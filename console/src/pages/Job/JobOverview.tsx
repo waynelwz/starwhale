@@ -43,32 +43,41 @@ export default function JobOverview() {
 
     const [currentTask, setCurrentTask] = useState<ITaskSchema | undefined>(undefined)
     const [expanded, setExpanded] = useState(false)
-    const [currentLogContent, setCurrentLogContent] = useState('')
+    const [currentLogFiles, setCurrentLogFiles] = useState<Record<string, string>>({})
     const onAction = useCallback(async (type, task: ITaskSchema) => {
         setCurrentTask(task)
         if ([TaskStatusType.SUCCESS, TaskStatusType.SUCCESS].includes(task.taskStatus)) {
             const data = await fetchTaskOfflineLogFiles(task?.id)
-            const content = await fetchTaskOfflineFileLog(task?.id, data[0])
-            console.log(content)
-            setCurrentLogContent(content)
+
+            let files: Record<string, string> = {}
+            data.map(async (v: string, k: number) => {
+                const content = await fetchTaskOfflineFileLog(task?.id, v)
+                files[v] = content
+                setCurrentLogFiles({
+                    ...files,
+                })
+            })
+        } else if ([TaskStatusType.RUNNING, TaskStatusType.PREPARING].includes(task.taskStatus)) {
+            setCurrentLogFiles({
+                [task?.uuid]: 'ws',
+            })
         }
         setExpanded(true)
     }, [])
 
     const currentOnlineLogUrl = useMemo(() => {
-        return `${window.location.protocol === 'http:' ? 'ws:' : 'wss:'}//${
-            //   window.location.host
-            'console.pre.intra.starwhale.ai'
-        }/api/v1/log/online/${currentTask?.id}?Authorization=${getToken()}`
+        return `${window.location.protocol === 'http:' ? 'ws:' : 'wss:'}//${window.location.host}/api/v1/log/online/${
+            currentTask?.id
+        }?Authorization=${getToken()}`
     }, [currentTask, currentTask?.id])
 
-    useWebSocket({
-        debug: true,
-        wsUrl: currentOnlineLogUrl,
-        onMessage: (e) => {
-            console.log('self', e)
-        },
-    })
+    // useWebSocket({
+    //     debug: true,
+    //     wsUrl: currentOnlineLogUrl,
+    //     onMessage: (e) => {
+    //         console.log('self', e)
+    //     },
+    // })
 
     return (
         <>
@@ -77,6 +86,8 @@ export default function JobOverview() {
                     width: '100%',
                     display: 'grid',
                     gridTemplateColumns: '1fr 1fr 380px',
+                    gridAutoRows: '200px',
+                    // gridAutoColumns: 'minmax(200px, 1fr)',
                     gridGap: '16px',
                 }}
             >
@@ -96,45 +107,98 @@ export default function JobOverview() {
                             setExpanded(expanded.includes('0'))
                         }}
                     >
-                        <Panel
-                            title={`Logs ${currentTask?.uuid ? ':' + currentTask.uuid : ''}`}
-                            expanded={expanded ? true : undefined}
-                        >
-                            <ScrollFollow
-                                startFollowing
-                                render={({ follow }) => {
-                                    if (currentLogContent) {
+                        {Object.entries(currentLogFiles).map(([fileName, content]) => (
+                            <Panel key={fileName} title={`Log: ${fileName}`}>
+                                <ScrollFollow
+                                    startFollowing
+                                    render={({ follow }) => {
+                                        console.log(fileName)
+                                        if (content) {
+                                            return (
+                                                <LazyLog
+                                                    enableSearch
+                                                    selectableLines
+                                                    text={content || ''}
+                                                    follow={follow}
+                                                    formatPart={(part) => {
+                                                        const obj = JSON.parse(part)
+                                                        const columns = [
+                                                            {
+                                                                key: 'time',
+                                                                value: obj?.time,
+                                                                styles: {
+                                                                    width: '190px',
+                                                                } as React.CSSProperties,
+                                                            },
+                                                            {
+                                                                key: 'stream',
+                                                                value: obj?.stream,
+                                                                styles: {
+                                                                    width: '50px',
+                                                                } as React.CSSProperties,
+                                                            },
+                                                            {
+                                                                key: 'log',
+                                                                value: obj?.log,
+                                                                styles: {
+                                                                    width: 'auto',
+                                                                } as React.CSSProperties,
+                                                            },
+                                                            {
+                                                                key: 'text',
+                                                                value: obj?.text,
+                                                                styles: {
+                                                                    width: 'auto',
+                                                                } as React.CSSProperties,
+                                                            },
+                                                        ]
+
+                                                        return (
+                                                            <>
+                                                                {columns
+                                                                    .filter((v) => !!v.value)
+                                                                    .map((v, k) => (
+                                                                        <span
+                                                                            key={v.key + k}
+                                                                            style={{
+                                                                                ...v.styles,
+                                                                                display: 'inline-block',
+                                                                                margin: '0 5px',
+                                                                            }}
+                                                                        >
+                                                                            {' '}
+                                                                            {v.value}{' '}
+                                                                        </span>
+                                                                    ))}
+                                                            </>
+                                                        )
+                                                    }}
+                                                    // scrollToLine={scrollToLine}
+                                                    // onScroll={handleScroll}
+                                                />
+                                            )
+                                        }
                                         return (
                                             <LazyLog
                                                 enableSearch
                                                 selectableLines
-                                                text={currentLogContent || ''}
+                                                url={currentOnlineLogUrl}
+                                                websocket
+                                                websocketOptions={{
+                                                    formatMessage: (e): any => {
+                                                        const msg = JSON.parse(e) as any
+                                                        console.log(msg)
+                                                        return e
+                                                    },
+                                                }}
                                                 follow={follow}
-                                                // scrollToLine={scrollToLine}
                                                 // onScroll={handleScroll}
                                             />
                                         )
-                                    }
-                                    return (
-                                        <LazyLog
-                                            enableSearch
-                                            selectableLines
-                                            url={currentOnlineLogUrl}
-                                            websocket
-                                            websocketOptions={{
-                                                formatMessage: (e): any => {
-                                                    const msg = JSON.parse(e) as any
-                                                    console.log(msg)
-                                                    return e
-                                                },
-                                            }}
-                                            follow={follow}
-                                            // onScroll={handleScroll}
-                                        />
-                                    )
-                                }}
-                            />
-                        </Panel>
+                                    }}
+                                />
+                            </Panel>
+                        ))}
                     </Accordion>
                 </div>
 
