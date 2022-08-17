@@ -84,7 +84,10 @@ export default function ProjectListCard() {
                     width: '100%',
                     flexWrap: 'wrap',
                     gap: '20px',
-                    gridTemplateColumns: 'repeat(auto-fit, minmax(334px, 1fr))',
+                    gridTemplateColumns:
+                        data.length >= 3 || data.length == 0
+                            ? 'repeat(auto-fit, minmax(334px, 1fr))'
+                            : 'repeat(3, minmax(334px, 1fr))',
                 })}
             >
                 {projectCards}
