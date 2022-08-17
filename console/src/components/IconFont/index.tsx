@@ -2,6 +2,8 @@ import React from 'react'
 
 import projectSvg from '@/assets/fonts/project.svg'
 import settingSvg from '@/assets/fonts/setting.svg'
+import emptySvg from '@/assets/empty.svg'
+import searchEmptySvg from '@/assets/search-empty.svg'
 
 const iconTypes = [
     'arrow2_down',
@@ -80,6 +82,8 @@ export default function IconFont({ size = 14, type = 'user', kind = 'inherit', s
         >
             {type === 'project' && <img src={projectSvg} alt={type} width={20} />}
             {type === 'setting2' && <img src={settingSvg} alt={type} width={20} />}
+            {type === 'empty' && <img src={emptySvg} alt={type} width={100} />}
+            {type === 'searchEmpty' && <img src={searchEmptySvg} alt={type} width={100} />}
             {!['project', 'setting2'].includes(type) && (
                 <span className={`iconfont icon-${type}`} style={{ fontSize: size }} />
             )}
