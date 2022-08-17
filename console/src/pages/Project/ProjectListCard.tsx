@@ -19,6 +19,7 @@ import { IProjectSchema } from '../../domain/project/schemas/project'
 import { QueryInput } from '@/components/data-table/stateful-data-table'
 import cn from 'classnames'
 import BusyPlaceholder from '@/components/BusyLoaderWrapper/BusyPlaceholder'
+import { StatefulTooltip } from 'baseui/tooltip'
 
 export default function ProjectListCard() {
     const [page] = usePage()
@@ -113,7 +114,7 @@ const ProjectCard = ({ project }: IProjectCardProps) => {
     const [t] = useTranslation()
 
     return (
-        <Link
+        <div
             className={css({
                 'display': 'flex',
                 'height': '116px',
@@ -131,7 +132,6 @@ const ProjectCard = ({ project }: IProjectCardProps) => {
                     boxShadow: '0 2px 8px 0 rgba(0,0,0,0.20)',
                 },
             })}
-            to={`/projects/${project.id}`}
         >
             <div
                 className={css({
@@ -142,26 +142,31 @@ const ProjectCard = ({ project }: IProjectCardProps) => {
                     lineHeight: '18px',
                 })}
             >
-                <div
+                <Link
                     className={css({
                         display: 'flex',
                         width: '80%',
                         textDecoration: 'none',
                     })}
+                    to={`/projects/${project.id}`}
                 >
                     <p
                         className={cn(
                             'text-ellipsis',
                             css({
-                                fontSize: '14px',
-                                fontWeight: 'bold',
-                                color: '#02102B',
+                                'fontSize': '14px',
+                                'fontWeight': 'bold',
+                                'color': '#02102B',
+                                ':hover': {
+                                    textDecoration: 'underline',
+                                    color: ' #5181E0',
+                                },
                             })
                         )}
                     >
                         {[project.owner?.name, project.name].join('/')}
                     </p>
-                </div>
+                </Link>
                 <div
                     className={css({
                         display: 'flex',
@@ -193,7 +198,9 @@ const ProjectCard = ({ project }: IProjectCardProps) => {
                     color: ' rgba(2,16,43,0.60)',
                 })}
             >
-                desc
+                <StatefulTooltip content={'desc'} placement='bottom'>
+                    desc
+                </StatefulTooltip>
             </div>
             <div
                 className={css({
@@ -202,25 +209,27 @@ const ProjectCard = ({ project }: IProjectCardProps) => {
                 })}
             >
                 <div></div>
-                <Link
-                    key={project.id}
-                    to={`/projects/${project.id}/members`}
-                    className={cn(
-                        'flex-row-center',
-                        css({
-                            display: 'flex',
-                            fontSize: '12px',
-                            background: '#F4F5F7',
-                            borderRadius: '2px',
-                            width: '20px',
-                            height: '20px',
-                            textDecoration: 'none',
-                        })
-                    )}
-                >
-                    <IconFont type='setting' kind='gray' size={12} />
-                </Link>
+                <StatefulTooltip content={t('Manage Member')} placement='bottom'>
+                    <Link
+                        key={project.id}
+                        to={`/projects/${project.id}/members`}
+                        className={cn(
+                            'flex-row-center',
+                            css({
+                                display: 'flex',
+                                fontSize: '12px',
+                                background: '#F4F5F7',
+                                borderRadius: '2px',
+                                width: '20px',
+                                height: '20px',
+                                textDecoration: 'none',
+                            })
+                        )}
+                    >
+                        <IconFont type='setting' kind='gray' size={12} />
+                    </Link>
+                </StatefulTooltip>
             </div>
-        </Link>
+        </div>
     )
 }
