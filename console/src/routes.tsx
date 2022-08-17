@@ -116,6 +116,11 @@ const Routes = () => {
                             </SettingsOverviewLayout>
                         </Route>
                         {/* project */}
+                        <Route exact path='/projects/:projectId/members'>
+                            <CenterLayout>
+                                <Route exact path='/projects/:projectId/members' component={ProjectMembers} />
+                            </CenterLayout>
+                        </Route>
                         <Route exact path='/projects/:projectId/:path?'>
                             <ProjectLayout>
                                 <Switch>

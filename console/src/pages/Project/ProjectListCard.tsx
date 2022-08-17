@@ -219,17 +219,21 @@ const ProjectCard = ({ project }: IProjectCardProps) => {
                         className={cn(
                             'flex-row-center',
                             css({
-                                display: 'flex',
-                                fontSize: '12px',
-                                background: '#F4F5F7',
-                                borderRadius: '2px',
-                                width: '20px',
-                                height: '20px',
-                                textDecoration: 'none',
+                                'display': 'flex',
+                                'fontSize': '12px',
+                                'background': '#F4F5F7',
+                                'borderRadius': '2px',
+                                'width': '20px',
+                                'height': '20px',
+                                'textDecoration': 'none',
+                                'color': 'gray !important',
+                                ':hover span': {
+                                    color: ' #5181E0  !important',
+                                },
                             })
                         )}
                     >
-                        <IconFont type='setting' kind='gray' size={12} />
+                        <IconFont type='setting' size={12} />
                     </Link>
                 </StatefulTooltip>
             </div>
