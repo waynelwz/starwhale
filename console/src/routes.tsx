@@ -45,6 +45,8 @@ import { getToken } from '@/api'
 import CreateAccount from '@/pages/Home/CreateAccount'
 import ResetPassword from '@/pages/Home/ResetPassword'
 import { useCurrentUser } from '@/hooks/useCurrentUser'
+import BaseSubLayout from './pages/BaseSubLayout'
+import CenterLayout from './pages/CenterLayout'
 
 const LoginNew = React.lazy(() => import('@/pages/Home/LoginNew'))
 
@@ -256,12 +258,12 @@ const Routes = () => {
                         </Route>
                         {/* default */}
                         <Route>
-                            <ProjectLayout>
+                            <CenterLayout>
                                 <Switch>
                                     <Route path='/projects' component={ProjectListCard} />
                                     <Redirect path='/' to='/projects' />
                                 </Switch>
-                            </ProjectLayout>
+                            </CenterLayout>
                         </Route>
                     </Switch>
                 </div>
