@@ -1,5 +1,6 @@
 /* eslint-disable no-param-reassign */
 import axios from 'axios'
+import qs from 'qs'
 
 const key = 'token'
 const store = window.localStorage ?? {
@@ -14,6 +15,34 @@ export function apiInit() {
         config.headers.Authorization = store?.token
         return config
     })
+    axios.interceptors.response.use(
+        (response) => {
+            if (response.headers.authorization) setToken(response.headers.authorization)
+            return response.data?.data ? response.data : response
+        },
+        (error) => {
+            if (error.response?.status === 401 && error.config.method === 'get') {
+                const withUnAuthRoute =
+                    ['/login', '/signup'].filter((path) => location.pathname.includes(path)).length > 0
+                const search = qs.parse(location.search, { ignoreQueryPrefix: true })
+                let { redirect } = search
+                if (redirect && typeof redirect === 'string') {
+                    redirect = decodeURI(redirect)
+                } else if (!withUnAuthRoute) {
+                    redirect = `${location.pathname}${location.search}`
+                } else {
+                    redirect = '/projects'
+                }
+
+                if (!withUnAuthRoute) {
+                    window.location.href = `${window.location.protocol}//${
+                        window.location.host
+                    }/login?redirect=${encodeURIComponent(redirect)}`
+                }
+            }
+            return error
+        }
+    )
 }
 
 export const getToken = () => {

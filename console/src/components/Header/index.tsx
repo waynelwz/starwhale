@@ -206,10 +206,11 @@ export default function Header() {
 
     return (
         <header className={headerStyles.headerWrapper}>
-            <Logo expanded={ctx.expanded} />
             {currentUser && (
                 <div className={styles.systemWrapper}>
-                    <Link to='/projects'>{t}</Link>
+                    <Link to='/projects'>
+                        <Logo expanded={ctx.expanded} />
+                    </Link>
                 </div>
             )}
             <div style={{ flexGrow: 1 }} />

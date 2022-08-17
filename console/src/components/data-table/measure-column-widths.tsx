@@ -7,6 +7,7 @@ import { useStyletron } from 'baseui'
 import HeaderCell from './header-cell'
 import type { ColumnT, RowT } from './types'
 import usePrevious from '../../hooks/usePrevious'
+import _ from 'lodash'
 
 const IS_BROWSER = true
 

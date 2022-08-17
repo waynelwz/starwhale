@@ -4,11 +4,12 @@ import { useQuery } from 'react-query'
 import { useCurrentUser } from '@/hooks/useCurrentUser'
 import axios from 'axios'
 import { toaster } from 'baseui/toast'
-import { getErrMsg, setToken } from '@/api'
+import { getErrMsg, getToken, setToken } from '@/api'
 import qs from 'qs'
 import { useLocation } from 'react-router-dom'
 import useTranslation from '@/hooks/useTranslation'
 import { useCurrentUserRoles } from '@/hooks/useCurrentUserRoles'
+import { useFirstRender } from '../hooks/useFirstRender'
 
 export default function ApiHeader() {
     const location = useLocation()
@@ -23,34 +24,12 @@ export default function ApiHeader() {
     const userRoles = useQuery('currentUserRoles', () => fetchCurrentUserRoles(), { enabled: false })
     const [t] = useTranslation()
 
-    useEffect(() => {
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        if ((axios.interceptors.response as any).handlers.length > 0) {
-            return
-        }
+    useFirstRender(() => {
         axios.interceptors.response.use(
-            (response) => {
-                if (response.headers.authorization) setToken(response.headers.authorization)
-                return response.data?.data ? response.data : response
-            },
+            (response) => response,
             (error) => {
                 const errMsg = getErrMsg(error)
-                if (error.response?.status === 401 && error.config.method === 'get') {
-                    const search = qs.parse(location.search, { ignoreQueryPrefix: true })
-                    let { redirect } = search
-                    if (redirect && typeof redirect === 'string') {
-                        redirect = decodeURI(redirect)
-                    } else if (['/login', '/logout'].indexOf(location.pathname) < 0) {
-                        redirect = `${location.pathname}${location.search}`
-                    } else {
-                        redirect = '/'
-                    }
-                    if (!location.pathname.startsWith('/login')) {
-                        window.location.href = `${window.location.protocol}//${
-                            window.location.host
-                        }/login?redirect=${encodeURIComponent(redirect)}`
-                    }
-                } else if (Date.now() - (lastErrMsgRef.current[errMsg] || 0) > errMsgExpireTimeSeconds * 1000) {
+                if (Date.now() - (lastErrMsgRef.current[errMsg] || 0) > errMsgExpireTimeSeconds * 1000) {
                     toaster.negative(
                         errMsg.length < 100 ? (
                             errMsg
@@ -73,11 +52,11 @@ export default function ApiHeader() {
                     )
                     lastErrMsgRef.current[errMsg] = Date.now()
                 }
-                return Promise.reject(error)
+                return error
             }
         )
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [])
+    })
 
     useEffect(() => {
         if (userInfo.isSuccess) {
@@ -86,11 +65,11 @@ export default function ApiHeader() {
     }, [userInfo.data, userInfo.isSuccess, setCurrentUser])
 
     useEffect(() => {
-        if (location.pathname !== '/login' && location.pathname !== '/login/' && !currentUser) {
+        if (!currentUser && getToken()) {
             userInfo.refetch()
             userRoles.refetch()
         }
-    }, [userInfo, location.pathname, currentUser, userRoles])
+    }, [userInfo, currentUser, userRoles])
 
     useEffect(() => {
         if (lastLocationPathRef.current !== location.pathname) {
