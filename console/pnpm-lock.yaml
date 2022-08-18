@@ -147,6 +147,7 @@ specifiers:
   typescript: ^4.6.4
   uuid: ^8.3.2
   vite: ^3.0.4
+  vite-plugin-eslint: ^1.8.1
   vite-plugin-mpa: ^1.1.4
   vite-plugin-multi-pages: ^0.0.8
   vite-plugin-svgr: ^2.2.1
@@ -297,6 +298,7 @@ devDependencies:
   rollup-plugin-visualizer: 5.7.1_rollup@2.77.2
   sass: 1.54.3
   swagger-typescript-api: 9.3.1
+  vite-plugin-eslint: 1.8.1_eslint@7.32.0+vite@3.0.4
   vite-plugin-mpa: 1.1.4
   webpack: 5.74.0
 
@@ -21491,6 +21493,19 @@ packages:
       unist-util-stringify-position: 3.0.2
       vfile-message: 3.1.2
     dev: false
+
+  /vite-plugin-eslint/1.8.1_eslint@7.32.0+vite@3.0.4:
+    resolution: {integrity: sha512-PqdMf3Y2fLO9FsNPmMX+//2BF5SF8nEWspZdgl4kSt7UvHDRHVVfHvxsD7ULYzZrJDGRxR81Nq7TOFgwMnUang==}
+    peerDependencies:
+      eslint: '>=7'
+      vite: '>=2'
+    dependencies:
+      '@rollup/pluginutils': 4.2.1
+      '@types/eslint': 8.4.5
+      eslint: 7.32.0
+      rollup: 2.77.2
+      vite: 3.0.4_sass@1.54.3
+    dev: true
 
   /vite-plugin-mpa/1.1.4:
     resolution: {integrity: sha512-sLXMOdMl8t9B9/sxXXZ9CLt8QudhGSSKCX+bZ/ePaO7kp4SdoA5d6CV+EnCyNuQCenAbXKJzk3nM8Do0RgmSpA==}

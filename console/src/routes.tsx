@@ -1,7 +1,7 @@
 import AdminLayout from '@/pages/Admin/AdminLayout'
 import UserManagement from '@/pages/Admin/UserManagement'
 import React from 'react'
-import { BrowserRouter, Switch, Route, Redirect, useHistory } from 'react-router-dom'
+import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom'
 import ProjectLayout from '@/pages/Project/ProjectLayout'
 import { useCurrentThemeType } from '@/hooks/useCurrentThemeType'
 import { IThemedStyleProps } from '@/theme'
@@ -22,9 +22,7 @@ import DatasetVersionLayout from '@/pages/Dataset/DatasetVersionLayout'
 import DatasetLayout from '@/pages/Dataset/DatasetLayout'
 import DatasetOverview from '@/pages/Dataset/Overview'
 import JobNewCard from '@/pages/Project/JobNewCard'
-import JobsLayout from '@/pages/Job/JobsLayout'
 import ApiHeader from '@/api/ApiHeader'
-import Pending from '@/pages/Home/Pending'
 import JobTasks from '@/pages/Job/JobTasks'
 import JobResults from '@/pages/Job/JobResults'
 import JobOverviewLayout from '@/pages/Job/JobOverviewLayout'
@@ -44,8 +42,6 @@ import LoginLayout from '@/pages/Home/LoginLayout'
 import { getToken } from '@/api'
 import CreateAccount from '@/pages/Home/CreateAccount'
 import ResetPassword from '@/pages/Home/ResetPassword'
-import { useCurrentUser } from '@/hooks/useCurrentUser'
-import BaseSubLayout from './pages/BaseSubLayout'
 import CenterLayout from './pages/CenterLayout'
 
 const LoginNew = React.lazy(() => import('@/pages/Home/LoginNew'))
@@ -73,7 +69,7 @@ const Routes = () => {
     const [, theme] = useStyletron()
     const styles = useStyles({ theme, themeType })
     // eslint-disable-next-line  react-hooks/exhaustive-deps
-    const { currentUser } = useCurrentUser()
+    // const { currentUser } = useCurrentUser()
 
     if (!getToken()) {
         return (

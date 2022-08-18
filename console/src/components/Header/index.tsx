@@ -36,7 +36,7 @@ const useHeaderStyles = createUseStyles({
 })
 
 const useStyles = createUseStyles({
-    systemWrapper: (props: IThemedStyleProps) => ({
+    systemWrapper: {
         'padding-left': '20px',
         'position': 'relative',
         'cursor': 'pointer',
@@ -69,7 +69,7 @@ const useStyles = createUseStyles({
                 'text-decoration': 'none',
             },
         },
-    }),
+    },
     systemMenu: (props: IThemedStyleProps) => ({
         'min-width': '180px',
         'position': 'absolute',

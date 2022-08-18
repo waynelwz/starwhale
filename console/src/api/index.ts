@@ -10,6 +10,14 @@ const store = window.localStorage ?? {
     getter: () => undefined,
 }
 
+export const setToken = (token: string | undefined) => {
+    if (!token) {
+        store.removeItem(key)
+        return
+    }
+    store.setItem(key, token)
+}
+
 export function apiInit() {
     axios.interceptors.request.use((config) => {
         config.headers.Authorization = store?.token
@@ -21,6 +29,9 @@ export function apiInit() {
             return response.data?.data ? response.data : response
         },
         (error) => {
+            // eslint-disable-next-line no-restricted-globals
+            // eslint-disable-next-line prefer-destructuring
+            const location = window.location
             if (error.response?.status === 401 && error.config.method === 'get') {
                 const withUnAuthRoute =
                     ['/login', '/signup'].filter((path) => location.pathname.includes(path)).length > 0
@@ -35,9 +46,9 @@ export function apiInit() {
                 }
 
                 if (!withUnAuthRoute) {
-                    window.location.href = `${window.location.protocol}//${
-                        window.location.host
-                    }/login?redirect=${encodeURIComponent(redirect)}`
+                    location.href = `${location.protocol}//${location.host}/login?redirect=${encodeURIComponent(
+                        redirect
+                    )}`
                 }
             }
             return error
@@ -47,13 +58,6 @@ export function apiInit() {
 
 export const getToken = () => {
     return store?.token
-}
-export const setToken = (token: string | undefined) => {
-    if (!token) {
-        store.removeItem(key)
-        return
-    }
-    store.setItem(key, token)
 }
 
 export function getErrMsg(err: any): string {

@@ -1,6 +1,8 @@
 import { defineConfig } from 'vite'
 import path from 'path'
 import react from '@vitejs/plugin-react'
+import eslint from 'vite-plugin-eslint'
+
 // import mpa from '../../vite-plugin-mpa'
 // import { visualizer } from 'rollup-plugin-visualizer'
 
@@ -38,6 +40,7 @@ export default defineConfig({
         },
     },
     plugins: [
+        eslint(),
         react({
             exclude: /\.stories\.(t|j)sx?$/,
         }),

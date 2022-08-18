@@ -4,109 +4,19 @@ import { createProject } from '@project/services/project'
 import { usePage } from '@/hooks/usePage'
 import { ICreateProjectSchema } from '@project/schemas/project'
 import ProjectForm from '@project/components/ProjectForm'
-import { formatTimestampDateTime } from '@/utils/datetime'
 import useTranslation from '@/hooks/useTranslation'
 import { Button, SIZE as ButtonSize } from 'baseui/button'
-import User from '@/domain/user/components/User'
 import { Modal, ModalHeader, ModalBody } from 'baseui/modal'
-import Table from '@/components/Table'
 import { Link } from 'react-router-dom'
 import { useFetchProjects } from '@project/hooks/useFetchProjects'
 import IconFont from '@/components/IconFont'
 import { useCurrentUser } from '@/hooks/useCurrentUser'
 import { useStyletron } from 'baseui'
-import { IProjectSchema } from '../../domain/project/schemas/project'
 import { QueryInput } from '@/components/data-table/stateful-data-table'
 import cn from 'classnames'
 import BusyPlaceholder from '@/components/BusyLoaderWrapper/BusyPlaceholder'
 import { StatefulTooltip } from 'baseui/tooltip'
-
-export default function ProjectListCard() {
-    const [page] = usePage()
-    const projectsInfo = useFetchProjects({ ...page, pageNum: 1, pageSize: 10000 })
-    const [filter, setFilter] = useState('')
-    const [isCreateProjectOpen, setIsCreateProjectOpen] = useState(false)
-    const handleCreateProject = useCallback(
-        async (data: ICreateProjectSchema) => {
-            await createProject(data)
-            await projectsInfo.refetch()
-            setIsCreateProjectOpen(false)
-        },
-        [projectsInfo]
-    )
-    const [data, setData] = useState<IProjectSchema[]>([])
-    const [css] = useStyletron()
-    const [t] = useTranslation()
-    const { currentUser } = useCurrentUser()
-
-    useEffect(() => {
-        const items = projectsInfo.data?.list ?? []
-        setData(items.filter((i) => (filter && i.name.includes(filter)) || filter === ''))
-    }, [filter, projectsInfo.data])
-
-    const projectCards = useMemo(() => {
-        if (data.length == 0 && filter) {
-            return <BusyPlaceholder type='notfound' />
-        }
-        if (data.length == 0) {
-            return <BusyPlaceholder type='empty' />
-        }
-        return data.map((project) => {
-            return <ProjectCard key={project.id} project={project} />
-        })
-    }, [data])
-
-    return (
-        <Card
-            title={currentUser?.name ?? t('projects')}
-            titleIcon={undefined}
-            extra={
-                <Button
-                    startEnhancer={<IconFont type='add' kind='white' />}
-                    size={ButtonSize.compact}
-                    onClick={() => setIsCreateProjectOpen(true)}
-                >
-                    {t('create')}
-                </Button>
-            }
-        >
-            <div className={css({ marginBottom: '20px', width: '280px' })}>
-                <QueryInput
-                    onChange={(val: string) => {
-                        setFilter(val.trim())
-                    }}
-                />
-            </div>
-            <div
-                className={css({
-                    marginBottom: '20px',
-                    display: 'grid',
-                    width: '100%',
-                    flexWrap: 'wrap',
-                    gap: '20px',
-                    gridTemplateColumns:
-                        data.length >= 3 || data.length == 0
-                            ? 'repeat(auto-fit, minmax(334px, 1fr))'
-                            : 'repeat(3, minmax(334px, 1fr))',
-                })}
-            >
-                {projectCards}
-            </div>
-            <Modal
-                isOpen={isCreateProjectOpen}
-                onClose={() => setIsCreateProjectOpen(false)}
-                closeable
-                animate
-                autoFocus
-            >
-                <ModalHeader>{t('create sth', [t('Project')])}</ModalHeader>
-                <ModalBody>
-                    <ProjectForm onSubmit={handleCreateProject} />
-                </ModalBody>
-            </Modal>
-        </Card>
-    )
-}
+import { IProjectSchema } from '../../domain/project/schemas/project'
 
 type IProjectCardProps = {
     project: IProjectSchema
@@ -201,7 +111,7 @@ const ProjectCard = ({ project }: IProjectCardProps) => {
                     color: ' rgba(2,16,43,0.60)',
                 })}
             >
-                <StatefulTooltip content={'desc'} placement='bottom'>
+                <StatefulTooltip content='desc' placement='bottom'>
                     desc
                 </StatefulTooltip>
             </div>
@@ -211,7 +121,7 @@ const ProjectCard = ({ project }: IProjectCardProps) => {
                     justifyContent: 'space-between',
                 })}
             >
-                <div></div>
+                <div />
                 <StatefulTooltip content={t('Manage Member')} placement='bottom'>
                     <Link
                         key={project.id}
@@ -238,5 +148,93 @@ const ProjectCard = ({ project }: IProjectCardProps) => {
                 </StatefulTooltip>
             </div>
         </div>
+    )
+}
+
+export default function ProjectListCard() {
+    const [page] = usePage()
+    const projectsInfo = useFetchProjects({ ...page, pageNum: 1, pageSize: 10000 })
+    const [filter, setFilter] = useState('')
+    const [isCreateProjectOpen, setIsCreateProjectOpen] = useState(false)
+    const handleCreateProject = useCallback(
+        async (data: ICreateProjectSchema) => {
+            await createProject(data)
+            await projectsInfo.refetch()
+            setIsCreateProjectOpen(false)
+        },
+        [projectsInfo]
+    )
+    const [data, setData] = useState<IProjectSchema[]>([])
+    const [css] = useStyletron()
+    const [t] = useTranslation()
+    // eslintd-disable-next-line react-hooks/exhaustive-deps
+    const { currentUser } = useCurrentUser()
+
+    useEffect(() => {
+        const items = projectsInfo.data?.list ?? []
+        setData(items.filter((i) => (filter && i.name.includes(filter)) || filter === ''))
+    }, [filter, projectsInfo.data])
+
+    const projectCards = useMemo(() => {
+        if (data.length === 0 && filter) {
+            return <BusyPlaceholder type='notfound' />
+        }
+        if (data.length === 0) {
+            return <BusyPlaceholder type='empty' />
+        }
+        return data.map((project) => {
+            return <ProjectCard key={project.id} project={project} />
+        })
+    }, [data, filter])
+
+    return (
+        <Card
+            title={currentUser?.name ?? t('projects')}
+            titleIcon={undefined}
+            extra={
+                <Button
+                    startEnhancer={<IconFont type='add' kind='white' />}
+                    size={ButtonSize.compact}
+                    onClick={() => setIsCreateProjectOpen(true)}
+                >
+                    {t('create')}
+                </Button>
+            }
+        >
+            <div className={css({ marginBottom: '20px', width: '280px' })}>
+                <QueryInput
+                    onChange={(val: string) => {
+                        setFilter(val.trim())
+                    }}
+                />
+            </div>
+            <div
+                className={css({
+                    marginBottom: '20px',
+                    display: 'grid',
+                    width: '100%',
+                    flexWrap: 'wrap',
+                    gap: '20px',
+                    gridTemplateColumns:
+                        data.length >= 3 || data.length === 0
+                            ? 'repeat(auto-fit, minmax(334px, 1fr))'
+                            : 'repeat(3, minmax(334px, 1fr))',
+                })}
+            >
+                {projectCards}
+            </div>
+            <Modal
+                isOpen={isCreateProjectOpen}
+                onClose={() => setIsCreateProjectOpen(false)}
+                closeable
+                animate
+                autoFocus
+            >
+                <ModalHeader>{t('create sth', [t('Project')])}</ModalHeader>
+                <ModalBody>
+                    <ProjectForm onSubmit={handleCreateProject} />
+                </ModalBody>
+            </Modal>
+        </Card>
     )
 }
