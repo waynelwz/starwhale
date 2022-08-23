@@ -1,13 +1,13 @@
 import React from 'react'
 import { ComponentStory, ComponentMeta, Story } from '@storybook/react'
-import normalLogoImg from '../assets/logo_normal_en_white.svg'
+import normalLogoImg from '@/assets/logo_normal_en_gray.svg'
 import ZoomWrapper from '../components/Viewer/ZoomWrapper'
 
 import ImageSegmentationViewer from '../components/Viewer/ImageSegmentationViewer'
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
-    title: 'Example/ZoomWrapper',
+    title: 'Viewer/ZoomWrapper',
     component: ZoomWrapper,
     // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
     // argTypes: {},
