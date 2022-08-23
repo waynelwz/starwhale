@@ -16,6 +16,7 @@ module.exports = {
         storyStoreV7: true,
         previewMdx2: true,
     },
+    staticDirs: ['../src/assets', '../public'],
     async viteFinal(config, { configType }) {
         const { config: userConfig } = await loadConfigFromFile(path.resolve(__dirname, '../vite.config.ts'))
         return mergeConfig(config, {
