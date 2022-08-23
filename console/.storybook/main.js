@@ -7,7 +7,6 @@ module.exports = {
         '@storybook/addon-links',
         '@storybook/addon-essentials',
         // '@storybook/addon-interactions',
-        // '@storybook/preset-create-react-app',
     ],
     framework: '@storybook/react',
     core: {
@@ -15,12 +14,11 @@ module.exports = {
     },
     features: {
         storyStoreV7: true,
+        previewMdx2: true,
     },
     async viteFinal(config, { configType }) {
         const { config: userConfig } = await loadConfigFromFile(path.resolve(__dirname, '../vite.config.ts'))
-
         return mergeConfig(config, {
-            // server: userConfig.server,
             resolve: userConfig.resolve,
         })
     },
