@@ -224,7 +224,7 @@ export default function VideoPreviewViewer({ isZoom = true }) {
         const hoverEvent = _.throttle((event: any) => {
             const clientRect = player.elements.progress.getBoundingClientRect()
             const percentage = (100 / clientRect.width) * (event.pageX - clientRect.left)
-            let seekTime = player.media.duration * (percentage / 100)
+            let seekTime = player.media.duration * (percentage / 100) ?? 0
             seekTime = Math.min(Math.max(0, seekTime), player.media.duration - 1)
 
             console.log(seekTime)
