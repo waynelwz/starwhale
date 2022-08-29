@@ -92,7 +92,7 @@ const ProjectCard = ({ project, onEdit }: IProjectCardProps) => {
                                 display: 'flex',
                                 fontSize: '12px',
                                 color: project?.privacy === 'PRIVATE' ? '#4848B3' : '#00B368',
-                                backgroundColor: '#E6FFF4',
+                                backgroundColor: project?.privacy === 'PRIVATE' ? '#EDEDFF' : '#E6FFF4',
                                 borderRadius: '9px',
                                 padding: '3px 10px',
                             })
