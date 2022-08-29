@@ -102,7 +102,7 @@ const ProjectCard = ({ project, onEdit }: IProjectCardProps) => {
                             backgroundColor: project?.privacy === 'PRIVATE' ? '#EDEDFF' : '#E6FFF4',
                         }}
                     >
-                        {project.privacy?.toLowerCase()}
+                        {project.privacy === 'PRIVATE' ? t('Private') : t('Public')}
                     </p>
                 </div>
             </div>
