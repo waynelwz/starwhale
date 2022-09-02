@@ -39,7 +39,6 @@ export function useQueryDatasetList(tableName?: string, page?: IListQuerySchema,
 
     React.useEffect(() => {
         if (tableName) {
-            console.log(tableName, start, limit)
             info.refetch()
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
