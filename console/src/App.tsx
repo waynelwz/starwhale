@@ -14,7 +14,13 @@ import '@/assets/fonts/iconfont.css'
 import Routes from './routes'
 import { AuthProvider } from './api/Auth'
 
+import * as runtime from '@starwhale/runtime'
+
+if (!window.runtime) window.runtime = runtime
+console.log(runtime)
+
 apiInit()
+
 const engine = new Styletron()
 const queryClient = new QueryClient()
 export default function App(): any {
