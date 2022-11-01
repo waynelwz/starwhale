@@ -2,6 +2,7 @@
 import System from 'systemjs/dist/system.js'
 
 import { config } from '../config'
+import { locateWithCache } from './pluginCacheBuster'
 
 // @ts-ignore
 
@@ -33,7 +34,7 @@ export function loadPluginCss(options: PluginCssOptions): Promise<any> {
     return SystemJS.import(`${theme}!css`)
 }
 
-// SystemJS.registry.set('plugin-loader', SystemJS.newModule({ locate: locateWithCache }))
+SystemJS.registry.set('plugin-loader', SystemJS.newModule({ locate: locateWithCache }))
 
 // grafanaRuntime.SystemJS.config({
 //     baseURL: 'public',
