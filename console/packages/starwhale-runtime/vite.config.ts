@@ -3,35 +3,19 @@ import path from 'path'
 import react from '@vitejs/plugin-react'
 import eslint from 'vite-plugin-eslint'
 
-// import mpa from '../../vite-plugin-mpa'
-// import { visualizer } from 'rollup-plugin-visualizer'
-
 // https://vitejs.dev/config/
 export default defineConfig({
-    server: {
-        proxy: {
-            '/api/v1/log/online': {
-                changeOrigin: true,
-                target:
-                    (process.env.PROXY ?? '').replace('https', 'wss').replace('http', 'ws') || 'ws://127.0.0.1:8082',
-                ws: true,
-            },
-            '^(/api|/swcloud)': {
-                target: process.env.PROXY || 'http://127.0.0.1:8082',
-                changeOrigin: true,
-                secure: false,
-            },
-            '/plugins': {
-                target: 'http://127.0.0.1:8080/',
-                changeOrigin: true,
-                secure: false,
-            },
-        },
+    define: {
+        'process.env.NODE_ENV': `"${process.env.NODE_ENV}"`,
     },
     build: {
         outDir: 'build',
         manifest: true,
-        minify: true,
+        minify: false,
+        lib: {
+            entry: './src/index.ts',
+            formats: ['es'],
+        },
     },
     resolve: {
         alias: {

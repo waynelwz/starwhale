@@ -227,8 +227,5 @@
     "ejs": "3.1.7",
     "framer-motion": "4.1.17",
     "react-virtualized": "git+https://git@github.com/remorses/react-virtualized-fixed-import.git#9.22.3"
-  },
-  "workspaces": [
-    "packages/*"
-  ]
+  }
 }
