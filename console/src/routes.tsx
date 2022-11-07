@@ -46,6 +46,7 @@ import RuntimeVersionOverviewMeta from './pages/Runtime/RuntimeVersionOverviewMe
 import RuntimeVersionOverview from './pages/Runtime/RuntimeVersionOverview'
 import RuntimeOverviewLayout from './pages/Runtime/RuntimeOverviewLayout'
 import SystemSettings from './pages/Admin/SystemSettings'
+import Panel from './components/Editor/Demo'
 
 const JobDAG = React.lazy(() => import('@/pages/Job/JobDAG'))
 
@@ -294,6 +295,7 @@ const Routes = () => {
                                 <CenterLayout>
                                     <Switch>
                                         <Route path='/projects' component={ProjectListCard} />
+                                        <Route path='/panels' component={Panel} />
                                         <Redirect path='/' to='/projects' />
                                     </Switch>
                                 </CenterLayout>
