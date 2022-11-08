@@ -1,22 +1,27 @@
+import React, { Context } from 'react'
 import { createContext, useContext, useMemo } from 'react'
 import { createCustomStore } from './store'
 
-export type IEditorContext = {
+export type EditorContextType = {
     store: typeof store
 }
-const EditorContext = createContext<IEditorContext>({})
+type EditorContextProviderProps = {
+    children: React.ReactNode
+}
+export const store = createCustomStore({})
 
-const store = createCustomStore({})
+export const EditorContext: Context<EditorContextType> = createContext({
+    store,
+})
 
 export const useEditorContext = () => useContext(EditorContext)
 
-export default function EditorContextProvider({ children }) {
+export default function EditorContextProvider({ children }: EditorContextProviderProps) {
     const value = useMemo(
         () => ({
             store,
         }),
         []
     )
-    console.log('---', store, value)
     return <EditorContext.Provider value={value}>{children}</EditorContext.Provider>
 }

@@ -46,7 +46,7 @@ import RuntimeVersionOverviewMeta from './pages/Runtime/RuntimeVersionOverviewMe
 import RuntimeVersionOverview from './pages/Runtime/RuntimeVersionOverview'
 import RuntimeOverviewLayout from './pages/Runtime/RuntimeOverviewLayout'
 import SystemSettings from './pages/Admin/SystemSettings'
-import Panel from './components/Editor/Demo'
+import Panel from './components/Editor/'
 
 const JobDAG = React.lazy(() => import('@/pages/Job/JobDAG'))
 

@@ -1,3 +1,26 @@
+import { WidgetStoreState, WidgetTreeNode } from "../context/store"
+
+export type WidgetType = string
+
+export interface WidgetBaseProps {
+    widgetId: string
+    type: WidgetType
+    widgetName: string
+    parentId?: string
+    version: number
+    childWidgets?: WidgetTreeNode[]
+}
+
+export interface WidgetProps extends WidgetBaseProps {}
+    
+
+export type WidgetState = Record<string, unknown>;
+export interface WidgetBuilder<
+  T extends WidgetProps,
+  S extends WidgetState
+> {
+  buildWidget(widgetProps: T): JSX.Element;
+
 // type ISection = {
 // 	id: string // section-xfasddf
 // 	name: string,

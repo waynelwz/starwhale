@@ -1,14 +1,28 @@
 import create, { createStore, useStore } from 'zustand'
 import { devtools, subscribeWithSelector } from 'zustand/middleware'
 
-export type WidgetState = any
-let initialized = null
+export type WidgetType = string
 
-export function createCustomStore(initState: Partial<WidgetState> = {}) {
+export type LayoutWidget = ''
+export type WidgetLayoutType = {
+    dndList: 'dndList'
+}
+
+export type WidgetTreeNode = {
+    id: string
+    children?: WidgetTreeNode[]
+}
+export type WidgetStoreState = {
+    key: string
+    tree: WidgetTreeNode[]
+    // widgets:
+}
+
+export function createCustomStore(initState: Partial<WidgetStoreState> = {}) {
     // if (initialized) return initialized
     console.log('store init')
     const name = `widgets`
-    const useStore = create<WidgetState>()(
+    const useStore = create<WidgetStoreState>()(
         devtools(
             (...a) => ({
                 key: name,
@@ -40,7 +54,7 @@ export function createCustomStore(initState: Partial<WidgetState> = {}) {
                 widgets: {
                     'layout-1': {
                         name: 'layout-1',
-                        type: 'dndList',
+                        type: 'ui:dndList',
                     },
                     'section-2': {
                         name: 'section-2',
