@@ -19,13 +19,13 @@ export function EditorLoader() {
         return <>registring</>
     }
 
-    console.log(WidgetFactory.widgetMap)
+    console.log('WidgetFactory', WidgetFactory.widgetMap)
 
     return <Demo />
 }
 
 export function witEditorContext(EditorApp: React.FC) {
-    return function EditorContext(props: any) {
+    return function EditorContexted(props: any) {
         return (
             <EditorContextProvider>
                 <EditorApp {...props} />

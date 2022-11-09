@@ -1,3 +1,4 @@
+import React from 'react'
 import { WidgetBuilder, WidgetProps, WidgetState } from './const'
 import log from 'loglevel'
 export type DerivedPropertiesMap = Record<string, string>

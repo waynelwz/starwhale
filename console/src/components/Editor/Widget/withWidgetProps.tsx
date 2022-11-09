@@ -3,13 +3,16 @@ import useSelector, { getWidget } from '../hooks/useSelector'
 import BaseWidget from './BaseWidget'
 
 export default function withWidgetProps(WrappedWidget: typeof BaseWidget) {
-    return function WrapedPropsWidget(props: any) {
+    function WrapedPropsWidget(props: any) {
         // todo
         // * add log state
         // * onFieldConfigChange
-        const { id } = props
+        const { id, ...rest } = props
         const state = useSelector(getWidget(id)) ?? {}
 
-        return <WrappedWidget {...props} {...state} />
+        console.log('WrapedPropsWidget', typeof WrappedWidget, id, props, state)
+
+        return <WrappedWidget {...props} config={state} />
     }
+    return WrapedPropsWidget
 }

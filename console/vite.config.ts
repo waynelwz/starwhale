@@ -31,7 +31,7 @@ export default defineConfig({
     build: {
         outDir: 'build',
         manifest: true,
-        minify: true,
+        // minify: true,
     },
     resolve: {
         alias: {
