@@ -30,26 +30,28 @@ export type WidgetProps = WidgetBase & WidgetBaseProps & WidgetActions
 /**
  * Describes the properties that can be passed to the PanelRenderer.
  *
- * @typeParam P - Panel options type for the panel being rendered.
- * @typeParam F - Field options type for the panel being rendered.
+ * @typeParam C - Config type for the widget being rendered.
+ * @typeParam F - Field options type for the widget being rendered.
  *
  * @internal
  */
-export interface WidgetRendererProps<P extends object = any, F extends object = any> {
+export interface WidgetRendererProps<C extends object = any, F extends object = any> {
     id: string
     type: string
     data?: any
-    options?: Partial<P>
-    onOptionsChange?: (options: P) => void
+    defaults?: Partial<C>
+    configs?: Partial<C>
+    onOptionsChange?: (options: C) => void
     // onFieldConfigChange?: (config: FieldConfigSource<F>) => void
     // fieldConfig?: FieldConfigSource<Partial<F>>
     // timeZone?: string
     width: number
     height: number
+    children?: React.ReactNode
 }
 
-export type WidgetRendererType<P extends object = any, F extends object = any> = React.ComponentType<
-    WidgetRendererProps<P, F>
+export type WidgetRendererType<C extends object = any, F extends object = any> = React.ComponentType<
+    WidgetRendererProps<C, F>
 >
 
 // export type WidgetState = Record<string, unknown>

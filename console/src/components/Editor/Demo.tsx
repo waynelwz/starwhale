@@ -12,15 +12,6 @@ import deepEqual from 'fast-deep-equal'
 import { useWidget } from './Widget/WidgetFactoryRegister'
 import { WidgetRenderer } from './Widget/WidgetRenderer'
 
-function Section(props) {
-    return (
-        <div>
-            - {props.id}
-            {props.children}
-        </div>
-    )
-}
-
 function Widget(props) {
     const { store } = useEditorContext()
     const a = useStore(store, (state) => state.a)
@@ -41,13 +32,6 @@ function Widget(props) {
             {props.children}
         </div>
     )
-}
-
-const Widgets = {
-    layout: withWidgetProps(Section),
-    dndList: withWidgetProps(LayoutWidget),
-    section: withWidgetProps(Section),
-    panel: withWidgetProps(Widget),
 }
 
 export const WrapedWidgetNode = withWidgetProps(function WidgetNode({ id, path, childWidgets, ...rest }) {
@@ -74,7 +58,7 @@ export const WrapedWidgetNode = withWidgetProps(function WidgetNode({ id, path, 
 export function WidgetTree() {
     // const tree = useSelector(getTree)
     const { store } = useEditorContext()
-    console.log(store)
+    // console.log(store)
     const api = store()
     const tree = store((state) => state.tree, deepEqual)
 

@@ -2,10 +2,13 @@ import React, { useState, useMemo, useEffect, useRef } from 'react'
 import { useWidget } from './WidgetFactoryRegister'
 import { WidgetProps, WidgetRendererType, WidgetRendererProps } from './const'
 import { generateId } from '../utils/generators'
+import ErrorBoundary from '@/components/ErrorBoundary/ErrorBoundary'
 
+const DEBUG = true
 const defaultFieldConfig = { defaults: {}, overrides: [] }
 export function WidgetRenderer<P extends object = any, F extends object = any>(props: WidgetRendererProps<P, F>) {
     const {
+        id,
         type,
         path,
         data,
@@ -42,33 +45,38 @@ export function WidgetRenderer<P extends object = any, F extends object = any>(p
 
     const WidgetComponent = widget.renderer
 
-    const WidgetId = useMemo(() => {
-        return generateId(type)
-    }, [type])
+    // const WidgetId = useMemo(() => {
+    //     return generateId(type)
+    // }, [type])
 
     return (
-        <WidgetComponent
-            id={WidgetId}
-            path={path}
-            // data={dataWithOverrides}
-            // title={title}
-            // transparent={false}
-            // width={width}
-            // height={height}
-            // renderCounter={0}
-            // replaceVariables={(str: string) => str}
-            //
-            // options={optionsWithDefaults!.options}
-            // onOptionsChange={onOptionsChange}
-            //
-            fieldConfig={fieldConfig}
-            onFieldConfigChange={onFieldConfigChange}
-            //
-            // onOrderChange=(oldIndex, newIndex) {}
-            // eventBus={appEvents}
-        >
-            {children}
-        </WidgetComponent>
+        <div>
+            {DEBUG && id}
+            <ErrorBoundary>
+                <WidgetComponent
+                    id={id}
+                    path={path}
+                    // data={dataWithOverrides}
+                    // title={title}
+                    // transparent={false}
+                    // width={width}
+                    // height={height}
+                    // renderCounter={0}
+                    // replaceVariables={(str: string) => str}
+                    //
+                    // options={optionsWithDefaults!.options}
+                    // onOptionsChange={onOptionsChange}
+                    //
+                    fieldConfig={fieldConfig}
+                    onFieldConfigChange={onFieldConfigChange}
+                    //
+                    // onOrderChange=(oldIndex, newIndex) {}
+                    // eventBus={appEvents}
+                >
+                    {children}
+                </WidgetComponent>
+            </ErrorBoundary>
+        </div>
     )
 }
 

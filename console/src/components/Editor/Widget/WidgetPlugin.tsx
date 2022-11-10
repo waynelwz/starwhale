@@ -11,10 +11,7 @@ class BaseWidget<T extends WidgetMeta = WidgetMeta> {
     // abstract getPageView(): ReactNode
 }
 
-class WidgetPlugin<
-    T extends WidgetProps = WidgetProps,
-    S extends WidgetConfigProps = WidgetConfigProps
-> extends BaseWidget<WidgetMeta> {
+class WidgetPlugin<T, S extends WidgetConfigProps = WidgetConfigProps> extends BaseWidget<WidgetMeta> {
     renderer: ComponentType<T> | null
 
     private _defaults: WidgetConfigProps = {}

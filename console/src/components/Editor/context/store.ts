@@ -1,6 +1,6 @@
 // @ts-nocheck
 import create, { createStore, useStore } from 'zustand'
-import { devtools, subscribeWithSelector } from 'zustand/middleware'
+import { devtools, subscribeWithSelector, persist } from 'zustand/middleware'
 import produce from 'immer'
 import { arrayMove, arrayRemove } from 'react-movable'
 import _ from 'lodash'
@@ -29,67 +29,70 @@ export function createCustomStore(initState: Partial<WidgetStoreState> = {}) {
     const useStore = create<WidgetStoreState>()(
         subscribeWithSelector(
             devtools(
-                (set, get, store) => ({
-                    key: name,
-                    tree: [
-                        {
-                            id: 'layout-1',
-                            children: [
-                                {
-                                    id: 'section-1',
-                                    children: [
-                                        {
-                                            id: 'layout-2',
-                                            children: [{ id: 'panel-1' }],
-                                        },
-                                    ],
-                                },
-                                {
-                                    id: 'section-2',
-                                    children: [
-                                        {
-                                            id: 'layout-2',
-                                            children: [{ id: 'panel-2' }],
-                                        },
-                                    ],
-                                },
-                            ],
-                        },
-                    ],
-                    widgets: {
-                        'layout-1': {
-                            name: 'layout-1',
-                            type: 'ui:dndList',
-                        },
-                        'section-2': {
-                            name: 'section-2',
-                            type: 'section',
-                        },
-                        'section-1': {
-                            name: 'section-1',
-                            type: 'section',
-                        },
-                        'panel-1': {
-                            name: 'panel-1',
-                            type: 'panel',
-                        },
-                    },
-                    a: 0,
-                    onOrderChange: (paths, oldIndex, newIndex) =>
-                        set(
-                            produce((state) => {
-                                const nodes = _.get(get(), paths)
-                                console.log(get(), nodes, paths)
-                                const ordered =
-                                    newIndex === -1
-                                        ? arrayRemove(nodes, oldIndex)
-                                        : arrayMove(nodes, oldIndex, newIndex)
-                                _.set(state, paths, ordered)
-                                console.log(paths, nodes, ordered)
-                            })
-                        ),
-                }),
-                { name }
+                persist(
+                    (set, get, store) => ({
+                        key: name,
+                        ...initState,
+                        // tree: [
+                        //     {
+                        //         id: 'layout-1',
+                        //         children: [
+                        //             {
+                        //                 id: 'section-1',
+                        //                 children: [
+                        //                     {
+                        //                         id: 'layout-1',
+                        //                         children: [{ id: 'panel-1' }],
+                        //                     },
+                        //                 ],
+                        //             },
+                        //             {
+                        //                 id: 'section-2',
+                        //                 children: [
+                        //                     {
+                        //                         id: 'layout-2',
+                        //                         children: [{ id: 'panel-2' }],
+                        //                     },
+                        //                 ],
+                        //             },
+                        //         ],
+                        //     },
+                        // ],
+                        // widgets: {
+                        //     'layout-1': {
+                        //         name: 'layout-1',
+                        //         type: 'ui:dndList',
+                        //     },
+                        //     'section-2': {
+                        //         name: 'section-2',
+                        //         type: 'ui:section',
+                        //     },
+                        //     'section-1': {
+                        //         name: 'section-1',
+                        //         type: 'ui:section',
+                        //     },
+                        //     'panel-1': {
+                        //         name: 'panel-1',
+                        //         type: 'panel',
+                        //     },
+                        // },
+                        onOrderChange: (paths, oldIndex, newIndex) =>
+                            set(
+                                produce((state) => {
+                                    const nodes = _.get(get(), paths)
+                                    console.log(get(), nodes, paths)
+                                    const ordered =
+                                        newIndex === -1
+                                            ? arrayRemove(nodes, oldIndex)
+                                            : arrayMove(nodes, oldIndex, newIndex)
+                                    _.set(state, paths, ordered)
+                                    console.log(paths, nodes, ordered)
+                                })
+                            ),
+                    }),
+                    { name: initState.key }
+                ),
+                { name: initState.key }
             )
         )
     )

@@ -1,19 +1,18 @@
 import React from 'react'
-import { WidgetProps } from '../../Widget/const'
+import { WidgetProps, WidgetRendererProps } from '../../Widget/const'
 import WidgetPlugin from '../../Widget/WidgetPlugin'
 import DNDList from './component/DNDList'
 
 export const CONFIG = {
-    type: 'ui:dndList',
+    type: 'dndList',
 }
+type DNDProps = typeof CONFIG
 
-function DNDListWidget(props: WidgetProps) {
-    console.log('DNDListWidget', props)
+function DNDListWidget(props: WidgetRendererProps) {
     return <DNDList {...props} />
 }
 
-const widget = new WidgetPlugin<WidgetProps, any>(DNDListWidget).addConfig(CONFIG)
-
-console.log('----', widget)
+// @FIXME type error
+const widget = new WidgetPlugin<DNDProps, any>(DNDListWidget).addConfig(CONFIG)
 
 export default widget
