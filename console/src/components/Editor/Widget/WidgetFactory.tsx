@@ -1,46 +1,30 @@
 import React from 'react'
-import { WidgetBuilder, WidgetProps, WidgetState } from './const'
+import { WidgetProps } from './const'
 import log from 'loglevel'
+import WidgetPlugin from './WidgetPlugin'
 export type DerivedPropertiesMap = Record<string, string>
 export type WidgetType = typeof WidgetFactory.widgetTypes[number]
 export type WidgetConfigProps = Record<string, unknown>
+export type WidgetConfig = Partial<WidgetProps> & WidgetConfigProps & { type: string }
 export interface WidgetCreationException {
     message: string
 }
 
 class WidgetFactory {
     static widgetTypes: Record<string, string> = {}
-    static widgetMap: Map<WidgetType, WidgetBuilder<WidgetProps, WidgetState>> = new Map()
+    static widgetMap: Map<WidgetType, WidgetPlugin> = new Map()
     static widgetConfigMap: Map<WidgetType, Partial<WidgetProps> & WidgetConfigProps & { type: string }> = new Map()
 
-    static registerWidgetBuilder(widgetType: string, widgetBuilder: WidgetBuilder<WidgetProps, WidgetState>) {
+    static register(widgetType: string, widget: WidgetPlugin, defaultConfig: WidgetConfig) {
         if (!this.widgetTypes[widgetType]) {
             this.widgetTypes[widgetType] = widgetType
-            this.widgetMap.set(widgetType, widgetBuilder)
+            this.widgetMap.set(widgetType, widget)
+            this.widgetConfigMap.set(widgetType, Object.freeze(defaultConfig))
         }
     }
 
-    static storeWidgetConfig(widgetType: string, config: Partial<WidgetProps> & WidgetConfigProps & { type: string }) {
+    static updateWidgetConfig(widgetType: string, config: WidgetConfig) {
         this.widgetConfigMap.set(widgetType, Object.freeze(config))
-    }
-
-    static createWidget(widgetData: WidgetProps): React.ReactNode {
-        const widgetProps = {
-            key: widgetData.widgetId,
-            isVisible: true,
-            ...widgetData,
-        }
-        const widgetBuilder = this.widgetMap.get(widgetData.type)
-        if (widgetBuilder) {
-            const widget = widgetBuilder.buildWidget(widgetProps)
-            return widget
-        } else {
-            const ex: WidgetCreationException = {
-                message: 'Widget Builder not registered for widget type' + widgetData.type,
-            }
-            log.error(ex)
-            return null
-        }
     }
 
     static getWidgetTypes(): WidgetType[] {

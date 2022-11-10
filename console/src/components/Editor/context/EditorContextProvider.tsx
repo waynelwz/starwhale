@@ -3,25 +3,22 @@ import { createContext, useContext, useMemo } from 'react'
 import { createCustomStore } from './store'
 
 export type EditorContextType = {
-    store: typeof store
+    store: ReturnType<typeof createCustomStore>
 }
 type EditorContextProviderProps = {
     children: React.ReactNode
 }
-export const store = createCustomStore({})
 
-export const EditorContext: Context<EditorContextType> = createContext({
-    store,
-})
+export const EditorContext: Context<EditorContextType> = createContext({} as EditorContextType)
 
 export const useEditorContext = () => useContext(EditorContext)
 
 export default function EditorContextProvider({ children }: EditorContextProviderProps) {
-    const value = useMemo(
-        () => ({
+    const value = useMemo(() => {
+        const store = createCustomStore({})
+        return {
             store,
-        }),
-        []
-    )
+        }
+    }, [])
     return <EditorContext.Provider value={value}>{children}</EditorContext.Provider>
 }

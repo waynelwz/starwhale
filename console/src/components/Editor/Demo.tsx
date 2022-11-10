@@ -8,6 +8,9 @@ import WidgetFactory from './Widget/WidgetFactory'
 import withWidgetProps from './Widget/withWidgetProps'
 import Editor from '.'
 import { defaultsDeep, isEqual } from 'lodash'
+import deepEqual from 'fast-deep-equal'
+import { useWidget } from './Widget/WidgetFactoryRegister'
+import { WidgetRenderer } from './Widget/WidgetRenderer'
 
 function Section(props) {
     return (
@@ -51,29 +54,31 @@ export const WrapedWidgetNode = withWidgetProps(function WidgetNode({ id, path, 
     // todo
     // * onOrderChange
     const { type = '' } = rest.config
-    let Node = Widgets['layout']
-
-    if (WidgetFactory.widgetMap.has(type)) {
-        Node = (props) => WidgetFactory.createWidget({ type: 'ui:dndList', widgetId: '123', ...props })
-    }
 
     return (
-        <Node id={id} path={path}>
+        <WidgetRenderer id={id} path={path} type={type}>
             {childWidgets &&
                 childWidgets.length > 0 &&
                 childWidgets.map((child, i) => (
-                    <WrapedWidgetNode key={child.id} id={child.id} path={[...path, i]} childWidgets={child.children} />
+                    <WrapedWidgetNode
+                        key={child.id}
+                        id={child.id}
+                        path={[...path, 'children', i]}
+                        childWidgets={child.children}
+                    />
                 ))}
-        </Node>
+        </WidgetRenderer>
     )
 })
 
 export function WidgetTree() {
     // const tree = useSelector(getTree)
     const { store } = useEditorContext()
-    const tree = store((state) => state.tree)
+    console.log(store)
+    const api = store()
+    const tree = store((state) => state.tree, deepEqual)
 
-    console.log('tree', tree)
+    console.log('tree', store, tree)
 
     return (
         <div>
