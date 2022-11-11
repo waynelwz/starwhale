@@ -6,41 +6,44 @@ import log from 'loglevel'
 import WidgetFactory from './Widget/WidgetFactory'
 import { generateId } from './utils/generators'
 import { createCustomStore } from './context/store'
+import WidgetRenderTree from './Widget/WidgetRenderTree'
 
-export function EditorLoader(props: any) {
-    const [registred, setRegistred] = React.useState(false)
+// log.enableAll()
 
-    useEffect(() => {
-        registerWidgets().then((module) => {
-            setRegistred(true)
-        })
-    }, [])
-    console.log('WidgetFactory', WidgetFactory.widgetMap)
+export function withEditorRegister(EditorApp: React.FC) {
+    return function EditorLoader(props: any) {
+        const [registred, setRegistred] = React.useState(false)
 
-    if (!registred) {
-        return <>registring</>
+        useEffect(() => {
+            registerWidgets().then((module) => {
+                setRegistred(true)
+            })
+        }, [])
+
+        if (!registred) {
+            return <>registring</>
+        }
+        log.debug('WidgetFactory', WidgetFactory.widgetMap)
+
+        return <EditorApp {...props} />
     }
-
-    return props.children
 }
 
-export function witEditorContext(EditorApp: React.FC, initialState = {}) {
+export function witEditorContext(EditorApp: React.FC, rawState: typeof initialState) {
     return function EditorContexted(props: any) {
-        const state = useMemo(() => tranformState(initialState), [])
+        const state = useMemo(() => tranformState(rawState), [])
         const value = useMemo(() => {
             const store = createCustomStore(state)
-            console.log('store', state)
+            log.debug('store', state)
             return {
                 store,
             }
         }, [state])
 
         return (
-            <EditorLoader>
-                <EditorContextProvider value={value}>
-                    <EditorApp {...props} />
-                </EditorContextProvider>
-            </EditorLoader>
+            <EditorContextProvider value={value}>
+                <EditorApp {...props} />
+            </EditorContextProvider>
         )
     }
 }
@@ -90,7 +93,7 @@ const tranformState = (state: typeof initialState) => {
         })
     }
     const newTree = walk(Object.assign([], state.tree))
-    console.log(newTree, defaults, widgets)
+    // console.log(newTree, defaults, widgets)
     return {
         key: state.key,
         tree: newTree,
@@ -99,6 +102,6 @@ const tranformState = (state: typeof initialState) => {
     }
 }
 
-const Editor = witEditorContext(Demo, initialState)
+const Editor = withEditorRegister(witEditorContext(WidgetRenderTree, initialState))
 
 export default Editor

@@ -12,11 +12,11 @@ export function WidgetRenderer<P extends object = any, F extends object = any>(p
         type,
         path,
         data,
-        options = {},
         width,
         height,
-        title,
-        onOptionsChange = () => {},
+        defaults = {},
+        config = {},
+        onConfigChange = () => {},
         onFieldConfigChange = () => {},
         fieldConfig = defaultFieldConfig,
         children,
@@ -45,9 +45,7 @@ export function WidgetRenderer<P extends object = any, F extends object = any>(p
 
     const WidgetComponent = widget.renderer
 
-    // const WidgetId = useMemo(() => {
-    //     return generateId(type)
-    // }, [type])
+    console.log('WidgetComponent', id, defaults, config)
 
     return (
         <div>
@@ -64,11 +62,12 @@ export function WidgetRenderer<P extends object = any, F extends object = any>(p
                     // renderCounter={0}
                     // replaceVariables={(str: string) => str}
                     //
-                    // options={optionsWithDefaults!.options}
-                    // onOptionsChange={onOptionsChange}
+                    defaults={defaults}
+                    config={config}
+                    onConfigChange={onConfigChange}
                     //
-                    fieldConfig={fieldConfig}
-                    onFieldConfigChange={onFieldConfigChange}
+                    // fieldConfig={fieldConfig}
+                    // onFieldConfigChange={onFieldConfigChange}
                     //
                     // onOrderChange=(oldIndex, newIndex) {}
                     // eventBus={appEvents}

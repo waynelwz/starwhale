@@ -40,8 +40,9 @@ export interface WidgetRendererProps<C extends object = any, F extends object = 
     type: string
     data?: any
     defaults?: Partial<C>
-    configs?: Partial<C>
-    onOptionsChange?: (options: C) => void
+    config?: Partial<C>
+    onConfigChange?: (options: C) => void
+    onOrderChange?: (oldIndex: number, newIndex: number) => void
     // onFieldConfigChange?: (config: FieldConfigSource<F>) => void
     // fieldConfig?: FieldConfigSource<Partial<F>>
     // timeZone?: string

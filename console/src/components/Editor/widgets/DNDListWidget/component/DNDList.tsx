@@ -82,11 +82,6 @@ export const Item = React.forwardRef(({ style, ...rest }: SharedStylePropsArgT, 
 
 export default function DNDList(props) {
     console.log(props.children.length, props)
-    const { path } = props
-    const { store } = useEditorContext()
-    const paths = ['tree', ...path, 'children']
-    const api = store()
-
     const $items = props.children.map((child) => {
         return child
     })
@@ -103,7 +98,7 @@ export default function DNDList(props) {
             }
             items={$items}
             onChange={({ oldIndex, newIndex }) => {
-                api.onOrderChange(paths, oldIndex, newIndex)
+                props.onChange?.(oldIndex, newIndex)
             }}
         />
     )

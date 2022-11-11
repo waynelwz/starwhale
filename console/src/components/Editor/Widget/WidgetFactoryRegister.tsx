@@ -30,11 +30,7 @@ export function useWidget(widgetType: string) {
 }
 
 export const registerWidget = (Widget: any, config: WidgetConfig) => {
-    WidgetFactory.register(['ui', config.type].join(':'), Widget, config)
-}
-
-export const registerCustomWidget = (Widget: any, config: WidgetConfig) => {
-    WidgetFactory.register(['custom', config.type].join(':'), Widget, config)
+    WidgetFactory.register(config.type, Widget, config)
 }
 
 export const registerWidgets = async () => {

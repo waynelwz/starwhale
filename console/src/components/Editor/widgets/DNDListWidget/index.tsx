@@ -4,12 +4,13 @@ import WidgetPlugin from '../../Widget/WidgetPlugin'
 import DNDList from './component/DNDList'
 
 export const CONFIG = {
-    type: 'dndList',
+    type: 'ui:dndList',
 }
 type DNDProps = typeof CONFIG
 
-function DNDListWidget(props: WidgetRendererProps) {
-    return <DNDList {...props} />
+function DNDListWidget({ onOrderChange, onConfigChange, ...rest }: WidgetRendererProps) {
+    console.log('DNDListWidget', rest)
+    return <DNDList {...rest} onChange={onOrderChange} onConfigChange={onConfigChange} />
 }
 
 // @FIXME type error

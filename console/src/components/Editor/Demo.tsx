@@ -62,7 +62,7 @@ export function WidgetTree() {
     const api = store()
     const tree = store((state) => state.tree, deepEqual)
 
-    console.log('tree', store, tree)
+    console.log('tree', tree)
 
     return (
         <div>

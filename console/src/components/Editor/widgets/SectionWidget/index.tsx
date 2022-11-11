@@ -3,7 +3,7 @@ import { WidgetProps, WidgetRendererProps } from '../../Widget/const'
 import WidgetPlugin from '../../Widget/WidgetPlugin'
 
 export const CONFIG = {
-    type: 'section',
+    type: 'ui:section',
 }
 type DNDProps = typeof CONFIG
 

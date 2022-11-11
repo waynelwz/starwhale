@@ -6,8 +6,6 @@ export type WidgetState = Record<string, unknown>
 class BaseWidget<T extends WidgetProps, K extends WidgetState> extends Component<T, K> {
     static contextType = EditorContext
     declare context: React.ContextType<typeof EditorContext>
-
-    // abstract getPageView(): ReactNode
 }
 
 export default BaseWidget

@@ -19,7 +19,10 @@ export type WidgetTreeNode = {
 export type WidgetStoreState = {
     key: string
     tree: WidgetTreeNode[]
+    widgets: Record<string, any>
+    defaults: Record<string, any>
     onOrderChange: any
+    onConfigChange: any
     // widgets:
 }
 
@@ -33,49 +36,6 @@ export function createCustomStore(initState: Partial<WidgetStoreState> = {}) {
                     (set, get, store) => ({
                         key: name,
                         ...initState,
-                        // tree: [
-                        //     {
-                        //         id: 'layout-1',
-                        //         children: [
-                        //             {
-                        //                 id: 'section-1',
-                        //                 children: [
-                        //                     {
-                        //                         id: 'layout-1',
-                        //                         children: [{ id: 'panel-1' }],
-                        //                     },
-                        //                 ],
-                        //             },
-                        //             {
-                        //                 id: 'section-2',
-                        //                 children: [
-                        //                     {
-                        //                         id: 'layout-2',
-                        //                         children: [{ id: 'panel-2' }],
-                        //                     },
-                        //                 ],
-                        //             },
-                        //         ],
-                        //     },
-                        // ],
-                        // widgets: {
-                        //     'layout-1': {
-                        //         name: 'layout-1',
-                        //         type: 'ui:dndList',
-                        //     },
-                        //     'section-2': {
-                        //         name: 'section-2',
-                        //         type: 'ui:section',
-                        //     },
-                        //     'section-1': {
-                        //         name: 'section-1',
-                        //         type: 'ui:section',
-                        //     },
-                        //     'panel-1': {
-                        //         name: 'panel-1',
-                        //         type: 'panel',
-                        //     },
-                        // },
                         onOrderChange: (paths, oldIndex, newIndex) =>
                             set(
                                 produce((state) => {
@@ -86,7 +46,12 @@ export function createCustomStore(initState: Partial<WidgetStoreState> = {}) {
                                             ? arrayRemove(nodes, oldIndex)
                                             : arrayMove(nodes, oldIndex, newIndex)
                                     _.set(state, paths, ordered)
-                                    console.log(paths, nodes, ordered)
+                                })
+                            ),
+                        onConfigChange: (id: string, config: any) =>
+                            set(
+                                produce((state) => {
+                                    state.widgets[id] = config
                                 })
                             ),
                     }),
@@ -97,7 +62,7 @@ export function createCustomStore(initState: Partial<WidgetStoreState> = {}) {
         )
     )
     // eslint-disable-next-line
-    useStore.subscribe(console.log)
+    // useStore.subscribe(console.log)
     // @ts-ignore
     return useStore
 }

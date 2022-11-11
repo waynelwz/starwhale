@@ -30,7 +30,7 @@ const location = window.location
 export const AuthProvider = ({ children }: any) => {
     const [currentToken, setCurrentToken] = React.useState(getToken())
 
-    const userInfo = useQuery('currentUser', fetchCurrentUser, { refetchOnWindowFocus: true })
+    const userInfo = useQuery('currentUser', fetchCurrentUser, { refetchOnWindowFocus: false })
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
     const { setCurrentUser } = useCurrentUser()
