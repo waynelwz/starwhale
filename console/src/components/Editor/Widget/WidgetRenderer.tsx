@@ -17,9 +17,8 @@ export function WidgetRenderer<P extends object = any, F extends object = any>(p
         defaults = {},
         config = {},
         onConfigChange = () => {},
-        onFieldConfigChange = () => {},
-        fieldConfig = defaultFieldConfig,
         children,
+        ...rest
     } = props
 
     const { widget } = useWidget(type)
@@ -71,6 +70,7 @@ export function WidgetRenderer<P extends object = any, F extends object = any>(p
                     //
                     // onOrderChange=(oldIndex, newIndex) {}
                     // eventBus={appEvents}
+                    {...rest}
                 >
                     {children}
                 </WidgetComponent>

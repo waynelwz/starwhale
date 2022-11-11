@@ -22,18 +22,18 @@ class WidgetPlugin<T, S extends WidgetConfigProps = WidgetConfigProps> extends B
         this.renderer = renderer
     }
 
-    addConfig(config: any) {
-        this._defaults = config
-        return this
-    }
+    // addConfig(config: any) {
+    //     this._defaults = config
+    //     return this
+    // }
 
-    get defaults() {
-        return this._defaults
-    }
+    // get defaults() {
+    //     return this._defaults
+    // }
 
-    get type() {
-        return this._defaults.type
-    }
+    // get type() {
+    //     return this._defaults.type
+    // }
 }
 
 export default WidgetPlugin

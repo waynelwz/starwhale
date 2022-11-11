@@ -1,6 +1,5 @@
 import React, { useEffect, useMemo } from 'react'
 import EditorContextProvider from './context/EditorContextProvider'
-import Demo from './Demo'
 import { registerWidgets } from './Widget/WidgetFactoryRegister'
 import log from 'loglevel'
 import WidgetFactory from './Widget/WidgetFactory'
@@ -93,7 +92,7 @@ const tranformState = (state: typeof initialState) => {
         })
     }
     const newTree = walk(Object.assign([], state.tree))
-    // console.log(newTree, defaults, widgets)
+    console.log(newTree, defaults, widgets)
     return {
         key: state.key,
         tree: newTree,

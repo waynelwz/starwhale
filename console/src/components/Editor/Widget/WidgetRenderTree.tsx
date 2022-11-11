@@ -5,18 +5,13 @@ import deepEqual from 'fast-deep-equal'
 import { WidgetRenderer } from '../Widget/WidgetRenderer'
 
 export const WrapedWidgetNode = withWidgetProps(function WidgetNode(props: any) {
-    const { type, childWidgets, path } = props
+    const { childWidgets, path } = props
     return (
         <WidgetRenderer {...props}>
             {childWidgets &&
                 childWidgets.length > 0 &&
-                childWidgets.map((child, i) => (
-                    <WrapedWidgetNode
-                        key={child.id}
-                        id={child.id}
-                        path={[...path, 'children', i]}
-                        childWidgets={child.children}
-                    />
+                childWidgets.map(({ childChildren, ...childRest }, i) => (
+                    <WrapedWidgetNode path={[...path, 'children', i]} childWidgets={childChildren} {...childRest} />
                 ))}
         </WidgetRenderer>
     )

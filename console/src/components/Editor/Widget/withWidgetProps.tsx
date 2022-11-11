@@ -25,7 +25,13 @@ export default function withWidgetProps(WrappedWidget: typeof BaseWidget) {
             },
             [api]
         )
-
+        const handleChildrenAdd = useCallback(
+            (widget: any) => {
+                const paths = ['tree', ...path, 'children']
+                api.onChildrenAdd(paths, widget)
+            },
+            [api]
+        )
         console.log('WrapedPropsWidget', props, config)
 
         return (
@@ -35,6 +41,7 @@ export default function withWidgetProps(WrappedWidget: typeof BaseWidget) {
                 config={config}
                 onConfigChange={handleConfigChange}
                 onOrderChange={handleOrderChange}
+                onChildrenAdd={handleChildrenAdd}
             />
         )
     }

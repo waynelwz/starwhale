@@ -1,9 +1,10 @@
-// @ts-nocheck
 import create, { createStore, useStore } from 'zustand'
 import { devtools, subscribeWithSelector, persist } from 'zustand/middleware'
 import produce from 'immer'
 import { arrayMove, arrayRemove } from 'react-movable'
 import _ from 'lodash'
+import { generateId } from '../utils/generators'
+import WidgetFactory from '../Widget/WidgetFactory'
 
 export type WidgetType = string
 
@@ -13,7 +14,8 @@ export type WidgetLayoutType = {
 }
 
 export type WidgetTreeNode = {
-    id: string
+    id?: string
+    type: string
     children?: WidgetTreeNode[]
 }
 export type WidgetStoreState = {
@@ -23,7 +25,19 @@ export type WidgetStoreState = {
     defaults: Record<string, any>
     onOrderChange: any
     onConfigChange: any
-    // widgets:
+    onChildrenAdd: any
+}
+
+const transformWidget = (node) => {
+    // console.log(node)
+    if (!node?.id) node.id = generateId(node.type)
+    const defaultConfig = WidgetFactory.widgetConfigMap.get(node.type) ?? {}
+    const config = WidgetFactory.widgetConfigMap.get(node.type) ?? {}
+    return {
+        node,
+        defaultConfig,
+        config,
+    }
 }
 
 export function createCustomStore(initState: Partial<WidgetStoreState> = {}) {
@@ -35,7 +49,7 @@ export function createCustomStore(initState: Partial<WidgetStoreState> = {}) {
                 persist(
                     (set, get, store) => ({
                         key: name,
-                        ...initState,
+                        ...(initState as any),
                         onOrderChange: (paths, oldIndex, newIndex) =>
                             set(
                                 produce((state) => {
@@ -52,6 +66,16 @@ export function createCustomStore(initState: Partial<WidgetStoreState> = {}) {
                             set(
                                 produce((state) => {
                                     state.widgets[id] = config
+                                })
+                            ),
+                        onChildrenAdd: (paths, widgets) =>
+                            set(
+                                produce((state) => {
+                                    const nodes = _.get(get(), paths)
+                                    const { node, defaultConfig, config } = transformWidget(widgets)
+                                    _.set(state, paths, [...nodes, widgets])
+                                    state.widgets[node.id] = config
+                                    state.defaults[node.id] = defaultConfig
                                 })
                             ),
                     }),

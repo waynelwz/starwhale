@@ -10,6 +10,8 @@ import log from 'loglevel'
 export function useWidget(widgetType: string) {
     const [widget, setWidget] = useState<WidgetPlugin | undefined>(WidgetFactory.widgetMap.get(widgetType))
 
+    console.log('useWidget', widgetType, widget)
+
     useEffect(() => {
         if (widget) {
             return
@@ -39,13 +41,15 @@ export const registerWidgets = async () => {
     const start = performance.now()
 
     const modules = [
-        { type: 'ui:dndList', url: '../widgets/DNDListWidget' },
-        { type: 'ui:section', url: '../widgets/SectionWidget' },
+        { type: 'ui:dndList', url: '../widgets/DNDListWidget/index.tsx' },
+        { type: 'ui:section', url: '../widgets/SectionWidget/index.tsx' },
     ].filter((v) => !(v.type in WidgetFactory.widgetTypes))
 
     for await (const module of modules.map(async (m) => await import(m.url))) {
         registerWidget(module.default, module.CONFIG)
     }
+
+    // registerWidget(module.default, module.CONFIG)
 
     // for (let m in modules) {
     //     const module = await import(modules[m].url)

@@ -60,12 +60,10 @@ export function DragHandle({ children, ...rest }: SharedStylePropsArgT & { child
 }
 
 export function Label({ children, ...rest }: SharedStylePropsArgT & { children: React.ReactNode }) {
-    // console.log('label', rest)
+    console.log('label', rest)
     return (
         <StyledLabel {...rest} style={{ flex: '1' }}>
-            <StatefulPanel title={rest.$value.key} {...rest}>
-                {children}
-            </StatefulPanel>
+            {rest.$value}
         </StyledLabel>
     )
 }
@@ -80,12 +78,7 @@ export const Item = React.forwardRef(({ style, ...rest }: SharedStylePropsArgT, 
     )
 })
 
-export default function DNDList(props) {
-    console.log(props.children.length, props)
-    const $items = props.children.map((child) => {
-        return child
-    })
-
+export default function DNDList(props: any) {
     return (
         <List
             // @ts-ignore
@@ -96,7 +89,7 @@ export default function DNDList(props) {
                     Label,
                 } as any
             }
-            items={$items}
+            items={props.children}
             onChange={({ oldIndex, newIndex }) => {
                 props.onChange?.(oldIndex, newIndex)
             }}
