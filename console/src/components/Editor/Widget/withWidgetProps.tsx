@@ -40,8 +40,10 @@ export default function withWidgetProps(WrappedWidget: typeof BaseWidget) {
                 defaults={defaults}
                 config={config}
                 onConfigChange={handleConfigChange}
+                // for dnd list
                 onOrderChange={handleOrderChange}
                 onChildrenAdd={handleChildrenAdd}
+                // for
             />
         )
     }
