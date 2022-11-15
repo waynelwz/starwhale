@@ -26,9 +26,18 @@ const SelectWidget = ({
     const { readonlyAsDisabled = true } = formContext
 
     const { enumOptions, enumDisabled } = options
+    console.log('SelectWidget', options)
 
     const handleChange = (nextValue: any) =>
-        onChange(processSelectValue(schema, nextValue?.option?.id as string, options))
+        !multiple
+            ? onChange(processSelectValue(schema, nextValue?.option?.id as string, options))
+            : onChange(
+                  processSelectValue(
+                      schema,
+                      nextValue.value?.map((item) => (item.id as string) ?? '').filter((name) => name !== ''),
+                      options
+                  )
+              )
 
     const handleBlur = () => onBlur(id, processSelectValue(schema, value, options))
 
@@ -52,6 +61,16 @@ const SelectWidget = ({
         })
     }, [enumOptions, value])
 
+    const $value =
+        multiple && Array.isArray(value)
+            ? value?.map((item) => ({
+                  id: item,
+                  label: item,
+              }))
+            : stringify(value)
+
+    console.log(multiple, 'select')
+
     return (
         <Select
             multi={multiple}
@@ -70,7 +89,7 @@ const SelectWidget = ({
             onChange={!readonly ? handleChange : undefined}
             onFocus={!readonly ? handleFocus : undefined}
             placeholder={placeholder}
-            value={typeof value !== 'undefined' ? stringify(value) : undefined}
+            value={$value}
             options={$options}
             {...extraProps}
         />

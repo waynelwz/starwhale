@@ -1,6 +1,6 @@
 import BusyPlaceholder from '@/components/BusyLoaderWrapper/BusyPlaceholder'
-import { getRocAucConfig } from '@/components/Indicator/utils'
-import { useParseRocAuc } from '@/domain/datastore/hooks/useParseDatastore'
+import { getHeatmapConfig, getRocAucConfig } from '@/components/Indicator/utils'
+import { useParseConfusionMatrix, useParseRocAuc } from '@/domain/datastore/hooks/useParseDatastore'
 import React, { useCallback, useState } from 'react'
 import { WidgetProps, WidgetRendererProps } from '../../Widget/const'
 import WidgetPlugin from '../../Widget/WidgetPlugin'
@@ -9,29 +9,31 @@ const PlotlyVisualizer = React.lazy(
 )
 
 export const CONFIG = {
-    type: 'ui:panel:rocauc',
+    type: 'ui:panel:heatmap',
     group: 'panel',
-    name: 'Roc Auc',
+    name: 'Heatmap',
 }
 
-function PanelRocAucWidget(props: WidgetRendererProps<any, any>) {
-    console.log('PanelRocAucWidget', props)
+function PanelHeatmapWidget(props: WidgetRendererProps<any, any>) {
+    console.log('PanelHeatmapWidget', props)
 
     const { defaults, config, children, data = {} } = props
     const { columnTypes = [], records = [] } = data
 
     const name = config?.name ?? defaults?.name
 
-    const rocAucData = useParseRocAuc({ records })
-    const vizData = getRocAucConfig(name, [], rocAucData)
+    const { labels, binarylabel } = useParseConfusionMatrix(data)
+    const heatmapData = getHeatmapConfig(name, labels, binarylabel)
+
+    console.log(heatmapData)
 
     return (
         <React.Suspense fallback={<BusyPlaceholder />}>
-            <PlotlyVisualizer data={vizData} />
+            <PlotlyVisualizer data={heatmapData} />
         </React.Suspense>
     )
 }
 
-const widget = new WidgetPlugin<any, any>(PanelRocAucWidget)
+const widget = new WidgetPlugin<any, any>(PanelHeatmapWidget)
 
 export default widget

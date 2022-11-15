@@ -8,6 +8,26 @@ export const CONFIG = {
     type: 'ui:panel:table',
     group: 'panel',
     name: 'table',
+    fieldConfig: {
+        uiSchema: {
+            'ui:order': ['*', 'chartTitle'],
+        },
+        schema: {
+            type: 'object',
+            properties: {
+                tableName: {
+                    'ui:widget': 'DatastoreTableSelect',
+                },
+            },
+        },
+        dataDefaults: {
+            chartType: 'ui:panel:table',
+        },
+        dataOverrides: {
+            tableName: '',
+            chartTitle: 'summary',
+        },
+    },
 }
 
 function PanelTableWidget(props: WidgetRendererProps<PanelTableProps, any>) {

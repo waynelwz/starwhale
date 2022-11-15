@@ -31,22 +31,7 @@ function PanelTableWidget(props: WidgetRendererProps<PanelTableProps, any>) {
         )
     }, [records, columns])
 
-    return (
-        <React.Suspense fallback={<BusyPlaceholder />}>
-            <PanelTable
-                columns={columns}
-                data={data}
-                // paginationProps={{
-                //     start: modelsInfo.data?.pageNum,
-                //     count: modelsInfo.data?.pageSize,
-                //     total: modelsInfo.data?.total,
-                //     afterPageChange: () => {
-                //         info.refetch()
-                //     },
-                // }}
-            />
-        </React.Suspense>
-    )
+    return <PanelTable columns={columns} data={data} />
 }
 
 const widget = new WidgetPlugin<PanelTableProps, any>(PanelTableWidget)

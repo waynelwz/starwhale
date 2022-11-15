@@ -25,7 +25,7 @@ export function useWidget(widgetType: string) {
         //   });
     }, [widget, widgetType])
 
-    console.log('useWidget', widgetType, widget, WidgetFactory.widgetMap)
+    console.log('useWidget', widgetType, widget)
 
     return {
         widget,
@@ -47,6 +47,7 @@ export const registerWidgets = async () => {
         { type: 'ui:section', url: '../widgets/SectionWidget/index.tsx' },
         { type: 'ui:panel:table', url: '../widgets/PanelTableWidget/index.tsx' },
         { type: 'ui:panel:rocauc', url: '../widgets/PanelRocAucWidget/index.tsx' },
+        { type: 'ui:panel:heatmap', url: '../widgets/PanelHeatmapWidget/index.tsx' },
     ].filter((v) => !(v.type in WidgetFactory.widgetTypes))
 
     for await (const module of modules.map(async (m) => await import(m.url))) {

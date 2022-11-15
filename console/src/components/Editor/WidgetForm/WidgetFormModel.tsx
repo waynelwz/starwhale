@@ -1,6 +1,6 @@
 import useTranslation from '@/hooks/useTranslation'
 import { Modal, ModalBody, ModalHeader } from 'baseui/modal'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { getWidget } from '../hooks/useSelector'
 import { WidgetEditForm } from './WidgetForm'
 import { WidgetRenderer } from '../Widget/WidgetRenderer'
@@ -15,12 +15,12 @@ export default function WidgetFormModel({ store }) {
     const [formData, setFormData] = React.useState({})
 
     const handleFormChange = (formData) => {
-        console.log(formData)
+        console.log('handleFormChange', formData)
         setFormData(formData)
     }
 
     const type = formData?.chartType
-    const tableName = formData?.tableName
+    const tableName = Array.isArray(formData?.tableName) ? formData?.tableName[0] : formData?.tableName
     const filter = undefined
     const PAGE_TABLE_SIZE = 100
 
@@ -36,7 +36,12 @@ export default function WidgetFormModel({ store }) {
         [tableName]
     )
 
-    const info = useQueryDatastore(query, true)
+    const info = useQueryDatastore(query, false)
+
+    useEffect(() => {
+        if (tableName) info.refetch()
+    }, [tableName, type])
+
     console.log(query, info)
 
     return (

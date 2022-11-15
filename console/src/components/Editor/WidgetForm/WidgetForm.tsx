@@ -13,6 +13,9 @@ const uiSchema: UiSchema = {
     age: {
         classNames: 'custom-class-age',
     },
+    tableName: {
+        'ui:widget': 'SelectWidget',
+    },
     // 'ui:order': ['bar', '*'],
     // "ui:options":  {
     //     expandable: false
@@ -25,11 +28,35 @@ const formData = {
 }
 
 export function WidgetEditForm({ formData, onChange }) {
-    const { tables } = useDatastoreTables('mnist-exp', '880e369d971d40b6ad08c6197fc3323a')
+    // 0165a7ec2b994458b79b016d72cf6394
+    const { tables = [] } = useDatastoreTables('starwhale', '90138e6fde2a480888531526b7b65dfe')
     console.log('panels', WidgetFactory.getPanels(), tables)
 
     const panels = WidgetFactory.getPanels()
     if (panels.length === 0) return <></>
+
+    const tableName = {
+        type: 'string',
+        oneOf:
+            tables.map((v) => ({
+                const: v.name,
+                title: v.short,
+            })) ?? [],
+    }
+    const multiTableName = {
+        type: 'array',
+        uniqueItems: true,
+        items: {
+            type: 'object',
+            oneOf:
+                tables.map((v) => ({
+                    const: v.name,
+                    title: v.short,
+                })) ?? [],
+        },
+    }
+
+    const tableNameSchema = tableName // formData.chartType === 'ui:panel:table' ? tableName : multiTableName
 
     const schema: RJSFSchema = {
         // title: 'My title',
@@ -44,14 +71,7 @@ export function WidgetEditForm({ formData, onChange }) {
                         title: v.name,
                     })) ?? [],
             },
-            tableName: {
-                type: 'string',
-                oneOf:
-                    tables.map((v) => ({
-                        const: v.name,
-                        title: v.short,
-                    })) ?? [],
-            },
+            tableName: { ...tableNameSchema },
             chartTitle: {
                 type: 'string',
             },
