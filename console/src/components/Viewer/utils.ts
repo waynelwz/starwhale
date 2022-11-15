@@ -84,24 +84,35 @@ export const drawSegment = (canvas: HTMLCanvasElement, imgDatas: IImageData[], r
     return newImageData
 }
 
-export const drawSegmentWithCOCOMask = (canvas: HTMLCanvasElement, imgDatas: IImageData[]) => {
+export const drawSegmentWithCOCOMask = (
+    canvas: HTMLCanvasElement,
+    imgDatas: IImageData[],
+    hiddenLabels: Set<number> = new Set()
+) => {
     const ctx = canvas.getContext('2d')
     const newImageData = new ImageData(canvas.width, canvas.height)
 
     for (let i = 0; i < newImageData.data.length; i += 4) {
         const rawIndex = imgDatas.findIndex((v) => v.img.data[i + 0] > 0)
-        if (rawIndex < 0) {
+        // newImageData.data[i] = 0
+        // newImageData.data[i + 1] = 0
+        // newImageData.data[i + 2] = 0
+        // newImageData.data[i + 3] = 200
+
+        if (rawIndex >= 0) {
+            const label = imgDatas[rawIndex].img.data[i + 0]
+            if (!hiddenLabels.has(label)) {
+                const [r, g, b] = COLORS[label % COLORS.length]
+                newImageData.data[i] = r
+                newImageData.data[i + 1] = g
+                newImageData.data[i + 2] = b
+                newImageData.data[i + 3] = 240
+            }
+        } else {
             newImageData.data[i] = 0
             newImageData.data[i + 1] = 0
             newImageData.data[i + 2] = 0
-            newImageData.data[i + 3] = 200
-        } else {
-            const label = imgDatas[rawIndex].img.data[i + 0]
-            const [r, g, b] = COLORS[label % COLORS.length]
-            newImageData.data[i] = r
-            newImageData.data[i + 1] = g
-            newImageData.data[i + 2] = b
-            newImageData.data[i + 3] = 240
+            newImageData.data[i + 3] = 0
         }
     }
     ctx?.putImageData(newImageData, 0, 0)

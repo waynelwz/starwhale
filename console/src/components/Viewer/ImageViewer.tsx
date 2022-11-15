@@ -51,7 +51,7 @@ export default function ImageViewer({ isZoom = false, data, masks = [], cocos = 
             <ZoomWrapper isTools={isZoom ? false : undefined}>
                 <img src={data.src} width='auto' height='100%' alt='dataset view' />
                 {/* eslint-disable-next-line @typescript-eslint/no-use-before-define */}
-                <SegmentOverlay masks={masks} />
+                <SegmentOverlay masks={masks} hiddenLabels={hiddenLabels} />
                 {/* eslint-disable-next-line @typescript-eslint/no-use-before-define */}
                 <COCOBBoxOverlay cocos={$cocos} />
             </ZoomWrapper>
@@ -59,7 +59,7 @@ export default function ImageViewer({ isZoom = false, data, masks = [], cocos = 
     )
 }
 
-export function SegmentOverlay({ masks = [] }: { masks: IObjectImage[] }) {
+export function SegmentOverlay({ masks = [], hiddenLabels }: { masks: IObjectImage[]; hiddenLabels: Set<number> }) {
     const canvasRef = React.useRef<HTMLCanvasElement | null>(null)
     const [imgDatas, setImgDatas] = React.useState<IImageData[]>([])
     const styles = useStyles()
@@ -77,9 +77,9 @@ export function SegmentOverlay({ masks = [] }: { masks: IObjectImage[] }) {
             const canvas = canvasRef.current
             canvas.width = width
             canvas.height = height
-            drawSegmentWithCOCOMask(canvas, imgDatas)
+            drawSegmentWithCOCOMask(canvas, imgDatas, hiddenLabels)
         }
-    }, [canvasRef, imgDatas, masks])
+    }, [canvasRef, imgDatas, masks, hiddenLabels])
 
     if (masks.length === 0) {
         return <></>
