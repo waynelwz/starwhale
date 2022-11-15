@@ -4,6 +4,7 @@ import { RegistryWidgetsType, RJSFSchema, UiSchema } from '@rjsf/utils'
 import validator from '@rjsf/validator-ajv8'
 import WidgetFactory from '../Widget/WidgetFactory'
 import useDatastoreTables from '../datastore/useDatastoreTables'
+import React from 'react'
 
 const uiSchema: UiSchema = {
     name: {
@@ -27,7 +28,7 @@ const formData = {
     done: true,
 }
 
-export function WidgetEditForm({ formData, onChange }) {
+function WidgetEditForm({ formData, onChange, onSubmit }, ref) {
     // 0165a7ec2b994458b79b016d72cf6394
     const { tables = [] } = useDatastoreTables('starwhale', '90138e6fde2a480888531526b7b65dfe')
     console.log('panels', WidgetFactory.getPanels(), tables)
@@ -88,7 +89,14 @@ export function WidgetEditForm({ formData, onChange }) {
             uiSchema={uiSchema}
             formData={formData}
             validator={validator}
+            onSubmit={onSubmit}
+            // ref={(form) => {
+            //     console.log(ref)
+            //     // ref?.current = form
+            // }}
             onChange={(e) => onChange?.(e.formData)}
         />
     )
 }
+
+export default React.forwardRef(WidgetEditForm)

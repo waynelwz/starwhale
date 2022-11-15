@@ -1,10 +1,11 @@
 import useTranslation from '@/hooks/useTranslation'
-import { Modal, ModalBody, ModalHeader } from 'baseui/modal'
+import { Modal, ModalBody, ModalFooter, ModalHeader } from 'baseui/modal'
 import React, { useEffect } from 'react'
 import { getWidget } from '../hooks/useSelector'
-import { WidgetEditForm } from './WidgetForm'
 import { WidgetRenderer } from '../Widget/WidgetRenderer'
 import { useQueryDatastore } from '@/domain/datastore/hooks/useFetchDatastore'
+import { Button } from '@/components/Button'
+import WidgetEditForm from './WidgetForm'
 
 export default function WidgetFormModel({ store }) {
     // @FIXME use event bus handle global state
@@ -17,6 +18,10 @@ export default function WidgetFormModel({ store }) {
     const handleFormChange = (formData) => {
         console.log('handleFormChange', formData)
         setFormData(formData)
+    }
+
+    const handleFormSubmit = ({ formData }) => {
+        console.log('handleFormSubmit', formData)
     }
 
     const type = formData?.chartType
@@ -43,6 +48,8 @@ export default function WidgetFormModel({ store }) {
     }, [tableName, type])
 
     console.log(query, info)
+
+    const formRef = React.useRef(null)
 
     return (
         <Modal
@@ -79,11 +86,38 @@ export default function WidgetFormModel({ store }) {
                     {type && <WidgetRenderer type={type} data={info.data} />}
                 </div>
                 <WidgetEditForm
+                    // ref={formRef}
                     formData={formData}
                     onChange={handleFormChange}
+                    onSubmit={handleFormSubmit}
+
                     // onSubmit={editProject ? handleEditProject : handleCreateProject}
                 />
             </ModalBody>
+            <ModalFooter>
+                <div style={{ display: 'flex' }}>
+                    <div style={{ flexGrow: 1 }} />
+                    <Button
+                        size='compact'
+                        kind='secondary'
+                        onClick={() => {
+                            setisPanelModalOpen(false)
+                        }}
+                    >
+                        {t('Cancel')}
+                    </Button>
+                    &nbsp;&nbsp;
+                    <Button
+                        size='compact'
+                        onClick={() => {
+                            // formRef.current?.onSubmit()
+                            // setisPanelModalOpen(false)
+                        }}
+                    >
+                        Submit
+                    </Button>
+                </div>
+            </ModalFooter>
         </Modal>
     )
 }
