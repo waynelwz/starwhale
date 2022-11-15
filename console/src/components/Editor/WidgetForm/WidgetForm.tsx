@@ -3,6 +3,7 @@ import Form from '@rjsf/core'
 import { RegistryWidgetsType, RJSFSchema, UiSchema } from '@rjsf/utils'
 import validator from '@rjsf/validator-ajv8'
 import WidgetFactory from '../Widget/WidgetFactory'
+import useDatastoreTables from '../datastore/useDatastoreTables'
 
 const uiSchema: UiSchema = {
     name: {
@@ -24,7 +25,8 @@ const formData = {
 }
 
 export function WidgetEditForm({ formData, onChange }) {
-    console.log('panels', WidgetFactory.getPanels())
+    const { tables } = useDatastoreTables('mnist-exp', '880e369d971d40b6ad08c6197fc3323a')
+    console.log('panels', WidgetFactory.getPanels(), tables)
 
     const panels = WidgetFactory.getPanels()
     if (panels.length === 0) return <></>
@@ -41,6 +43,17 @@ export function WidgetEditForm({ formData, onChange }) {
                         const: v.type,
                         title: v.name,
                     })) ?? [],
+            },
+            tableName: {
+                type: 'string',
+                oneOf:
+                    tables.map((v) => ({
+                        const: v.name,
+                        title: v.short,
+                    })) ?? [],
+            },
+            chartTitle: {
+                type: 'string',
             },
         },
         //   "required": ["name"],

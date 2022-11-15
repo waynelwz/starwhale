@@ -4,6 +4,7 @@ import React from 'react'
 import { getWidget } from '../hooks/useSelector'
 import { WidgetEditForm } from './WidgetForm'
 import { WidgetRenderer } from '../Widget/WidgetRenderer'
+import { useQueryDatastore } from '@/domain/datastore/hooks/useFetchDatastore'
 
 export default function WidgetFormModel({ store }) {
     // @FIXME use event bus handle global state
@@ -19,6 +20,24 @@ export default function WidgetFormModel({ store }) {
     }
 
     const type = formData?.chartType
+    const tableName = formData?.tableName
+    const filter = undefined
+    const PAGE_TABLE_SIZE = 100
+
+    const query = React.useMemo(
+        () => ({
+            tableName,
+            start: 0,
+            limit: PAGE_TABLE_SIZE,
+            rawResult: true,
+            ignoreNonExistingTable: true,
+            // filter,
+        }),
+        [tableName]
+    )
+
+    const info = useQueryDatastore(query, true)
+    console.log(query, info)
 
     return (
         <Modal
@@ -45,13 +64,14 @@ export default function WidgetFormModel({ store }) {
             <ModalBody style={{ display: 'flex', gap: '30px' }}>
                 <div
                     style={{
-                        flexBasis: '616px',
+                        flexBasis: '600px',
+                        flexGrow: '1',
                         minHeight: '348px',
                         height: 'auto',
+                        overflow: 'auto',
                     }}
                 >
-                    {/* id='ui:section-dkwygaa7ts' */}
-                    {type && <WidgetRenderer type={type} />}
+                    {type && <WidgetRenderer type={type} data={info.data} />}
                 </div>
                 <WidgetEditForm
                     formData={formData}

@@ -5,6 +5,7 @@ import Select from '@/components/Select'
 
 const SELECT_STYLE = {
     width: '100%',
+    minWidth: '280px',
 }
 
 const SelectWidget = ({
@@ -53,6 +54,7 @@ const SelectWidget = ({
 
     return (
         <Select
+            multi={multiple}
             overrides={{
                 ControlContainer: {
                     style: {

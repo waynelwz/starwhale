@@ -13,7 +13,8 @@ export const CONFIG = {
 function PanelTableWidget(props: WidgetRendererProps<PanelTableProps, any>) {
     console.log('PanelTableWidget', props)
 
-    const { defaults, config, children, columnTypes, records } = props
+    const { defaults, config, children, data } = props
+    const { columnTypes = {}, records = [] } = data
     const name = config?.name ?? defaults?.name
 
     const columns = React.useMemo(() => {

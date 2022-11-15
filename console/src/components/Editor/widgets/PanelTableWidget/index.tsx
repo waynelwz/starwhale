@@ -13,28 +13,31 @@ export const CONFIG = {
 function PanelTableWidget(props: WidgetRendererProps<PanelTableProps, any>) {
     console.log('PanelTableWidget', props)
 
-    const { defaults, config, children, columnTypes, records } = props
+    const { defaults, config, children, data = {} } = props
+    const { columnTypes = [], records = [] } = data
     const name = config?.name ?? defaults?.name
 
     const columns = React.useMemo(() => {
-        return columnTypes?.map((column) => column.name)?.sort((a) => (a === 'id' ? -1 : 1)) ?? []
+        return columnTypes.map((column) => column.name)?.sort((a) => (a === 'id' ? -1 : 1)) ?? []
     }, [columnTypes])
 
-    const data = React.useMemo(() => {
+    const $data = React.useMemo(() => {
         if (!records) return []
 
         return (
-            records?.map((item) => {
+            records.map((item) => {
                 return columns.map((k) => item?.[k])
             }) ?? []
         )
     }, [records, columns])
 
+    console.log(columns, data)
+
     return (
         <React.Suspense fallback={<BusyPlaceholder />}>
             <PanelTable
                 columns={columns}
-                data={data}
+                data={$data}
                 // paginationProps={{
                 //     start: modelsInfo.data?.pageNum,
                 //     count: modelsInfo.data?.pageSize,
