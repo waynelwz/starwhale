@@ -1,32 +1,9 @@
+import Widgets from '@/components/RJSF/widgets'
 import Form from '@rjsf/core'
-import { RJSFSchema, UiSchema } from '@rjsf/utils'
+import { RegistryWidgetsType, RJSFSchema, UiSchema } from '@rjsf/utils'
 import validator from '@rjsf/validator-ajv8'
+import WidgetFactory from '../Widget/WidgetFactory'
 
-const schema: RJSFSchema = {
-    // title: 'My title',
-    // description: 'My description',
-    type: 'object',
-    properties: {
-        selectWidgetOptions: {
-            title: 'Custom select widget with options, overriding the enum titles.',
-            type: 'string',
-            oneOf: [
-                {
-                    const: 'foo',
-                    title: 'Foo',
-                },
-                {
-                    const: 'bar',
-                    title: 'Bar',
-                },
-            ],
-        },
-    },
-    //   "required": ["name"],
-    //   "dependencies": {
-    //     "credit_card": ["billing_address"]
-    //   }
-}
 const uiSchema: UiSchema = {
     name: {
         classNames: 'custom-class-name',
@@ -46,14 +23,39 @@ const formData = {
     done: true,
 }
 
-export function WidgetEditForm() {
+export function WidgetEditForm({ formData, onChange }) {
+    console.log('panels', WidgetFactory.getPanels())
+
+    const panels = WidgetFactory.getPanels()
+    if (panels.length === 0) return <></>
+
+    const schema: RJSFSchema = {
+        // title: 'My title',
+        // description: 'My description',
+        type: 'object',
+        properties: {
+            chartType: {
+                type: 'string',
+                oneOf:
+                    WidgetFactory.getPanels().map((v) => ({
+                        const: v.type,
+                        title: v.name,
+                    })) ?? [],
+            },
+        },
+        //   "required": ["name"],
+        //   "dependencies": {
+        //     "credit_card": ["billing_address"]
+        //   }
+    }
     return (
         <Form
             schema={schema}
+            widgets={Widgets}
             uiSchema={uiSchema}
             formData={formData}
             validator={validator}
-            // onChange={(e) => setFormData(e.formData)}
+            onChange={(e) => onChange?.(e.formData)}
         />
     )
 }

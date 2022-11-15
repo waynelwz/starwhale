@@ -10,11 +10,11 @@ import log from 'loglevel'
 export function useWidget(widgetType: string) {
     const [widget, setWidget] = useState<WidgetPlugin | undefined>(WidgetFactory.widgetMap.get(widgetType))
 
-    console.log('useWidget', widgetType, widget)
-
     useEffect(() => {
-        if (widget) {
-            return
+        const temp = WidgetFactory.widgetMap.get(widgetType)
+
+        if (temp && temp != widget) {
+            setWidget(temp)
         }
 
         // @FIXME dynamic Async load the plugin if none exists
@@ -24,6 +24,8 @@ export function useWidget(widgetType: string) {
         //     setError(err.message);
         //   });
     }, [widget, widgetType])
+
+    console.log('useWidget', widgetType, widget, WidgetFactory.widgetMap)
 
     return {
         widget,
@@ -43,6 +45,8 @@ export const registerWidgets = async () => {
     const modules = [
         { type: 'ui:dndList', url: '../widgets/DNDListWidget/index.tsx' },
         { type: 'ui:section', url: '../widgets/SectionWidget/index.tsx' },
+        { type: 'ui:panel:table', url: '../widgets/PanelTableWidget/index.tsx' },
+        { type: 'ui:panel:rocauc', url: '../widgets/PanelRocAucWidget/index.tsx' },
     ].filter((v) => !(v.type in WidgetFactory.widgetTypes))
 
     for await (const module of modules.map(async (m) => await import(m.url))) {

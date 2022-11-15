@@ -56,6 +56,19 @@ export type WidgetRendererType<C extends object = any, F extends object = any> =
     WidgetRendererProps<C, F>
 >
 
+// -----------WidgetGroup---------------
+
+type WidgetGroupType = 'panel' | 'layout' | string
+
+interface PanelProps {
+    type: string
+    name: string
+}
+
+interface PanelTableProps extends PanelProps {
+    group: WidgetGroupType
+}
+
 // export type WidgetState = Record<string, unknown>
 // export interface WidgetBuilder<
 //   T extends WidgetProps,

@@ -51,7 +51,7 @@ export function WidgetRenderer<P extends object = any, F extends object = any>(p
             {DEBUG && id}
             <ErrorBoundary>
                 <WidgetComponent
-                    id={id}
+                    id={id ?? '0'}
                     path={path}
                     // data={dataWithOverrides}
                     // title={title}

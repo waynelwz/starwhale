@@ -6,7 +6,7 @@ import { WidgetProps, WidgetRendererProps } from '../../Widget/const'
 import WidgetPlugin from '../../Widget/WidgetPlugin'
 
 const Header = React.forwardRef((props, ref) => {
-    console.log('Header', props)
+    // console.log('Header', props)
     const { $expanded, children, onClick, onRename } = props
 
     return (
@@ -34,7 +34,7 @@ const Header = React.forwardRef((props, ref) => {
 function Section(props: PanelProps) {
     const [expanded, setExpanded] = useState(false)
     const { title } = props
-    console.log(props)
+    // console.log(props)
 
     const handleChange = useCallback(
         ({ expanded }) => {

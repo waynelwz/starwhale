@@ -11,6 +11,14 @@ export default function WidgetFormModel({ store }) {
     const [isPanelModalOpen, setisPanelModalOpen] = React.useState(true)
     const [editWidgetId, setEditWidgetId] = React.useState('')
     const config = store(getWidget(editWidgetId)) ?? {}
+    const [formData, setFormData] = React.useState({})
+
+    const handleFormChange = (formData) => {
+        console.log(formData)
+        setFormData(formData)
+    }
+
+    const type = formData?.chartType
 
     return (
         <Modal
@@ -38,13 +46,16 @@ export default function WidgetFormModel({ store }) {
                 <div
                     style={{
                         flexBasis: '616px',
-                        height: '348px',
+                        minHeight: '348px',
+                        height: 'auto',
                     }}
                 >
-                    <WidgetRenderer id='ui:section-dkwygaa7ts' type='ui:section' />
+                    {/* id='ui:section-dkwygaa7ts' */}
+                    {type && <WidgetRenderer type={type} />}
                 </div>
                 <WidgetEditForm
-                    config={config}
+                    formData={formData}
+                    onChange={handleFormChange}
                     // onSubmit={editProject ? handleEditProject : handleCreateProject}
                 />
             </ModalBody>

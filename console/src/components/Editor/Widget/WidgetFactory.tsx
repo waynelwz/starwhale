@@ -2,6 +2,7 @@ import React from 'react'
 import { WidgetProps } from './const'
 import log from 'loglevel'
 import WidgetPlugin from './WidgetPlugin'
+import config from '../../../../playwright/playwright.config'
 export type DerivedPropertiesMap = Record<string, string>
 export type WidgetType = typeof WidgetFactory.widgetTypes[number]
 export type WidgetConfigProps = Record<string, unknown>
@@ -29,6 +30,10 @@ class WidgetFactory {
 
     static getWidgetTypes(): WidgetType[] {
         return Array.from(this.widgetMap.keys())
+    }
+
+    static getPanels() {
+        return Array.from(this.widgetConfigMap.values()).filter((config) => config.group === 'panel')
     }
 }
 
