@@ -354,8 +354,8 @@ export function expandBorderRadius(radius: string) {
 export function expandPadding(top: string, right: string, bottom: string, left: string) {
     return {
         paddingTop: top ?? undefined,
-        paddingBottom: top ?? undefined,
-        paddingLeft: top ?? undefined,
-        paddingRight: top ?? undefined,
+        paddingBottom: bottom ?? undefined,
+        paddingLeft: left ?? undefined,
+        paddingRight: right ?? undefined,
     }
 }

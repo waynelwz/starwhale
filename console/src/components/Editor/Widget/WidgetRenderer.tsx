@@ -54,6 +54,7 @@ export function WidgetRenderer<P extends object = any, F extends object = any>(p
                 <WidgetComponent
                     id={id ?? '0'}
                     path={path}
+                    type={type}
                     data={data}
                     name={name}
                     // title={title}
