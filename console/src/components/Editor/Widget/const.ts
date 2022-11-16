@@ -3,32 +3,79 @@ import { WidgetConfig, WidgetType } from './WidgetFactory'
 
 export type WidgetMeta = Record<string, unknown>
 
-export interface WidgetBase {
+// export const CONFIG = {
+//     type: 'ui:panel:table',
+//     group: 'panel',
+//     name: 'table',
+//     fieldConfig: {
+//         uiSchema: {
+//             'ui:order': ['*', 'chartTitle'],
+//         },
+//         schema: {
+//             type: 'object',
+//             properties: {
+//                 tableName: {
+//                     'ui:widget': 'DatastoreTableSelect',
+//                 },
+//             },
+//         },
+//         dataDefaults: {
+//             chartType: 'ui:panel:table',
+//         },
+//         // dataOverrides: {
+//         //     tableName: '',
+//         //     chartTitle: 'summary',
+//         // },
+//     },
+// }
+
+// -----------the config of options/field---------------
+
+export interface WidgetBaseConfig {
     type: WidgetType
     name: string
-}
-
-export interface WidgetConfigProps {
-    defaults?: WidgetConfig
+    group?: WidgetGroupType
     meta?: WidgetMeta
-    config: WidgetConfig
 }
 
-export interface WidgetBaseProps {
+export interface WidgetFieldConfig {
+    uiSchema: any
+    schema: any
+    data: any
+}
+
+export type WidgetOptionConfig = any
+
+export interface WidgetConfig<
+    O extends WidgetOptionConfig = WidgetOptionConfig,
+    F extends WidgetFieldConfig = WidgetFieldConfig
+> extends WidgetBaseConfig {
+    optionConfig?: Partial<O>
+    fieldConfig?: Partial<F>
+}
+
+// -----------widget component---------------
+export interface WidgetTreeProps {
     // @FIXME namepath
     id: string
     path?: any[]
     childWidgets?: WidgetTreeNode[]
 }
 
-export interface WidgetActions {
-    onOrderChange?: () => any
-}
+// export interface WidgetActions {
+//     onOrderChange?: () => any
+// }
 
-export type WidgetProps = WidgetBase & WidgetBaseProps & WidgetActions
+export interface WidgetProps<C extends object = any, F extends object = any>
+    extends WidgetRendererProps,
+        WidgetTreeProps {}
+
+export type WidgetComponent<C extends object = any, F extends object = any> = React.ComponentType<WidgetProps<C, F>>
+
+// -----------widget renderer---------------
 
 /**
- * Describes the properties that can be passed to the PanelRenderer.
+ * Describes the properties that can be passed to the WidgetRenderer.
  *
  * @typeParam C - Config type for the widget being rendered.
  * @typeParam F - Field options type for the widget being rendered.
@@ -38,10 +85,13 @@ export type WidgetProps = WidgetBase & WidgetBaseProps & WidgetActions
 export interface WidgetRendererProps<C extends object = any, F extends object = any> {
     id: string
     type: string
+    path?: any
     data?: any
-    defaults?: Partial<C>
-    config?: Partial<C>
-    onConfigChange?: (options: C) => void
+    defaults: WidgetConfig
+    optionConfig: Partial<C>
+    fieldConfig: Partial<F>
+    onOptionChange?: (options: C) => void
+    onFieldChange?: (options: F) => void
     onOrderChange?: (oldIndex: number, newIndex: number) => void
     onChildrenAdd?: (widgets: any) => void
     // onFieldConfigChange?: (config: FieldConfigSource<F>) => void
@@ -60,14 +110,7 @@ export type WidgetRendererType<C extends object = any, F extends object = any> =
 
 type WidgetGroupType = 'panel' | 'layout' | string
 
-interface PanelProps {
-    type: string
-    name: string
-}
-
-interface PanelTableProps extends PanelProps {
-    group: WidgetGroupType
-}
+interface PanelTableProps extends WidgetBaseConfig {}
 
 // export type WidgetState = Record<string, unknown>
 // export interface WidgetBuilder<

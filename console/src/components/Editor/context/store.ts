@@ -4,7 +4,7 @@ import produce from 'immer'
 import { arrayMove, arrayRemove } from 'react-movable'
 import _ from 'lodash'
 import { generateId } from '../utils/generators'
-import WidgetFactory from '../Widget/WidgetFactory'
+import WidgetFactory, { WidgetConfig } from '../Widget/WidgetFactory'
 
 export type WidgetType = string
 
@@ -28,17 +28,17 @@ export type WidgetStoreState = {
     onChildrenAdd: any
 }
 
-const transformWidget = (node) => {
-    // console.log(node)
-    if (!node?.id) node.id = generateId(node.type)
-    const defaultConfig = WidgetFactory.widgetConfigMap.get(node.type) ?? {}
-    const config = WidgetFactory.widgetConfigMap.get(node.type) ?? {}
-    return {
-        node,
-        defaultConfig,
-        config,
-    }
-}
+// const transformWidget = (node) => {
+//     // console.log(node)
+//     if (!node?.id) node.id = generateId(node.type)
+//     const defaultConfig = WidgetFactory.widgetConfigMap.get(node.type) ?? {}
+//     const config = WidgetFactory.widgetConfigMap.get(node.type) ?? {}
+//     return {
+//         node,
+//         defaultConfig,
+//         config,
+//     }
+// }
 
 export function createCustomStore(initState: Partial<WidgetStoreState> = {}) {
     console.log('store init')
@@ -68,20 +68,24 @@ export function createCustomStore(initState: Partial<WidgetStoreState> = {}) {
                                     state.widgets[id] = config
                                 })
                             ),
-                        onChildrenAdd: (paths, widgets) =>
+                        onWidgetUpdate: (paths: any, widgets: WidgetConfig, append = true) =>
                             set(
                                 produce((state) => {
-                                    const nodes = _.get(get(), paths)
-                                    const { node, defaultConfig, config } = transformWidget(widgets)
-                                    _.set(state, paths, [...nodes, widgets])
-                                    state.widgets[node.id] = config
-                                    state.defaults[node.id] = defaultConfig
+                                    const { type } = widgets
+                                    const nodes = _.get(get(), paths) ?? []
+                                    const config = WidgetFactory.newWidget(type)
+                                    if (!config) return
+                                    console.log(config, get(), paths, nodes, '---')
+                                    const { defaults, overrides, node } = config
+                                    if (append) _.set(state, paths, [...nodes, node])
+                                    state.widgets[overrides.id] = { ...widgets, ...overrides }
+                                    state.defaults[type] = defaults
                                 })
                             ),
                     }),
-                    { name: initState.key }
+                    { name: initState.key ?? name }
                 ),
-                { name: initState.key }
+                { name: initState.key ?? name }
             )
         )
     )

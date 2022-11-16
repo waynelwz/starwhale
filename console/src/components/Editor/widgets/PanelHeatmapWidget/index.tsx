@@ -2,13 +2,14 @@ import BusyPlaceholder from '@/components/BusyLoaderWrapper/BusyPlaceholder'
 import { getHeatmapConfig, getRocAucConfig } from '@/components/Indicator/utils'
 import { useParseConfusionMatrix, useParseRocAuc } from '@/domain/datastore/hooks/useParseDatastore'
 import React, { useCallback, useState } from 'react'
-import { WidgetProps, WidgetRendererProps } from '../../Widget/const'
+import { WidgetConfig, WidgetProps, WidgetRendererProps } from '../../Widget/const'
 import WidgetPlugin from '../../Widget/WidgetPlugin'
+
 const PlotlyVisualizer = React.lazy(
     () => import(/* webpackChunkName: "PlotlyVisualizer" */ '@/components/Indicator/PlotlyVisualizer')
 )
 
-export const CONFIG = {
+export const CONFIG: WidgetConfig = {
     type: 'ui:panel:heatmap',
     group: 'panel',
     name: 'Heatmap',
@@ -34,6 +35,6 @@ function PanelHeatmapWidget(props: WidgetRendererProps<any, any>) {
     )
 }
 
-const widget = new WidgetPlugin<any, any>(PanelHeatmapWidget)
+const widget = new WidgetPlugin(PanelHeatmapWidget, CONFIG)
 
 export default widget

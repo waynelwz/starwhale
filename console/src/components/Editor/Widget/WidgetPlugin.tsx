@@ -1,6 +1,6 @@
 import React, { Component, ComponentType, ReactNode } from 'react'
 import { EditorContext } from '../context/EditorContextProvider'
-import { WidgetMeta, WidgetProps } from './const'
+import { WidgetComponent, WidgetConfig, WidgetFieldConfig, WidgetMeta, WidgetProps, WidgetRendererProps } from './const'
 import { WidgetConfigProps } from './WidgetFactory'
 export type WidgetState = Record<string, unknown>
 
@@ -8,18 +8,19 @@ class BaseWidget<T extends WidgetMeta = WidgetMeta> {
     static contextType = EditorContext
     declare context: React.ContextType<typeof EditorContext>
     meta?: T
-    // abstract getPageView(): ReactNode
 }
 
-class WidgetPlugin<T, S extends WidgetConfigProps = WidgetConfigProps> extends BaseWidget<WidgetMeta> {
-    renderer: ComponentType<T> | null
+class WidgetPlugin<
+    O extends object = any,
+    S extends WidgetFieldConfig = WidgetFieldConfig
+> extends BaseWidget<WidgetMeta> {
+    renderer: WidgetComponent<O, S> | null
+    defaults: WidgetConfig<O, S>
 
-    private _defaults: WidgetConfigProps = {}
-    private _overrides: WidgetConfigProps = {}
-
-    constructor(renderer: ComponentType<T>) {
+    constructor(renderer: WidgetComponent<O, S>, config: WidgetConfig<O, S>) {
         super()
         this.renderer = renderer
+        this.defaults = config
     }
 
     // addConfig(config: any) {

@@ -12,12 +12,13 @@ export function WidgetRenderer<P extends object = any, F extends object = any>(p
         type,
         path,
         data,
-        width,
-        height,
-        defaults = {},
-        config = {},
-        onConfigChange = () => {},
+        optionConfig = {},
+        onOptionChange = () => {},
+        fieldConfig = {},
+        onFieldChange = () => {},
+        onOrderChange = () => {},
         children,
+        eventBus,
         ...rest
     } = props
 
@@ -44,7 +45,7 @@ export function WidgetRenderer<P extends object = any, F extends object = any>(p
 
     const WidgetComponent = widget.renderer
 
-    console.log('WidgetComponent', id, defaults, config)
+    console.log('WidgetComponent', id, widget.defaults)
 
     return (
         <div>
@@ -54,23 +55,22 @@ export function WidgetRenderer<P extends object = any, F extends object = any>(p
                     id={id ?? '0'}
                     path={path}
                     data={data}
-                    // data={dataWithOverrides}
+                    name={name}
                     // title={title}
                     // transparent={false}
                     // width={width}
                     // height={height}
                     // renderCounter={0}
                     // replaceVariables={(str: string) => str}
+                    defaults={widget.defaults}
+                    optionConfig={optionConfig}
+                    onOptionChange={onOptionChange}
                     //
-                    defaults={defaults}
-                    config={config}
-                    onConfigChange={onConfigChange}
+                    fieldConfig={fieldConfig}
+                    onFieldChange={onFieldChange}
                     //
-                    // fieldConfig={fieldConfig}
-                    // onFieldConfigChange={onFieldConfigChange}
-                    //
-                    // onOrderChange=(oldIndex, newIndex) {}
-                    // eventBus={appEvents}
+                    onOrderChange={onOrderChange}
+                    eventBus={eventBus}
                     {...rest}
                 >
                     {children}

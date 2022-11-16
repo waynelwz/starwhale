@@ -7,20 +7,23 @@ import useDatastoreTables from '../datastore/useDatastoreTables'
 import React from 'react'
 
 const uiSchema: UiSchema = {
-    name: {
+    'name': {
         classNames: 'custom-class-name',
         // "ui:widget": "radio" // could also be "select"
     },
-    age: {
+    'age': {
         classNames: 'custom-class-age',
     },
-    tableName: {
+    'tableName': {
         'ui:widget': 'SelectWidget',
     },
     // 'ui:order': ['bar', '*'],
     // "ui:options":  {
     //     expandable: false
     //   }
+    'ui:submitButtonOptions': {
+        norender: true,
+    },
 }
 
 const formData = {
@@ -31,7 +34,6 @@ const formData = {
 function WidgetEditForm({ formData, onChange, onSubmit }, ref) {
     // 0165a7ec2b994458b79b016d72cf6394
     const { tables = [] } = useDatastoreTables('starwhale', '90138e6fde2a480888531526b7b65dfe')
-    console.log('panels', WidgetFactory.getPanels(), tables)
 
     const panels = WidgetFactory.getPanels()
     if (panels.length === 0) return <></>
@@ -59,6 +61,8 @@ function WidgetEditForm({ formData, onChange, onSubmit }, ref) {
 
     const tableNameSchema = tableName // formData.chartType === 'ui:panel:table' ? tableName : multiTableName
 
+    console.log('panels', WidgetFactory.getPanels(), tables, tableNameSchema)
+
     const schema: RJSFSchema = {
         // title: 'My title',
         // description: 'My description',
@@ -72,7 +76,7 @@ function WidgetEditForm({ formData, onChange, onSubmit }, ref) {
                         title: v.name,
                     })) ?? [],
             },
-            tableName: { ...tableNameSchema },
+            tableName: tables.length === 0 ? undefined : tableNameSchema,
             chartTitle: {
                 type: 'string',
             },
@@ -90,10 +94,7 @@ function WidgetEditForm({ formData, onChange, onSubmit }, ref) {
             formData={formData}
             validator={validator}
             onSubmit={onSubmit}
-            // ref={(form) => {
-            //     console.log(ref)
-            //     // ref?.current = form
-            // }}
+            ref={(form) => (ref.current = form)}
             onChange={(e) => onChange?.(e.formData)}
         />
     )

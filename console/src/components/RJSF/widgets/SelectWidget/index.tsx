@@ -26,7 +26,7 @@ const SelectWidget = ({
     const { readonlyAsDisabled = true } = formContext
 
     const { enumOptions, enumDisabled } = options
-    console.log('SelectWidget', options)
+    // console.log('SelectWidget', options)
 
     const handleChange = (nextValue: any) =>
         !multiple
@@ -69,7 +69,7 @@ const SelectWidget = ({
               }))
             : stringify(value)
 
-    console.log(multiple, 'select')
+    // console.log(multiple, 'select')
 
     return (
         <Select

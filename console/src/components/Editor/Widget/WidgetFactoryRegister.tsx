@@ -34,6 +34,7 @@ export function useWidget(widgetType: string) {
 }
 
 export const registerWidget = (Widget: any, config: WidgetConfig) => {
+    if (!config?.type) return console.log('Widget registration missing type', config)
     WidgetFactory.register(config.type, Widget, config)
 }
 
@@ -51,15 +52,9 @@ export const registerWidgets = async () => {
     ].filter((v) => !(v.type in WidgetFactory.widgetTypes))
 
     for await (const module of modules.map(async (m) => await import(m.url))) {
-        registerWidget(module.default, module.CONFIG)
+        const widget = module.default as WidgetPlugin
+        registerWidget(widget, widget.defaults)
     }
-
-    // registerWidget(module.default, module.CONFIG)
-
-    // for (let m in modules) {
-    //     const module = await import(modules[m].url)
-    //     registerWidget(module.default, module.CONFIG)
-    // }
 
     console.log('Widget registration took: ', performance.now() - start, 'ms')
 }

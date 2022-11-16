@@ -7,7 +7,7 @@ import WidgetPlugin from '../../Widget/WidgetPlugin'
 
 const Header = React.forwardRef((props, ref) => {
     // console.log('Header', props)
-    const { $expanded, children, onClick, onRename } = props
+    const { $expanded, children, onClick, onAdd } = props
 
     return (
         <div ref={ref} style={{ height: '48px', display: 'flex', justifyContent: 'space-between' }}>
@@ -26,7 +26,7 @@ const Header = React.forwardRef((props, ref) => {
             >
                 {children}
             </Button>
-            <Button onClick={onRename}>Add</Button>
+            <Button onClick={onAdd}>Add</Button>
         </div>
     )
 })
@@ -34,7 +34,7 @@ const Header = React.forwardRef((props, ref) => {
 function Section(props: PanelProps) {
     const [expanded, setExpanded] = useState(false)
     const { title } = props
-    // console.log(props)
+    console.log(props)
 
     const handleChange = useCallback(
         ({ expanded }) => {
@@ -63,7 +63,7 @@ export const CONFIG = {
     type: 'ui:section',
     name: 'test',
     isExpaned: true,
-    layoutConfig: {
+    optionConfig: {
         gutter: 10,
         columnsPerPage: 3,
         rowsPerPage: 2,
@@ -72,11 +72,11 @@ export const CONFIG = {
     },
 }
 
-type SectionProps = typeof CONFIG
+type Option = typeof CONFIG['optionConfig']
 
-function SectionWidget(props: WidgetRendererProps<SectionProps, any>) {
-    const { defaults, config, children } = props
-    console.log('SectionWidget', props)
+function SectionWidget(props: WidgetRendererProps<Option, any>) {
+    const { defaults, config, children, eventBus } = props
+    console.log('SectionWidget', props, children)
     const name = config?.name ?? defaults?.name
 
     return (
@@ -89,12 +89,20 @@ function SectionWidget(props: WidgetRendererProps<SectionProps, any>) {
                     name: '123',
                 })
             }}
+            onAdd={() =>
+                eventBus.publish({
+                    type: 'add-panel',
+                    payload: {
+                        path: props.path,
+                    },
+                })
+            }
         >
             {children}
         </Section>
     )
 }
 
-const widget = new WidgetPlugin<SectionProps, any>(SectionWidget)
+const widget = new WidgetPlugin<Option>(SectionWidget, CONFIG)
 
 export default widget

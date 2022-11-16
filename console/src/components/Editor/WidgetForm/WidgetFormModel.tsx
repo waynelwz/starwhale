@@ -7,21 +7,21 @@ import { useQueryDatastore } from '@/domain/datastore/hooks/useFetchDatastore'
 import { Button } from '@/components/Button'
 import WidgetEditForm from './WidgetForm'
 
-export default function WidgetFormModel({ store }) {
+export default function WidgetFormModel({
+    store,
+    handleFormSubmit,
+    widgetId: editWidgetId = '',
+    isShow: isPanelModalOpen = false,
+    setIsShow: setisPanelModalOpen,
+}) {
     // @FIXME use event bus handle global state
     const [t] = useTranslation()
-    const [isPanelModalOpen, setisPanelModalOpen] = React.useState(true)
-    const [editWidgetId, setEditWidgetId] = React.useState('')
     const config = store(getWidget(editWidgetId)) ?? {}
     const [formData, setFormData] = React.useState({})
 
     const handleFormChange = (formData) => {
         console.log('handleFormChange', formData)
         setFormData(formData)
-    }
-
-    const handleFormSubmit = ({ formData }) => {
-        console.log('handleFormSubmit', formData)
     }
 
     const type = formData?.chartType
@@ -54,7 +54,7 @@ export default function WidgetFormModel({ store }) {
     return (
         <Modal
             isOpen={isPanelModalOpen}
-            // onClose={() => setisPanelModalOpen(false)}
+            onClose={() => setisPanelModalOpen(false)}
             closeable
             animate
             autoFocus
@@ -78,6 +78,7 @@ export default function WidgetFormModel({ store }) {
                     style={{
                         flexBasis: '600px',
                         flexGrow: '1',
+                        maxHeight: '70vh',
                         minHeight: '348px',
                         height: 'auto',
                         overflow: 'auto',
@@ -86,7 +87,7 @@ export default function WidgetFormModel({ store }) {
                     {type && <WidgetRenderer type={type} data={info.data} />}
                 </div>
                 <WidgetEditForm
-                    // ref={formRef}
+                    ref={formRef}
                     formData={formData}
                     onChange={handleFormChange}
                     onSubmit={handleFormSubmit}
@@ -110,7 +111,7 @@ export default function WidgetFormModel({ store }) {
                     <Button
                         size='compact'
                         onClick={() => {
-                            // formRef.current?.onSubmit()
+                            formRef.current?.submit()
                             // setisPanelModalOpen(false)
                         }}
                     >

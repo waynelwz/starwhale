@@ -4,8 +4,9 @@ import { registerWidgets } from './Widget/WidgetFactoryRegister'
 import log from 'loglevel'
 import WidgetFactory from './Widget/WidgetFactory'
 import { generateId } from './utils/generators'
-import { createCustomStore } from './context/store'
+import { createCustomStore, WidgetTreeNode } from './context/store'
 import WidgetRenderTree from './Widget/WidgetRenderTree'
+import { EventBusSrv } from './events/events'
 
 // log.enableAll()
 
@@ -33,9 +34,11 @@ export function witEditorContext(EditorApp: React.FC, rawState: typeof initialSt
         const state = useMemo(() => tranformState(rawState), [])
         const value = useMemo(() => {
             const store = createCustomStore(state)
+            const eventBus = new EventBusSrv()
             log.debug('store', state)
             return {
                 store,
+                eventBus,
             }
         }, [state])
 
@@ -55,21 +58,7 @@ const initialState = {
             children: [
                 {
                     type: 'ui:section',
-                    children: [
-                        {
-                            type: 'ui:dndList',
-                            children: [{ type: 'panel-1' }],
-                        },
-                    ],
-                },
-                {
-                    type: 'ui:section',
-                    children: [
-                        {
-                            type: 'layout-2',
-                            children: [{ type: 'panel-2' }],
-                        },
-                    ],
+                    // children: [],
                 },
             ],
         },
@@ -78,21 +67,24 @@ const initialState = {
     defaults: {},
 }
 const tranformState = (state: typeof initialState) => {
-    const defaults = {}
-    const widgets = {}
+    const defaults = {} as any
+    const widgets = {} as any
 
-    function walk(nodes) {
-        return nodes.map((node) => {
-            // console.log(node)
-            if (!node.id) node.id = generateId(node.type)
+    function walk(nodes: WidgetTreeNode[]) {
+        return nodes.map((node: WidgetTreeNode) => {
             if (node.children) node.children = walk(node.children)
-            defaults[node.type] = WidgetFactory.widgetConfigMap.get(node.type) ?? {}
-            widgets[node.id] = WidgetFactory.widgetConfigMap.get(node.type) ?? {}
-            return node
+            const widgetConfig = WidgetFactory.newWidget(node.type)
+            if (widgetConfig) {
+                defaults[node.type] = widgetConfig.defaults
+                widgets[widgetConfig.overrides.id] = widgetConfig.overrides
+                return { ...node, ...widgetConfig.node }
+            } else {
+                console.log('Init state missing widget', node.type)
+            }
         })
     }
-    const newTree = walk(Object.assign([], state.tree))
-    console.log(newTree, defaults, widgets)
+    const newTree = walk(Object.assign([], state.tree) as WidgetTreeNode[])
+    console.log('INIT TREE', newTree, defaults, widgets)
     return {
         key: state.key,
         tree: newTree,

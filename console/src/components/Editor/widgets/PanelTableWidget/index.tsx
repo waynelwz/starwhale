@@ -1,10 +1,10 @@
 import BusyPlaceholder from '@/components/BusyLoaderWrapper/BusyPlaceholder'
 import React, { useCallback, useState } from 'react'
-import { WidgetProps, WidgetRendererProps } from '../../Widget/const'
+import { WidgetProps, WidgetRendererProps, WidgetConfig } from '../../Widget/const'
 import WidgetPlugin from '../../Widget/WidgetPlugin'
 import PanelTable from './component/Table'
 
-export const CONFIG = {
+export const CONFIG: WidgetConfig = {
     type: 'ui:panel:table',
     group: 'panel',
     name: 'table',
@@ -20,22 +20,22 @@ export const CONFIG = {
                 },
             },
         },
-        dataDefaults: {
+        data: {
             chartType: 'ui:panel:table',
         },
-        dataOverrides: {
-            tableName: '',
-            chartTitle: 'summary',
-        },
+        // dataOverrides: {
+        //     tableName: '',
+        //     chartTitle: 'summary',
+        // },
     },
 }
 
 function PanelTableWidget(props: WidgetRendererProps<PanelTableProps, any>) {
     console.log('PanelTableWidget', props)
 
-    const { defaults, config, children, data = {} } = props
+    const { name, fieldConfig = {}, optionConfig = {}, data = {} } = props
     const { columnTypes = [], records = [] } = data
-    const name = config?.name ?? defaults?.name
+    const { data: formData } = fieldConfig
 
     const columns = React.useMemo(() => {
         return columnTypes.map((column) => column.name)?.sort((a) => (a === 'id' ? -1 : 1)) ?? []
@@ -71,6 +71,6 @@ function PanelTableWidget(props: WidgetRendererProps<PanelTableProps, any>) {
     )
 }
 
-const widget = new WidgetPlugin<PanelTableProps, any>(PanelTableWidget)
+const widget = new WidgetPlugin(PanelTableWidget, CONFIG)
 
 export default widget

@@ -3,8 +3,9 @@ import React, { useCallback, useState } from 'react'
 import { WidgetProps, WidgetRendererProps } from '../../Widget/const'
 import WidgetPlugin from '../../Widget/WidgetPlugin'
 import PanelTable from './component/Table'
+import { WidgetConfig, WidgetProps, WidgetRendererProps } from '../../Widget/const'
 
-export const CONFIG = {
+export const CONFIG: WidgetConfig = {
     type: 'ui:panel:table',
     group: 'panel',
     name: 'table',
@@ -34,6 +35,6 @@ function PanelTableWidget(props: WidgetRendererProps<PanelTableProps, any>) {
     return <PanelTable columns={columns} data={data} />
 }
 
-const widget = new WidgetPlugin<PanelTableProps, any>(PanelTableWidget)
+const widget = new WidgetPlugin(PanelTableWidget, CONFIG)
 
 export default widget
