@@ -1,9 +1,11 @@
+import AutoSizer from 'react-virtualized-auto-sizer'
 import Button from '@/components/Button'
 import IconFont from '@/components/IconFont'
 import { Panel, PanelProps } from 'baseui/accordion'
 import React, { useCallback, useState } from 'react'
 import { WidgetProps, WidgetRendererProps } from '../../Widget/const'
 import WidgetPlugin from '../../Widget/WidgetPlugin'
+import { GridLayout } from './component/GridBasicLayout'
 
 const Header = React.forwardRef((props, ref) => {
     // console.log('Header', props)
@@ -33,8 +35,8 @@ const Header = React.forwardRef((props, ref) => {
 
 function Section(props: PanelProps) {
     const [expanded, setExpanded] = useState(false)
-    const { title } = props
-    console.log(props)
+    const { title, children, ...rest } = props
+    console.log('Section', props, children)
 
     const handleChange = useCallback(
         ({ expanded }) => {
@@ -45,17 +47,19 @@ function Section(props: PanelProps) {
 
     return (
         <Panel
-            {...props}
+            {...rest}
             overrides={{
                 Header: (headerProps: any) => (
-                    <Header {...props} {...headerProps}>
+                    <Header {...rest} {...headerProps}>
                         {title}
                     </Header>
                 ),
             }}
             expanded={expanded}
             onChange={handleChange}
-        />
+        >
+            {children}
+        </Panel>
     )
 }
 
@@ -98,7 +102,37 @@ function SectionWidget(props: WidgetRendererProps<Option, any>) {
                 })
             }
         >
-            {children}
+            {/* <AutoSizer key={i} defaultHeight={100} defaultWidth={100}>
+                {({ width = 100, height = 100 }) => props.defaults.name}
+            </AutoSizer> */}
+            {/* {children} */}
+            <GridLayout rowHeight={300} className='layout' cols={3} onLayoutChange={() => {}}>
+                {children}
+            </GridLayout>
+
+            {/* {children?.map((child, i) => {
+                console.log(child, '----', typeof child)
+                return (
+                    <div style={{ width: '100%', height: 'auto', minHeight: '280px', overflow: 'auto' }}>
+                        <AutoSizer key={i}>
+                            {({ width = 100, height = 100 }) => {
+                                console.log(width, height, '12312312')
+                                return (
+                                    <div
+                                        style={{
+                                            width: `${width}px`,
+                                            height: `${height}px`,
+                                        }}
+                                    >
+                                        {child}
+                                    </div>
+                                )
+                            }}
+                        </AutoSizer>
+                        123
+                    </div>
+                )
+            })} */}
         </Section>
     )
 }

@@ -62,6 +62,10 @@ const initialState = {
                 },
             ],
         },
+        {
+            type: 'ui:section',
+            // children: [],
+        },
     ],
     widgets: {},
     defaults: {},
