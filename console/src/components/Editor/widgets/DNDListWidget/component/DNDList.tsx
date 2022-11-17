@@ -1,6 +1,6 @@
 import * as React from 'react'
 import type { ListProps, SharedStylePropsArgT } from 'baseui/dnd-list'
-import { List, arrayMove, arrayRemove, StyledItem, StyledDragHandle } from 'baseui/dnd-list'
+import { List, arrayMove, arrayRemove, StyledItem, StyledDragHandle } from './index'
 import Accordion from '@/components/Accordion'
 import { Panel, StatefulPanel, StatelessAccordion } from 'baseui/accordion'
 import { StyledListItem } from 'baseui/menu'

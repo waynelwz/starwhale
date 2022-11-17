@@ -33,12 +33,18 @@ function DNDListWidget(props: WidgetRendererProps) {
     return (
         <div>
             <DNDList {...rest} onChange={onOrderChange} onOptionChange={onOptionChange} />
-            <Button onClick={() => eventBus.pushlish({
-                type: 'add-panel',
-                payload: {
-                    path: props.path,
+            <Button
+                onClick={() =>
+                    eventBus.publish({
+                        type: 'add-section',
+                        payload: {
+                            path: props.path,
+                        },
+                    })
                 }
-            })}>Add Section</Button>
+            >
+                Add Section
+            </Button>
         </div>
     )
 }
