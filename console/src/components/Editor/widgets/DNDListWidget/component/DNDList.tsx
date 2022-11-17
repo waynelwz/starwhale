@@ -60,7 +60,7 @@ export function DragHandle({ children, ...rest }: SharedStylePropsArgT & { child
 }
 
 export function Label({ children, ...rest }: SharedStylePropsArgT & { children: React.ReactNode }) {
-    console.log('label', rest)
+    // console.log('label', rest)
     return (
         <StyledLabel {...rest} style={{ flex: '1' }}>
             {rest.$value}

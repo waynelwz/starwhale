@@ -37,6 +37,12 @@ export function WidgetRenderTree() {
     //     console.log(evt)
     // })
 
+    const handleAddSection = ({ path, type }) => {
+        api.onLayoutChildrenChange(['tree', ...path], ['tree', ...path, 'children'], {
+            type,
+        })
+    }
+
     const handleAddPanel = (formData) => {
         const { path } = editWidget?.payload
         if (path && path.length > 0)
@@ -80,6 +86,14 @@ export function WidgetRenderTree() {
                     console.log(evt)
                     setisPanelModalOpen(true)
                     setEditWidget(evt)
+                },
+            })
+        )
+        subscription.add(
+            eventBus.getStream({ type: 'add-section' }).subscribe({
+                next: (evt) => {
+                    console.log(evt)
+                    handleAddSection(evt.payload)
                 },
             })
         )

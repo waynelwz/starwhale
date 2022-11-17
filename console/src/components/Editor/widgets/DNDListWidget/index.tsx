@@ -1,8 +1,12 @@
 import BusyPlaceholder from '@/components/BusyLoaderWrapper/BusyPlaceholder'
 import Button from '@/components/Button'
-import React from 'react'
+import { DnDContainer } from './dnd/DnDContainer'
+import { LabelSmall } from 'baseui/typography'
+import React, { useMemo, useState } from 'react'
+import { useHover } from 'react-use'
 import { WidgetConfig, WidgetProps, WidgetRendererProps } from '../../Widget/const'
 import WidgetPlugin from '../../Widget/WidgetPlugin'
+import { GridLayout } from '../SectionWidget/component/GridBasicLayout'
 import DNDList from './component/DNDList'
 
 export const CONFIG: WidgetConfig = {
@@ -13,7 +17,7 @@ export const CONFIG: WidgetConfig = {
 
 function DNDListWidget(props: WidgetRendererProps) {
     console.log('DNDListWidget', props)
-    const { onOrderChange, onOptionChange, onChildrenAdd, eventBus, ...rest } = props
+    const { onOrderChange, onOptionChange, onChildrenAdd, eventBus, children, ...rest } = props
     // if (rest.children?.length === 0 || 1)
     //     return (
     //         <div
@@ -29,16 +33,28 @@ function DNDListWidget(props: WidgetRendererProps) {
     //             <BusyPlaceholder type='empty' />
     //         </div>
     //     )
-
     return (
-        <div>
-            <DNDList {...rest} onChange={onOrderChange} onOptionChange={onOptionChange} />
+        <div style={{ width: '100%', height: '100%' }}>
+            {children}
+            {/* <DnDContainer
+                data={children?.map((child, i) => {
+                    return {
+                        id: i,
+                        text: child,
+                    }
+                })}
+            /> */}
+            {/* <DNDList {...rest} onChange={onOrderChange} onOptionChange={onOptionChange}>
+                {children}
+            </DNDList> */}
             <Button
                 onClick={() =>
                     eventBus.publish({
                         type: 'add-section',
                         payload: {
                             path: props.path,
+                            // @FIXME type const shouldn't be here
+                            type: 'ui:section',
                         },
                     })
                 }

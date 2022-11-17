@@ -63,10 +63,10 @@ const initialState = {
                 },
             ],
         },
-        {
-            type: 'ui:section',
-            // children: [],
-        },
+        // {
+        //     type: 'ui:section',
+        //     // children: [],
+        // },
     ],
     widgets: {},
     defaults: {},

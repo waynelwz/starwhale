@@ -12,6 +12,7 @@ import BusyPlaceholder from '@/components/BusyLoaderWrapper/BusyPlaceholder'
 export const CONFIG = {
     type: 'ui:section',
     name: 'test',
+    group: 'section',
     optionConfig: {
         title: 'Section',
         isExpaned: true,

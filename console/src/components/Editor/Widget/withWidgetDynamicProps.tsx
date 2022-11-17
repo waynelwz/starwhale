@@ -30,7 +30,7 @@ export default function withWidgetDynamicProps(WrappedWidgetRender: WidgetRender
             (widget: any, payload: Record<string, any>) => {
                 // @FIXME path utils
                 const paths = ['tree', ...path]
-                console.log(getParentPath(paths))
+                console.log(paths, getParentPath(paths))
                 api.onLayoutChildrenChange(paths, getParentPath(paths), widget, payload)
             },
             [api]
@@ -83,8 +83,7 @@ export default function withWidgetDynamicProps(WrappedWidgetRender: WidgetRender
 function getParentPath(paths: any[]) {
     const curr = paths.slice()
     const parentIndex = paths.lastIndexOf('children')
-    curr.splice(parentIndex, 1)
-    return curr
+    return curr.slice(0, parentIndex + 1)
 }
 
 function getChildrenPath(paths: any[]) {
