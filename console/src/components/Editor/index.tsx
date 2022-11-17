@@ -7,6 +7,7 @@ import { generateId } from './utils/generators'
 import { createCustomStore, WidgetTreeNode } from './context/store'
 import WidgetRenderTree from './Widget/WidgetRenderTree'
 import { EventBusSrv } from './events/events'
+import BusyPlaceholder from '@/components/BusyLoaderWrapper/BusyPlaceholder'
 
 // log.enableAll()
 
@@ -21,7 +22,7 @@ export function withEditorRegister(EditorApp: React.FC) {
         }, [])
 
         if (!registred) {
-            return <>registring</>
+            return <BusyPlaceholder type='spinner' />
         }
         log.debug('WidgetFactory', WidgetFactory.widgetMap)
 

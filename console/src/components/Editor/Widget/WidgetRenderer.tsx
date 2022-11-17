@@ -53,38 +53,36 @@ export function WidgetRenderer<P extends object = any, F extends object = any>(p
     // console.log('WidgetComponent', optionsWithDefaults)
 
     return (
-        <div>
+        <ErrorBoundary>
             {DEBUG && type + '-' + id}
-            <ErrorBoundary>
-                <WidgetComponent
-                    id={id ?? '0'}
-                    path={path}
-                    type={type}
-                    data={data}
-                    // title={title}
-                    // transparent={false}
-                    // width={width}
-                    // height={height}
-                    // renderCounter={0}
-                    // replaceVariables={(str: string) => str}
-                    defaults={widget.defaults ?? {}}
-                    optionConfig={optionsWithDefaults}
-                    onOptionChange={onOptionChange}
-                    //
-                    fieldConfig={fieldsWithDefaults}
-                    onFieldChange={onFieldChange}
-                    //
-                    onOrderChange={onOrderChange}
-                    onLayoutOrderChange={onLayoutOrderChange}
-                    onLayoutChildrenChange={onLayoutChildrenChange}
-                    onLayoutCurrentChange={onLayoutCurrentChange}
-                    eventBus={eventBus}
-                    {...rest}
-                >
-                    {children}
-                </WidgetComponent>
-            </ErrorBoundary>
-        </div>
+            <WidgetComponent
+                id={id ?? '0'}
+                path={path}
+                type={type}
+                data={data}
+                // title={title}
+                // transparent={false}
+                // width={width}
+                // height={height}
+                // renderCounter={0}
+                // replaceVariables={(str: string) => str}
+                defaults={widget.defaults ?? {}}
+                optionConfig={optionsWithDefaults}
+                onOptionChange={onOptionChange}
+                //
+                fieldConfig={fieldsWithDefaults}
+                onFieldChange={onFieldChange}
+                //
+                onOrderChange={onOrderChange}
+                onLayoutOrderChange={onLayoutOrderChange}
+                onLayoutChildrenChange={onLayoutChildrenChange}
+                onLayoutCurrentChange={onLayoutCurrentChange}
+                eventBus={eventBus}
+                {...rest}
+            >
+                {children}
+            </WidgetComponent>
+        </ErrorBoundary>
     )
 }
 

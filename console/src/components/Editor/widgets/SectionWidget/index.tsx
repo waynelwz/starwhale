@@ -7,6 +7,7 @@ import SectionAccordionPanel from './component/SectionAccordionPanel'
 import SectionForm from './component/SectionForm'
 import IconFont from '@/components/IconFont'
 import Button from '@/components/Button'
+import BusyPlaceholder from '@/components/BusyLoaderWrapper/BusyPlaceholder'
 
 export const CONFIG = {
     type: 'ui:section',
@@ -82,6 +83,7 @@ function SectionWidget(props: WidgetRendererProps<Option, any>) {
                     props.onLayoutCurrentChange?.({ type }, { type: 'delete', id: props.id })
                 }}
             >
+                {len === 0 && <BusyPlaceholder type='empty' style={{ minHeight: '240px' }} />}
                 <GridLayout
                     rowHeight={300}
                     className='layout'
@@ -95,57 +97,56 @@ function SectionWidget(props: WidgetRendererProps<Option, any>) {
                     margin={[20, 20]}
                 >
                     {children?.map((child, i) => (
-                        <div key={i}>
+                        <div
+                            key={i}
+                            style={{
+                                width: '100%',
+                                height: '100%',
+                                overflow: 'auto',
+                                padding: '40px 20px 20px',
+                                backgroundColor: '#fff',
+                                border: '1px solid #CFD7E6',
+                                borderRadius: '4px',
+                                position: 'relative',
+                            }}
+                        >
+                            {child}
                             <div
                                 style={{
-                                    width: '100%',
-                                    height: '100%',
-                                    overflow: 'auto',
-                                    padding: '20px',
-                                    backgroundColor: '#fff',
-                                    border: '1px solid #CFD7E6',
-                                    borderRadius: '4px',
-                                    position: 'relative',
+                                    position: 'absolute',
+                                    right: '20px',
+                                    top: '16px',
                                 }}
                             >
-                                {child}
-                                <div
-                                    style={{
-                                        position: 'absolute',
-                                        right: '20px',
-                                        top: '20px',
-                                    }}
-                                >
-                                    <Button
-                                        // @FIXME direct used child props here ?
-                                        onClick={(i) => handleEditPanel(child.props.id)}
-                                        size='compact'
-                                        kind='secondary'
-                                        overrides={{
-                                            BaseButton: {
-                                                style: {
-                                                    'display': 'flex',
-                                                    'fontSize': '12px',
-                                                    'backgroundColor': '#F4F5F7',
-                                                    'width': '20px',
-                                                    'height': '20px',
-                                                    'textDecoration': 'none',
-                                                    'color': 'gray !important',
-                                                    'paddingLeft': '10px',
-                                                    'paddingRight': '10px',
-                                                    ':hover span': {
-                                                        color: ' #5181E0  !important',
-                                                    },
-                                                    ':hover': {
-                                                        backgroundColor: '#F0F4FF',
-                                                    },
+                                <Button
+                                    // @FIXME direct used child props here ?
+                                    onClick={(i) => handleEditPanel(child.props.id)}
+                                    size='compact'
+                                    kind='secondary'
+                                    overrides={{
+                                        BaseButton: {
+                                            style: {
+                                                'display': 'flex',
+                                                'fontSize': '12px',
+                                                'backgroundColor': '#F4F5F7',
+                                                'width': '20px',
+                                                'height': '20px',
+                                                'textDecoration': 'none',
+                                                'color': 'gray !important',
+                                                'paddingLeft': '10px',
+                                                'paddingRight': '10px',
+                                                ':hover span': {
+                                                    color: ' #5181E0  !important',
+                                                },
+                                                ':hover': {
+                                                    backgroundColor: '#F0F4FF',
                                                 },
                                             },
-                                        }}
-                                    >
-                                        <IconFont type='edit' size={10} />
-                                    </Button>
-                                </div>
+                                        },
+                                    }}
+                                >
+                                    <IconFont type='edit' size={10} />
+                                </Button>
                             </div>
                         </div>
                     ))}

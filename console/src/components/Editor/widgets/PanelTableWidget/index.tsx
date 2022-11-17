@@ -52,7 +52,7 @@ function PanelTableWidget(props: WidgetRendererProps<PanelTableProps, any>) {
     }, [records, columns])
 
     return (
-        <React.Suspense fallback={<BusyPlaceholder />}>
+        <div style={{ width: '100%', height: '100%' }}>
             <PanelTable
                 columns={columns}
                 data={$data}
@@ -65,7 +65,7 @@ function PanelTableWidget(props: WidgetRendererProps<PanelTableProps, any>) {
                 //     },
                 // }}
             />
-        </React.Suspense>
+        </div>
     )
 }
 

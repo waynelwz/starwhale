@@ -4,7 +4,7 @@ import IconFont from '@/components/IconFont'
 import { Panel, PanelProps } from 'baseui/accordion'
 import React, { useCallback, useState } from 'react'
 import { GridLayout } from './GridBasicLayout'
-import { expandMargin, expandPadding } from '@/utils'
+import { expandBorder, expandMargin, expandPadding } from '@/utils'
 import SectionPopover from './SectionPopover'
 
 const Header = React.forwardRef((props, ref) => {
@@ -124,7 +124,9 @@ export default function SectionAccordionPanel(props: PanelProps) {
                     style: {
                         backgroundColor: '#FAFBFC;',
                         ...expandPadding('0', '0', '0', '0'),
-                        borderBottomWidth: '0px',
+                        borderBottomWidth: '1px',
+                        ...expandBorder('1px', 'solid', '#E2E7F0'),
+                        marginBottom: '-1px',
                     },
                 },
                 Content: {

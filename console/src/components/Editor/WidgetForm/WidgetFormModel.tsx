@@ -83,9 +83,30 @@ export default function WidgetFormModel({
                         minHeight: '348px',
                         height: 'auto',
                         overflow: 'auto',
+                        backgroundColor: '#F7F8FA',
+                        display: 'grid',
+                        placeItems: 'center',
+                        position: 'relative',
                     }}
                 >
-                    {type && <WidgetRenderer type={type} data={info.data} />}
+                    {!type && 'Select a metric to visalize in this chart'}
+                    {type && (
+                        <div
+                            key={i}
+                            style={{
+                                width: '100%',
+                                height: '100%',
+                                overflow: 'auto',
+                                padding: '20px 20px 20px',
+                                backgroundColor: '#fff',
+                                border: '1px solid #CFD7E6',
+                                borderRadius: '4px',
+                                position: 'relative',
+                            }}
+                        >
+                            <WidgetRenderer type={type} data={info.data} />
+                        </div>
+                    )}
                 </div>
                 <WidgetEditForm
                     ref={formRef}
