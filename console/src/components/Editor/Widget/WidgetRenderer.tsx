@@ -5,7 +5,7 @@ import { generateId } from '../utils/generators'
 import ErrorBoundary from '@/components/ErrorBoundary/ErrorBoundary'
 import _ from 'lodash'
 
-const DEBUG = true
+const DEBUG = false
 const defaultFieldConfig = { defaults: {}, overrides: [] }
 export function WidgetRenderer<P extends object = any, F extends object = any>(props: WidgetRendererProps<P, F>) {
     const {
@@ -19,6 +19,9 @@ export function WidgetRenderer<P extends object = any, F extends object = any>(p
         fieldConfig = {},
         onFieldChange = () => {},
         onOrderChange = () => {},
+        onLayoutOrderChange = () => {},
+        onLayoutChildrenChange = () => {},
+        onLayoutCurrentChange = () => {},
         children,
         eventBus,
         ...rest
@@ -47,11 +50,11 @@ export function WidgetRenderer<P extends object = any, F extends object = any>(p
     const optionsWithDefaults = _.merge({}, widget.defaults?.optionConfig ?? {}, optionConfig)
     const fieldsWithDefaults = _.merge({}, widget.defaults?.fieldConfig ?? {}, fieldConfig)
 
-    console.log('WidgetComponent', optionsWithDefaults)
+    // console.log('WidgetComponent', optionsWithDefaults)
 
     return (
         <div>
-            {DEBUG && id}
+            {DEBUG && type + '-' + id}
             <ErrorBoundary>
                 <WidgetComponent
                     id={id ?? '0'}
@@ -72,6 +75,9 @@ export function WidgetRenderer<P extends object = any, F extends object = any>(p
                     onFieldChange={onFieldChange}
                     //
                     onOrderChange={onOrderChange}
+                    onLayoutOrderChange={onLayoutOrderChange}
+                    onLayoutChildrenChange={onLayoutChildrenChange}
+                    onLayoutCurrentChange={onLayoutCurrentChange}
                     eventBus={eventBus}
                     {...rest}
                 >

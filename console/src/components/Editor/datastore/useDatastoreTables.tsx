@@ -19,11 +19,11 @@ export default function useDatastoreTables(projectName: string, jobUuid: string)
     }, [projectName, jobUuid])
 
     const tables = React.useMemo(() => {
-        const names = []
+        // const names = []
         // if (projectName) names.push(tableNameOfSummary(projectName))
 
         return [
-            ...names,
+            // ...names,
             // @FIXME hard code remove results
             ...(allTables.data?.tables?.sort((a, b) => (a > b ? 1 : -1)).filter((v) => !v.includes('results')) ?? []),
         ]

@@ -25,7 +25,7 @@ export function useWidget(widgetType: string) {
         //   });
     }, [widget, widgetType])
 
-    console.log('useWidget', widgetType, widget)
+    // console.log('useWidget', widgetType, widget)
 
     return {
         widget,

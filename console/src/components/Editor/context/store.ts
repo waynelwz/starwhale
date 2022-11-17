@@ -4,7 +4,8 @@ import produce from 'immer'
 import { arrayMove, arrayRemove } from 'react-movable'
 import _ from 'lodash'
 import { generateId } from '../utils/generators'
-import WidgetFactory, { WidgetConfig } from '../Widget/WidgetFactory'
+import WidgetFactory, { WidgetConfig, WidgetConfigProps } from '../Widget/WidgetFactory'
+import { getTreePath } from '../utils/path'
 
 export type WidgetType = string
 
@@ -25,7 +26,8 @@ export type WidgetStoreState = {
     defaults: Record<string, any>
     onOrderChange: any
     onConfigChange: any
-    onChildrenAdd: any
+    onLayoutChildrenChange: any
+    onWidgetChange: any
 }
 
 // const transformWidget = (node) => {
@@ -50,7 +52,7 @@ export function createCustomStore(initState: Partial<WidgetStoreState> = {}) {
                     (set, get, store) => ({
                         key: name,
                         ...(initState as any),
-                        onOrderChange: (paths, oldIndex, newIndex) =>
+                        onLayoutOrderChange: (paths: any, oldIndex, newIndex) =>
                             set(
                                 produce((state) => {
                                     const nodes = _.get(get(), paths)
@@ -62,26 +64,83 @@ export function createCustomStore(initState: Partial<WidgetStoreState> = {}) {
                                     _.set(state, paths, ordered)
                                 })
                             ),
-                        onConfigChange: (paths: string, config: any) =>
+                        onConfigChange: (paths: any, config: any) =>
                             set(
                                 produce((state) => {
-                                    const temp = _.get(get(), paths) ?? {}
-                                    _.set(state, paths, _.merge({}, temp, config))
-                                    console.log('onConfigChange', state, paths, temp, config)
+                                    const rawConfig = _.get(get(), paths) ?? {}
+                                    _.set(state, paths, _.merge({}, rawConfig, config))
+                                    console.log('onConfigChange', state, paths, rawConfig, config)
                                 })
                             ),
-                        onWidgetUpdate: (paths: any, widgets: WidgetConfig, append = true) =>
+                        onWidgetChange: (id: string, widgets: WidgetConfigProps) =>
+                            set(
+                                produce((state) => {
+                                    const { type } = widgets ?? {}
+                                    const { type: currType } = state.widgets?.[id] ?? {}
+                                    if (type != currType) {
+                                        const { current } = getTreePath(state, id)
+                                        const node = _.get(state, current)
+
+                                        console.log('---', type, currType, current)
+
+                                        // udpate tree ndoe
+                                        _.set(state, current, {
+                                            ...node,
+                                            type,
+                                        })
+
+                                        // update defaults
+                                        const config = WidgetFactory.newWidget(type)
+                                        if (!config) return
+                                        const { defaults, overrides } = config
+                                        if (!state.defaults[type]) state.defaults[type] = defaults
+                                    }
+
+                                    state.widgets[id] = _.merge({}, state.widgets?.[id], widgets)
+                                })
+                            ),
+                        onLayoutChildrenChange: (
+                            paths: any[],
+                            sourcePaths: any[],
+                            widgets: WidgetConfig,
+                            payload: any = { type: 'append' }
+                        ) =>
                             set(
                                 produce((state) => {
                                     const { type } = widgets
-                                    const nodes = _.get(get(), paths) ?? []
+                                    const currentIndex = getCurrentIndex(paths)
+                                    const curr = _.get(get(), sourcePaths) ?? []
+                                    //
+                                    if (payload.type === 'delete') {
+                                        const darr = curr.slice()
+                                        darr.splice(currentIndex, 1)
+                                        _.set(state, sourcePaths, darr)
+                                        delete state.widgets[payload.id]
+                                        return
+                                    }
+                                    //
                                     const config = WidgetFactory.newWidget(type)
                                     if (!config) return
-                                    console.log(config, get(), paths, nodes, '---')
                                     const { defaults, overrides, node } = config
-                                    if (append) _.set(state, paths, [...nodes, node])
                                     state.widgets[overrides.id] = { ...widgets, ...overrides }
                                     state.defaults[type] = defaults
+
+                                    // @FIXME abstract replace/add/....
+                                    switch (payload.type) {
+                                        case 'append':
+                                            _.set(state, sourcePaths, [...curr, node])
+                                            break
+                                        case 'addAbove':
+                                            const arr = curr.slice()
+                                            arr.splice(currentIndex, 0, node)
+                                            _.set(state, sourcePaths, arr)
+                                            break
+                                        case 'addBelow':
+                                            const arr2 = curr.slice()
+                                            arr2.splice(currentIndex + 1, 0, node)
+                                            _.set(state, sourcePaths, arr2)
+                                            break
+                                    }
                                 })
                             ),
                     }),
@@ -98,4 +157,8 @@ export function createCustomStore(initState: Partial<WidgetStoreState> = {}) {
 }
 export default {
     createCustomStore,
+}
+
+function getCurrentIndex(paths: any[]) {
+    return paths[paths.length - 1]
 }

@@ -61,7 +61,7 @@ function WidgetEditForm({ formData, onChange, onSubmit }, ref) {
 
     const tableNameSchema = tableName // formData.chartType === 'ui:panel:table' ? tableName : multiTableName
 
-    console.log('panels', WidgetFactory.getPanels(), tables, tableNameSchema)
+    // console.log('panels', WidgetFactory.getPanels(), tables, tableNameSchema)
 
     const schema: RJSFSchema = {
         // title: 'My title',

@@ -50,7 +50,7 @@ class WidgetFactory {
     static newWidget(widgetType: WidgetType) {
         if (!this.widgetMap.has(widgetType)) return null
         const widget = this.widgetMap.get(widgetType) as WidgetPlugin
-        const id = generateId(widgetType)
+        const id = generateId(widget.defaults?.group ?? '')
 
         return {
             defaults: widget.defaults,

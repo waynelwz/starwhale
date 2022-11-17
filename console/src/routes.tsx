@@ -47,6 +47,7 @@ import RuntimeVersionOverview from './pages/Runtime/RuntimeVersionOverview'
 import RuntimeOverviewLayout from './pages/Runtime/RuntimeOverviewLayout'
 import SystemSettings from './pages/Admin/SystemSettings'
 import Panel from './components/Editor/'
+import EvaluationWidgetResults from './pages/Evaluation/EvaluationWidgetResults'
 
 const JobDAG = React.lazy(() => import('@/pages/Job/JobDAG'))
 
@@ -143,7 +144,7 @@ const Routes = () => {
                                         <Route
                                             exact
                                             path='/projects/:projectId/evaluations/:jobId/results'
-                                            component={EvaluationResults}
+                                            component={EvaluationWidgetResults}
                                         />
                                         <Route
                                             exact

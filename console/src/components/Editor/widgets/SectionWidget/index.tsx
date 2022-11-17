@@ -5,6 +5,8 @@ import WidgetPlugin from '../../Widget/WidgetPlugin'
 import { GridLayout } from './component/GridBasicLayout'
 import SectionAccordionPanel from './component/SectionAccordionPanel'
 import SectionForm from './component/SectionForm'
+import IconFont from '@/components/IconFont'
+import Button from '@/components/Button'
 
 export const CONFIG = {
     type: 'ui:section',
@@ -25,7 +27,7 @@ export const CONFIG = {
 type Option = typeof CONFIG['optionConfig']
 
 function SectionWidget(props: WidgetRendererProps<Option, any>) {
-    const { optionConfig, fieldConfig, children, eventBus } = props
+    const { optionConfig, fieldConfig, children, eventBus, type, id } = props
     const title = optionConfig?.title
 
     const layoutDefault = [
@@ -39,14 +41,19 @@ function SectionWidget(props: WidgetRendererProps<Option, any>) {
     const [isModelOpen, setIsModelOpen] = useState(false)
 
     const onRename = ({ name }: { name: string }) => {
-        console.log('rename', name)
         props.onOptionChange?.({
             title: name,
         })
         setIsModelOpen(false)
     }
-
-    console.log('ismodelopen', isModelOpen)
+    const handleEditPanel = (id) => {
+        eventBus.publish({
+            type: 'edit-panel',
+            payload: {
+                id,
+            },
+        })
+    }
 
     return (
         <div>
@@ -54,6 +61,7 @@ function SectionWidget(props: WidgetRendererProps<Option, any>) {
                 childNums={len}
                 title={title}
                 onPanelAdd={() =>
+                    // @FIXME abatract events
                     eventBus.publish({
                         type: 'add-panel',
                         payload: {
@@ -64,9 +72,15 @@ function SectionWidget(props: WidgetRendererProps<Option, any>) {
                 onSectionRename={() => {
                     setIsModelOpen(true)
                 }}
-                onSectionAddAbove={() => {}}
-                onSectionAddBelow={() => {}}
-                onSectionDelete={() => {}}
+                onSectionAddAbove={() => {
+                    props.onLayoutCurrentChange?.({ type }, { type: 'addAbove' })
+                }}
+                onSectionAddBelow={() => {
+                    props.onLayoutCurrentChange?.({ type }, { type: 'addBelow' })
+                }}
+                onSectionDelete={() => {
+                    props.onLayoutCurrentChange?.({ type }, { type: 'delete', id: props.id })
+                }}
             >
                 <GridLayout
                     rowHeight={300}
@@ -75,7 +89,6 @@ function SectionWidget(props: WidgetRendererProps<Option, any>) {
                     layout={layout}
                     onLayoutChange={(args) => {
                         console.log(args)
-
                         setLayout(args)
                     }}
                     containerPadding={[20, 0]}
@@ -92,9 +105,47 @@ function SectionWidget(props: WidgetRendererProps<Option, any>) {
                                     backgroundColor: '#fff',
                                     border: '1px solid #CFD7E6',
                                     borderRadius: '4px',
+                                    position: 'relative',
                                 }}
                             >
                                 {child}
+                                <div
+                                    style={{
+                                        position: 'absolute',
+                                        right: '20px',
+                                        top: '20px',
+                                    }}
+                                >
+                                    <Button
+                                        // @FIXME direct used child props here ?
+                                        onClick={(i) => handleEditPanel(child.props.id)}
+                                        size='compact'
+                                        kind='secondary'
+                                        overrides={{
+                                            BaseButton: {
+                                                style: {
+                                                    'display': 'flex',
+                                                    'fontSize': '12px',
+                                                    'backgroundColor': '#F4F5F7',
+                                                    'width': '20px',
+                                                    'height': '20px',
+                                                    'textDecoration': 'none',
+                                                    'color': 'gray !important',
+                                                    'paddingLeft': '10px',
+                                                    'paddingRight': '10px',
+                                                    ':hover span': {
+                                                        color: ' #5181E0  !important',
+                                                    },
+                                                    ':hover': {
+                                                        backgroundColor: '#F0F4FF',
+                                                    },
+                                                },
+                                            },
+                                        }}
+                                    >
+                                        <IconFont type='edit' size={10} />
+                                    </Button>
+                                </div>
                             </div>
                         </div>
                     ))}

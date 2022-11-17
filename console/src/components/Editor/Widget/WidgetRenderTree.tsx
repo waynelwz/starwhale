@@ -9,6 +9,7 @@ import useSelector, { getWidget } from '../hooks/useSelector'
 import WidgetFormModel from '../WidgetForm/WidgetFormModel'
 import { Subscription } from 'rxjs'
 import { useBusEvent } from '../events/useBusEvent'
+import { getTreePath } from '../utils/path'
 
 export const WrapedWidgetNode = withWidgetDynamicProps(function WidgetNode(props: any) {
     const { childWidgets, path } = props
@@ -30,11 +31,37 @@ export function WidgetRenderTree() {
     const [editWidget, setEditWidget] = useState(null)
     const [isPanelModalOpen, setisPanelModalOpen] = React.useState(false)
 
-    console.log('tree', tree, editWidget)
+    console.log('Tree', tree, editWidget)
 
     // useBusEvent(eventBus, { type: 'add-panel' }, (evt) => {
     //     console.log(evt)
     // })
+
+    const handleAddPanel = (formData) => {
+        const { path } = editWidget?.payload
+        if (path && path.length > 0)
+            api.onLayoutChildrenChange(['tree', ...path], ['tree', ...path, 'children'], {
+                type: formData.chartType,
+                fieldConfig: {
+                    data: formData,
+                },
+            })
+    }
+
+    const handleEditPanel = (formData) => {
+        const { id } = editWidget?.payload
+        api.onWidgetChange(id, {
+            type: formData.chartType,
+            fieldConfig: {
+                data: formData,
+            },
+        })
+    }
+
+    const actions = {
+        'add-panel': handleAddPanel,
+        'edit-panel': handleEditPanel,
+    }
 
     useEffect(() => {
         const subscription = new Subscription()
@@ -43,7 +70,16 @@ export function WidgetRenderTree() {
                 next: (evt) => {
                     console.log(evt)
                     setisPanelModalOpen(true)
-                    setEditWidget(evt.payload)
+                    setEditWidget(evt)
+                },
+            })
+        )
+        subscription.add(
+            eventBus.getStream({ type: 'edit-panel' }).subscribe({
+                next: (evt) => {
+                    console.log(evt)
+                    setisPanelModalOpen(true)
+                    setEditWidget(evt)
                 },
             })
         )
@@ -62,19 +98,12 @@ export function WidgetRenderTree() {
         <div>
             {Nodes}
             <WidgetFormModel
+                id={editWidget?.payload?.id}
                 isShow={isPanelModalOpen}
                 setIsShow={setisPanelModalOpen}
                 store={store}
                 handleFormSubmit={({ formData }) => {
-                    console.log(formData, editWidget)
-                    const { path } = editWidget
-                    if (path && path.length > 0)
-                        api.onWidgetUpdate(['tree', ...path, 'children'], {
-                            type: formData.chartType,
-                            fieldConfig: {
-                                data: formData,
-                            },
-                        })
+                    actions[editWidget.type]?.(formData)
                     setisPanelModalOpen(false)
                 }}
             />

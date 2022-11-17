@@ -12,17 +12,26 @@ export default function withWidgetDynamicProps(WrappedWidgetRender: WidgetRender
         const api = store()
         const overrides = useSelector(getWidget(id)) ?? {}
 
-        const handleOrderChange = useCallback(
+        const handleLayoutOrderChange = useCallback(
             (oldIndex, newIndex) => {
                 const paths = ['tree', ...path, 'children']
-                api.onOrderChange(paths, oldIndex, newIndex)
+                api.onLayoutOrderChange(paths, oldIndex, newIndex)
             },
             [api]
         )
-        const handleChildrenAdd = useCallback(
-            (widget: any) => {
+        const handleLayoutChildrenChange = useCallback(
+            (widget: any, payload: Record<string, any>) => {
                 const paths = ['tree', ...path, 'children']
-                api.onChildrenAdd(paths, widget)
+                api.onLayoutChildrenChange(paths, getChildrenPath(paths), widget, payload)
+            },
+            [api]
+        )
+        const handleLayoutCurrentChange = useCallback(
+            (widget: any, payload: Record<string, any>) => {
+                // @FIXME path utils
+                const paths = ['tree', ...path]
+                console.log(getParentPath(paths))
+                api.onLayoutChildrenChange(paths, getParentPath(paths), widget, payload)
             },
             [api]
         )
@@ -60,12 +69,24 @@ export default function withWidgetDynamicProps(WrappedWidgetRender: WidgetRender
                 fieldConfig={overrides.fieldConfig}
                 onFieldChange={(config) => api.onConfigChange(['widgets', id, 'fieldConfig'], config)}
                 // for layout
-                onOrderChange={handleOrderChange}
-                onChildrenAdd={handleChildrenAdd}
+                onLayoutOrderChange={handleLayoutOrderChange}
+                onLayoutChildrenChange={handleLayoutChildrenChange}
+                onLayoutCurrentChange={handleLayoutCurrentChange}
                 eventBus={eventBus}
                 // for
             />
         )
     }
     return WrapedPropsWidget
+}
+
+function getParentPath(paths: any[]) {
+    const curr = paths.slice()
+    const parentIndex = paths.lastIndexOf('children')
+    curr.splice(parentIndex, 1)
+    return curr
+}
+
+function getChildrenPath(paths: any[]) {
+    return [...paths, 'children']
 }

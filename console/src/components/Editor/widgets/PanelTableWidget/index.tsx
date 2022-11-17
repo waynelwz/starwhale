@@ -31,7 +31,7 @@ export const CONFIG: WidgetConfig = {
 }
 
 function PanelTableWidget(props: WidgetRendererProps<PanelTableProps, any>) {
-    console.log('PanelTableWidget', props)
+    // console.log('PanelTableWidget', props)
 
     const { name, fieldConfig = {}, optionConfig = {}, data = {} } = props
     const { columnTypes = [], records = [] } = data
@@ -50,8 +50,6 @@ function PanelTableWidget(props: WidgetRendererProps<PanelTableProps, any>) {
             }) ?? []
         )
     }, [records, columns])
-
-    console.log(columns, data)
 
     return (
         <React.Suspense fallback={<BusyPlaceholder />}>

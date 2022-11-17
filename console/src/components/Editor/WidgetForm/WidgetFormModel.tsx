@@ -10,7 +10,7 @@ import WidgetEditForm from './WidgetForm'
 export default function WidgetFormModel({
     store,
     handleFormSubmit,
-    widgetId: editWidgetId = '',
+    id: editWidgetId = '',
     isShow: isPanelModalOpen = false,
     setIsShow: setisPanelModalOpen,
 }) {
@@ -19,10 +19,7 @@ export default function WidgetFormModel({
     const config = store(getWidget(editWidgetId)) ?? {}
     const [formData, setFormData] = React.useState({})
 
-    const handleFormChange = (formData) => {
-        console.log('handleFormChange', formData)
-        setFormData(formData)
-    }
+    const handleFormChange = (formData: any) => setFormData(formData)
 
     const type = formData?.chartType
     const tableName = Array.isArray(formData?.tableName) ? formData?.tableName[0] : formData?.tableName
@@ -47,7 +44,11 @@ export default function WidgetFormModel({
         if (tableName) info.refetch()
     }, [tableName, type])
 
-    console.log(query, info)
+    useEffect(() => {
+        setFormData(config.fieldConfig?.data ?? {})
+    }, [editWidgetId])
+
+    // console.log('WidgetFormModel', query, info, editWidgetId)
 
     const formRef = React.useRef(null)
 

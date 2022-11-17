@@ -87,7 +87,7 @@ const Header = React.forwardRef((props, ref) => {
 export default function SectionAccordionPanel(props: PanelProps) {
     const [expanded, setExpanded] = useState(false)
     const { title, children, childNums, ...rest } = props
-    console.log('Section', props, children)
+    // console.log('Section', props, children)
 
     const handleChange = useCallback(
         ({ expanded }) => {

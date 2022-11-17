@@ -1,5 +1,6 @@
 import { WidgetStoreState, WidgetTreeNode } from '../context/store'
 import { WidgetConfig, WidgetType } from './WidgetFactory'
+import { EventBus } from '../events/types'
 
 export type WidgetMeta = Record<string, unknown>
 
@@ -90,10 +91,11 @@ export interface WidgetRendererProps<C extends object = any, F extends object = 
     defaults: WidgetConfig
     optionConfig: Partial<C>
     fieldConfig: Partial<F>
-    onOptionChange?: (options: C) => void
-    onFieldChange?: (options: F) => void
+    onOptionChange?: (options: Partial<C>) => void
+    onFieldChange?: (options: Partial<F>) => void
     onOrderChange?: (oldIndex: number, newIndex: number) => void
     onChildrenAdd?: (widgets: any) => void
+    eventBus: EventBus
     // onFieldConfigChange?: (config: FieldConfigSource<F>) => void
     // fieldConfig?: FieldConfigSource<Partial<F>>
     // timeZone?: string
