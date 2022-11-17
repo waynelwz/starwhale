@@ -47,20 +47,31 @@ function DNDListWidget(props: WidgetRendererProps) {
             {/* <DNDList {...rest} onChange={onOrderChange} onOptionChange={onOptionChange}>
                 {children}
             </DNDList> */}
-            <Button
-                onClick={() =>
-                    eventBus.publish({
-                        type: 'add-section',
-                        payload: {
-                            path: props.path,
-                            // @FIXME type const shouldn't be here
-                            type: 'ui:section',
-                        },
-                    })
-                }
-            >
-                Add Section
-            </Button>
+            <div style={{ marginTop: '20px', display: 'flex', justifyContent: 'flex-end', gap: '10px' }}>
+                <Button
+                    onClick={() =>
+                        eventBus.publish({
+                            type: 'save',
+                        })
+                    }
+                >
+                    Save
+                </Button>
+                <Button
+                    onClick={() =>
+                        eventBus.publish({
+                            type: 'add-section',
+                            payload: {
+                                path: props.path,
+                                // @FIXME type const shouldn't be here
+                                type: 'ui:section',
+                            },
+                        })
+                    }
+                >
+                    Add Section
+                </Button>
+            </div>
         </div>
     )
 }

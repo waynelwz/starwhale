@@ -10,6 +10,10 @@ import WidgetFormModel from '../WidgetForm/WidgetFormModel'
 import { Subscription } from 'rxjs'
 import { useBusEvent } from '../events/useBusEvent'
 import { getTreePath } from '../utils/path'
+import { fetchPanelSetting, updatePanelSetting } from '@/domain/panel/services/panel'
+import { useParams } from 'react-router'
+import { toaster } from 'baseui/toast'
+import { useFetchPanelSetting } from '../../../domain/panel/hooks/useSettings'
 
 export const WrapedWidgetNode = withWidgetDynamicProps(function WidgetNode(props: any) {
     const { childWidgets, path } = props
@@ -18,13 +22,20 @@ export const WrapedWidgetNode = withWidgetDynamicProps(function WidgetNode(props
             {childWidgets &&
                 childWidgets.length > 0 &&
                 childWidgets.map(({ children: childChildren, ...childRest }, i) => (
-                    <WrapedWidgetNode path={[...path, 'children', i]} childWidgets={childChildren} {...childRest} />
+                    <WrapedWidgetNode
+                        key={[...path, 'children', i]}
+                        path={[...path, 'children', i]}
+                        childWidgets={childChildren}
+                        {...childRest}
+                    />
                 ))}
         </WidgetRenderer>
     )
 })
+const key = 'results'
 
 export function WidgetRenderTree() {
+    const { projectId, evaluationId } = useParams<{ projectId: string; evaluationId: string }>()
     const { store, eventBus } = useEditorContext()
     const api = store()
     const tree = store((state) => state.tree, deepEqual)
@@ -69,6 +80,21 @@ export function WidgetRenderTree() {
         'edit-panel': handleEditPanel,
     }
 
+    // use  api store
+    const setting = useFetchPanelSetting(projectId, key)
+    useEffect(() => {
+        if (setting.data) {
+            try {
+                const data = JSON.parse(setting.data)
+                console.log('-----', data, data.time, store.getState().time)
+                if (store.getState().time < data?.time) store.setState(data)
+            } catch (e) {
+                console.log(e)
+            }
+        }
+    }, [setting])
+
+    // subscription
     useEffect(() => {
         const subscription = new Subscription()
         subscription.add(
@@ -94,6 +120,21 @@ export function WidgetRenderTree() {
                 next: (evt) => {
                     console.log(evt)
                     handleAddSection(evt.payload)
+                },
+            })
+        )
+        subscription.add(
+            eventBus.getStream({ type: 'save' }).subscribe({
+                next: async (evt) => {
+                    try {
+                        store.setState({
+                            key: Date.now(),
+                        })
+                        await updatePanelSetting(projectId, key, store.getState())
+                        toaster.positive('Panel setting saved')
+                    } catch (e) {
+                        console.log(e)
+                    }
                 },
             })
         )
