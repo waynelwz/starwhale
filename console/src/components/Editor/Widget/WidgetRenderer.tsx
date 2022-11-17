@@ -3,6 +3,7 @@ import { useWidget } from './WidgetFactoryRegister'
 import { WidgetProps, WidgetRendererType, WidgetRendererProps } from './const'
 import { generateId } from '../utils/generators'
 import ErrorBoundary from '@/components/ErrorBoundary/ErrorBoundary'
+import _ from 'lodash'
 
 const DEBUG = true
 const defaultFieldConfig = { defaults: {}, overrides: [] }
@@ -12,6 +13,7 @@ export function WidgetRenderer<P extends object = any, F extends object = any>(p
         type,
         path,
         data,
+        name,
         optionConfig = {},
         onOptionChange = () => {},
         fieldConfig = {},
@@ -24,8 +26,6 @@ export function WidgetRenderer<P extends object = any, F extends object = any>(p
 
     const { widget } = useWidget(type)
     const [error, setError] = useState<string | undefined>()
-    const optionsWithDefaults = {}
-    const dataWithOverrides = {}
 
     if (error) {
         return <div>Failed to load widget: {error}</div>
@@ -39,13 +39,15 @@ export function WidgetRenderer<P extends object = any, F extends object = any>(p
         return <div>Seems like the widget you are trying to load does not have a renderer component.</div>
     }
 
-    if (!dataWithOverrides) {
-        return <div>No datastore data</div>
-    }
+    // if (!data) {
+    //     return <div>No datastore data</div>
+    // }
 
     const WidgetComponent = widget.renderer
+    const optionsWithDefaults = _.merge({}, widget.defaults?.optionConfig ?? {}, optionConfig)
+    const fieldsWithDefaults = _.merge({}, widget.defaults?.fieldConfig ?? {}, fieldConfig)
 
-    console.log('WidgetComponent', id, widget.defaults)
+    console.log('WidgetComponent', optionsWithDefaults)
 
     return (
         <div>
@@ -56,18 +58,17 @@ export function WidgetRenderer<P extends object = any, F extends object = any>(p
                     path={path}
                     type={type}
                     data={data}
-                    name={name}
                     // title={title}
                     // transparent={false}
                     // width={width}
                     // height={height}
                     // renderCounter={0}
                     // replaceVariables={(str: string) => str}
-                    defaults={widget.defaults}
-                    optionConfig={optionConfig}
+                    defaults={widget.defaults ?? {}}
+                    optionConfig={optionsWithDefaults}
                     onOptionChange={onOptionChange}
                     //
-                    fieldConfig={fieldConfig}
+                    fieldConfig={fieldsWithDefaults}
                     onFieldChange={onFieldChange}
                     //
                     onOrderChange={onOrderChange}

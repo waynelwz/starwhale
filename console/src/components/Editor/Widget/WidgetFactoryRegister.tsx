@@ -4,7 +4,7 @@ import useSelector, { getWidget } from '../hooks/useSelector'
 import BaseWidget from './BaseWidget'
 import WidgetFactory, { WidgetConfig, WidgetType } from './WidgetFactory'
 import WidgetPlugin from './WidgetPlugin'
-import withWidgetProps from './withWidgetProps'
+import withWidgetProps from './withWidgetDynamicProps'
 import log from 'loglevel'
 
 export function useWidget(widgetType: string) {

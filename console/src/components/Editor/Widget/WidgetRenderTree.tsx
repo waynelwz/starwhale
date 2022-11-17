@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useMemo, useState } from 'react'
 import { useEditorContext } from '../context/EditorContextProvider'
-import withWidgetProps from '../Widget/withWidgetProps'
+import withWidgetDynamicProps from './withWidgetDynamicProps'
 import deepEqual from 'fast-deep-equal'
 import { WidgetRenderer } from '../Widget/WidgetRenderer'
 import { Modal, ModalBody, ModalHeader } from 'baseui/modal'
@@ -10,7 +10,7 @@ import WidgetFormModel from '../WidgetForm/WidgetFormModel'
 import { Subscription } from 'rxjs'
 import { useBusEvent } from '../events/useBusEvent'
 
-export const WrapedWidgetNode = withWidgetProps(function WidgetNode(props: any) {
+export const WrapedWidgetNode = withWidgetDynamicProps(function WidgetNode(props: any) {
     const { childWidgets, path } = props
     return (
         <WidgetRenderer {...props}>

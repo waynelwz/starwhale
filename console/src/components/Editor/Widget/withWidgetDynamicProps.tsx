@@ -5,20 +5,13 @@ import { useEditorContext } from '../context/EditorContextProvider'
 import { WidgetRendererProps, WidgetRendererType } from './const'
 import { useQueryDatastore } from '@/domain/datastore/hooks/useFetchDatastore'
 
-export default function withWidgetProps(WrappedWidgetRender: WidgetRendererType) {
+export default function withWidgetDynamicProps(WrappedWidgetRender: WidgetRendererType) {
     function WrapedPropsWidget(props: any) {
         const { id, type, path, childWidgets } = props
         const { store, eventBus } = useEditorContext()
         const api = store()
         const overrides = useSelector(getWidget(id)) ?? {}
 
-        const handleConfigChange = useCallback(
-            (config) => {
-                console.log('config change', id, config)
-                api.onConfigChange(id, config)
-            },
-            [api, id]
-        )
         const handleOrderChange = useCallback(
             (oldIndex, newIndex) => {
                 const paths = ['tree', ...path, 'children']
@@ -33,7 +26,7 @@ export default function withWidgetProps(WrappedWidgetRender: WidgetRendererType)
             },
             [api]
         )
-        console.log('WrapedPropsWidget', props)
+        console.log('withWidgetDynamicProps', props, overrides)
 
         // @FIXME show datastore be fetch at here
         // @FIXME refrech setting
@@ -60,12 +53,12 @@ export default function withWidgetProps(WrappedWidgetRender: WidgetRendererType)
         return (
             <WrappedWidgetRender
                 {...props}
-                name={overrides.name ?? ''}
+                name={overrides.name}
                 data={info?.data}
-                optionConfig={overrides.optionConfig ?? {}}
-                onOptionChange={handleConfigChange}
-                fieldConfig={overrides.fieldConfig ?? {}}
-                onFieldChange={handleConfigChange}
+                optionConfig={overrides.optionConfig}
+                onOptionChange={(config) => api.onConfigChange(['widgets', id, 'optionConfig'], config)}
+                fieldConfig={overrides.fieldConfig}
+                onFieldChange={(config) => api.onConfigChange(['widgets', id, 'fieldConfig'], config)}
                 // for layout
                 onOrderChange={handleOrderChange}
                 onChildrenAdd={handleChildrenAdd}

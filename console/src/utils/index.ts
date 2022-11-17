@@ -359,3 +359,13 @@ export function expandPadding(top: string, right: string, bottom: string, left: 
         paddingRight: right ?? undefined,
     }
 }
+
+// eslint-disable-next-line  @typescript-eslint/no-unused-vars
+export function expandMargin(top: string, right: string, bottom: string, left: string) {
+    return {
+        marginTop: top ?? undefined,
+        marginBottom: bottom ?? undefined,
+        marginLeft: left ?? undefined,
+        marginRight: right ?? undefined,
+    }
+}
