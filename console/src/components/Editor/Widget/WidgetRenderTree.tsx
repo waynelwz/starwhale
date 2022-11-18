@@ -14,6 +14,7 @@ import { fetchPanelSetting, updatePanelSetting } from '@/domain/panel/services/p
 import { useParams } from 'react-router'
 import { toaster } from 'baseui/toast'
 import { useFetchPanelSetting } from '../../../domain/panel/hooks/useSettings'
+import { useJob } from '@/domain/job/hooks/useJob'
 
 export const WrapedWidgetNode = withWidgetDynamicProps(function WidgetNode(props: any) {
     const { childWidgets, path } = props
@@ -40,14 +41,16 @@ enum PanelEditAction {
 
 export function WidgetRenderTree() {
     const { projectId, jobId } = useParams<{ projectId: string; jobId: string }>()
+    const { job } = useJob()
     const { store, eventBus } = useEditorContext()
     const api = store()
     const tree = store((state) => state.tree, deepEqual)
     const [editWidget, setEditWidget] = useState<{ type: PanelEditAction; payload: any }>(null)
     const [isPanelModalOpen, setisPanelModalOpen] = React.useState(false)
-    const key = `evaluation/${jobId}`
+    // const key = job?.modelName ? `modelName-${job?.modelName}` : ''
+    const key = jobId ? `evaluation-${jobId}` : ''
 
-    console.log('Tree', tree)
+    console.log('Tree', tree, job)
 
     // useBusEvent(eventBus, { type: 'add-panel' }, (evt) => {
     //     console.log(evt)
@@ -91,7 +94,6 @@ export function WidgetRenderTree() {
         if (setting.data) {
             try {
                 const data = JSON.parse(setting.data)
-                console.log('-----', data, data.time, store.getState().time)
                 if (store.getState().time < data?.time) store.setState(data)
             } catch (e) {
                 console.log(e)
@@ -131,14 +133,13 @@ export function WidgetRenderTree() {
         subscription.add(
             eventBus.getStream({ type: 'save' }).subscribe({
                 next: async (evt) => {
-                    try {
-                        store.setState({
-                            time: Date.now(),
-                        })
+                    store.setState({
+                        key,
+                        time: Date.now(),
+                    })
+                    if (key) {
                         await updatePanelSetting(projectId, key, store.getState())
-                        toaster.positive('Panel setting saved')
-                    } catch (e) {
-                        console.log(e)
+                        toaster.positive('Panel setting saved', { autoHideDuration: 2000 })
                     }
                 },
             })

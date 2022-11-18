@@ -9,13 +9,6 @@ import { useJob } from '@/domain/job/hooks/useJob'
 import { useProject } from '@/domain/project/hooks/useProject'
 
 const uiSchema: UiSchema = {
-    'name': {
-        classNames: 'custom-class-name',
-        // "ui:widget": "radio" // could also be "select"
-    },
-    'age': {
-        classNames: 'custom-class-age',
-    },
     'tableName': {
         'ui:widget': 'SelectWidget',
     },
@@ -37,7 +30,7 @@ function WidgetEditForm({ formData, onChange, onSubmit }, ref) {
     // 'starwhale', '90138e6fde2a480888531526b7b65dfe'
     const { project } = useProject()
     const { job } = useJob()
-    const { tables = [] } = useDatastoreTables(project?.id, job?.uuid)
+    const { tables = [] } = useDatastoreTables(project?.name, job?.uuid)
 
     const panels = WidgetFactory.getPanels()
     if (panels.length === 0) return <></>

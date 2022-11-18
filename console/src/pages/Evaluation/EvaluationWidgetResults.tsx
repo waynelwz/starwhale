@@ -19,14 +19,17 @@ function Summary({ fetch }: any) {
     const [t] = useTranslation()
     const record: Record<string, string> = fetch?.data?.records?.[0] ?? {}
 
-    if (fetch?.data?.records.length === 0) {
-        return <BusyPlaceholder type='notfound' />
-    }
+    // if (fetch?.data?.records.length === 0) {
+    //     return <BusyPlaceholder type='notfound' />
+    // }
 
     return (
         <div className='mb-20'>
             <Accordion accordion>
                 <Panel title={`Summary`} expanded={true}>
+                    {fetch?.data?.records.length === 0 && (
+                        <BusyPlaceholder type='notfound' style={{ minHeight: '300px' }} />
+                    )}
                     <div
                         style={{
                             lineHeight: '32px',
@@ -167,7 +170,7 @@ function EvaluationWidgetResults() {
                     //             },
                     //         ],
                     //     }
-                    // return <EvaluationViewer table={name} key={name} filter={filter} />
+                    return <EvaluationViewer table={name} key={name} filter={filter} />
                 })}
             </div>
             <Editor />
