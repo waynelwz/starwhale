@@ -128,7 +128,7 @@ export function WidgetRenderTree() {
                 next: async (evt) => {
                     try {
                         store.setState({
-                            key: Date.now(),
+                            time: Date.now(),
                         })
                         await updatePanelSetting(projectId, key, store.getState())
                         toaster.positive('Panel setting saved')

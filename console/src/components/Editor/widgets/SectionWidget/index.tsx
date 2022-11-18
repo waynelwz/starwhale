@@ -1,5 +1,5 @@
 import { Modal, ModalBody, ModalHeader } from 'baseui/modal'
-import React, { useCallback, useState } from 'react'
+import React, { useCallback, useMemo, useState } from 'react'
 import { WidgetProps, WidgetRendererProps } from '../../Widget/const'
 import WidgetPlugin from '../../Widget/WidgetPlugin'
 import { GridLayout } from './component/GridBasicLayout'
@@ -16,13 +16,26 @@ export const CONFIG = {
     optionConfig: {
         title: 'Section',
         isExpaned: true,
-        layout: {
+        layoutConfig: {
             gutter: 10,
             columnsPerPage: 3,
             rowsPerPage: 2,
             boxWidth: 430,
             heightWidth: 274,
         },
+        gridLayoutConfig: {
+            item: {
+                w: 1,
+                h: 2,
+                minW: 1,
+                maxW: 2,
+                maxH: 3,
+                minH: 1,
+                isBounded: true,
+            },
+            cols: 2,
+        },
+        gridLayout: [],
     },
 }
 
@@ -30,30 +43,44 @@ type Option = typeof CONFIG['optionConfig']
 
 function SectionWidget(props: WidgetRendererProps<Option, any>) {
     const { optionConfig, fieldConfig, children, eventBus, type, id } = props
-    const title = optionConfig?.title
+    const { title = '', isExpaned = false, gridLayoutConfig, gridLayout } = optionConfig as Option
 
-    const layoutDefault = [
-        { i: '0', x: 0, y: 0, w: 1, h: 2, minW: 1, maxW: 3, isBounded: true },
-        { i: '1', x: 1, y: 0, w: 1, h: 2, minW: 1, maxW: 3, isBounded: true },
-    ]
     const len = React.Children.count(children)
-    const cols = 2 //Math.min(3, Math.max(1, len))
+    const cols = gridLayoutConfig.cols
+    const layout = useMemo(() => {
+        if (gridLayout.length != 0) return gridLayout
+        return new Array(len).fill(0).map((_, i) => ({
+            i: String(i),
+            x: i,
+            y: 0,
+            ...gridLayoutConfig.item,
+        }))
+    }, [gridLayout, gridLayoutConfig, len])
 
-    const [layout, setLayout] = useState(layoutDefault)
     const [isModelOpen, setIsModelOpen] = useState(false)
 
-    const onRename = ({ name }: { name: string }) => {
+    const handleSectionForm = ({ name }: { name: string }) => {
         props.onOptionChange?.({
             title: name,
         })
         setIsModelOpen(false)
     }
-    const handleEditPanel = (id) => {
+    const handleEditPanel = (id: string) => {
         eventBus.publish({
             type: 'edit-panel',
             payload: {
                 id,
             },
+        })
+    }
+    const handleExpanded = (expanded: boolean) => {
+        props.onOptionChange?.({
+            isExpaned: expanded,
+        })
+    }
+    const handleLayoutChange = (args: any) => {
+        props.onOptionChange?.({
+            gridLayout: args,
         })
     }
 
@@ -62,6 +89,8 @@ function SectionWidget(props: WidgetRendererProps<Option, any>) {
             <SectionAccordionPanel
                 childNums={len}
                 title={title}
+                expanded={isExpaned}
+                onExpanded={handleExpanded}
                 onPanelAdd={() =>
                     // @FIXME abatract events
                     eventBus.publish({
@@ -90,10 +119,7 @@ function SectionWidget(props: WidgetRendererProps<Option, any>) {
                     className='layout'
                     cols={cols}
                     layout={layout}
-                    onLayoutChange={(args) => {
-                        console.log(args)
-                        setLayout(args)
-                    }}
+                    onLayoutChange={handleLayoutChange}
                     containerPadding={[20, 0]}
                     margin={[20, 20]}
                 >
@@ -156,7 +182,7 @@ function SectionWidget(props: WidgetRendererProps<Option, any>) {
             <Modal isOpen={isModelOpen} onClose={() => setIsModelOpen(false)} closeable animate autoFocus>
                 <ModalHeader>{'Panel'}</ModalHeader>
                 <ModalBody>
-                    <SectionForm onSubmit={onRename} formData={{ name: title }} />
+                    <SectionForm onSubmit={handleSectionForm} formData={{ name: title }} />
                 </ModalBody>
             </Modal>
         </div>
