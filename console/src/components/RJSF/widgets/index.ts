@@ -8,7 +8,7 @@
 // import RadioWidget from "./RadioWidget";
 // import RangeWidget from "./RangeWidget";
 import SelectWidget from './SelectWidget'
-// import TextareaWidget from "./TextareaWidget";
+import TextWidget from './TextWidget'
 
 const Widgets = {
     // AltDateTimeWidget,
@@ -21,7 +21,7 @@ const Widgets = {
     // RadioWidget,
     // RangeWidget,
     SelectWidget,
-    // TextareaWidget,
+    TextWidget,
 }
 
 export default Widgets

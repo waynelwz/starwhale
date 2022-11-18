@@ -11,12 +11,11 @@ export const CONFIG: WidgetConfig = {
     name: 'table',
 }
 
-function PanelTableWidget(props: WidgetRendererProps<PanelTableProps, any>) {
+function PanelTableWidget(props: WidgetRendererProps) {
     console.log('PanelTableWidget', props)
 
-    const { defaults, config, children, data } = props
-    const { columnTypes = {}, records = [] } = data
-    const name = config?.name ?? defaults?.name
+    const { defaults, children, data } = props
+    const { columnTypes, records } = data
 
     const columns = React.useMemo(() => {
         return columnTypes?.map((column) => column.name)?.sort((a) => (a === 'id' ? -1 : 1)) ?? []

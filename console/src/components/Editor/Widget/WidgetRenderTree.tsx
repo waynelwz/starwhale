@@ -42,7 +42,7 @@ export function WidgetRenderTree() {
     const [editWidget, setEditWidget] = useState(null)
     const [isPanelModalOpen, setisPanelModalOpen] = React.useState(false)
 
-    console.log('Tree', tree, editWidget)
+    console.log('Tree', tree, editWidget, getTreePath(api, 'panel-l3a3ba5w62'))
 
     // useBusEvent(eventBus, { type: 'add-panel' }, (evt) => {
     //     console.log(evt)

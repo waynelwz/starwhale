@@ -18,13 +18,13 @@ export const CONFIG: WidgetConfig = {
 function PanelHeatmapWidget(props: WidgetRendererProps<any, any>) {
     console.log('PanelHeatmapWidget', props)
 
-    const { defaults, config, children, data = {} } = props
+    const { fieldConfig, data = {} } = props
     const { columnTypes = [], records = [] } = data
-
-    const name = config?.name ?? defaults?.name
+    const { data: formData } = fieldConfig ?? {}
+    const title = formData?.chartTitle ?? ''
 
     const { labels, binarylabel } = useParseConfusionMatrix(data)
-    const heatmapData = getHeatmapConfig(name, labels, binarylabel)
+    const heatmapData = getHeatmapConfig(title, labels, binarylabel)
 
     console.log(heatmapData)
 

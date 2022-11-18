@@ -83,7 +83,7 @@ export function createCustomStore(initState: Partial<WidgetStoreState> = {}) {
                                     const { current } = getTreePath(state, id)
                                     const node = _.get(state, current)
 
-                                    console.log('---', type, currType, current)
+                                    console.log('---', id, node, type, currType, current)
 
                                     // udpate tree ndoe
                                     _.set(state, current, {

@@ -18,13 +18,13 @@ export const CONFIG: WidgetConfig = {
 function PanelRocAucWidget(props: WidgetRendererProps<any, any>) {
     console.log('PanelRocAucWidget', props)
 
-    const { defaults, config, children, data = {} } = props
+    const { defaults, fieldConfig, data = {} } = props
     const { columnTypes = [], records = [] } = data
-
-    const name = config?.name ?? defaults?.name
+    const { data: formData } = fieldConfig ?? {}
+    const title = formData?.chartTitle ?? ''
 
     const rocAucData = useParseRocAuc({ records })
-    const vizData = getRocAucConfig(name, [], rocAucData)
+    const vizData = getRocAucConfig(title, [], rocAucData)
 
     return (
         <React.Suspense fallback={<BusyPlaceholder />}>

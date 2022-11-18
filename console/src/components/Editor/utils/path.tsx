@@ -21,7 +21,7 @@ export function getTreePath(state: any, id: string) {
             currPaths.push(i)
             if (node.children) {
                 currPaths.push('children')
-                walk(node.children, currPaths)
+                walk(node.children, [...paths, ...currPaths])
             }
         })
     }
