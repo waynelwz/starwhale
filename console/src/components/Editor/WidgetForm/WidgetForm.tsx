@@ -5,6 +5,8 @@ import validator from '@rjsf/validator-ajv8'
 import WidgetFactory from '../Widget/WidgetFactory'
 import useDatastoreTables from '../datastore/useDatastoreTables'
 import React from 'react'
+import { useJob } from '@/domain/job/hooks/useJob'
+import { useProject } from '@/domain/project/hooks/useProject'
 
 const uiSchema: UiSchema = {
     'name': {
@@ -32,8 +34,10 @@ const formData = {
 }
 
 function WidgetEditForm({ formData, onChange, onSubmit }, ref) {
-    // 0165a7ec2b994458b79b016d72cf6394
-    const { tables = [] } = useDatastoreTables('starwhale', '90138e6fde2a480888531526b7b65dfe')
+    // 'starwhale', '90138e6fde2a480888531526b7b65dfe'
+    const { project } = useProject()
+    const { job } = useJob()
+    const { tables = [] } = useDatastoreTables(project?.id, job?.uuid)
 
     const panels = WidgetFactory.getPanels()
     if (panels.length === 0) return <></>

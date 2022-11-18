@@ -1,9 +1,11 @@
 import React, { Context } from 'react'
 import { createContext, useContext, useMemo } from 'react'
 import { createCustomStore } from './store'
+import { EventBus } from '../events/types';
 
 export type EditorContextType = {
     store: ReturnType<typeof createCustomStore>
+    eventBus: EventBus
 }
 type EditorContextProviderProps = {
     value: any

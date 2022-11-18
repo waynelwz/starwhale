@@ -32,17 +32,22 @@ export const WrapedWidgetNode = withWidgetDynamicProps(function WidgetNode(props
         </WidgetRenderer>
     )
 })
-const key = 'results'
+
+enum PanelEditAction {
+    ADD = 'add-panel',
+    EDIT = 'edit-panel',
+}
 
 export function WidgetRenderTree() {
-    const { projectId, evaluationId } = useParams<{ projectId: string; evaluationId: string }>()
+    const { projectId, jobId } = useParams<{ projectId: string; jobId: string }>()
     const { store, eventBus } = useEditorContext()
     const api = store()
     const tree = store((state) => state.tree, deepEqual)
-    const [editWidget, setEditWidget] = useState(null)
+    const [editWidget, setEditWidget] = useState<{ type: PanelEditAction; payload: any }>(null)
     const [isPanelModalOpen, setisPanelModalOpen] = React.useState(false)
+    const key = `evaluation/${jobId}`
 
-    console.log('Tree', tree, editWidget, getTreePath(api, 'panel-l3a3ba5w62'))
+    console.log('Tree', tree)
 
     // useBusEvent(eventBus, { type: 'add-panel' }, (evt) => {
     //     console.log(evt)
@@ -54,7 +59,7 @@ export function WidgetRenderTree() {
         })
     }
 
-    const handleAddPanel = (formData) => {
+    const handleAddPanel = (formData: any) => {
         const { path } = editWidget?.payload
         if (path && path.length > 0)
             api.onLayoutChildrenChange(['tree', ...path], ['tree', ...path, 'children'], {
@@ -65,7 +70,7 @@ export function WidgetRenderTree() {
             })
     }
 
-    const handleEditPanel = (formData) => {
+    const handleEditPanel = (formData: any) => {
         const { id } = editWidget?.payload
         api.onWidgetChange(id, {
             type: formData.chartType,
@@ -76,8 +81,8 @@ export function WidgetRenderTree() {
     }
 
     const actions = {
-        'add-panel': handleAddPanel,
-        'edit-panel': handleEditPanel,
+        [PanelEditAction.ADD]: handleAddPanel,
+        [PanelEditAction.EDIT]: handleEditPanel,
     }
 
     // use  api store
@@ -157,7 +162,7 @@ export function WidgetRenderTree() {
                 isShow={isPanelModalOpen}
                 setIsShow={setisPanelModalOpen}
                 store={store}
-                handleFormSubmit={({ formData }) => {
+                handleFormSubmit={({ formData }: any) => {
                     actions[editWidget.type]?.(formData)
                     setisPanelModalOpen(false)
                 }}
