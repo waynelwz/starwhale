@@ -1,11 +1,7 @@
 import React from 'react'
-import { useStyletron } from 'baseui'
-import { ChevronDown, ChevronUp } from 'baseui/icon'
-import { isFocusVisible } from '@/utils/focusVisible'
 import { StatefulPopover, PLACEMENT } from 'baseui/popover'
 import { StatefulMenu } from 'baseui/menu'
 import IconFont from '@/components/IconFont'
-import cn from 'classnames'
 
 const COLUMN_OPTIONS = [
     { label: 'Rename', type: 'rename' },

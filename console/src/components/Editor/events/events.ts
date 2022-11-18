@@ -1,10 +1,11 @@
-import { EventBus, BusEventHandler, BusEventType, BusEvent, EventFilterOptions } from './types'
 import { Unsubscribable, Observable, Subscriber } from 'rxjs'
 import { filter } from 'rxjs/operators'
 import EventEmitter from 'eventemitter3'
+import { EventBus, BusEventHandler, BusEventType, BusEvent, EventFilterOptions } from './types'
 
 export class EventBusSrv implements EventBus {
     private emitter: EventEmitter
+
     private subscribers = new Map<Function, Subscriber<BusEvent>>()
 
     constructor() {

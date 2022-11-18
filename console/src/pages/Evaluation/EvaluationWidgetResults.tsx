@@ -1,13 +1,9 @@
-import React, { useEffect } from 'react'
-import { getHeatmapConfig, getRocAucConfig } from '@/components/Indicator/utils'
+import React from 'react'
 import Card from '@/components/Card'
-import useTranslation from '@/hooks/useTranslation'
 import BusyPlaceholder from '@/components/BusyLoaderWrapper/BusyPlaceholder'
-import { showTableName, tableNameOfSummary, tablesOfEvaluation } from '@/domain/datastore/utils'
-import { useJob } from '@/domain/job/hooks/useJob'
-import { useListDatastoreTables, useQueryDatastore } from '@/domain/datastore/hooks/useFetchDatastore'
+import { showTableName, tableNameOfSummary } from '@/domain/datastore/utils'
+import { useQueryDatastore } from '@/domain/datastore/hooks/useFetchDatastore'
 import { useProject } from '@/domain/project/hooks/useProject'
-import { useParseConfusionMatrix, useParseRocAuc } from '@/domain/datastore/hooks/useParseDatastore'
 import Table from '@/components/Table'
 import Editor from '@/components/Editor'
 import { Panel } from 'baseui/accordion'
@@ -16,17 +12,12 @@ import Accordion from '@/components/Accordion'
 const PAGE_TABLE_SIZE = 100
 
 function Summary({ fetch }: any) {
-    const [t] = useTranslation()
     const record: Record<string, string> = fetch?.data?.records?.[0] ?? {}
-
-    // if (fetch?.data?.records.length === 0) {
-    //     return <BusyPlaceholder type='notfound' />
-    // }
 
     return (
         <div className='mb-20'>
             <Accordion accordion>
-                <Panel title={`Summary`} expanded={true}>
+                <Panel title='Summary' expanded>
                     {fetch?.data?.records.length === 0 && (
                         <BusyPlaceholder type='notfound' style={{ minHeight: '300px' }} />
                     )}
@@ -111,18 +102,7 @@ function EvaluationViewer({ table, filter }: { table: string; filter?: Record<st
     return (
         <Card outTitle={showTableName(table)} style={{ padding: '20px', background: '#fff', borderRadius: '12px' }}>
             <React.Suspense fallback={<BusyPlaceholder />}>
-                <Table
-                    columns={columns}
-                    data={data}
-                    // paginationProps={{
-                    //     start: modelsInfo.data?.pageNum,
-                    //     count: modelsInfo.data?.pageSize,
-                    //     total: modelsInfo.data?.total,
-                    //     afterPageChange: () => {
-                    //         info.refetch()
-                    //     },
-                    // }}
-                />
+                <Table columns={columns} data={data} />
             </React.Suspense>
         </Card>
     )
@@ -130,14 +110,6 @@ function EvaluationViewer({ table, filter }: { table: string; filter?: Record<st
 
 function EvaluationWidgetResults() {
     const { project } = useProject()
-    const { job } = useJob()
-
-    const queryAllTables = React.useMemo(() => {
-        if (!project?.name || !job?.uuid) return ''
-        return {
-            prefix: tablesOfEvaluation(project?.name as string, job?.uuid),
-        }
-    }, [project, job])
 
     const tables = React.useMemo(() => {
         const names = []
@@ -157,20 +129,7 @@ function EvaluationWidgetResults() {
                 }}
             >
                 {tables.map((name) => {
-                    let filter
-                    // if (name.includes('/summary') && job?.uuid)
-                    //     filter = {
-                    //         operator: 'EQUAL',
-                    //         operands: [
-                    //             {
-                    //                 stringValue: job?.uuid,
-                    //             },
-                    //             {
-                    //                 columnName: 'id',
-                    //             },
-                    //         ],
-                    //     }
-                    return <EvaluationViewer table={name} key={name} filter={filter} />
+                    return <EvaluationViewer table={name} key={name} />
                 })}
             </div>
             <Editor />

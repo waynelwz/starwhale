@@ -1,22 +1,18 @@
 import React, { useContext, useEffect, useMemo, useState } from 'react'
-import { useEditorContext } from '../context/EditorContextProvider'
-import withWidgetDynamicProps from './withWidgetDynamicProps'
 import deepEqual from 'fast-deep-equal'
-import { WidgetRenderer } from '../Widget/WidgetRenderer'
-import { Modal, ModalBody, ModalHeader } from 'baseui/modal'
-import useTranslation from '@/hooks/useTranslation'
-import useSelector, { getWidget } from '../hooks/useSelector'
-import WidgetFormModel from '../WidgetForm/WidgetFormModel'
 import { Subscription } from 'rxjs'
-import { useBusEvent } from '../events/useBusEvent'
-import { getTreePath } from '../utils/path'
-import { fetchPanelSetting, updatePanelSetting } from '@/domain/panel/services/panel'
+import { updatePanelSetting } from '@/domain/panel/services/panel'
 import { useParams } from 'react-router'
 import { toaster } from 'baseui/toast'
-import { useFetchPanelSetting } from '../../../domain/panel/hooks/useSettings'
 import { useJob } from '@/domain/job/hooks/useJob'
+import { useEditorContext } from '../context/EditorContextProvider'
+import withWidgetDynamicProps from './withWidgetDynamicProps'
+import { WidgetRenderer } from './WidgetRenderer'
+import WidgetFormModel from '../WidgetForm/WidgetFormModel'
+import { useFetchPanelSetting } from '../../../domain/panel/hooks/useSettings'
+import { WidgetProps } from './const'
 
-export const WrapedWidgetNode = withWidgetDynamicProps(function WidgetNode(props: any) {
+export const WrapedWidgetNode = withWidgetDynamicProps(function WidgetNode(props: WidgetProps) {
     const { childWidgets, path } = props
     return (
         <WidgetRenderer {...props}>

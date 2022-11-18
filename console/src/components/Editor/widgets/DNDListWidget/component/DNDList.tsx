@@ -1,6 +1,8 @@
+/* eslint-disable */
+/* @ts-nocheck */
+
 import * as React from 'react'
 import type { ListProps, SharedStylePropsArgT } from 'baseui/dnd-list'
-import { List, arrayMove, arrayRemove, StyledItem, StyledDragHandle } from './index'
 import Accordion from '@/components/Accordion'
 import { Panel, StatefulPanel, StatelessAccordion } from 'baseui/accordion'
 import { StyledListItem } from 'baseui/menu'
@@ -9,9 +11,10 @@ import { createUseStyles } from 'react-jss'
 import { expandPadding } from '@/utils'
 import { StyledLabel } from 'baseui/checkbox'
 import { useEditorContext } from '@/components/Editor/context/EditorContextProvider'
-import useSelector, { getTree } from '../../../hooks/useSelector'
 import { get, set } from 'lodash'
 import WidgetPlugin from '@/components/Editor/Widget/WidgetPlugin'
+import useSelector, { getTree } from '../../../hooks/useSelector'
+import { List, arrayMove, arrayRemove, StyledItem, StyledDragHandle } from './index'
 
 const useStyles = createUseStyles({
     dragHandle: {},

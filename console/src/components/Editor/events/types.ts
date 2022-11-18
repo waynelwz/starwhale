@@ -16,11 +16,13 @@ export interface BusEvent {
  */
 export abstract class BusEventBase implements BusEvent {
     readonly type: string
+
     readonly payload?: any
+
     readonly origin?: EventBus
 
     constructor() {
-        //@ts-ignore
+        // @ts-ignore
         this.type = this.__proto__.constructor.type
     }
 }
@@ -98,4 +100,4 @@ export interface EventBus {
 }
 
 /** @alpha */
-export interface EventBusExtended extends EventBus {}
+export type EventBusExtended = EventBus

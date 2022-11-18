@@ -1,6 +1,6 @@
 import React from 'react'
 import { processSelectValue, WidgetProps } from '@rjsf/utils'
-import { SelectProps, SIZE } from 'baseui/select'
+import { SIZE } from 'baseui/select'
 import Select from '@/components/Select'
 
 const SELECT_STYLE = {
@@ -25,6 +25,7 @@ const SelectWidget = ({
 }: WidgetProps) => {
     const { readonlyAsDisabled = true } = formContext
 
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { enumOptions, enumDisabled } = options
     // console.log('SelectWidget', options)
 

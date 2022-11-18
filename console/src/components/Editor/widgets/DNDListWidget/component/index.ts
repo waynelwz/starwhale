@@ -24,5 +24,5 @@ export {
 } from './styled-components'
 // Flow
 export * from './types'
-/** @deprecated use SharedStylePropsArg instead. To be removed in future versions.*/
+/** @deprecated use SharedStylePropsArg instead. To be removed in future versions. */
 export type SharedStylePropsArgT = SharedStylePropsArg

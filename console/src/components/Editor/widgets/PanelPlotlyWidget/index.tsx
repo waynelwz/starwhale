@@ -1,9 +1,7 @@
-import BusyPlaceholder from '@/components/BusyLoaderWrapper/BusyPlaceholder'
-import React, { useCallback, useState } from 'react'
-import { WidgetProps, WidgetRendererProps } from '../../Widget/const'
+import React from 'react'
+import { WidgetRendererProps, WidgetConfig } from '../../Widget/const'
 import WidgetPlugin from '../../Widget/WidgetPlugin'
 import PanelTable from './component/Table'
-import { WidgetConfig, WidgetProps, WidgetRendererProps } from '../../Widget/const'
 
 export const CONFIG: WidgetConfig = {
     type: 'ui:panel:table',
@@ -12,16 +10,14 @@ export const CONFIG: WidgetConfig = {
 }
 
 function PanelTableWidget(props: WidgetRendererProps) {
-    console.log('PanelTableWidget', props)
-
-    const { defaults, children, data } = props
+    const { data } = props
     const { columnTypes, records } = data
 
     const columns = React.useMemo(() => {
         return columnTypes?.map((column) => column.name)?.sort((a) => (a === 'id' ? -1 : 1)) ?? []
     }, [columnTypes])
 
-    const data = React.useMemo(() => {
+    const panelData = React.useMemo(() => {
         if (!records) return []
 
         return (
@@ -31,7 +27,7 @@ function PanelTableWidget(props: WidgetRendererProps) {
         )
     }, [records, columns])
 
-    return <PanelTable columns={columns} data={data} />
+    return <PanelTable columns={columns} data={panelData} />
 }
 
 const widget = new WidgetPlugin(PanelTableWidget, CONFIG)

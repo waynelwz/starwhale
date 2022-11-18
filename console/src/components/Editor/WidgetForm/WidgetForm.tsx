@@ -2,11 +2,11 @@ import Widgets from '@/components/RJSF/widgets'
 import Form from '@rjsf/core'
 import { RegistryWidgetsType, RJSFSchema, UiSchema } from '@rjsf/utils'
 import validator from '@rjsf/validator-ajv8'
-import WidgetFactory from '../Widget/WidgetFactory'
-import useDatastoreTables from '../datastore/useDatastoreTables'
 import React from 'react'
 import { useJob } from '@/domain/job/hooks/useJob'
 import { useProject } from '@/domain/project/hooks/useProject'
+import useDatastoreTables from '../datastore/useDatastoreTables'
+import WidgetFactory from '../Widget/WidgetFactory'
 
 const uiSchema: UiSchema = {
     'tableName': {

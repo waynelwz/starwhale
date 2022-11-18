@@ -1,9 +1,10 @@
-import create, { createStore, useStore } from 'zustand'
+/* eslint-disable */
+/* @ts-nocheck */
+import create from 'zustand'
 import { devtools, subscribeWithSelector, persist } from 'zustand/middleware'
 import produce from 'immer'
 import { arrayMove, arrayRemove } from 'react-movable'
 import _ from 'lodash'
-import { generateId } from '../utils/generators'
 import WidgetFactory, { WidgetConfig, WidgetConfigProps } from '../Widget/WidgetFactory'
 import { getTreePath } from '../utils/path'
 
@@ -45,7 +46,7 @@ export type WidgetStoreState = {
 
 export function createCustomStore(initState: Partial<WidgetStoreState> = {}) {
     console.log('store init')
-    const name = `widgets`
+    const name = 'widgets'
     const useStore = create<WidgetStoreState>()(
         subscribeWithSelector(
             devtools(

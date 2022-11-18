@@ -1,13 +1,13 @@
 import React, { useEffect, useMemo } from 'react'
+import log from 'loglevel'
+import BusyPlaceholder from '@/components/BusyLoaderWrapper/BusyPlaceholder'
 import EditorContextProvider from './context/EditorContextProvider'
 import { registerWidgets } from './Widget/WidgetFactoryRegister'
-import log from 'loglevel'
 import WidgetFactory from './Widget/WidgetFactory'
 import { generateId } from './utils/generators'
 import { createCustomStore, WidgetTreeNode } from './context/store'
 import WidgetRenderTree from './Widget/WidgetRenderTree'
 import { EventBusSrv } from './events/events'
-import BusyPlaceholder from '@/components/BusyLoaderWrapper/BusyPlaceholder'
 
 // log.enableAll()
 
@@ -83,9 +83,8 @@ const tranformState = (state: typeof initialState) => {
                 defaults[node.type] = widgetConfig.defaults
                 widgets[widgetConfig.overrides.id] = widgetConfig.overrides
                 return { ...node, ...widgetConfig.node }
-            } else {
-                console.log('Init state missing widget', node.type)
             }
+            console.log('Init state missing widget', node.type)
         })
     }
     const newTree = walk(Object.assign([], state.tree) as WidgetTreeNode[])

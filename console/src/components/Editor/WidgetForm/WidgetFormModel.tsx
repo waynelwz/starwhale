@@ -1,10 +1,10 @@
 import useTranslation from '@/hooks/useTranslation'
 import { Modal, ModalBody, ModalFooter, ModalHeader } from 'baseui/modal'
 import React, { useEffect } from 'react'
-import { getWidget } from '../hooks/useSelector'
-import { WidgetRenderer } from '../Widget/WidgetRenderer'
 import { useQueryDatastore } from '@/domain/datastore/hooks/useFetchDatastore'
 import { Button } from '@/components/Button'
+import { getWidget } from '../hooks/useSelector'
+import { WidgetRenderer } from '../Widget/WidgetRenderer'
 import WidgetEditForm from './WidgetForm'
 
 export default function WidgetFormModel({

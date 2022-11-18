@@ -1,12 +1,14 @@
-import React, { Component, ComponentType, ReactNode } from 'react'
+import React from 'react'
 import { EditorContext } from '../context/EditorContextProvider'
-import { WidgetComponent, WidgetConfig, WidgetFieldConfig, WidgetMeta, WidgetProps, WidgetRendererProps } from './const'
-import { WidgetConfigProps } from './WidgetFactory'
+import { WidgetComponent, WidgetConfig, WidgetFieldConfig, WidgetMeta } from './const'
+
 export type WidgetState = Record<string, unknown>
 
 class BaseWidget<T extends WidgetMeta = WidgetMeta> {
     static contextType = EditorContext
+
     declare context: React.ContextType<typeof EditorContext>
+
     meta?: T
 }
 
@@ -15,6 +17,7 @@ class WidgetPlugin<
     S extends WidgetFieldConfig = WidgetFieldConfig
 > extends BaseWidget<WidgetMeta> {
     renderer: WidgetComponent<O, S> | null
+
     defaults: WidgetConfig<O, S>
 
     constructor(renderer: WidgetComponent<O, S>, config: WidgetConfig<O, S>) {

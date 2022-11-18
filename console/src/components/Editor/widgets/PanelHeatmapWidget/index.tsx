@@ -1,8 +1,8 @@
 import BusyPlaceholder from '@/components/BusyLoaderWrapper/BusyPlaceholder'
-import { getHeatmapConfig, getRocAucConfig } from '@/components/Indicator/utils'
-import { useParseConfusionMatrix, useParseRocAuc } from '@/domain/datastore/hooks/useParseDatastore'
-import React, { useCallback, useState } from 'react'
-import { WidgetConfig, WidgetProps, WidgetRendererProps } from '../../Widget/const'
+import { getHeatmapConfig } from '@/components/Indicator/utils'
+import { useParseConfusionMatrix } from '@/domain/datastore/hooks/useParseDatastore'
+import React from 'react'
+import { WidgetConfig, WidgetRendererProps } from '../../Widget/const'
 import WidgetPlugin from '../../Widget/WidgetPlugin'
 
 const PlotlyVisualizer = React.lazy(
@@ -16,17 +16,12 @@ export const CONFIG: WidgetConfig = {
 }
 
 function PanelHeatmapWidget(props: WidgetRendererProps<any, any>) {
-    console.log('PanelHeatmapWidget', props)
-
     const { fieldConfig, data = {} } = props
-    const { columnTypes = [], records = [] } = data
     const { data: formData } = fieldConfig ?? {}
     const title = formData?.chartTitle ?? ''
 
     const { labels, binarylabel } = useParseConfusionMatrix(data)
     const heatmapData = getHeatmapConfig(title, labels, binarylabel)
-
-    console.log(heatmapData)
 
     return (
         <React.Suspense fallback={<BusyPlaceholder />}>

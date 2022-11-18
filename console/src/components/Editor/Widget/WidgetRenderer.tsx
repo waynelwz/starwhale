@@ -1,24 +1,20 @@
-import React, { useState, useMemo, useEffect, useRef } from 'react'
-import { useWidget } from './WidgetFactoryRegister'
-import { WidgetProps, WidgetRendererType, WidgetRendererProps } from './const'
-import { generateId } from '../utils/generators'
+import React, { useState } from 'react'
 import ErrorBoundary from '@/components/ErrorBoundary/ErrorBoundary'
 import _ from 'lodash'
+import { useWidget } from './WidgetFactoryRegister'
+import { WidgetRendererProps } from './const'
 
 const DEBUG = false
-const defaultFieldConfig = { defaults: {}, overrides: [] }
 export function WidgetRenderer<P extends object = any, F extends object = any>(props: WidgetRendererProps<P, F>) {
     const {
         id,
         type,
         path,
         data,
-        name,
         optionConfig = {},
         onOptionChange = () => {},
         fieldConfig = {},
         onFieldChange = () => {},
-        onOrderChange = () => {},
         onLayoutOrderChange = () => {},
         onLayoutChildrenChange = () => {},
         onLayoutCurrentChange = () => {},
@@ -54,7 +50,7 @@ export function WidgetRenderer<P extends object = any, F extends object = any>(p
 
     return (
         <ErrorBoundary>
-            {DEBUG && type + '-' + id}
+            {DEBUG && `${type}-${id}`}
             <WidgetComponent
                 id={id ?? '0'}
                 path={path}
@@ -73,7 +69,6 @@ export function WidgetRenderer<P extends object = any, F extends object = any>(p
                 fieldConfig={fieldsWithDefaults}
                 onFieldChange={onFieldChange}
                 //
-                onOrderChange={onOrderChange}
                 onLayoutOrderChange={onLayoutOrderChange}
                 onLayoutChildrenChange={onLayoutChildrenChange}
                 onLayoutCurrentChange={onLayoutCurrentChange}

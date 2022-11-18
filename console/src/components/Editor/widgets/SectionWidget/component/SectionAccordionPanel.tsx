@@ -1,15 +1,17 @@
-import AutoSizer from 'react-virtualized-auto-sizer'
+/* eslint-disable */
+/* @ts-nocheck */
+
 import Button from '@/components/Button'
 import IconFont from '@/components/IconFont'
 import { Panel, PanelProps } from 'baseui/accordion'
-import React, { useCallback, useState } from 'react'
-import { GridLayout } from './GridBasicLayout'
+import React, { useCallback } from 'react'
 import { expandBorder, expandMargin, expandPadding } from '@/utils'
 import SectionPopover from './SectionPopover'
 
+// @FIXME type define
 const Header = React.forwardRef((props, ref) => {
     // console.log('Header', props)
-    const { $expanded, children, onClick, onPanelAdd } = props
+    const { $expanded, children, onClick, onPanelAdd } = props as any
 
     const actions = {
         rename: props.onSectionRename,
@@ -84,7 +86,7 @@ const Header = React.forwardRef((props, ref) => {
     )
 })
 
-export default function SectionAccordionPanel(props: PanelProps) {
+export default function SectionAccordionPanel(props: any) {
     const { title, children, childNums, expanded, onExpanded: setExpanded, ...rest } = props
     // console.log('Section', props, children)
 

@@ -1,13 +1,13 @@
 import { Modal, ModalBody, ModalHeader } from 'baseui/modal'
-import React, { useCallback, useMemo, useState } from 'react'
-import { WidgetProps, WidgetRendererProps } from '../../Widget/const'
+import React, { useMemo, useState } from 'react'
+import IconFont from '@/components/IconFont'
+import Button from '@/components/Button'
+import BusyPlaceholder from '@/components/BusyLoaderWrapper/BusyPlaceholder'
+import { WidgetRendererProps } from '../../Widget/const'
 import WidgetPlugin from '../../Widget/WidgetPlugin'
 import { GridLayout } from './component/GridBasicLayout'
 import SectionAccordionPanel from './component/SectionAccordionPanel'
 import SectionForm from './component/SectionForm'
-import IconFont from '@/components/IconFont'
-import Button from '@/components/Button'
-import BusyPlaceholder from '@/components/BusyLoaderWrapper/BusyPlaceholder'
 
 export const CONFIG = {
     type: 'ui:section',
@@ -42,13 +42,13 @@ export const CONFIG = {
 type Option = typeof CONFIG['optionConfig']
 
 function SectionWidget(props: WidgetRendererProps<Option, any>) {
-    const { optionConfig, fieldConfig, children, eventBus, type, id } = props
+    const { optionConfig, children, eventBus, type } = props
     const { title = '', isExpaned = false, gridLayoutConfig, gridLayout } = optionConfig as Option
 
     const len = React.Children.count(children)
-    const cols = gridLayoutConfig.cols
+    const { cols } = gridLayoutConfig
     const layout = useMemo(() => {
-        if (gridLayout.length != 0) return gridLayout
+        if (gridLayout.length !== 0) return gridLayout
         return new Array(len).fill(0).map((_, i) => ({
             i: String(i),
             x: i,
@@ -123,7 +123,7 @@ function SectionWidget(props: WidgetRendererProps<Option, any>) {
                     containerPadding={[20, 0]}
                     margin={[20, 20]}
                 >
-                    {children?.map((child, i) => (
+                    {children?.map((child: React.ReactChild, i: number) => (
                         <div
                             key={i}
                             style={{
@@ -147,7 +147,7 @@ function SectionWidget(props: WidgetRendererProps<Option, any>) {
                             >
                                 <Button
                                     // @FIXME direct used child props here ?
-                                    onClick={(i) => handleEditPanel(child.props.id)}
+                                    onClick={() => handleEditPanel(child.props.id)}
                                     size='compact'
                                     kind='secondary'
                                     overrides={{
@@ -180,7 +180,7 @@ function SectionWidget(props: WidgetRendererProps<Option, any>) {
                 </GridLayout>
             </SectionAccordionPanel>
             <Modal isOpen={isModelOpen} onClose={() => setIsModelOpen(false)} closeable animate autoFocus>
-                <ModalHeader>{'Panel'}</ModalHeader>
+                <ModalHeader>Panel</ModalHeader>
                 <ModalBody>
                     <SectionForm onSubmit={handleSectionForm} formData={{ name: title }} />
                 </ModalBody>

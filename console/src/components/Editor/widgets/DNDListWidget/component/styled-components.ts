@@ -72,7 +72,7 @@ export const Item = styled<'li', SharedStylePropsArg>('li', ({ $isDragged, $isSe
         'borderBottomStyle': 'solid',
         'borderLeftStyle': 'solid',
         'borderRightStyle': 'solid',
-        'borderTopColor': 'transparent', //$isDragged || $isSelected ? $theme.colors.primary : 'transparent',
+        'borderTopColor': 'transparent', // $isDragged || $isSelected ? $theme.colors.primary : 'transparent',
         'borderBottomColor': 'transparent', // $isDragged || $isSelected ? $theme.colors.primary : 'transparent',
         'borderLeftColor': 'transparent', // $isDragged || $isSelected ? $theme.colors.primary : 'transparent',
         'borderRightColor': 'transparent', // $isDragged || $isSelected ? $theme.colors.primary : 'transparent',
@@ -122,7 +122,7 @@ CloseHandle.displayName = 'StyledCloseHandle'
 
 export const Label = styled<'div', SharedStylePropsArg>('div', ({ $theme }) => ({
     flexGrow: 1,
-    ...$theme.typography.font300,
+    ...$theme.typography.ParagraphMedium,
 }))
 Label.displayName = 'Label'
 Label.displayName = 'StyledLabel'

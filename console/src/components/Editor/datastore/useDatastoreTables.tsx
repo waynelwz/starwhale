@@ -33,7 +33,7 @@ export default function useDatastoreTables(projectName: string, jobUuid: string)
         names: tables,
         tables: tables.map((table) => {
             // @FIXME hard code remove summary replace
-            const short = table.replace(tablesOfEvaluation(projectName, jobUuid) + '/', '')
+            const short = table.replace(`${tablesOfEvaluation(projectName, jobUuid)}/`, '')
             // .replace('project/mnist-exp/eval/', '')
             return {
                 short,

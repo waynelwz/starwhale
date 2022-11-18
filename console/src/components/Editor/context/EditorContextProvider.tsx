@@ -1,7 +1,6 @@
-import React, { Context } from 'react'
-import { createContext, useContext, useMemo } from 'react'
+import React, { Context, createContext, useContext, useMemo } from 'react'
 import { createCustomStore } from './store'
-import { EventBus } from '../events/types';
+import { EventBus } from '../events/types'
 
 export type EditorContextType = {
     store: ReturnType<typeof createCustomStore>

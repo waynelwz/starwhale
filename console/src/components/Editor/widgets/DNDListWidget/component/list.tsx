@@ -6,6 +6,14 @@ LICENSE file in the root directory of this source tree.
 */
 import * as React from 'react'
 import { getOverrides } from 'baseui/helpers/overrides'
+import { List as MovableList } from 'react-movable'
+import { isFocusVisible, forkFocus, forkBlur } from '@/utils/focusVisible'
+import { Layer } from 'baseui/layer'
+
+import type { SyntheticEvent } from 'react'
+import type { ListProps, SharedStylePropsArg } from './types'
+
+import Grab from './grab.svg'
 import {
     Root as StyledRoot,
     List as StyledList,
@@ -14,14 +22,6 @@ import {
     CloseHandle as StyledCloseHandle,
     Label as StyledLabel,
 } from './styled-components'
-import { List as MovableList } from 'react-movable'
-import Grab from './grab.svg'
-import { isFocusVisible, forkFocus, forkBlur } from '@/utils/focusVisible'
-import { Layer } from 'baseui/layer'
-
-import type { ListProps, SharedStylePropsArg } from './types'
-
-import type { SyntheticEvent } from 'react'
 
 const ItemLayer: React.FC<{ children: React.ReactNode; dragged: boolean }> = ({ children, dragged }) => {
     if (!dragged) {

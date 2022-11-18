@@ -93,8 +93,9 @@ export interface WidgetRendererProps<C extends object = any, F extends object = 
     fieldConfig: Partial<F>
     onOptionChange?: (options: Partial<C>) => void
     onFieldChange?: (options: Partial<F>) => void
-    onOrderChange?: (oldIndex: number, newIndex: number) => void
-    onChildrenAdd?: (widgets: any) => void
+    onLayoutOrderChange?: (oldIndex: number, newIndex: number) => void
+    onLayoutChildrenChange?: (widgets: any, payload: Record<string, any>) => void
+    onLayoutCurrentChange?: (widgets: any, payload: Record<string, any>) => void
     eventBus: EventBus
     // onFieldConfigChange?: (config: FieldConfigSource<F>) => void
     // fieldConfig?: FieldConfigSource<Partial<F>>
@@ -112,7 +113,7 @@ export type WidgetRendererType<C extends object = any, F extends object = any> =
 
 type WidgetGroupType = 'panel' | 'layout' | string
 
-interface PanelTableProps extends WidgetBaseConfig {}
+type PanelTableProps = WidgetBaseConfig
 
 // export type WidgetState = Record<string, unknown>
 // export interface WidgetBuilder<

@@ -2,17 +2,13 @@ import React, { useCallback, useEffect, useState } from 'react'
 import { createForm } from '@/components/Form'
 import { Input } from 'baseui/input'
 import useTranslation from '@/hooks/useTranslation'
-import { isModified } from '@/utils'
-import { RadioGroup, Radio, ALIGN } from 'baseui/radio'
 import Button from '@/components/Button'
-import { ICreateModelSchema } from '@/domain/model/schemas/model'
 
-const { Form, FormItem } = createForm<ICreateModelSchema>()
+const { Form, FormItem } = createForm<{ name: string }>()
 
-export default function SectionForm({ formData = {}, onSubmit }) {
+export default function SectionForm({ formData, onSubmit }: any) {
     const [values, setValues] = useState<any | undefined>(formData)
 
-    console.log(values, formData)
     useEffect(() => {
         if (!formData) {
             return
@@ -20,6 +16,7 @@ export default function SectionForm({ formData = {}, onSubmit }) {
         setValues({
             name: formData?.name,
         })
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [formData?.name])
 
     const [loading, setLoading] = useState(false)
@@ -44,7 +41,7 @@ export default function SectionForm({ formData = {}, onSubmit }) {
 
     return (
         <Form initialValues={values} onFinish={handleFinish} onValuesChange={handleValuesChange}>
-            <FormItem name='name' label={'Name'}>
+            <FormItem name='name' label='Name'>
                 <Input size='compact' />
             </FormItem>
             <FormItem>

@@ -1,11 +1,6 @@
-import { memoize } from 'lodash'
 import React, { useEffect, useState } from 'react'
-import useSelector, { getWidget } from '../hooks/useSelector'
-import BaseWidget from './BaseWidget'
-import WidgetFactory, { WidgetConfig, WidgetType } from './WidgetFactory'
+import WidgetFactory, { WidgetConfig } from './WidgetFactory'
 import WidgetPlugin from './WidgetPlugin'
-import withWidgetProps from './withWidgetDynamicProps'
-import log from 'loglevel'
 
 export function useWidget(widgetType: string) {
     const [widget, setWidget] = useState<WidgetPlugin | undefined>(WidgetFactory.widgetMap.get(widgetType))
@@ -25,8 +20,6 @@ export function useWidget(widgetType: string) {
         //   });
     }, [widget, widgetType])
 
-    // console.log('useWidget', widgetType, widget)
-
     return {
         widget,
         setWidget,
@@ -35,7 +28,7 @@ export function useWidget(widgetType: string) {
 
 export const registerWidget = (Widget: any, config: WidgetConfig) => {
     if (!config?.type) return console.log('Widget registration missing type', config)
-    WidgetFactory.register(config.type, Widget, config)
+    WidgetFactory.register(config.type, Widget)
 }
 
 export const registerWidgets = async () => {
@@ -51,7 +44,7 @@ export const registerWidgets = async () => {
         { type: 'ui:panel:heatmap', url: '../widgets/PanelHeatmapWidget/index.tsx' },
     ].filter((v) => !(v.type in WidgetFactory.widgetTypes))
 
-    for await (const module of modules.map(async (m) => await import(m.url))) {
+    for await (const module of modules.map(async (m) => import(m.url))) {
         const widget = module.default as WidgetPlugin
         registerWidget(widget, widget.defaults)
     }

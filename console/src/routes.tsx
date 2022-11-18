@@ -31,7 +31,6 @@ import RuntimeVersionOverviewFiles from '@/pages/Runtime/RuntimeVersionOverviewF
 import ProjectRuntimes from '@/pages/Project/Runtimes'
 import ProjectEvaluations from '@/pages/Project/Evaluations'
 import EvaluationOverviewLayout from '@/pages/Evaluation/EvaluationOverviewLayout'
-import EvaluationResults from '@/pages/Evaluation/EvaluationResults'
 import Header from '@/components/Header'
 import LoginLayout from '@/pages/Home/LoginLayout'
 import ResetPassword from '@/pages/Home/ResetPassword'
@@ -46,7 +45,7 @@ import RuntimeVersionOverviewMeta from './pages/Runtime/RuntimeVersionOverviewMe
 import RuntimeVersionOverview from './pages/Runtime/RuntimeVersionOverview'
 import RuntimeOverviewLayout from './pages/Runtime/RuntimeOverviewLayout'
 import SystemSettings from './pages/Admin/SystemSettings'
-import Panel from './components/Editor/'
+import Panel from './components/Editor'
 import EvaluationWidgetResults from './pages/Evaluation/EvaluationWidgetResults'
 
 const JobDAG = React.lazy(() => import('@/pages/Job/JobDAG'))

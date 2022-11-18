@@ -1,13 +1,7 @@
-import BusyPlaceholder from '@/components/BusyLoaderWrapper/BusyPlaceholder'
 import Button from '@/components/Button'
-import { DnDContainer } from './dnd/DnDContainer'
-import { LabelSmall } from 'baseui/typography'
-import React, { useMemo, useState } from 'react'
-import { useHover } from 'react-use'
-import { WidgetConfig, WidgetProps, WidgetRendererProps } from '../../Widget/const'
+import React from 'react'
+import { WidgetConfig, WidgetRendererProps } from '../../Widget/const'
 import WidgetPlugin from '../../Widget/WidgetPlugin'
-import { GridLayout } from '../SectionWidget/component/GridBasicLayout'
-import DNDList from './component/DNDList'
 
 export const CONFIG: WidgetConfig = {
     type: 'ui:dndList',
