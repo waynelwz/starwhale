@@ -19,9 +19,7 @@ export interface IModelVersionListSchema extends IResourceSchema {
     manifest: string
 }
 
-export interface IModelVersionDetailSchema extends IModelVersionSchema {
-    modelName?: string
-}
+export interface IModelVersionDetailSchema extends IModelVersionListSchema {}
 
 export interface IUpdateModelVersionSchema {
     tag: string
