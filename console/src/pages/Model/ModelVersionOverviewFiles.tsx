@@ -16,6 +16,7 @@ import qs from 'qs'
 import { DatasetObject, TYPES } from '@/domain/dataset/sdk'
 import { useSearchParam } from 'react-use'
 import { useDatasetVersion } from '@/domain/dataset/hooks/useDatasetVersion'
+import GridResizer from '@/components/AutoResizer/GridResizer'
 
 const useCardStyles = createUseStyles({
     wrapper: {
@@ -52,5 +53,16 @@ export default function ModelVersionFiles() {
     const styles = useCardStyles()
     const { datasetVersion } = useDatasetVersion()
 
-    return <div className={styles.wrapper}></div>
+    return (
+        <div className={styles.wrapper}>
+            <GridResizer
+                left={() => {
+                    return 1
+                }}
+                right={() => {
+                    return 1
+                }}
+            />
+        </div>
+    )
 }
