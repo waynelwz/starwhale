@@ -357,7 +357,7 @@ function UnablePreviewer({ file }: { file?: FileNodeWithPathT | null }) {
                             }}
                         >
                             <BusyPlaceholder type='center'>
-                                <IconFont type='searchEmpty' />
+                                <IconFont type='invalidFile' size={64} />
                                 <p style={{ color: 'rgba(2,16,43,0.40)' }}>Unable to show preview</p>
                             </BusyPlaceholder>
                         </div>
