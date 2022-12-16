@@ -16,11 +16,12 @@ export type GridResizerPropsT = {
     left: () => React.ReactNode
     right: () => React.ReactNode
     gridLayout?: string[]
+    threshold?: number
 }
 
-function GridResizer({ left, right, gridLayout = gridDefaultLayout }: GridResizerPropsT) {
+function GridResizer({ left, right, gridLayout = gridDefaultLayout, threshold = 200 }: GridResizerPropsT) {
     const [gridMode, setGridMode] = useState(1)
-    const resizeRef = React.useRef<HTMLDivElement>(null)
+    const resizeRef = React.useRef<any>(null)
     const gridRef = React.useRef<HTMLDivElement>(null)
     const leftRef = React.useRef<HTMLDivElement | null>(null)
 
@@ -35,18 +36,18 @@ function GridResizer({ left, right, gridLayout = gridDefaultLayout }: GridResize
                     // console.log('resize', leftRef.current?.getBoundingClientRect(), e.clientX, offset)
                     const newWidth = leftRef.current?.getBoundingClientRect().width - offset
                     // eslint-disable-next-line
-                    if (newWidth + 300 > gridRef.current!.getBoundingClientRect().width) {
+                    if (newWidth + threshold > gridRef.current!.getBoundingClientRect().width) {
                         grdiModeRef.current = 2
                         setGridMode(2)
-                    } else if (newWidth < 440) {
+                    } else if (newWidth < threshold) {
                         grdiModeRef.current = 0
                         setGridMode(0)
                     } else if (grdiModeRef.current === 1) {
                         // eslint-disable-next-line
                         gridRef.current!.style.gridTemplateColumns = `${Math.max(
                             newWidth,
-                            440
-                        )}px ${RESIZEBAR_WIDTH}px minmax(400px, 1fr)`
+                            threshold
+                        )}px ${RESIZEBAR_WIDTH}px minmax(${threshold}px, 1fr)`
                     }
                 }
             })
@@ -103,7 +104,7 @@ function GridResizer({ left, right, gridLayout = gridDefaultLayout }: GridResize
             >
                 {left()}
             </div>
-            <ResizeBar ref={resizeRef} onResizeStart={resizeStart} onModeChange={handleResize} />
+            <ResizeBar mode={gridMode} resizeRef={resizeRef} onResizeStart={resizeStart} onModeChange={handleResize} />
             {right()}
         </div>
     )
@@ -111,69 +112,58 @@ function GridResizer({ left, right, gridLayout = gridDefaultLayout }: GridResize
 export default GridResizer
 
 export type ResizeBarPropsT = {
+    resizeRef: React.RefObject<any>
     mode: number
     onResizeStart: () => void
     onModeChange: (mode: number) => void
 }
 
-const ResizeBar = React.forwardRef<React.MutableRefObject<HTMLElement>, ResizeBarPropsT>(
-    ({ mode: gridMode = 2, onResizeStart, onModeChange }, ref) => {
-        const [css] = useStyletron()
+function ResizeBar({ mode: gridMode = 2, onResizeStart, onModeChange, resizeRef }: ResizeBarPropsT) {
+    const [css] = useStyletron()
 
-        return (
-            <div
-                ref={ref}
-                className={classNames(
-                    'resize-bar',
-                    css({
-                        width: `${RESIZEBAR_WIDTH}px`,
-                        flexBasis: `${RESIZEBAR_WIDTH}px`,
-                        cursor: 'col-resize',
-                        paddingTop: '25px',
-                        zIndex: 20,
-                        overflow: 'visible',
-                        backgroundColor: '#fff',
-                        position: 'relative',
-                        right: gridMode === 2 ? '14px' : undefined,
-                        left: gridMode === 0 ? '0px' : undefined,
-                    })
-                )}
-                role='button'
-                tabIndex={0}
-                onMouseDown={onResizeStart}
-            >
-                <i
-                    role='button'
-                    tabIndex={0}
-                    className='resize-left resize-left--hover'
-                    onClick={() => onModeChange(1)}
-                >
-                    <IconFont
-                        type='fold2'
-                        size={12}
-                        style={{
-                            color: gridMode !== 2 ? undefined : '#ccc',
-                            transform: 'rotate(-90deg) translateY(-2px)',
-                            marginBottom: '2px',
-                        }}
-                    />
-                </i>
-                <i
-                    role='button'
-                    tabIndex={0}
-                    className='resize-right resize-right--hover'
-                    onClick={() => onModeChange(-1)}
-                >
-                    <IconFont
-                        type='unfold2'
-                        size={12}
-                        style={{
-                            color: gridMode !== 0 ? undefined : '#ccc',
-                            transform: 'rotate(-90deg) translateY(2px)',
-                        }}
-                    />
-                </i>
-            </div>
-        )
-    }
-)
+    return (
+        <div
+            ref={resizeRef}
+            className={classNames(
+                'resize-bar',
+                css({
+                    width: `${RESIZEBAR_WIDTH}px`,
+                    flexBasis: `${RESIZEBAR_WIDTH}px`,
+                    cursor: 'col-resize',
+                    paddingTop: '25px',
+                    zIndex: 20,
+                    overflow: 'visible',
+                    backgroundColor: '#fff',
+                    position: 'relative',
+                    right: gridMode === 2 ? '14px' : undefined,
+                    left: gridMode === 0 ? '0px' : undefined,
+                })
+            )}
+            role='button'
+            tabIndex={0}
+            onMouseDown={onResizeStart}
+        >
+            <i role='button' tabIndex={0} className='resize-left resize-left--hover' onClick={() => onModeChange(1)}>
+                <IconFont
+                    type='fold2'
+                    size={12}
+                    style={{
+                        color: gridMode !== 2 ? undefined : '#ccc',
+                        transform: 'rotate(-90deg) translateY(-2px)',
+                        marginBottom: '2px',
+                    }}
+                />
+            </i>
+            <i role='button' tabIndex={0} className='resize-right resize-right--hover' onClick={() => onModeChange(-1)}>
+                <IconFont
+                    type='unfold2'
+                    size={12}
+                    style={{
+                        color: gridMode !== 0 ? undefined : '#ccc',
+                        transform: 'rotate(-90deg) translateY(2px)',
+                    }}
+                />
+            </i>
+        </div>
+    )
+}

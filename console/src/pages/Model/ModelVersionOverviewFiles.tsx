@@ -1,68 +1,308 @@
-import React from 'react'
-import { useQueryDatasetList } from '@/domain/datastore/hooks/useFetchDatastore'
+import React, { useEffect, useMemo, useCallback } from 'react'
 import { useHistory, useParams } from 'react-router-dom'
-import { TableBuilder, TableBuilderColumn } from 'baseui/table-semantic'
-import { useAuth } from '@/api/Auth'
-import { getMetaRow } from '@/domain/dataset/utils'
-import { Pagination } from 'baseui/pagination'
-import { IPaginationProps } from '@/components/Table/IPaginationProps'
 import { usePage } from '@/hooks/usePage'
-import DatasetViewer from '@/components/Viewer/DatasetViewer'
-import { Tabs, Tab } from 'baseui/tabs'
-import { getReadableStorageQuantityStr } from '@/utils'
-import IconFont from '@/components/IconFont/index'
 import { createUseStyles } from 'react-jss'
-import qs from 'qs'
-import { DatasetObject, TYPES } from '@/domain/dataset/sdk'
-import { useSearchParam } from 'react-use'
 import { useDatasetVersion } from '@/domain/dataset/hooks/useDatasetVersion'
 import GridResizer from '@/components/AutoResizer/GridResizer'
+import { JSONTree } from 'react-json-tree'
+import Input from '@starwhale/ui/Input'
+import IconFont from '@starwhale/ui/IconFont'
+import { useModelVersion } from '../../domain/model/hooks/useModelVersion'
+import _ from 'lodash'
+import { TreeView, toggleIsExpanded, TreeLabelInteractable } from 'baseui/tree-view'
+import { FileNode } from '@/domain/base/schemas/file'
+import { getToken } from '@/api'
+import { useProject } from '@/domain/project/hooks/useProject'
+import { useModel } from '@/domain/model/hooks/useModel'
+import Editor, { EditorProps } from '@monaco-editor/react'
+import BusyPlaceholder from '@/components/BusyLoaderWrapper/BusyPlaceholder'
+import AutoResizer from '@/components/AutoResizer/AutoResizer'
+import Select from '@starwhale/ui/Select'
+// @ts-ignore
+import * as monaco from 'monaco-editor/esm/vs/editor/editor.api'
+import { setLevel } from 'loglevel'
 
-const useCardStyles = createUseStyles({
+const useStyles = createUseStyles({
     wrapper: {
         flex: 1,
         position: 'relative',
         display: 'flex',
         flexDirection: 'column',
     },
-    icon: {
-        position: 'absolute',
-        top: '-60px',
-        right: 0,
+    treeWrapper: {
+        padding: '20px 20px 20px 0',
+        flex: 1,
     },
-    tableCell: {
-        'position': 'relative',
-        'textAlign': 'left',
-        '&:hover $cardFullscreen': {
-            display: 'grid',
-        },
+    flex: {
+        display: 'flex',
+        alignItems: 'center',
     },
 })
 
+type FileNodeWithPathT = FileNode & {
+    path: string[]
+}
+
+const walk = (files: FileNode[] = [], directory: string[] = [], search: string = ''): TreeNodeT[] => {
+    return files
+        .map((file) => {
+            if (file.type === 'file' && !file.name.includes(search)) return null as any
+
+            return {
+                id: [...directory, file.name].join('/'),
+                label: file.name,
+                isExpanded: true,
+                children: walk(file.files, [...directory, file.name], search),
+            }
+        })
+        .filter((file) => !!file)
+}
+
 export default function ModelVersionFiles() {
-    const { projectId, modelId, modelVersionId } = useParams<{
-        projectId: string
-        modelId: string
-        modelVersionId: string
-    }>()
-    // @FIXME layoutParam missing when build
-    const layoutParam = useSearchParam('layout') as string
-    const [page, setPage] = usePage()
-    const { token } = useAuth()
-    const history = useHistory()
-    const styles = useCardStyles()
-    const { datasetVersion } = useDatasetVersion()
+    const styles = useStyles()
+    const { modelVerson } = useModelVersion()
+    const { project } = useProject()
+    const { model } = useModel()
+    const [search, setSearch] = React.useState('')
+
+    const fileTree: TreeNodeT[] = useMemo(() => {
+        return walk(modelVerson?.files, [], search)
+    }, [modelVerson, search])
+
+    const fileMap = useMemo(() => {
+        const map = new Map<string, FileNodeWithPathT>()
+        const walk = (files: FileNode[] = [], directory: string[] = []) => {
+            files.forEach((file) => {
+                map.set([...directory, file.name].join('/'), {
+                    ...file,
+                    path: [...directory, file.name],
+                })
+                walk(file.files, [...directory, file.name])
+            })
+        }
+        walk(modelVerson?.files)
+        return map
+    }, [modelVerson])
+
+    const [content, setContent] = React.useState('')
+    const [sourceFile, setSourceFile] = React.useState<FileNodeWithPathT | null>(null)
+
+    // testing
+    useEffect(() => {
+        setSourceFile(fileMap.get('src/model.yaml'))
+    }, [fileMap])
+
+    useEffect(() => {
+        if (sourceFile) {
+            fetch(`/api/v1/project/${project?.name}/model/${model?.name}/version/${modelVerson?.versionName}/file`, {
+                // @ts-ignore
+                headers: {
+                    'Authorization': getToken(),
+                    'X-SW-DOWNLOAD-OBJECT-PATH': sourceFile.path.join('/'),
+                    'X-SW-DOWNLOAD-OBJECT-NAME': sourceFile.name,
+                    'X-SW-DOWNLOAD-OBJECT-HASH': sourceFile.signature,
+                },
+            }).then(async (res) => {
+                if (sourceFile.type === 'file' || sourceFile.mime === 'text/plain') {
+                    const text = await res.text()
+                    setContent(text)
+                }
+            })
+        }
+    }, [sourceFile])
 
     return (
         <div className={styles.wrapper}>
             <GridResizer
                 left={() => {
-                    return 1
+                    return <FileTree data={fileTree} search={search} onSearch={setSearch} />
                 }}
                 right={() => {
-                    return 1
+                    return <CodeViewer value={content} file={sourceFile} />
+                }}
+                gridLayout={[
+                    // RIGHT:
+                    '0px 40px 1fr',
+                    // MIDDLE:
+                    '320px 40px 1fr',
+                    // LEFT:
+                    '1fr 40px 0px',
+                ]}
+            />
+        </div>
+    )
+}
+
+type TreeNodeT = {
+    id: string
+    label: string
+    isExpanded: boolean
+    children?: TreeNodeT[]
+}
+type FileTreePropsT = {
+    data: TreeNodeT[]
+    search?: string
+    onSearch?: (search: string) => void
+}
+function FileTree({ data: rawData = [], search = '', onSearch = () => {} }: FileTreePropsT) {
+    const styles = useStyles()
+    const [data, setData] = React.useState(rawData)
+
+    useEffect(() => {
+        setData(rawData)
+    }, [rawData])
+
+    return (
+        <div className={styles.treeWrapper}>
+            <Input
+                value={search}
+                onChange={(e) => {
+                    onSearch?.(e.target.value)
+                }}
+                startEnhancer={() => <IconFont type='search' style={{ color: 'rgba(2,16,43,0.40)' }} />}
+                overrides={{
+                    Root: {
+                        style: {
+                            marginBottom: '20px',
+                            maxWidth: '320px',
+                        },
+                    },
+                }}
+            />
+            <TreeView
+                data={data}
+                onToggle={(node) => {
+                    // @ts-ignore
+                    setData((prevData) => toggleIsExpanded(prevData, node))
                 }}
             />
         </div>
+    )
+}
+
+const THEMES = [
+    {
+        id: 'light',
+        label: 'Light',
+    },
+    {
+        id: 'vs-dark',
+        label: 'Dark',
+    },
+]
+
+function CodeViewer({ file, value }: EditorProps & { file?: FileNodeWithPathT | null }) {
+    if (!value) return <BusyPlaceholder />
+
+    const styles = useStyles()
+    const [theme, setTheme] = React.useState(THEMES[0].id)
+    const [language, setLanguage] = React.useState('yaml')
+    const [languages, setLanguages] = React.useState<monaco.languages.ILanguageExtensionPoint[]>([])
+    const editorRef = React.useRef<monaco.editor.IStandaloneCodeEditor | null>(null)
+    const monacoRef = React.useRef<typeof monaco | null>(null)
+
+    useEffect(() => {
+        if (!editorRef.current) return
+    }, [editorRef.current, monacoRef.current])
+
+    const onMount = useCallback((e: monaco.editor.IStandaloneCodeEditor, m: typeof monaco) => {
+        editorRef.current = e
+        monacoRef.current = m
+        if (m) {
+            const lgs = m.languages.getLanguages()
+            setLanguages(lgs)
+        }
+    }, [])
+
+    return (
+        <div>
+            <div
+                style={{
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    padding: '20px 0',
+                    alignItems: 'center',
+                }}
+            >
+                <div>{file?.name ?? ''}</div>
+                <div className={styles.flex} style={{ gap: '20px' }}>
+                    <div className={styles.flex} style={{ gap: '12px' }}>
+                        Language{' '}
+                        <Select
+                            overrides={{
+                                ControlContainer: {
+                                    style: {
+                                        width: '200px',
+                                    },
+                                },
+                            }}
+                            clearable={false}
+                            options={languages.map((lg) => ({ id: lg.id, label: lg.id }))}
+                            onChange={(params) => {
+                                if (!params.option) return
+                                setLanguage?.(params.option.id as string)
+                            }}
+                            value={language ? [{ id: language }] : []}
+                        />
+                    </div>
+                    <div className={styles.flex} style={{ gap: '12px' }}>
+                        Theme
+                        <Select
+                            overrides={{
+                                ControlContainer: {
+                                    style: {
+                                        width: '200px',
+                                    },
+                                },
+                            }}
+                            clearable={false}
+                            options={THEMES}
+                            onChange={(params) => {
+                                if (!params.option) return
+                                setTheme?.(params.option.id as string)
+                            }}
+                            value={theme ? [{ id: theme }] : []}
+                        />
+                    </div>
+                </div>
+            </div>
+            <AutoResizer>
+                {({ width, height }: { width: number; height: number }) => {
+                    return (
+                        <div
+                            style={{
+                                display: value ? 'block' : 'none',
+                                border: '1px solid #CFD7E6',
+                                borderRadius: '4px',
+                            }}
+                        >
+                            <Editor
+                                options={{
+                                    readOnly: true,
+                                }}
+                                theme={theme}
+                                height={height}
+                                width={width}
+                                defaultLanguage='yaml'
+                                language={language}
+                                value={value}
+                                onMount={onMount}
+                            />
+                        </div>
+                    )
+                }}
+            </AutoResizer>
+        </div>
+    )
+}
+
+const getLabel = (label: React.ReactNode) => () => {
+    const [value, setValue] = React.useState(false)
+    return (
+        <TreeLabelInteractable>
+            <div onClick={(e) => setValue(!value)}>
+                {label} {value}
+            </div>
+        </TreeLabelInteractable>
     )
 }
