@@ -40,6 +40,5 @@
     "**/node_modules/**",
     "**/__generated__/**",
     "**/build/**"
-
   ]
 }

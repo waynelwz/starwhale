@@ -52,7 +52,7 @@ function GridResizer({ left, right, gridLayout = gridDefaultLayout, threshold = 
                 }
             })
         },
-        [grdiModeRef, setGridMode]
+        [grdiModeRef, setGridMode, threshold]
     )
     const resizeEnd = () => {
         document.body.style.userSelect = 'unset'
@@ -80,7 +80,7 @@ function GridResizer({ left, right, gridLayout = gridDefaultLayout, threshold = 
             grdiModeRef.current = next
             setGridMode(next)
         },
-        [gridMode, setGridMode, grdiModeRef]
+        [gridMode, setGridMode, grdiModeRef, gridLayout.length]
     )
     return (
         <div
@@ -104,6 +104,7 @@ function GridResizer({ left, right, gridLayout = gridDefaultLayout, threshold = 
             >
                 {left()}
             </div>
+            {/* eslint-disable-next-line  @typescript-eslint/no-use-before-define */}
             <ResizeBar mode={gridMode} resizeRef={resizeRef} onResizeStart={resizeStart} onModeChange={handleResize} />
             {right()}
         </div>

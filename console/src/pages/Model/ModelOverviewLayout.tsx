@@ -9,11 +9,11 @@ import BaseSubLayout from '@/pages/BaseSubLayout'
 import IconFont from '@starwhale/ui/IconFont'
 import { BaseNavTabs } from '@/components/BaseNavTabs'
 import { Button } from '@starwhale/ui'
-import ModelVersionSelector from '../../domain/model/components/ModelVersionSelector'
 import { usePage } from '@/hooks/usePage'
 import qs from 'qs'
 import { useFetchModelVersion } from '../../domain/model/hooks/useFetchModelVersion'
 import { useModelVersion } from '../../domain/model/hooks/useModelVersion'
+import ModelVersionSelector from '../../domain/model/components/ModelVersionSelector'
 
 export interface IModelLayoutProps {
     children: React.ReactNode

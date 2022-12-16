@@ -4,7 +4,6 @@ import GridResizer from '@/components/AutoResizer/GridResizer'
 import Input from '@starwhale/ui/Input'
 import IconFont from '@starwhale/ui/IconFont'
 import { useModelVersion } from '@/domain/model/hooks/useModelVersion'
-import _ from 'lodash'
 import { TreeView, toggleIsExpanded, TreeLabelInteractable } from 'baseui/tree-view'
 import { FileNode } from '@/domain/base/schemas/file'
 import { getToken } from '@/api'
@@ -16,7 +15,6 @@ import AutoResizer from '@/components/AutoResizer/AutoResizer'
 import Select from '@starwhale/ui/Select'
 // @ts-ignore
 import * as monaco from 'monaco-editor/esm/vs/editor/editor.api'
-import useGlobalState from '@/hooks/global'
 import { useLocalStorage } from 'react-use'
 
 const useStyles = createUseStyles({
@@ -74,10 +72,10 @@ export default function ModelVersionFiles() {
     }, [modelVerson])
 
     const fileTree: TreeNodeT[] = useMemo(() => {
-        const walkWithSearch = (files: FileNode[] = [], directory: string[] = [], search: string = ''): TreeNodeT[] => {
+        const walkWithSearch = (files: FileNode[] = [], directory: string[] = [], searchtmp = ''): TreeNodeT[] => {
             return files
                 .map((file) => {
-                    if (file.type === 'file' && !file.name.includes(search)) return null as any
+                    if (file.type === 'file' && !file.name.includes(searchtmp)) return null as any
                     const id = [...directory, file.name].join('/')
                     const isSelected = sourceFile?.path.join('/') === id
                     const fileType = file.type === 'directory' ? 'file' : 'file2'
@@ -87,6 +85,8 @@ export default function ModelVersionFiles() {
                         label: (
                             <TreeLabelInteractable>
                                 <div
+                                    role='button'
+                                    tabIndex={-1}
                                     className={isSelected ? 'item--selected' : ''}
                                     style={{
                                         display: 'flex',
@@ -108,7 +108,7 @@ export default function ModelVersionFiles() {
                             </TreeLabelInteractable>
                         ),
                         isExpanded: true,
-                        children: walkWithSearch(file.files, [...directory, file.name], search),
+                        children: walkWithSearch(file.files, [...directory, file.name], searchtmp),
                     }
                 })
                 .filter((file) => !!file)
@@ -138,20 +138,22 @@ export default function ModelVersionFiles() {
                 }
             })
         }
-    }, [sourceFile])
+    }, [sourceFile, project?.name, model?.name, modelVerson?.versionName])
 
     return (
         <div className={styles.wrapper}>
             <GridResizer
                 left={() => {
+                    // eslint-disable-next-line @typescript-eslint/no-use-before-define
                     return <FileTree data={fileTree} search={search} onSearch={setSearch} />
                 }}
                 right={() => {
-                    console.log(sourceFile)
                     if (isText(sourceFile)) {
+                        // eslint-disable-next-line @typescript-eslint/no-use-before-define
                         return <CodeViewer value={content} file={sourceFile} />
                     }
 
+                    // eslint-disable-next-line @typescript-eslint/no-use-before-define
                     return <UnablePreviewer file={sourceFile} />
                 }}
                 gridLayout={[
@@ -227,24 +229,23 @@ const THEMES = [
 
 function CodeViewer({ file, value }: EditorProps & { file?: FileNodeWithPathT | null }) {
     const styles = useStyles()
-    const [theme, setTheme] = useLocalStorage(THEMES[0].id)
+    const [theme, setTheme] = useLocalStorage<string>(THEMES[0].id)
     const [language, setLanguage] = React.useState('yaml')
     const [languages, setLanguages] = React.useState<monaco.languages.ILanguageExtensionPoint[]>([])
     const editorRef = React.useRef<monaco.editor.IStandaloneCodeEditor | null>(null)
     const monacoRef = React.useRef<typeof monaco | null>(null)
 
-    useEffect(() => {
-        if (!editorRef.current) return
-    }, [editorRef.current, monacoRef.current])
-
-    const onMount = useCallback((e: monaco.editor.IStandaloneCodeEditor, m: typeof monaco) => {
-        editorRef.current = e
-        monacoRef.current = m
-        if (m) {
-            const lgs = m.languages.getLanguages()
-            setLanguages(lgs)
-        }
-    }, [])
+    const onMount = useCallback(
+        (e: monaco.editor.IStandaloneCodeEditor, m: typeof monaco) => {
+            editorRef.current = e
+            monacoRef.current = m
+            if (m) {
+                const lgs = m.languages.getLanguages()
+                setLanguages(lgs)
+            }
+        },
+        [setLanguages]
+    )
 
     return (
         <div>
@@ -299,6 +300,7 @@ function CodeViewer({ file, value }: EditorProps & { file?: FileNodeWithPathT | 
                 </div>
             </div>
             <AutoResizer>
+                {/* eslint-disable-next-line react/no-unused-prop-types */}
                 {({ width, height }: { width: number; height: number }) => {
                     return (
                         <div
@@ -344,6 +346,7 @@ function UnablePreviewer({ file }: { file?: FileNodeWithPathT | null }) {
                 <div>{file?.name ?? ''}</div>
             </div>
             <AutoResizer>
+                {/* eslint-disable-next-line react/no-unused-prop-types */}
                 {({ width, height }: { width: number; height: number }) => {
                     return (
                         <div
@@ -365,16 +368,5 @@ function UnablePreviewer({ file }: { file?: FileNodeWithPathT | null }) {
                 }}
             </AutoResizer>
         </div>
-    )
-}
-
-const getLabel = (label: React.ReactNode) => () => {
-    const [value, setValue] = React.useState(false)
-    return (
-        <TreeLabelInteractable>
-            <div onClick={(e) => setValue(!value)}>
-                {label} {value}
-            </div>
-        </TreeLabelInteractable>
     )
 }

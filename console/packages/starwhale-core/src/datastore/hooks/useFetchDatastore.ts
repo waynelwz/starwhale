@@ -12,7 +12,7 @@ export function useScanDatastore(query: any, enabled = false) {
     return info
 }
 
-export function useQueryDatastore(query: any, enabled = false) {
+export function useQueryDatastore(query: any) {
     const info = useQuery(`queryDatastore:${qs.stringify(query)}`, () => queryTable(query), {
         refetchOnWindowFocus: false,
         enabled: !!query?.tableName,

@@ -21,6 +21,7 @@ export interface IModelVersionListSchema extends IResourceSchema, IFileSchema {
     createdTime?: number
 }
 
+// eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface IModelVersionDetailSchema extends IModelVersionListSchema {}
 
 export interface IUpdateModelVersionSchema {

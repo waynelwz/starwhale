@@ -4,12 +4,13 @@ import { tablesOfEvaluation } from '../utils'
 
 export default function useDatastoreTables(projectName: string, jobUuid: string) {
     const queryAllTables = useMemo(() => {
-        if (!projectName || !jobUuid) return
+        if (!projectName || !jobUuid) return {}
         return {
             prefix: tablesOfEvaluation(projectName, jobUuid),
         }
     }, [projectName, jobUuid])
 
+    // eslint-disable-next-line @typescript-eslint/no-use-before-define
     return useDatastoreTablesByPrefix(queryAllTables?.prefix as string)
 }
 
