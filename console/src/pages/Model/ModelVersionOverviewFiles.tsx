@@ -1,13 +1,9 @@
 import React, { useEffect, useMemo, useCallback } from 'react'
-import { useHistory, useParams } from 'react-router-dom'
-import { usePage } from '@/hooks/usePage'
 import { createUseStyles } from 'react-jss'
-import { useDatasetVersion } from '@/domain/dataset/hooks/useDatasetVersion'
 import GridResizer from '@/components/AutoResizer/GridResizer'
-import { JSONTree } from 'react-json-tree'
 import Input from '@starwhale/ui/Input'
 import IconFont from '@starwhale/ui/IconFont'
-import { useModelVersion } from '../../domain/model/hooks/useModelVersion'
+import { useModelVersion } from '@/domain/model/hooks/useModelVersion'
 import _ from 'lodash'
 import { TreeView, toggleIsExpanded, TreeLabelInteractable } from 'baseui/tree-view'
 import { FileNode } from '@/domain/base/schemas/file'
@@ -20,14 +16,22 @@ import AutoResizer from '@/components/AutoResizer/AutoResizer'
 import Select from '@starwhale/ui/Select'
 // @ts-ignore
 import * as monaco from 'monaco-editor/esm/vs/editor/editor.api'
-import { setLevel } from 'loglevel'
+import useGlobalState from '@/hooks/global'
+import { useLocalStorage } from 'react-use'
 
 const useStyles = createUseStyles({
     wrapper: {
-        flex: 1,
-        position: 'relative',
-        display: 'flex',
-        flexDirection: 'column',
+        'flex': 1,
+        'position': 'relative',
+        'display': 'flex',
+        'flexDirection': 'column',
+        '& [role="treeitem"] > div': {
+            color: '#02102B',
+        },
+        '& [role="treeitem"] > div:has(.item--selected)': {
+            backgroundColor: '#2B65D9',
+            color: '#fff !important',
+        },
     },
     treeWrapper: {
         padding: '20px 20px 20px 0',
@@ -43,20 +47,7 @@ type FileNodeWithPathT = FileNode & {
     path: string[]
 }
 
-const walk = (files: FileNode[] = [], directory: string[] = [], search: string = ''): TreeNodeT[] => {
-    return files
-        .map((file) => {
-            if (file.type === 'file' && !file.name.includes(search)) return null as any
-
-            return {
-                id: [...directory, file.name].join('/'),
-                label: file.name,
-                isExpanded: true,
-                children: walk(file.files, [...directory, file.name], search),
-            }
-        })
-        .filter((file) => !!file)
-}
+const isText = (file?: FileNodeWithPathT) => (file ? file.desc === 'SRC' || file.mime === 'text/plain' : false)
 
 export default function ModelVersionFiles() {
     const styles = useStyles()
@@ -64,10 +55,8 @@ export default function ModelVersionFiles() {
     const { project } = useProject()
     const { model } = useModel()
     const [search, setSearch] = React.useState('')
-
-    const fileTree: TreeNodeT[] = useMemo(() => {
-        return walk(modelVerson?.files, [], search)
-    }, [modelVerson, search])
+    const [content, setContent] = React.useState('')
+    const [sourceFile, setSourceFile] = React.useState<FileNodeWithPathT | undefined>()
 
     const fileMap = useMemo(() => {
         const map = new Map<string, FileNodeWithPathT>()
@@ -84,13 +73,53 @@ export default function ModelVersionFiles() {
         return map
     }, [modelVerson])
 
-    const [content, setContent] = React.useState('')
-    const [sourceFile, setSourceFile] = React.useState<FileNodeWithPathT | null>(null)
+    const fileTree: TreeNodeT[] = useMemo(() => {
+        const walkWithSearch = (files: FileNode[] = [], directory: string[] = [], search: string = ''): TreeNodeT[] => {
+            return files
+                .map((file) => {
+                    if (file.type === 'file' && !file.name.includes(search)) return null as any
+                    const id = [...directory, file.name].join('/')
+                    const isSelected = sourceFile?.path.join('/') === id
+                    const fileType = file.type === 'directory' ? 'file' : 'file2'
+
+                    return {
+                        id,
+                        label: (
+                            <TreeLabelInteractable>
+                                <div
+                                    className={isSelected ? 'item--selected' : ''}
+                                    style={{
+                                        display: 'flex',
+                                        justifyContent: 'space-between',
+                                        alignItems: 'center',
+                                    }}
+                                    onClick={() => setSourceFile(fileMap.get(id))}
+                                >
+                                    <p>
+                                        <IconFont
+                                            type={fileType}
+                                            style={{ color: 'rgba(2,16,43,0.20)', marginRight: '5px' }}
+                                            size={14}
+                                        />{' '}
+                                        {file.name}
+                                    </p>
+                                    {isSelected && <IconFont type='check' style={{ color: '#00B0FF' }} />}
+                                </div>
+                            </TreeLabelInteractable>
+                        ),
+                        isExpanded: true,
+                        children: walkWithSearch(file.files, [...directory, file.name], search),
+                    }
+                })
+                .filter((file) => !!file)
+        }
+        return walkWithSearch(modelVerson?.files, [], search)
+    }, [modelVerson, search, fileMap, sourceFile, setSourceFile])
 
     // testing
-    useEffect(() => {
-        setSourceFile(fileMap.get('src/model.yaml'))
-    }, [fileMap])
+    // useEffect(() => {
+    //     setSourceFile(fileMap.get('src/model.yaml'))
+    // }, [fileMap])
 
     useEffect(() => {
         if (sourceFile) {
@@ -103,7 +132,7 @@ export default function ModelVersionFiles() {
                     'X-SW-DOWNLOAD-OBJECT-HASH': sourceFile.signature,
                 },
             }).then(async (res) => {
-                if (sourceFile.type === 'file' || sourceFile.mime === 'text/plain') {
+                if (isText(sourceFile)) {
                     const text = await res.text()
                     setContent(text)
                 }
@@ -118,7 +147,12 @@ export default function ModelVersionFiles() {
                     return <FileTree data={fileTree} search={search} onSearch={setSearch} />
                 }}
                 right={() => {
-                    return <CodeViewer value={content} file={sourceFile} />
+                    console.log(sourceFile)
+                    if (isText(sourceFile)) {
+                        return <CodeViewer value={content} file={sourceFile} />
+                    }
+
+                    return <UnablePreviewer file={sourceFile} />
                 }}
                 gridLayout={[
                     // RIGHT:
@@ -192,10 +226,8 @@ const THEMES = [
 ]
 
 function CodeViewer({ file, value }: EditorProps & { file?: FileNodeWithPathT | null }) {
-    if (!value) return <BusyPlaceholder />
-
     const styles = useStyles()
-    const [theme, setTheme] = React.useState(THEMES[0].id)
+    const [theme, setTheme] = useLocalStorage(THEMES[0].id)
     const [language, setLanguage] = React.useState('yaml')
     const [languages, setLanguages] = React.useState<monaco.languages.ILanguageExtensionPoint[]>([])
     const editorRef = React.useRef<monaco.editor.IStandaloneCodeEditor | null>(null)
@@ -274,20 +306,60 @@ function CodeViewer({ file, value }: EditorProps & { file?: FileNodeWithPathT | 
                                 display: value ? 'block' : 'none',
                                 border: '1px solid #CFD7E6',
                                 borderRadius: '4px',
+                                padding: '2px',
+                                width: 'fit-content',
                             }}
                         >
                             <Editor
                                 options={{
                                     readOnly: true,
                                 }}
-                                theme={theme}
-                                height={height}
-                                width={width}
+                                theme={theme as string}
+                                height={height - 58}
+                                width={width - 6}
                                 defaultLanguage='yaml'
                                 language={language}
                                 value={value}
                                 onMount={onMount}
                             />
+                        </div>
+                    )
+                }}
+            </AutoResizer>
+        </div>
+    )
+}
+
+function UnablePreviewer({ file }: { file?: FileNodeWithPathT | null }) {
+    return (
+        <div>
+            <div
+                style={{
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    padding: '20px 0',
+                    alignItems: 'center',
+                }}
+            >
+                <div>{file?.name ?? ''}</div>
+            </div>
+            <AutoResizer>
+                {({ width, height }: { width: number; height: number }) => {
+                    return (
+                        <div
+                            style={{
+                                display: 'block',
+                                border: '1px solid #CFD7E6',
+                                borderRadius: '4px',
+                                padding: '2px',
+                                width,
+                                height,
+                            }}
+                        >
+                            <BusyPlaceholder type='center'>
+                                <IconFont type='searchEmpty' />
+                                <p style={{ color: 'rgba(2,16,43,0.40)' }}>Unable to show preview</p>
+                            </BusyPlaceholder>
                         </div>
                     )
                 }}

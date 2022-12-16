@@ -70,6 +70,8 @@ const iconTypes = [
     'a-Addabove',
     'a-Addbelow',
     'arrow2',
+    'file',
+    'file2',
 ]
 
 interface IIconFontProps {
