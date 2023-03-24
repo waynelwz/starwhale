@@ -61,6 +61,10 @@ export default function DatasetVersionListCard() {
                                 datasetVersion.createdTime && formatTimestampDateTime(datasetVersion.createdTime),
                                 datasetVersion.owner && <User user={datasetVersion.owner} />,
                                 <>
+                                    <CopyToClipboard
+                                        content={`${window.location.protocol}//${window.location.host}/projects/${projectId}/datasets/${datasetId}/versions/${datasetVersion.id}/`}
+                                    />
+                                    &nbsp;&nbsp;
                                     {i ? (
                                         <WithCurrentAuth id='dataset.version.revert'>
                                             <Button
@@ -72,10 +76,6 @@ export default function DatasetVersionListCard() {
                                             </Button>
                                         </WithCurrentAuth>
                                     ) : null}
-                                    &nbsp;&nbsp;
-                                    <CopyToClipboard
-                                        content={`${window.location.protocol}//${window.location.host}/projects/${projectId}/datasets/${datasetId}/versions/${datasetVersion.id}/`}
-                                    />
                                 </>,
                             ]
                         }) ?? []
