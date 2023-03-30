@@ -1,7 +1,7 @@
 .PHONY: *
 
 install-dev-tools:
-	npm install -g yarn pnpm
+	npm install -g yarn pnpm@latest
 
 install-dependencies:
 	# yarn
@@ -19,8 +19,7 @@ rebuild-gradio:
 	export NODE_OPTIONS="--max_old_space_size=4096" && \
 	export NODE_OPTIONS="--max-old-space-size=4096" && \
 	cd gradio/ui && \
-		pnpm update && \
-		pnpm i && \
+		pnpm i --fix-lockfile && \
 		pnpm build && \
 		cd ../.. && \
 		rm -rf src/assets/GradioWidget && mkdir -p src/assets/GradioWidget && \
