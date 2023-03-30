@@ -14,12 +14,11 @@ ci-lint:
 	yarn typecheck
 
 rebuild-gradio:
-	git config --global --add safe.directory $(realpath gradio) || echo "gradio not exists"
+	 $(realpath gradio) ? git config --global --add safe.directory $(realpath gradio) : echo "gradio not exists"
 	(([ -d gradio ] && git -C gradio clean -f -x && git -C gradio checkout . && git -C gradio reset --hard && git -C gradio pull) || (rm -rf gradio &&git clone --depth 1 --branch=feat/sw-gradio-widget https://github.com/star-whale/gradio gradio))	&& \
 	export NODE_OPTIONS="--max_old_space_size=4096" && \
 	export NODE_OPTIONS="--max-old-space-size=4096" && \
 	cd gradio/ui && \
-		pnpm add pnpm@8.0.0 && \
 		pnpm i && \
 		pnpm build && \
 		cd ../.. && \
