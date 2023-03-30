@@ -13,6 +13,9 @@ on:
   pull_request:
     branches:
       - main
+  push:
+    branches:
+      - e2e/*
 
 env:
   PYPI_RELEASE_VERSION: 100.0.0
