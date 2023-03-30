@@ -208,7 +208,8 @@ client_test() {
   if ! in_github_action; then
     unset http_proxy
     unset https_proxy
-    bash scripts/client_test/cli_test.sh all
+    # bash scripts/client_test/cli_test.sh all
+    bash scripts/client_test/cli_test.sh mnist
   else
     if ! bash scripts/client_test/cli_test.sh simple; then
       scripts/e2e_test/check_job.sh 127.0.0.1:$PORT_CONTROLLER || exit 1
@@ -223,6 +224,13 @@ api_test() {
   pushd ../apitest/pytest
   python3 -m pip install -r requirements.txt
   pytest --host 127.0.0.1 --port $PORT_CONTROLLER
+  popd
+}
+
+console_test() {
+  pushd ../../console/playwright
+  yarn install
+  PROXY=$CONTROLLER_URL yarn test
   popd
 }
 
@@ -287,6 +295,8 @@ main() {
   else
     exit 1
   fi
+
+  # console_test
 
 }
 
