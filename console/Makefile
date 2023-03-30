@@ -4,10 +4,10 @@ install-dev-tools:
 	npm install -g yarn pnpm
 
 install-dependencies:
-	yarn
+	# yarn
 
 build-ui:
-	yarn build
+	# yarn build
 
 ci-lint:
 	yarn lint
@@ -19,7 +19,7 @@ rebuild-gradio:
 	export NODE_OPTIONS="--max_old_space_size=4096" && \
 	export NODE_OPTIONS="--max-old-space-size=4096" && \
 	cd gradio/ui && \
-		pnpm add -g pnpm@8.0.0 && \
+		pnpm add pnpm@8.0.0 && \
 		pnpm i && \
 		pnpm build && \
 		cd ../.. && \
