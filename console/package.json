@@ -142,6 +142,7 @@
     "build:extend": "rm -rf build/* && NODE_OPTIONS='--max-old-space-size=5120' vite build --mode extend --emptyOutDir false",
     "serve": "vite preview",
     "test": "vitest dev",
+    "test:ui": "vitest --ui",
     "test:run": "vitest run",
     "test:coverage": "vitest run --coverage"
   },
@@ -232,6 +233,7 @@
     "jest-css-modules": "^2.1.0",
     "jest-transform-stub": "^2.0.0",
     "lerna": "^6.0.1",
+    "msw": "^1.2.2",
     "prettier": "^2.3.2",
     "react-test-renderer": "^18.2.0",
     "rollup": "^2.0.0",

@@ -1,0 +1,215 @@
+{
+    "code": "success",
+    "message": "Success",
+    "data": [
+        {
+            "ownerName": "starwhale",
+            "projectName": "public",
+            "modelId": "48",
+            "modelName": "sdwebui",
+            "shared": 1,
+            "versions": [
+                {
+                    "id": "84",
+                    "versionName": "zoomkd7zskt3dz6qvf6b45qup5hvtgubalevqos3",
+                    "alias": "latest",
+                    "shared": 1,
+                    "stepSpecs": [
+                        {
+                            "concurrency": 1,
+                            "needs": [],
+                            "resources": [],
+                            "env": null,
+                            "replicas": 1,
+                            "expose": 0,
+                            "virtual": false,
+                            "job_name": "swmp:ft",
+                            "name": "swmp:ft",
+                            "show_name": "fine_tune"
+                        },
+                        {
+                            "concurrency": 1,
+                            "needs": [],
+                            "resources": [],
+                            "env": null,
+                            "replicas": 1,
+                            "expose": 7860,
+                            "virtual": false,
+                            "job_name": "swmp:sdui",
+                            "name": "swmp:sdui",
+                            "show_name": "sdui"
+                        }
+                    ],
+                    "builtInRuntime": null,
+                    "createdTime": 1687863996000
+                }
+            ]
+        },
+        {
+            "ownerName": "starwhale",
+            "projectName": "public",
+            "modelId": "36",
+            "modelName": "llama-7b",
+            "shared": 1,
+            "versions": [
+                {
+                    "id": "69",
+                    "versionName": "t7b62obpgktk7hgllzuegiajigpt4zpccxoppayq",
+                    "alias": "latest",
+                    "shared": 1,
+                    "stepSpecs": [
+                        {
+                            "concurrency": 1,
+                            "needs": [],
+                            "resources": [
+                                {
+                                    "type": "nvidia.com/gpu",
+                                    "request": 1.0,
+                                    "limit": 1.0
+                                }
+                            ],
+                            "env": null,
+                            "replicas": 1,
+                            "expose": null,
+                            "virtual": null,
+                            "job_name": "evaluation:copilot_predict",
+                            "name": "evaluation:copilot_predict",
+                            "show_name": "predict"
+                        },
+                        {
+                            "concurrency": 1,
+                            "needs": [],
+                            "resources": [
+                                {
+                                    "type": "nvidia.com/gpu",
+                                    "request": 1.0,
+                                    "limit": 1.0
+                                }
+                            ],
+                            "env": null,
+                            "replicas": 1,
+                            "expose": null,
+                            "virtual": null,
+                            "job_name": "finetune:llama_fine_tuning",
+                            "name": "finetune:llama_fine_tuning",
+                            "show_name": "fine_tune"
+                        }
+                    ],
+                    "builtInRuntime": null,
+                    "createdTime": 1687752958000
+                }
+            ]
+        },
+        {
+            "ownerName": "starwhale",
+            "projectName": "public",
+            "modelId": "35",
+            "modelName": "guanaco-7b",
+            "shared": 1,
+            "versions": [
+                {
+                    "id": "68",
+                    "versionName": "moypwq4dx4lbwlxbbya3wsieccsagxrzln4tnbks",
+                    "alias": "latest",
+                    "shared": 1,
+                    "stepSpecs": [
+                        {
+                            "concurrency": 1,
+                            "needs": [],
+                            "resources": [
+                                {
+                                    "type": "nvidia.com/gpu",
+                                    "request": 1.0,
+                                    "limit": 1.0
+                                }
+                            ],
+                            "env": null,
+                            "replicas": 1,
+                            "expose": null,
+                            "virtual": null,
+                            "job_name": "sw:copilot_predict",
+                            "name": "sw:copilot_predict",
+                            "show_name": "predict"
+                        }
+                    ],
+                    "builtInRuntime": null,
+                    "createdTime": 1687751510000
+                }
+            ]
+        },
+        {
+            "ownerName": "starwhale",
+            "projectName": "public",
+            "modelId": "33",
+            "modelName": "vicuna-13b",
+            "shared": 1,
+            "versions": [
+                {
+                    "id": "66",
+                    "versionName": "osyugneffh3rqqd232bqskwt2j54ltqlum76mq4e",
+                    "alias": "latest",
+                    "shared": 1,
+                    "stepSpecs": [
+                        {
+                            "concurrency": 1,
+                            "needs": [],
+                            "resources": [
+                                {
+                                    "type": "nvidia.com/gpu",
+                                    "request": 1.0,
+                                    "limit": 1.0
+                                }
+                            ],
+                            "env": null,
+                            "replicas": 1,
+                            "expose": null,
+                            "virtual": null,
+                            "job_name": "evaluation:copilot_predict",
+                            "name": "evaluation:copilot_predict",
+                            "show_name": "predict"
+                        }
+                    ],
+                    "builtInRuntime": null,
+                    "createdTime": 1687749092000
+                }
+            ]
+        },
+        {
+            "ownerName": "starwhale",
+            "projectName": "public",
+            "modelId": "31",
+            "modelName": "vicuna-7b",
+            "shared": 1,
+            "versions": [
+                {
+                    "id": "64",
+                    "versionName": "kecgdvs43rjocsfnqouegdbntyam2ci6zta5ckuy",
+                    "alias": "latest",
+                    "shared": 1,
+                    "stepSpecs": [
+                        {
+                            "concurrency": 1,
+                            "needs": [],
+                            "resources": [
+                                {
+                                    "type": "nvidia.com/gpu",
+                                    "request": 1.0,
+                                    "limit": 1.0
+                                }
+                            ],
+                            "env": null,
+                            "replicas": 1,
+                            "expose": null,
+                            "virtual": null,
+                            "job_name": "evaluation:copilot_predict",
+                            "name": "evaluation:copilot_predict",
+                            "show_name": "predict"
+                        }
+                    ],
+                    "builtInRuntime": null,
+                    "createdTime": 1687747575000
+                }
+            ]
+        }
+    ]
+}

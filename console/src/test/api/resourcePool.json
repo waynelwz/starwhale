@@ -1,0 +1,64 @@
+{
+    "code": "success",
+    "message": "Success",
+    "data": [
+        {
+            "resourceId": 4,
+            "price": "60.0000",
+            "currency": "CNY",
+            "priceUnit": "HOUR",
+            "name": "bj005",
+            "capacity": {
+                "cpu": "16",
+                "memory": "32G"
+            }
+        },
+        {
+            "resourceId": 18,
+            "price": "35.0000",
+            "currency": "CNY",
+            "priceUnit": "HOUR",
+            "name": "A100 * 1",
+            "capacity": {
+                "cpu": "16",
+                "memory": "125G",
+                "GPU": "1*NVIDIA A100"
+            }
+        },
+        {
+            "resourceId": 19,
+            "price": "25.0000",
+            "currency": "CNY",
+            "priceUnit": "HOUR",
+            "name": "T4 * 1",
+            "capacity": {
+                "cpu": "16",
+                "memory": "60G",
+                "GPU": "1*NVIDIA T4"
+            }
+        },
+        {
+            "resourceId": 20,
+            "price": "35.0000",
+            "currency": "CNY",
+            "priceUnit": "HOUR",
+            "name": "A100 80G * 1",
+            "capacity": {
+                "cpu": "16",
+                "memory": "125G",
+                "GPU": "1*NVIDIA A100 80G"
+            }
+        },
+        {
+            "resourceId": 21,
+            "price": "15.0000",
+            "currency": "CNY",
+            "priceUnit": "HOUR",
+            "name": "small",
+            "capacity": {
+                "cpu": "4",
+                "memory": "8G"
+            }
+        }
+    ]
+}

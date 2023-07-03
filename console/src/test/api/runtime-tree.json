@@ -1,0 +1,102 @@
+{
+    "code": "success",
+    "message": "Success",
+    "data": [
+        {
+            "ownerName": "lwzlwz",
+            "projectName": "lwz1",
+            "runtimeId": "20",
+            "runtimeName": "pytorch",
+            "shared": 0,
+            "versions": [
+                {
+                    "id": "57",
+                    "versionName": "fl4z5l637klr5rutz4v6whu6khry2qkxyyy3bmyb",
+                    "alias": "latest",
+                    "shared": 0,
+                    "createdTime": 1686213279000
+                }
+            ]
+        },
+        {
+            "ownerName": "starwhale",
+            "projectName": "public",
+            "runtimeId": "38",
+            "runtimeName": "belle",
+            "shared": 1,
+            "versions": [
+                {
+                    "id": "92",
+                    "versionName": "uetijwi54ptswcchmw4c6lnsp6xwqwiubuneyuuu",
+                    "alias": "latest",
+                    "shared": 1,
+                    "createdTime": 1687863464000
+                }
+            ]
+        },
+        {
+            "ownerName": "starwhale",
+            "projectName": "public",
+            "runtimeId": "36",
+            "runtimeName": "vicuna",
+            "shared": 1,
+            "versions": [
+                {
+                    "id": "86",
+                    "versionName": "e6kyrlsv6khkfuk3lakm43n4mtuhglnnxhd7vp56",
+                    "alias": "latest",
+                    "shared": 1,
+                    "createdTime": 1687853390000
+                }
+            ]
+        },
+        {
+            "ownerName": "starwhale",
+            "projectName": "public",
+            "runtimeId": "33",
+            "runtimeName": "sdwebui",
+            "shared": 1,
+            "versions": [
+                {
+                    "id": "94",
+                    "versionName": "mkfcpzqy7dc6vvqvy2vrzn4mj7ni4ycoio3e4fg2",
+                    "alias": "latest",
+                    "shared": 1,
+                    "createdTime": 1687863831000
+                }
+            ]
+        },
+        {
+            "ownerName": "starwhale",
+            "projectName": "public",
+            "runtimeId": "32",
+            "runtimeName": "guanaco",
+            "shared": 1,
+            "versions": [
+                {
+                    "id": "87",
+                    "versionName": "svhmr73xl4uoqy72an2nmoxcvp524bgckwfbi23w",
+                    "alias": "latest",
+                    "shared": 1,
+                    "createdTime": 1687854872000
+                }
+            ]
+        },
+        {
+            "ownerName": "tianwei",
+            "projectName": "llm",
+            "runtimeId": "14",
+            "runtimeName": "belle-venv",
+            "shared": 1,
+            "versions": [
+                {
+                    "id": "45",
+                    "versionName": "inelmsnl24kyh6u7ip4gv7yvckislrdyx5s43ys3",
+                    "alias": "latest",
+                    "shared": 1,
+                    "createdTime": 1685004104000
+                }
+            ]
+        }
+    ]
+}

@@ -1,0 +1,1001 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`JobForm component > should form be renders corrent default 1`] = `
+{
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <div
+        class=""
+      >
+        <form>
+          <div
+            class="divider-0-2-5 divider-d0-0-2-11 top-0-2-9"
+          >
+            <div
+              class="innerText-0-2-10 innerText-d1-0-2-12"
+            >
+              Environment
+            </div>
+          </div>
+          <div
+            class="row3-0-2-1"
+          >
+            <div
+              class="_formItem_07992c"
+            >
+              <span
+                class="ae af ag ah ai aj"
+              >
+                <label
+                  class="ak al am an af ao ap aq ar as at"
+                  data-baseweb="form-control-label"
+                >
+                  <div
+                    style="display: flex; align-items: center; gap: 4px;"
+                  >
+                    <div>
+                      *
+                    </div>
+                    <div
+                      style="flex-shrink: 0;"
+                    >
+                      Resource Pool
+                    </div>
+                  </div>
+                </label>
+              </span>
+              <div
+                class="af au"
+                data-baseweb="form-control-container"
+              >
+                <div
+                  class="ak al av aw ax ay af"
+                  data-baseweb="select"
+                >
+                  <div
+                    class="az b0 b1 b2 ax b3 af ae b4 b5 b6 b7 b8 b9 ba bb bc bd be bf bg ao bh bi bj bk bl bm"
+                  >
+                    <div
+                      class="ax ay bn bo bp ae bq br b3 bs bt bu ar"
+                    >
+                      <div
+                        class="bv ax bw bx by b3 bz c0 c1"
+                      />
+                      <div
+                        class="ay c2 by c3 c4 c5 c6 c7 c8 ax c9 ca cb bw ah aq as at ar cc cd"
+                      >
+                        <input
+                          aria-autocomplete="list"
+                          aria-expanded="false"
+                          aria-haspopup="listbox"
+                          aria-label=""
+                          aria-required="true"
+                          class="ak al av aw ao ce f7 by cg c4 c5 c6 c7 c8 c2 c9 ca cb aj ah aq as at ar"
+                          role="combobox"
+                          tabindex="0"
+                          value=""
+                        />
+                        <div
+                          class="ak al av aw ch ci cj ck cl cm cn"
+                        />
+                      </div>
+                    </div>
+                    <div
+                      class="ax ay ae co bq cp cq cr"
+                    >
+                      <i
+                        class="ap cs ct cu cv ba bb bc bd cw cx cy cz d0 d1 d2 d3 d4 d5 d6 d7"
+                        role="status"
+                      >
+                        <span
+                          style="position: absolute; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0px, 0px, 0px, 0px); white-space: nowrap; border: 0px;"
+                        >
+                          Loading
+                        </span>
+                      </i>
+                      <i
+                        class="icon-container row-center"
+                        style="width: 14px; height: 14px; line-height: 14px; color: rgba(2, 16, 43, 0.4); padding: 0px; display: inline-block; font-weight: normal; transform: rotate(0deg); transition: transform 0.2s ease;"
+                      >
+                        <span
+                          class="iconfont icon-arrow_down"
+                          style="font-size: 14px;"
+                        />
+                      </i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            class="divider-0-2-5 divider-d2-0-2-13 top-0-2-9"
+          >
+            <div
+              class="innerText-0-2-10 innerText-d3-0-2-14"
+            >
+              Model Information
+            </div>
+          </div>
+          <div
+            class="rowModel-0-2-3"
+          >
+            <div
+              class="_formItem_07992c"
+            >
+              <span
+                class="ae af ag ah ai aj"
+              >
+                <label
+                  class="ak al am an af ao ap aq ar as at"
+                  data-baseweb="form-control-label"
+                >
+                  <div
+                    style="display: flex; align-items: center; gap: 4px;"
+                  >
+                    <div>
+                      *
+                    </div>
+                    <div
+                      style="flex-shrink: 0;"
+                    >
+                      Model Version
+                    </div>
+                  </div>
+                </label>
+              </span>
+              <div
+                class="af au"
+                data-baseweb="form-control-container"
+              >
+                <div
+                  class="ae aw d8 d9 da db dc dd cc de df dg dh"
+                  role="button"
+                  tabindex="0"
+                >
+                  <div
+                    class="ay ae di bq"
+                  >
+                    <div
+                      class="dj ak am al dk ch dl dm ci dn"
+                      data-baseweb="typo-labelsmall"
+                    >
+                      selector.placeholder
+                    </div>
+                  </div>
+                  <div
+                    class="ae bn do cc aw bq"
+                  >
+                    <div
+                      class="ay dp dq dk af"
+                      role="button"
+                      tabindex="0"
+                    >
+                      <div
+                        class="dr ds dp"
+                      />
+                      <p
+                        aria-expanded="false"
+                        aria-haspopup="true"
+                      />
+                    </div>
+                  </div>
+                  <div
+                    class="dt du dv dw co"
+                  >
+                    <i
+                      class="icon-container row-center"
+                      style="width: 12px; height: 12px; line-height: 12px; color: rgba(2, 16, 43, 0.4); padding: 0px; display: inline-block; font-weight: normal;"
+                    >
+                      <span
+                        class="iconfont icon-library"
+                        style="font-size: 12px;"
+                      />
+                    </i>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div
+              class="_formItem_07992c"
+            >
+              <span
+                class="ae af ag ah ai aj"
+              >
+                <label
+                  class="ak al am an af ao ap aq ar as at"
+                  data-baseweb="form-control-label"
+                >
+                  Raw Type
+                </label>
+              </span>
+              <div
+                class="af au"
+                data-baseweb="form-control-container"
+              >
+                <label
+                  class="dx ae bq dq dy dz e0"
+                  data-baseweb="checkbox"
+                >
+                  <div
+                    class="bq e1 e2 e3 e4 e5 ae e6 e7 e8 e9 ea e0"
+                  >
+                    <div
+                      class="bl eb ec ed ee ef c9 e6 eg eh"
+                    />
+                  </div>
+                  <input
+                    aria-checked="false"
+                    class="ei di cl b3 ej ek ch"
+                    type="checkbox"
+                    value=""
+                  />
+                </label>
+              </div>
+            </div>
+          </div>
+          <div
+            style="padding-bottom: 16px;"
+          >
+            <div
+              style="display: none;"
+            >
+              <section
+                style="display: flex; position: relative; text-align: initial; width: 960px; height: 500px;"
+              >
+                <div
+                  style="display: flex; height: 100%; width: 100%; justify-content: center; align-items: center;"
+                >
+                  Loading...
+                </div>
+                <div
+                  style="width: 100%; display: none;"
+                />
+              </section>
+            </div>
+          </div>
+          <div
+            class="divider-0-2-5 divider-d4-0-2-15 top-0-2-9"
+          >
+            <div
+              class="innerText-0-2-10 innerText-d5-0-2-16"
+            >
+              Datasets
+            </div>
+          </div>
+          <div
+            class="bfc"
+            style="width: 660px; margin-bottom: 36px;"
+          >
+            <div
+              class="_formItem_07992c"
+            >
+              <span
+                class="ae af ag ah ai aj"
+              >
+                <label
+                  class="ak al am an af ao ap aq ar as at"
+                  data-baseweb="form-control-label"
+                >
+                  <div
+                    style="display: flex; align-items: center; gap: 4px;"
+                  >
+                    <div>
+                      *
+                    </div>
+                    <div
+                      style="flex-shrink: 0;"
+                    >
+                      Dataset Version
+                    </div>
+                  </div>
+                </label>
+              </span>
+              <div
+                class="af au"
+                data-baseweb="form-control-container"
+              >
+                <div
+                  class="ae aw d8 d9 da db dc dd cc de df dg dh"
+                  role="button"
+                  tabindex="0"
+                >
+                  <div
+                    class="ay ae di bq"
+                  >
+                    <div
+                      class="dj ak am al dk ch dl dm ci dn"
+                      data-baseweb="typo-labelsmall"
+                    >
+                      selector.placeholder
+                    </div>
+                  </div>
+                  <div
+                    class="ae bn do cc aw bq"
+                  >
+                    <div
+                      class="ay dp dq dk af"
+                      role="button"
+                      tabindex="0"
+                    >
+                      <div
+                        class="dr ds dp"
+                      />
+                      <p
+                        aria-expanded="false"
+                        aria-haspopup="true"
+                      />
+                    </div>
+                  </div>
+                  <div
+                    class="dt du dv dw co"
+                  >
+                    <i
+                      class="icon-container row-center"
+                      style="width: 12px; height: 12px; line-height: 12px; color: rgba(2, 16, 43, 0.4); padding: 0px; display: inline-block; font-weight: normal;"
+                    >
+                      <span
+                        class="iconfont icon-library"
+                        style="font-size: 12px;"
+                      />
+                    </i>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            class="divider-0-2-5 divider-d6-0-2-17 top-0-2-9"
+          >
+            <div
+              class="innerText-0-2-10 innerText-d7-0-2-18"
+            >
+              Runtime
+            </div>
+          </div>
+          <div
+            class="bfc"
+            style="width: 660px; margin-bottom: 36px;"
+          >
+            <div
+              class="_formItem_07992c"
+            >
+              <span
+                class="ae af ag ah ai aj"
+              >
+                <label
+                  class="ak al am an af ao ap aq ar as at"
+                  data-baseweb="form-control-label"
+                >
+                  <div
+                    style="display: flex; align-items: center; gap: 4px;"
+                  >
+                    <div>
+                      *
+                    </div>
+                    <div
+                      style="flex-shrink: 0;"
+                    >
+                      Runtime Version
+                    </div>
+                  </div>
+                </label>
+              </span>
+              <div
+                class="af au"
+                data-baseweb="form-control-container"
+              >
+                <div
+                  class="ae aw d8 d9 da db dc dd cc de df dg dh"
+                  role="button"
+                  tabindex="0"
+                >
+                  <div
+                    class="ay ae di bq"
+                  >
+                    <div
+                      class="dj ak am al dk ch dl dm ci dn"
+                      data-baseweb="typo-labelsmall"
+                    >
+                      selector.placeholder
+                    </div>
+                  </div>
+                  <div
+                    class="ae bn do cc aw bq"
+                  >
+                    <div
+                      class="ay dp dq dk af"
+                      role="button"
+                      tabindex="0"
+                    >
+                      <div
+                        class="dr ds dp"
+                      />
+                      <p
+                        aria-expanded="false"
+                        aria-haspopup="true"
+                      />
+                    </div>
+                  </div>
+                  <div
+                    class="dt du dv dw co"
+                  >
+                    <i
+                      class="icon-container row-center"
+                      style="width: 12px; height: 12px; line-height: 12px; color: rgba(2, 16, 43, 0.4); padding: 0px; display: inline-block; font-weight: normal;"
+                    >
+                      <span
+                        class="iconfont icon-library"
+                        style="font-size: 12px;"
+                      />
+                    </i>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            class="_formItem_07992c"
+          >
+            <div
+              class="af au"
+              data-baseweb="form-control-container"
+            >
+              <div
+                style="display: flex; gap: 20px; margin-top: 60px;"
+                value="[object Object]"
+              >
+                <div
+                  style="flex-grow: 1;"
+                />
+                <button
+                  class="el dx bq em en eo ep eq c4 c5 c6 c7 c9 c8 er es et bf eu dq ev ew ex aj ca ah cb ak al am an b1 b2 az b0 ey ez f0 f1 f2 f3 f4 f5 f6"
+                  data-baseweb="button"
+                  type="button"
+                >
+                  Cancel
+                </button>
+                <button
+                  class="el dx bq em en eo ep eq c4 c5 c6 c7 c9 c8 er es et bf eu dq ev ew ex aj ca ah cb ak al am an b1 b2 az b0 ey ez f0 f1 f6"
+                  data-baseweb="button"
+                  disabled=""
+                >
+                  submit
+                </button>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div
+        class=""
+      />
+    </div>
+    <script
+      src="https://cdn.jsdelivr.net/npm/monaco-editor@0.33.0/min/vs/loader.js"
+    />
+  </body>,
+  "container": <div>
+    <div
+      class=""
+    >
+      <form>
+        <div
+          class="divider-0-2-5 divider-d0-0-2-11 top-0-2-9"
+        >
+          <div
+            class="innerText-0-2-10 innerText-d1-0-2-12"
+          >
+            Environment
+          </div>
+        </div>
+        <div
+          class="row3-0-2-1"
+        >
+          <div
+            class="_formItem_07992c"
+          >
+            <span
+              class="ae af ag ah ai aj"
+            >
+              <label
+                class="ak al am an af ao ap aq ar as at"
+                data-baseweb="form-control-label"
+              >
+                <div
+                  style="display: flex; align-items: center; gap: 4px;"
+                >
+                  <div>
+                    *
+                  </div>
+                  <div
+                    style="flex-shrink: 0;"
+                  >
+                    Resource Pool
+                  </div>
+                </div>
+              </label>
+            </span>
+            <div
+              class="af au"
+              data-baseweb="form-control-container"
+            >
+              <div
+                class="ak al av aw ax ay af"
+                data-baseweb="select"
+              >
+                <div
+                  class="az b0 b1 b2 ax b3 af ae b4 b5 b6 b7 b8 b9 ba bb bc bd be bf bg ao bh bi bj bk bl bm"
+                >
+                  <div
+                    class="ax ay bn bo bp ae bq br b3 bs bt bu ar"
+                  >
+                    <div
+                      class="bv ax bw bx by b3 bz c0 c1"
+                    />
+                    <div
+                      class="ay c2 by c3 c4 c5 c6 c7 c8 ax c9 ca cb bw ah aq as at ar cc cd"
+                    >
+                      <input
+                        aria-autocomplete="list"
+                        aria-expanded="false"
+                        aria-haspopup="listbox"
+                        aria-label=""
+                        aria-required="true"
+                        class="ak al av aw ao ce f7 by cg c4 c5 c6 c7 c8 c2 c9 ca cb aj ah aq as at ar"
+                        role="combobox"
+                        tabindex="0"
+                        value=""
+                      />
+                      <div
+                        class="ak al av aw ch ci cj ck cl cm cn"
+                      />
+                    </div>
+                  </div>
+                  <div
+                    class="ax ay ae co bq cp cq cr"
+                  >
+                    <i
+                      class="ap cs ct cu cv ba bb bc bd cw cx cy cz d0 d1 d2 d3 d4 d5 d6 d7"
+                      role="status"
+                    >
+                      <span
+                        style="position: absolute; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0px, 0px, 0px, 0px); white-space: nowrap; border: 0px;"
+                      >
+                        Loading
+                      </span>
+                    </i>
+                    <i
+                      class="icon-container row-center"
+                      style="width: 14px; height: 14px; line-height: 14px; color: rgba(2, 16, 43, 0.4); padding: 0px; display: inline-block; font-weight: normal; transform: rotate(0deg); transition: transform 0.2s ease;"
+                    >
+                      <span
+                        class="iconfont icon-arrow_down"
+                        style="font-size: 14px;"
+                      />
+                    </i>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          class="divider-0-2-5 divider-d2-0-2-13 top-0-2-9"
+        >
+          <div
+            class="innerText-0-2-10 innerText-d3-0-2-14"
+          >
+            Model Information
+          </div>
+        </div>
+        <div
+          class="rowModel-0-2-3"
+        >
+          <div
+            class="_formItem_07992c"
+          >
+            <span
+              class="ae af ag ah ai aj"
+            >
+              <label
+                class="ak al am an af ao ap aq ar as at"
+                data-baseweb="form-control-label"
+              >
+                <div
+                  style="display: flex; align-items: center; gap: 4px;"
+                >
+                  <div>
+                    *
+                  </div>
+                  <div
+                    style="flex-shrink: 0;"
+                  >
+                    Model Version
+                  </div>
+                </div>
+              </label>
+            </span>
+            <div
+              class="af au"
+              data-baseweb="form-control-container"
+            >
+              <div
+                class="ae aw d8 d9 da db dc dd cc de df dg dh"
+                role="button"
+                tabindex="0"
+              >
+                <div
+                  class="ay ae di bq"
+                >
+                  <div
+                    class="dj ak am al dk ch dl dm ci dn"
+                    data-baseweb="typo-labelsmall"
+                  >
+                    selector.placeholder
+                  </div>
+                </div>
+                <div
+                  class="ae bn do cc aw bq"
+                >
+                  <div
+                    class="ay dp dq dk af"
+                    role="button"
+                    tabindex="0"
+                  >
+                    <div
+                      class="dr ds dp"
+                    />
+                    <p
+                      aria-expanded="false"
+                      aria-haspopup="true"
+                    />
+                  </div>
+                </div>
+                <div
+                  class="dt du dv dw co"
+                >
+                  <i
+                    class="icon-container row-center"
+                    style="width: 12px; height: 12px; line-height: 12px; color: rgba(2, 16, 43, 0.4); padding: 0px; display: inline-block; font-weight: normal;"
+                  >
+                    <span
+                      class="iconfont icon-library"
+                      style="font-size: 12px;"
+                    />
+                  </i>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div
+            class="_formItem_07992c"
+          >
+            <span
+              class="ae af ag ah ai aj"
+            >
+              <label
+                class="ak al am an af ao ap aq ar as at"
+                data-baseweb="form-control-label"
+              >
+                Raw Type
+              </label>
+            </span>
+            <div
+              class="af au"
+              data-baseweb="form-control-container"
+            >
+              <label
+                class="dx ae bq dq dy dz e0"
+                data-baseweb="checkbox"
+              >
+                <div
+                  class="bq e1 e2 e3 e4 e5 ae e6 e7 e8 e9 ea e0"
+                >
+                  <div
+                    class="bl eb ec ed ee ef c9 e6 eg eh"
+                  />
+                </div>
+                <input
+                  aria-checked="false"
+                  class="ei di cl b3 ej ek ch"
+                  type="checkbox"
+                  value=""
+                />
+              </label>
+            </div>
+          </div>
+        </div>
+        <div
+          style="padding-bottom: 16px;"
+        >
+          <div
+            style="display: none;"
+          >
+            <section
+              style="display: flex; position: relative; text-align: initial; width: 960px; height: 500px;"
+            >
+              <div
+                style="display: flex; height: 100%; width: 100%; justify-content: center; align-items: center;"
+              >
+                Loading...
+              </div>
+              <div
+                style="width: 100%; display: none;"
+              />
+            </section>
+          </div>
+        </div>
+        <div
+          class="divider-0-2-5 divider-d4-0-2-15 top-0-2-9"
+        >
+          <div
+            class="innerText-0-2-10 innerText-d5-0-2-16"
+          >
+            Datasets
+          </div>
+        </div>
+        <div
+          class="bfc"
+          style="width: 660px; margin-bottom: 36px;"
+        >
+          <div
+            class="_formItem_07992c"
+          >
+            <span
+              class="ae af ag ah ai aj"
+            >
+              <label
+                class="ak al am an af ao ap aq ar as at"
+                data-baseweb="form-control-label"
+              >
+                <div
+                  style="display: flex; align-items: center; gap: 4px;"
+                >
+                  <div>
+                    *
+                  </div>
+                  <div
+                    style="flex-shrink: 0;"
+                  >
+                    Dataset Version
+                  </div>
+                </div>
+              </label>
+            </span>
+            <div
+              class="af au"
+              data-baseweb="form-control-container"
+            >
+              <div
+                class="ae aw d8 d9 da db dc dd cc de df dg dh"
+                role="button"
+                tabindex="0"
+              >
+                <div
+                  class="ay ae di bq"
+                >
+                  <div
+                    class="dj ak am al dk ch dl dm ci dn"
+                    data-baseweb="typo-labelsmall"
+                  >
+                    selector.placeholder
+                  </div>
+                </div>
+                <div
+                  class="ae bn do cc aw bq"
+                >
+                  <div
+                    class="ay dp dq dk af"
+                    role="button"
+                    tabindex="0"
+                  >
+                    <div
+                      class="dr ds dp"
+                    />
+                    <p
+                      aria-expanded="false"
+                      aria-haspopup="true"
+                    />
+                  </div>
+                </div>
+                <div
+                  class="dt du dv dw co"
+                >
+                  <i
+                    class="icon-container row-center"
+                    style="width: 12px; height: 12px; line-height: 12px; color: rgba(2, 16, 43, 0.4); padding: 0px; display: inline-block; font-weight: normal;"
+                  >
+                    <span
+                      class="iconfont icon-library"
+                      style="font-size: 12px;"
+                    />
+                  </i>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          class="divider-0-2-5 divider-d6-0-2-17 top-0-2-9"
+        >
+          <div
+            class="innerText-0-2-10 innerText-d7-0-2-18"
+          >
+            Runtime
+          </div>
+        </div>
+        <div
+          class="bfc"
+          style="width: 660px; margin-bottom: 36px;"
+        >
+          <div
+            class="_formItem_07992c"
+          >
+            <span
+              class="ae af ag ah ai aj"
+            >
+              <label
+                class="ak al am an af ao ap aq ar as at"
+                data-baseweb="form-control-label"
+              >
+                <div
+                  style="display: flex; align-items: center; gap: 4px;"
+                >
+                  <div>
+                    *
+                  </div>
+                  <div
+                    style="flex-shrink: 0;"
+                  >
+                    Runtime Version
+                  </div>
+                </div>
+              </label>
+            </span>
+            <div
+              class="af au"
+              data-baseweb="form-control-container"
+            >
+              <div
+                class="ae aw d8 d9 da db dc dd cc de df dg dh"
+                role="button"
+                tabindex="0"
+              >
+                <div
+                  class="ay ae di bq"
+                >
+                  <div
+                    class="dj ak am al dk ch dl dm ci dn"
+                    data-baseweb="typo-labelsmall"
+                  >
+                    selector.placeholder
+                  </div>
+                </div>
+                <div
+                  class="ae bn do cc aw bq"
+                >
+                  <div
+                    class="ay dp dq dk af"
+                    role="button"
+                    tabindex="0"
+                  >
+                    <div
+                      class="dr ds dp"
+                    />
+                    <p
+                      aria-expanded="false"
+                      aria-haspopup="true"
+                    />
+                  </div>
+                </div>
+                <div
+                  class="dt du dv dw co"
+                >
+                  <i
+                    class="icon-container row-center"
+                    style="width: 12px; height: 12px; line-height: 12px; color: rgba(2, 16, 43, 0.4); padding: 0px; display: inline-block; font-weight: normal;"
+                  >
+                    <span
+                      class="iconfont icon-library"
+                      style="font-size: 12px;"
+                    />
+                  </i>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          class="_formItem_07992c"
+        >
+          <div
+            class="af au"
+            data-baseweb="form-control-container"
+          >
+            <div
+              style="display: flex; gap: 20px; margin-top: 60px;"
+              value="[object Object]"
+            >
+              <div
+                style="flex-grow: 1;"
+              />
+              <button
+                class="el dx bq em en eo ep eq c4 c5 c6 c7 c9 c8 er es et bf eu dq ev ew ex aj ca ah cb ak al am an b1 b2 az b0 ey ez f0 f1 f2 f3 f4 f5 f6"
+                data-baseweb="button"
+                type="button"
+              >
+                Cancel
+              </button>
+              <button
+                class="el dx bq em en eo ep eq c4 c5 c6 c7 c9 c8 er es et bf eu dq ev ew ex aj ca ah cb ak al am an b1 b2 az b0 ey ez f0 f1 f6"
+                data-baseweb="button"
+                disabled=""
+              >
+                submit
+              </button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div
+      class=""
+    />
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;
