@@ -1,15 +1,169 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`JobForm component > should form be renders corrent default 1`] = `
-<input
-  aria-autocomplete="list"
-  aria-expanded="false"
-  aria-haspopup="listbox"
-  aria-label=""
-  aria-required="true"
-  class="ak al av aw ao ce f7 by cg c4 c5 c6 c7 c8 c2 c9 ca cb aj ah aq as at ar"
-  role="combobox"
-  tabindex="0"
-  value=""
-/>
+<div
+  class="row3-0-2-1"
+>
+  <div
+    class="_formItem_07992c"
+  >
+    <span
+      class="ae af ag ah ai aj"
+    >
+      <label
+        class="ak al am an af ao ap aq ar as at"
+        data-baseweb="form-control-label"
+      >
+        <div
+          style="display: flex; align-items: center; gap: 4px;"
+        >
+          <div>
+            *
+          </div>
+          <div
+            style="flex-shrink: 0;"
+          >
+            Resource Pool
+          </div>
+        </div>
+      </label>
+    </span>
+    <div
+      class="af au"
+      data-baseweb="form-control-container"
+    >
+      <div
+        class="ak al av aw ax ay af"
+        data-baseweb="select"
+      >
+        <div
+          class="az b0 b1 b2 ax b3 af ae b4 b5 b6 b7 b8 b9 ba bb bc bd be bf bg ao bh bi bj bk bl bm"
+        >
+          <div
+            class="ax ay bn bo bp ae bq br b3 bs bt bu ar"
+          >
+            <div
+              class="bv ax bw bx by b3 bz c0 c1"
+            />
+            <div
+              class="ay c2 by c3 c4 c5 c6 c7 c8 ax c9 ca cb bw ah aq as at ar cc cd"
+            >
+              <input
+                aria-autocomplete="list"
+                aria-expanded="false"
+                aria-haspopup="listbox"
+                aria-label=""
+                aria-required="true"
+                class="ak al av aw ao ce f7 by cg c4 c5 c6 c7 c8 c2 c9 ca cb aj ah aq as at ar"
+                role="combobox"
+                tabindex="0"
+                value=""
+              />
+              <div
+                class="ak al av aw ch ci cj ck cl cm cn"
+              />
+            </div>
+          </div>
+          <div
+            class="ax ay ae co bq cp cq cr"
+          >
+            <i
+              class="icon-container row-center"
+              style="width: 14px; height: 14px; line-height: 14px; color: rgba(2, 16, 43, 0.4); padding: 0px; display: inline-block; font-weight: normal; transform: rotate(0deg); transition: transform 0.2s ease;"
+            >
+              <span
+                class="iconfont icon-arrow_down"
+                style="font-size: 14px;"
+              />
+            </i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`JobForm component > should form be renders corrent default 2`] = `
+<div
+  class="row3-0-2-1"
+>
+  <div
+    class="_formItem_07992c"
+  >
+    <span
+      class="ae af ag ah ai aj"
+    >
+      <label
+        class="ak al am an af ao ap aq ar as at"
+        data-baseweb="form-control-label"
+      >
+        <div
+          style="display: flex; align-items: center; gap: 4px;"
+        >
+          <div>
+            *
+          </div>
+          <div
+            style="flex-shrink: 0;"
+          >
+            Resource Pool
+          </div>
+        </div>
+      </label>
+    </span>
+    <div
+      class="af au"
+      data-baseweb="form-control-container"
+    >
+      <div
+        class="ak al av aw ax ay af"
+        data-baseweb="select"
+      >
+        <div
+          class="az b0 b1 b2 ax b3 af ae b4 b5 b6 b7 b8 b9 ba bb bc bd be bf bg ao bh bi bj bk bl bm"
+        >
+          <div
+            class="ax ay bn bo bp ae bq br b3 bs bt bu ar"
+          >
+            <div
+              class="bv ax bw bx by b3 bz c0 c1"
+            />
+            <div
+              class="ay c2 by c3 c4 c5 c6 c7 c8 ax c9 ca cb bw ah aq as at ar cc cd"
+            >
+              <input
+                aria-autocomplete="list"
+                aria-expanded="false"
+                aria-haspopup="listbox"
+                aria-label=""
+                aria-required="true"
+                class="ak al av aw ao ce f7 by cg c4 c5 c6 c7 c8 c2 c9 ca cb aj ah aq as at ar"
+                role="combobox"
+                tabindex="0"
+                value=""
+              />
+              <div
+                class="ak al av aw ch ci cj ck cl cm cn"
+              />
+            </div>
+          </div>
+          <div
+            class="ax ay ae co bq cp cq cr"
+          >
+            <i
+              class="icon-container row-center"
+              style="width: 14px; height: 14px; line-height: 14px; color: rgba(2, 16, 43, 0.4); padding: 0px; display: inline-block; font-weight: normal; transform: rotate(0deg); transition: transform 0.2s ease;"
+            >
+              <span
+                class="iconfont icon-arrow_down"
+                style="font-size: 14px;"
+              />
+            </i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 `;
