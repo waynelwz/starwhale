@@ -17,9 +17,9 @@ export const data = {
             },
         },
     },
-    'http://localhost:3000/api/v1/system/resourcePool': await import('./api/model-tree.json'),
-    'http://localhost:3000/api/v1/project/1/model-tree': await import('./api/model-tree.json'),
-    'http://localhost:3000/api/v1/project/1/runtime-tree': await import('./api/runtime-tree.json'),
+    'http://localhost:3000/api/v1/system/resourcePool': (await import('./api/model-tree.json')).default.data,
+    'http://localhost:3000/api/v1/project/1/model-tree': (await import('./api/model-tree.json')).default.data,
+    'http://localhost:3000/api/v1/project/1/runtime-tree': (await import('./api/runtime-tree.json')).default.data,
 }
 
 const jsonPlaceHolder = graphql.link('https://jsonplaceholder.ir/graphql')

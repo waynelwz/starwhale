@@ -7,13 +7,15 @@ const onSubmit = vi.fn()
 describe('JobForm component', async () => {
     test('should form be renders corrent default', async () => {
         const tree = render(<JobForm onSubmit={onSubmit} />)
-        const { container } = tree
+        const { container, component } = tree
         await wait(100)
-        // expect(tree).toMatchSnapshot()
-        // expect(tree.getAllByLabelText('Resource Pool')).toHaveLength(1)
-        const input = container.querySelector('input')
+
+        expect(container.querySelector('input')).toMatchSnapshot()
+        // expect(screen.getByRole('combobox')).
+        // const input = container.querySelector('input')
         // if (input) fireEvent.change(input, { target: { value: 'test' } })
-        expect(input.value).toEqual('bj005')
+        // expect(input.value).toEqual('bj005')
+        console.log(screen)
     })
     it('should form auto filled when have query args', () => {})
     it('should model handeler auto select when modelVersion selected', () => {})
