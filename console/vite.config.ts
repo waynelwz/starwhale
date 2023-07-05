@@ -4,6 +4,7 @@ import react from '@vitejs/plugin-react'
 import inspect from 'vite-plugin-inspect'
 import router from './vite-plugin-react-routes'
 import { readFileSync } from 'fs'
+import { configDefaults } from 'vitest/config'
 
 // import eslint from 'vite-plugin-eslint'
 // import mpa from '../../vite-plugin-mpa'
@@ -100,5 +101,8 @@ export default defineConfig({
     ],
     esbuild: {
         logOverride: { 'this-is-undefined-in-esm': 'silent' },
+    },
+    test: {
+        exclude: [...configDefaults.exclude, '**/stories/**', '**/playwright/**', '**/gradio/**', '**/base/**'],
     },
 })

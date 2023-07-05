@@ -97,6 +97,9 @@ export default {
         '^@model/(.*)': '<rootDir>/src/domain/model/$1',
         '^@project/(.*)': '<rootDir>/src/domain/project/$1',
         '^@user/(.*)': '<rootDir>/src/domain/user/$1',
+        '^@starwhale/ui/(.*)': '<rootDir>/packages/starwhale-ui/src/$1',
+        '^@starwhale/core/(.*)': '<rootDir>/packages/starwhale-core/src/$1',
+        '^@starwhale/widgets/(.*)': '<rootDir>/packages/starwhale-widgets/src/$1',
         '\\.(css|less|scss|sss|styl)$': '<rootDir>/node_modules/jest-css-modules',
         // '.+\\.(svg|css|styl|less|sass|scss|png|jpg|ttf|woff|woff2)$': 'jest-transform-stub',
     },
@@ -111,7 +114,7 @@ export default {
     // notifyMode: "failure-change",
 
     // A preset that is used as a base for Jest's configuration
-    // preset: undefined,
+    preset: 'ts-jest',
 
     // Run tests from one or more projects
     // projects: undefined,
@@ -167,7 +170,7 @@ export default {
     testMatch: ['**/__tests__/**/*.[jt]s?(x)', '**/?(*.)+(spec|test).[tj]s?(x)'],
 
     // An array of regexp pattern strings that are matched against all test paths, matched tests are skipped
-    testPathIgnorePatterns: ['/node_modules/', '/stories/', '/playwright/'],
+    testPathIgnorePatterns: ['/node_modules/', '/stories/', '/playwright/', '/gradio/'],
 
     // The regexp pattern or array of patterns that Jest uses to detect test files
     // testRegex: '^.+\\.test\\.(ts|tsx)$',
@@ -189,7 +192,7 @@ export default {
     },
 
     // An array of regexp pattern strings that are matched against all source file paths, matched files will skip transformation
-    transformIgnorePatterns: ['/node_modules/', '\\.pnp\\.[^\\/]+$', 'node_modules/react-dnd'],
+    transformIgnorePatterns: ['/node_modules/(?!(@rjsf|react-dnd)/)', '\\.pnp\\.[^\\/]+$'],
 
     // An array of regexp pattern strings that are matched against all modules before the module loader will automatically return a mock for them
     // unmockedModulePathPatterns: undefined,
