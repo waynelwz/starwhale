@@ -22,28 +22,55 @@ import useWebSocket from '@/hooks/useWebSocket'
 import SWSelect from '@starwhale/ui/Select'
 import './LogView.scss'
 import useTranslation from '@/hooks/useTranslation'
+import _ from 'lodash'
+import { useEventCallback } from '@starwhale/core'
 
 const empty: any[] = []
 
 function useSourceData({ ws = '', data }: { ws?: string; data?: string }) {
     const [content, setContent] = React.useState<any[]>([])
+    const ref = React.useRef<any[]>([])
+
+    React.useEffect(() => {
+        ref.current = []
+    }, [ws])
 
     React.useEffect(() => {
         if (data) {
+            ref.current = data.split('\n')
             setContent(data.split('\n'))
         }
     }, [data])
 
+    // @ts-ignore
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    const throttle = React.useCallback(
+        _.throttle(
+            (tmp: any) => {
+                setContent([...tmp])
+            },
+            500,
+            { leading: false }
+        ),
+        []
+    )
+
+    // useInterval(() => {
+    //     console.log('useInterval')
+    //     ref.current.push('test')
+    //     throttle(ref.current)
+    // }, 100)
+
     useWebSocket({
         wsUrl: ws,
-        onMessage: React.useCallback((d) => {
-            setContent((prev) => {
-                return [...prev, d]
-            })
-        }, []),
-        onClose: React.useCallback(() => {
+        onMessage: useEventCallback((d) => {
+            ref.current.push(d)
+            throttle(ref.current)
+        }),
+        onClose: useEventCallback(() => {
             setContent(empty)
-        }, []),
+            ref.current = empty
+        }),
     })
 
     return {
@@ -71,11 +98,11 @@ const ComplexToolbarLogViewer = ({
     const logViewerRef = React.useRef<any>()
     const [t] = useTranslation()
 
-    const selectedDataSourceObj = dataSources?.find((d) => d.id === selectedDataSource) || {}
+    const selectedDataSourceObj = React.useMemo(
+        () => dataSources?.find((d) => d.id === selectedDataSource) || {},
+        [dataSources, selectedDataSource]
+    )
     const { content: selectedData } = useSourceData(selectedDataSourceObj)
-
-    // console.log(dataSources)
-    // console.log(selectedData, selectedDataSourceObj)
 
     const reset = React.useCallback(() => {
         setLinesBehind(0)
@@ -93,14 +120,13 @@ const ComplexToolbarLogViewer = ({
     }, [dataSources])
 
     React.useEffect(() => {
-        if (currentItemCount !== selectedData.length) {
-            setCurrentItemCount(selectedData.length)
+        if (currentItemCount < selectedData.length) {
             setBuffer(selectedData as any)
-            setRenderData(selectedData.join('\n'))
         }
-    }, [selectedData, currentItemCount])
+    }, [currentItemCount, selectedData])
 
     React.useEffect(() => {
+        // console.log({ isPaused, currentItemCount, len: selectedData.length, buffer: buffer.length })
         if (!isPaused && buffer.length > 0) {
             setCurrentItemCount(buffer.length)
             setRenderData(buffer.join('\n'))
@@ -108,11 +134,11 @@ const ComplexToolbarLogViewer = ({
                 logViewerRef.current?.scrollToBottom()
             }
         } else if (buffer.length !== currentItemCount) {
-            setLinesBehind(buffer.length - currentItemCount)
+            setLinesBehind(Math.max(buffer.length - currentItemCount, 0))
         } else {
             setLinesBehind(0)
         }
-    }, [isPaused, buffer, currentItemCount])
+    }, [isPaused, buffer, currentItemCount, logViewerRef, selectedData.length])
 
     // @ts-ignore
     const onExpandClick = () => {
@@ -168,7 +194,7 @@ const ComplexToolbarLogViewer = ({
     // @ts-ignore
     const onScroll = ({ scrollOffsetToBottom, scrollUpdateWasRequested }) => {
         if (!scrollUpdateWasRequested) {
-            if (scrollOffsetToBottom > 0) {
+            if (scrollOffsetToBottom > 2) {
                 setIsPaused(true)
             } else {
                 setIsPaused(false)
@@ -176,20 +202,22 @@ const ComplexToolbarLogViewer = ({
         }
     }
 
-    const ControlButton = () => (
-        <Button
-            variant={isPaused ? 'plain' : 'link'}
-            onClick={() => {
-                setIsPaused(!isPaused)
-                if (!isPaused)
-                    if (logViewerRef && logViewerRef.current) {
-                        logViewerRef.current?.scrollToBottom()
-                    }
-            }}
-        >
-            {isPaused ? <PlayIcon /> : <PauseIcon />}
-            {isPaused ? t('log.resume') : t('log.pause')}
-        </Button>
+    const handleClick = useEventCallback(() => {
+        setIsPaused(!isPaused)
+        if (!isPaused)
+            if (logViewerRef && logViewerRef.current) {
+                logViewerRef.current?.scrollToBottom()
+            }
+    })
+
+    const ControlButton = React.useCallback(
+        () => (
+            <Button variant={isPaused ? 'plain' : 'link'} onClick={handleClick}>
+                {isPaused ? <PlayIcon /> : <PauseIcon />}
+                {isPaused ? t('log.resume') : t('log.pause')}
+            </Button>
+        ),
+        [handleClick, isPaused, t]
     )
 
     const leftAlignedToolbarGroup = (
@@ -257,13 +285,14 @@ const ComplexToolbarLogViewer = ({
         </>
     )
 
-    const FooterButton = () => {
-        const handleClick = () => {
-            setIsPaused(false)
-        }
+    const handleContinue = useEventCallback(() => {
+        setIsPaused(false)
+    })
+
+    const FooterButton = React.useCallback(() => {
         return (
             <Button
-                onClick={handleClick}
+                onClick={handleContinue}
                 isBlock
                 style={{
                     visibility: isPaused ? 'visible' : 'hidden',
@@ -273,7 +302,8 @@ const ComplexToolbarLogViewer = ({
                 {t('log.resume')} {linesBehind === 0 ? null : t('log.behind.lines', [linesBehind])}
             </Button>
         )
-    }
+    }, [handleContinue, isPaused, linesBehind, t])
+
     return (
         <LogViewer
             data={renderData}

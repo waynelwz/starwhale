@@ -160,14 +160,6 @@ export default function JobListCard() {
                                         </WithCurrentAuth>
                                     </>
                                 ),
-                                [JobStatusType.SUCCESS]: (
-                                    <Button
-                                        kind='tertiary'
-                                        onClick={() => history.push(`/projects/${projectId}/jobs/${job.id}/tasks`)}
-                                    >
-                                        {t('View Tasks')}
-                                    </Button>
-                                ),
                             }
 
                             const pinBtnStyle: ConfigurationOverride = {
@@ -231,6 +223,12 @@ export default function JobListCard() {
                                 job?.stopTime && job?.stopTime > 0 ? formatTimestampDateTime(job?.stopTime) : '-',
                                 <JobStatus key='jobStatus' status={job.jobStatus as any} />,
                                 <div key='action' style={{ display: 'flex', gap: '8px' }}>
+                                    <Button
+                                        kind='tertiary'
+                                        onClick={() => history.push(`/projects/${projectId}/jobs/${job.id}/tasks`)}
+                                    >
+                                        {t('View Tasks')}
+                                    </Button>
                                     {actions[job.jobStatus] ?? ''}
                                     {job.exposedLinks?.map((link) => {
                                         return (
