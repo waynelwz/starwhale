@@ -210,9 +210,7 @@ export default function JobForm({ job, onSubmit }: IJobFormProps) {
                     >
                         {t('Cancel')}
                     </Button>
-                    <Button isLoading={loading} disabled={!isModified(job, values)}>
-                        {t('submit')}
-                    </Button>
+                    <Button isLoading={loading}>{t('submit')}</Button>
                 </div>
             </FormItem>
         </Form>
