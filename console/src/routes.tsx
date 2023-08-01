@@ -55,6 +55,7 @@ import { getAuthedRoutes, getUnauthedRoutes } from './routesUtils'
 import EvaluationListResult from './pages/Evaluation/EvaluationListResult'
 import DatasetBuildListCard from './pages/Dataset/DatasetBuildListCard'
 import ModelReadmeOverview from './pages/Model/ModelReadmeOverview'
+import Report from './pages/Report'
 
 const useStyles = createUseStyles({
     root: ({ theme }: IThemedStyleProps) => ({
@@ -348,6 +349,7 @@ const Routes = () => {
                                     <Switch>
                                         <Route path='/projects' component={ProjectListCard} />
                                         <Route path='/panels' component={Panel} />
+                                        <Route path='/report' component={Report} />
                                         <Redirect path='/' to='/projects' />
                                     </Switch>
                                 </CenterLayout>
