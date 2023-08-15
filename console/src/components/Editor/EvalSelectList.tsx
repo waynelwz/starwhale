@@ -67,13 +67,16 @@ const RenderButton = ({ count, editing, toggle }) => {
 }
 
 function EvalSelectList({
+    editing,
     value,
+    onEditingChange,
     onSelectDataChange,
 }: {
+    editing?: boolean
+    onEditingChange?: (editing: boolean) => void
     value?: EvalSelectDataT
     onSelectDataChange?: (data: EvalSelectDataT) => void
 }) {
-    const [editing, setEditing] = React.useState(false)
     const [isAddOpen, setIsAddOpen] = React.useState(false)
     const [selectData, setSelectData] = React.useState<EvalSelectDataT>(value ?? {})
     const ref = React.useRef<{ getData: () => EvalSelectDataT }>()
@@ -138,7 +141,7 @@ function EvalSelectList({
                 count={count}
                 editing={editing}
                 toggle={() => {
-                    setEditing(!editing)
+                    onEditingChange(!editing)
                 }}
             />
 
