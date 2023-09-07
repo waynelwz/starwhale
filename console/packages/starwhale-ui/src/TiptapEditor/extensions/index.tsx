@@ -13,6 +13,7 @@ import { InputRule } from '@tiptap/core'
 import Focus from '@tiptap/extension-focus'
 import SlashCommand from './SlashCommand'
 import EvalSelectPanel from './EvalSelectPanelExtension'
+import FloatingMenu from '../extension-floating-menu'
 
 // import Document from '@tiptap/extension-document'
 // import UploadImagesPlugin from './plugins/upload-images'

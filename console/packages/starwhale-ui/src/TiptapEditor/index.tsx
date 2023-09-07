@@ -5,6 +5,7 @@ import { TiptapExtensions } from './extensions'
 import useLocalStorage from './hooks/use-local-storage'
 import DEFAULT_EDITOR_CONTENT from './default-content'
 import { EditorBubbleMenu } from './components'
+import { EditorHoverMenu } from './components'
 import { useDebounceFn } from 'ahooks'
 import './styles/globals.css'
 import './styles/prosemirror.css'
@@ -97,6 +98,7 @@ export default function TiptapEditor({ id = '', initialContent, editable, onSave
             // tabIndex={0}
             className='relative self-center min-h-[500px] w-full h-full bg-white sm:mb-[calc(10px)] sm:rounded-lg'
         >
+            {editor && <EditorHoverMenu editor={editor} />}
             {editor && <EditorBubbleMenu editor={editor} />}
             <EditorContent editor={editor} />
         </div>

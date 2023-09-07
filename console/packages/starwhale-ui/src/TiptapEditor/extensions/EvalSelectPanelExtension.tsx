@@ -11,6 +11,7 @@ import EvalSelectEditor from '@/components/Editor/EvalSelectEditor'
 import { useEventCallback } from '@starwhale/core'
 import React, { useEffect } from 'react'
 import { isString } from 'lodash'
+import { Plugin, PluginKey } from '@tiptap/pm/state'
 
 const Component = (props: NodeViewProps) => {
     const [, setEditing] = React.useState(true)
