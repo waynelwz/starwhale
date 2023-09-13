@@ -179,14 +179,27 @@ export const FloatingMenuPlugin = (options: FloatingMenuPluginProps) => {
             handleDOMEvents: {
                 mousemove(view, event) {
                     const viewportCoordinates = {
-                        left: event.pageX,
-                        top: event.pageY,
+                        left: event.clientX,
+                        top: event.clientY,
                     }
                     const viewportPos = view.posAtCoords(viewportCoordinates)
-                    console.log(view.domAtPos(viewportPos?.pos))
+                    const { pos, offset } = viewportPos || {}
+                    if (!pos) return
+                    const node = view.domAtPos(pos)
+                    const nodeDom = view.nodeDOM(pos)
+                    if (!nodeDom) return
+                    //margin
+
+                    // console.log(nodeDom)
+                    console.log({
+                        viewportCoordinates,
+                        nodeDom,
+                        nodeDomRect: nodeDom.getBoundingClientRect(),
+                        viewportPos,
+                    })
                     // console.log(view.nodeDOM(viewportPos?.pos))
                     // console.log(posAtCoords({ left: event.clientX, top: event.clientY }), { view, event })
-                    console.log(this)
+                    // console.log(this)
                 },
             },
         },
