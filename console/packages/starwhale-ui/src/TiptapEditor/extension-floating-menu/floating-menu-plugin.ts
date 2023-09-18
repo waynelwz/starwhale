@@ -1,7 +1,8 @@
+import { themedWithStyle } from '@starwhale/ui/theme/styletron'
 import { Editor, posToDOMRect } from '@tiptap/core'
 import { EditorState, Plugin, PluginKey } from '@tiptap/pm/state'
 import { EditorView } from '@tiptap/pm/view'
-import tippy, { Instance, Props } from 'tippy.js'
+import tippy, { Instance, Props, sticky } from 'tippy.js'
 
 export interface FloatingMenuPluginProps {
     pluginKey: PluginKey | string
@@ -88,6 +89,8 @@ export class FloatingMenuView {
             return
         }
 
+        console.log('blur')
+
         this.hide()
     }
 
@@ -109,13 +112,16 @@ export class FloatingMenuView {
             content: this.element,
             interactive: true,
             trigger: 'manual',
-            placement: 'right',
+            placement: 'left-start',
             hideOnClick: 'toggle',
             ...this.tippyOptions,
+            sticky: 'popper',
+            plugins: [sticky],
         })
 
         // maybe we have to hide tippy on its own blur event as well
         if (this.tippy.popper.firstChild) {
+            console.log('blur')
             ;(this.tippy.popper.firstChild as HTMLElement).addEventListener('blur', this.tippyBlurHandler)
         }
     }
@@ -141,12 +147,25 @@ export class FloatingMenuView {
 
         if (!shouldShow) {
             this.hide()
-
             return
         }
 
+        // this.tippy?.setProps({
+        //     getReferenceClientRect: this.tippyOptions?.getReferenceClientRect || (() => posToDOMRect(view, from, to)),
+        // })
+
+        // this.show()
+    }
+
+    updatePosition(view: EditorView, rect) {
+        const { state } = view
+
+        // console.log(rect)
+
+        this.createTooltip()
+
         this.tippy?.setProps({
-            getReferenceClientRect: this.tippyOptions?.getReferenceClientRect || (() => posToDOMRect(view, from, to)),
+            getReferenceClientRect: () => rect,
         })
 
         this.show()
@@ -171,32 +190,71 @@ export class FloatingMenuView {
     }
 }
 
+const getBoundingClientRect = (element) => {
+    const { top, right, bottom, left, width, height, x, y } = element.getBoundingClientRect()
+    return { top, right, bottom, left, width, height, x, y }
+}
+
 export const FloatingMenuPlugin = (options: FloatingMenuPluginProps) => {
+    let domView = null
     return new Plugin({
         key: typeof options.pluginKey === 'string' ? new PluginKey(options.pluginKey) : options.pluginKey,
-        view: (view) => new FloatingMenuView({ view, ...options }),
+        view: (view) => {
+            domView = new FloatingMenuView({ view, ...options })
+            return domView
+        },
         props: {
             handleDOMEvents: {
                 mousemove(view, event) {
                     const viewportCoordinates = {
                         left: event.clientX,
-                        top: event.clientY,
+                        top: event.clientY - 24,
                     }
                     const viewportPos = view.posAtCoords(viewportCoordinates)
-                    const { pos, offset } = viewportPos || {}
-                    if (!pos) return
-                    const node = view.domAtPos(pos)
-                    const nodeDom = view.nodeDOM(pos)
-                    if (!nodeDom) return
-                    //margin
+                    const { pos, inside } = viewportPos || {}
 
+                    console.log(pos, inside, viewportCoordinates, view.dom.getBoundingClientRect())
+
+                    if (!pos) return
+                    const node = view.domAtPos(pos, inside)
+                    const nodeDom = view.nodeDOM(pos)
+
+                    if (!domView) return
+                    if (!nodeDom) {
+                        // console.log(nodeDom, event.target)
+                        // domView.hide()
+                        return
+                    }
+
+                    // view.state.doc.descendants((node, pos) => {
+                    //     if (node.contains(event.target)) {
+                    //         console.log(node)
+                    //     }
+                    // })
+
+                    const rect = getBoundingClientRect(nodeDom)
+
+                    domView.updatePosition(view, {
+                        ...rect,
+                        x: 0,
+                        left: 0,
+                    })
+
+                    // console.log(pos, node, nodeDom)
                     // console.log(nodeDom)
-                    console.log({
+                    console.log(nodeDom, {
+                        domView,
+                        pos,
+                        inside,
+                        view,
                         viewportCoordinates,
+                        node,
                         nodeDom,
                         nodeDomRect: nodeDom.getBoundingClientRect(),
                         viewportPos,
+                        docRect: node.node.getBoundingClientRect(),
                     })
+
                     // console.log(view.nodeDOM(viewportPos?.pos))
                     // console.log(posAtCoords({ left: event.clientX, top: event.clientY }), { view, event })
                     // console.log(this)

@@ -56,7 +56,9 @@ export const EditorHoverMenu = (props: FloatingMenuProps) => {
         shouldShow: ({ editor }) => {
             console.log(editor.view.state.selection)
 
-            return editor.view.state.selection.content().size === 0
+            // return editor.view.state.selection.content().size === 0
+
+            return true
         },
         tippyOptions: {
             moveTransition: 'transform 0.15s ease-out',
