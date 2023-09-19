@@ -1,8 +1,8 @@
-import { themedWithStyle } from '@starwhale/ui/theme/styletron'
 import { Editor, posToDOMRect } from '@tiptap/core'
 import { EditorState, Plugin, PluginKey } from '@tiptap/pm/state'
 import { EditorView } from '@tiptap/pm/view'
 import tippy, { Instance, Props, sticky } from 'tippy.js'
+import _ from 'lodash'
 
 export interface FloatingMenuPluginProps {
     pluginKey: PluginKey | string
@@ -27,9 +27,7 @@ export class FloatingMenuView {
 
     public preventHide = false
 
-    public tippy: Instance | undefined
-
-    public tippyOptions?: Partial<Props>
+    public preventShow = false
 
     public shouldShow: Exclude<FloatingMenuPluginProps['shouldShow'], null> = ({ view, state }) => {
         const { selection } = state
@@ -45,12 +43,10 @@ export class FloatingMenuView {
         return true
     }
 
-    constructor({ editor, element, view, tippyOptions = {}, shouldShow }: FloatingMenuViewProps) {
+    constructor({ editor, element, view, shouldShow }: FloatingMenuViewProps) {
         this.editor = editor
         this.element = element
         this.view = view
-
-        console.log(editor, element, view)
 
         if (shouldShow) {
             this.shouldShow = shouldShow
@@ -59,10 +55,16 @@ export class FloatingMenuView {
         this.element.addEventListener('mousedown', this.mousedownHandler, { capture: true })
         this.editor.on('focus', this.focusHandler)
         this.editor.on('blur', this.blurHandler)
-        this.tippyOptions = tippyOptions
         // Detaches menu content from its current parent
         this.element.remove()
-        this.element.style.visibility = 'visible'
+        // Attaches menu content to high level parent
+        document.body.appendChild(this.element)
+        Object.assign(this.element.style, {
+            'position': 'absolute',
+            'z-index': 9999,
+            'visibility': 'visible',
+            'transition': 'all 0.15s ease-out',
+        })
     }
 
     mousedownHandler = () => {
@@ -102,28 +104,17 @@ export class FloatingMenuView {
         const { element: editorElement } = this.editor.options
         const editorIsAttached = !!editorElement.parentElement
 
-        if (this.tippy || !editorIsAttached) {
+        if (!editorIsAttached) {
             return
         }
 
-        this.tippy = tippy(editorElement, {
-            duration: 0,
-            getReferenceClientRect: null,
-            content: this.element,
-            interactive: true,
-            trigger: 'manual',
-            placement: 'left-start',
-            hideOnClick: 'toggle',
-            ...this.tippyOptions,
-            sticky: 'popper',
-            plugins: [sticky],
-        })
+        // editorElement.appendChild(this.element)
 
         // maybe we have to hide tippy on its own blur event as well
-        if (this.tippy.popper.firstChild) {
-            console.log('blur')
-            ;(this.tippy.popper.firstChild as HTMLElement).addEventListener('blur', this.tippyBlurHandler)
-        }
+        // if (this.tippy.popper.firstChild) {
+        //     console.log('blur')
+        //     ;(this.tippy.popper.firstChild as HTMLElement).addEventListener('blur', this.tippyBlurHandler)
+        // }
     }
 
     update(view: EditorView, oldState?: EditorState) {
@@ -136,6 +127,8 @@ export class FloatingMenuView {
             return
         }
 
+        console.log('update')
+
         this.createTooltip()
 
         const shouldShow = this.shouldShow?.({
@@ -144,6 +137,8 @@ export class FloatingMenuView {
             state,
             oldState,
         })
+
+        this.preventShow = !shouldShow
 
         if (!shouldShow) {
             this.hide()
@@ -157,33 +152,40 @@ export class FloatingMenuView {
         // this.show()
     }
 
-    updatePosition(view: EditorView, rect) {
-        const { state } = view
+    updatePosition(view: EditorView, rect, dom) {
+        if (this.preventShow) return
 
-        // console.log(rect)
+        const { element: editorElement } = this.editor.options
+        if (dom.classList.contains('tiptap')) {
+            return
+        }
 
-        this.createTooltip()
+        const editorRect = editorElement.getBoundingClientRect()
 
-        this.tippy?.setProps({
-            getReferenceClientRect: () => rect,
+        // console.log(this.element, rect, this.element.getBoundingClientRect())
+
+        Object.assign(this.element.style, {
+            'top': `${rect.y}px`,
+            'left': `${rect.x - 50}px`,
+            'position': 'absolute',
+            'z-index': 9999,
+            'visibility': 'visible',
         })
-
-        this.show()
     }
 
     show() {
-        this.tippy?.show()
+        this.element.style.visibility = 'visible'
     }
 
     hide() {
-        this.tippy?.hide()
+        this.element.style.visibility = 'hidden'
     }
 
     destroy() {
-        if (this.tippy?.popper.firstChild) {
-            ;(this.tippy.popper.firstChild as HTMLElement).removeEventListener('blur', this.tippyBlurHandler)
-        }
-        this.tippy?.destroy()
+        // if (this.tippy?.popper.firstChild) {
+        //     ;(this.tippy.popper.firstChild as HTMLElement).removeEventListener('blur', this.tippyBlurHandler)
+        // }
+        // this.tippy?.destroy()
         this.element.removeEventListener('mousedown', this.mousedownHandler, { capture: true })
         this.editor.off('focus', this.focusHandler)
         this.editor.off('blur', this.blurHandler)
@@ -192,72 +194,56 @@ export class FloatingMenuView {
 
 const getBoundingClientRect = (element) => {
     const { top, right, bottom, left, width, height, x, y } = element.getBoundingClientRect()
-    return { top, right, bottom, left, width, height, x, y }
+    return { top, right, bottom, left, width, height, x, y } as DOMRect
+}
+
+function isBlockNode(dom: Node) {
+    if (!dom) return false
+    const desc = dom.pmViewDesc
+    if (!desc) return false
+    return desc && desc.node && desc.node.isBlock
 }
 
 export const FloatingMenuPlugin = (options: FloatingMenuPluginProps) => {
-    let domView = null
+    let domView: FloatingMenuView | null = null
+    let debouceUpdate: ((view: EditorView, rect: DOMRect, finale: Node) => void) | null = null
     return new Plugin({
         key: typeof options.pluginKey === 'string' ? new PluginKey(options.pluginKey) : options.pluginKey,
         view: (view) => {
-            domView = new FloatingMenuView({ view, ...options })
+            domView = new FloatingMenuView({ view, ...options }) as FloatingMenuView
+            debouceUpdate = _.debounce((v, rect, finale) => {
+                console.log(finale.pmViewDesc)
+                domView?.updatePosition(v, rect, finale)
+            }, 10)
             return domView
         },
         props: {
             handleDOMEvents: {
                 mousemove(view, event) {
-                    const viewportCoordinates = {
-                        left: event.clientX,
-                        top: event.clientY - 24,
-                    }
-                    const viewportPos = view.posAtCoords(viewportCoordinates)
-                    const { pos, inside } = viewportPos || {}
-
-                    console.log(pos, inside, viewportCoordinates, view.dom.getBoundingClientRect())
-
-                    if (!pos) return
-                    const node = view.domAtPos(pos, inside)
-                    const nodeDom = view.nodeDOM(pos)
-
                     if (!domView) return
-                    if (!nodeDom) {
-                        // console.log(nodeDom, event.target)
-                        // domView.hide()
-                        return
+                    if (!event.target) return
+                    const pos = view.posAtDOM(event.target as Node, 0, 1)
+                    const { node, offset } = view.domAtPos(pos)
+                    let final: Node
+                    if (isBlockNode(node) && !offset) {
+                        final = node
+                    } else {
+                        final = node.childNodes[offset]
                     }
+                    // console.log(final.pmViewDesc)
+                    // FIXME code/
+                    if (!isBlockNode(final)) return
 
-                    // view.state.doc.descendants((node, pos) => {
-                    //     if (node.contains(event.target)) {
-                    //         console.log(node)
-                    //     }
-                    // })
-
-                    const rect = getBoundingClientRect(nodeDom)
-
-                    domView.updatePosition(view, {
-                        ...rect,
-                        x: 0,
-                        left: 0,
-                    })
-
-                    // console.log(pos, node, nodeDom)
-                    // console.log(nodeDom)
-                    console.log(nodeDom, {
-                        domView,
-                        pos,
-                        inside,
-                        view,
-                        viewportCoordinates,
-                        node,
-                        nodeDom,
-                        nodeDomRect: nodeDom.getBoundingClientRect(),
-                        viewportPos,
-                        docRect: node.node.getBoundingClientRect(),
-                    })
-
-                    // console.log(view.nodeDOM(viewportPos?.pos))
-                    // console.log(posAtCoords({ left: event.clientX, top: event.clientY }), { view, event })
-                    // console.log(this)
+                    // console.log(
+                    //     pos,
+                    //     nodeDom,
+                    //     node,
+                    //     node.pmViewDesc?.children[node.offset],
+                    //     // hasBlockDesc(node.node),
+                    //     final
+                    // )
+                    const rect = getBoundingClientRect(final)
+                    debouceUpdate?.(view, rect, final)
                 },
             },
         },

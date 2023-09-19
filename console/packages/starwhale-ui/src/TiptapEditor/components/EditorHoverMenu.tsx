@@ -1,4 +1,5 @@
-import { FloatingMenuPlugin, FloatingMenuPluginProps } from '../extension-floating-menu'
+import IconFont from '@starwhale/ui/IconFont'
+import { FloatingMenuPlugin, FloatingMenuPluginProps } from '../extensions/FloatingMenu'
 import React, { useEffect, useState } from 'react'
 
 type Optional<T, K extends keyof T> = Pick<Partial<T>, K> & Omit<T, K>
@@ -54,11 +55,7 @@ export const EditorHoverMenu = (props: FloatingMenuProps) => {
     const menuProps: FloatingMenuProps = {
         ...props,
         shouldShow: ({ editor }) => {
-            console.log(editor.view.state.selection)
-
-            // return editor.view.state.selection.content().size === 0
-
-            return true
+            return editor.view.state.selection.content().size === 0
         },
         tippyOptions: {
             moveTransition: 'transform 0.15s ease-out',
@@ -66,5 +63,31 @@ export const EditorHoverMenu = (props: FloatingMenuProps) => {
         },
     }
 
-    return <HoverMenu {...menuProps}>123</HoverMenu>
+    return (
+        <HoverMenu {...menuProps}>
+            <div className='hover-menu h-28 relative mx-auto w-full max-w-4xl ml-10px'>
+                {/* Container for buttons that appear on hover */}
+                <div
+                    className='absolute left-0 top-0 flex w-12 gap-1 opacity-100 transition-opacity duration-300 ease-in-out group-hover:opacity-100'
+                    aria-label='left-menu'
+                >
+                    {/* Button to add a new node after the current node */}
+                    <button type='button' className=''>
+                        <IconFont type='add' />
+                    </button>
+                    {/* Draggable handle button to allow rearranging nodes: contentEditable = false !!! */}
+                    {/* <button
+                        draggable
+                        data-drag-handle
+                        className='cursor-grab'
+                        type='button'
+                        contentEditable='false'
+                        suppressContentEditableWarning
+                    >
+                        <IconFont type='drag' />
+                    </button> */}
+                </div>
+            </div>
+        </HoverMenu>
+    )
 }
