@@ -30,6 +30,8 @@ const ThemeDecorator = (storyFn) => {
     const [, theme] = themedUseStyletron()
     const styles = useStyles({ theme })
 
+    console.log(DeepTheme)
+
     return (
         <React.StrictMode>
             <QueryClientProvider client={queryClient}>

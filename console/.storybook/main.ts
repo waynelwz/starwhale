@@ -37,6 +37,9 @@ const config: StorybookConfig = {
         autodocs: true,
     },
     staticDirs: ['../src/assets', '../public'],
+    typescript: {
+        reactDocgen: 'react-docgen',
+    },
     // async viteFinal(config, { configType }) {
     //     const { config: userConfig } = await loadConfigFromFile(resolve(__dirname, '../vite.config.ts') as any)
     //     userConfig.resolve.dedupe = ['@storybook/client-api']

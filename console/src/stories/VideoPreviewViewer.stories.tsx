@@ -1,7 +1,7 @@
 import React from 'react'
 import { ComponentStory, ComponentMeta, Story } from '@storybook/react'
 
-import VideoPreviewViewer from '../components/Viewer/VideoPreviewViewer'
+import VideoPreviewViewer from '@starwhale/ui/Viewer/VideoPreviewViewer.demo'
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {

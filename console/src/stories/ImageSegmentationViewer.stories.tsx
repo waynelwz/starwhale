@@ -1,7 +1,7 @@
 import React from 'react'
 import { ComponentStory, ComponentMeta, Story } from '@storybook/react'
 
-import ImageSegmentationViewer from '../components/Viewer/ImageSegmentationViewer'
+import ImageSegmentationViewer from '@starwhale/ui/Viewer/ImageSegmentationViewer.demo'
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {

@@ -1,16 +1,15 @@
 import React from 'react'
-import { ComponentStory, ComponentMeta } from '@storybook/react'
-import Input from '@starwhale/ui/Input'
+import { Input } from '@starwhale/ui'
 
 export default {
-    title: 'Components/Input',
+    title: 'Component/Input',
     component: Input,
     argTypes: {},
-} as ComponentMeta<typeof Input>
+}
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
 /* eslint-disable react/jsx-props-no-spreading */
-const Template: ComponentStory<typeof Input> = (args) => <Input {...args} clearable />
+const Template = (args) => <Input {...args} clearable />
 
 export const Primary = Template.bind({})
 Primary.args = {
