@@ -1,10 +1,6 @@
 import type { StorybookConfig } from '@storybook/react-vite'
 
-import { join, dirname, resolve } from 'path'
-
-import { loadConfigFromFile, mergeConfig } from 'vite'
-import tsconfigPaths from 'vite-tsconfig-paths'
-import { alias } from '../vite.config'
+import { join, dirname } from 'path'
 
 /**
  * This function is used to resolve the absolute path of a package.
