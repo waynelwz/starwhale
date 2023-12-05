@@ -1,0 +1,2288 @@
+{
+    "code": "success",
+    "message": "Success",
+    "data": {
+        "columnHints": {
+            "sys/resource_pool": {
+                "typeHints": [
+                    "STRING"
+                ],
+                "columnValueHints": [
+                    "default"
+                ]
+            },
+            "bbox/average_recall_max1": {
+                "typeHints": [
+                    "FLOAT64"
+                ],
+                "columnValueHints": [
+                    "0.374468085106383"
+                ]
+            },
+            "cohen_kappa_score": {
+                "typeHints": [
+                    "FLOAT64"
+                ],
+                "columnValueHints": [
+                    "0.7545818949882326",
+                    "0.9257173374763314"
+                ]
+            },
+            "bbox/average_precision_iou75": {
+                "typeHints": [
+                    "FLOAT64"
+                ],
+                "columnValueHints": [
+                    "0.980936534659577"
+                ]
+            },
+            "sys/id": {
+                "typeHints": [
+                    "INT64"
+                ],
+                "columnValueHints": [
+                    "4",
+                    "5",
+                    "6",
+                    "7",
+                    "47",
+                    "48",
+                    "50",
+                    "53",
+                    "54",
+                    "56"
+                ]
+            },
+            "sys/dev_mode": {
+                "typeHints": [
+                    "INT32"
+                ],
+                "columnValueHints": [
+                    "0"
+                ]
+            },
+            "accuracy": {
+                "typeHints": [
+                    "FLOAT64"
+                ],
+                "columnValueHints": [
+                    "0.7624486524396353",
+                    "0.9264705882352942"
+                ]
+            },
+            "sys/model_version": {
+                "typeHints": [
+                    "STRING"
+                ],
+                "columnValueHints": [
+                    "ggwhw7g64rlzxnubkbmewexvnb4lqvebhtqgyeh4",
+                    "irhfphltgfugzs35tnaiydsuqfv26h6euic2g67e",
+                    "qf54dfmabju5we2zfu3zx2b2wyorho7ohlxwznd4",
+                    "sjfiszw2krewz5x4ppnsp7vqklgidkjotm36yuap",
+                    "vr6idg2nb23ycktmhdijjnbjrmvpj7ynli4oa5z7",
+                    "yzzhqj4rccnxhmg23oa723hlp5rqt4t2lqym64al"
+                ]
+            },
+            "sys/_dataset_id_version_map": {
+                "typeHints": [
+                    "MAP"
+                ],
+                "columnValueHints": [],
+                "keyHints": {
+                    "typeHints": [
+                        "INT64"
+                    ],
+                    "columnValueHints": [
+                        "3",
+                        "5",
+                        "6",
+                        "7",
+                        "8",
+                        "9"
+                    ]
+                },
+                "valueHints": {
+                    "typeHints": [
+                        "STRING"
+                    ],
+                    "columnValueHints": [
+                        "hquydtisnq5wgih4jcdrexw3psn5gujlib466cea",
+                        "lg7jhusv42fwaotmymhxtgnkpqojxdpuyajaew4b",
+                        "mdkirpcr2tvydiq3pnjkc3bgwkc3e7v2fd4y3743",
+                        "n2uqkchatonteurw7arkk63sjapmh6pjcxugyy4b",
+                        "nsaxzaoxy4ddgqhydsyk64ksbgwjwzqsfirdaiwv",
+                        "x46ngr4tzxsxotgmluqfnapsyu6aciolacnre3d2"
+                    ]
+                }
+            },
+            "sys/name": {
+                "typeHints": [
+                    "STRING"
+                ],
+                "columnValueHints": [
+                    "evaluation:evaluation_results",
+                    "nmt.evaluator:NMTPipeline.cmp",
+                    "pfp.evaluator:cmp",
+                    "sc.evaluator:evaluate_speech",
+                    "serving",
+                    "ucf101.evaluator:UCF101PipelineHandler.cmp"
+                ]
+            },
+            "hamming_loss": {
+                "typeHints": [
+                    "FLOAT64"
+                ],
+                "columnValueHints": [
+                    "0.07352941176470588",
+                    "0.2375513475603647"
+                ]
+            },
+            "weighted avg/support": {
+                "typeHints": [
+                    "INT64"
+                ],
+                "columnValueHints": [
+                    "204",
+                    "19962"
+                ]
+            },
+            "segm/ap_across_scales_small": {
+                "typeHints": [
+                    "FLOAT64"
+                ],
+                "columnValueHints": [
+                    "0.6456207159177456"
+                ]
+            },
+            "bbox/average_recall_max100": {
+                "typeHints": [
+                    "FLOAT64"
+                ],
+                "columnValueHints": [
+                    "0.9111111111111111"
+                ]
+            },
+            "weighted avg/precision": {
+                "typeHints": [
+                    "FLOAT64"
+                ],
+                "columnValueHints": [
+                    "0.8010113393265583",
+                    "0.9323529411764705"
+                ]
+            },
+            "sys/_runtime_uri": {
+                "typeHints": [
+                    "STRING"
+                ],
+                "columnValueHints": [
+                    "project/1/runtime/1/version/1",
+                    "project/1/runtime/3/version/3",
+                    "project/1/runtime/5/version/5",
+                    "project/1/runtime/6/version/7",
+                    "project/1/runtime/6/version/8"
+                ]
+            },
+            "sys/owner_name": {
+                "typeHints": [
+                    "STRING"
+                ],
+                "columnValueHints": [
+                    "starwhale"
+                ]
+            },
+            "sys/created_time": {
+                "typeHints": [
+                    "INT64"
+                ],
+                "columnValueHints": [
+                    "1699808463886",
+                    "1699808464015",
+                    "1699808464927",
+                    "1699808465094",
+                    "1700556544285",
+                    "1700559376326",
+                    "1700706461597",
+                    "1700724287955",
+                    "1700724634770",
+                    "1700792597587"
+                ]
+            },
+            "sys/modified_time": {
+                "typeHints": [
+                    "INT64"
+                ],
+                "columnValueHints": [
+                    "1699809710634",
+                    "1699809829285",
+                    "1699810060877",
+                    "1699810663097",
+                    "1700556979160",
+                    "1700559376326",
+                    "1700559376556",
+                    "1700559376670",
+                    "1700559817610",
+                    "1700559817613",
+                    "1700706461597",
+                    "1700706461627",
+                    "1700706461742",
+                    "1700706965119",
+                    "1700706965223",
+                    "1700706965225",
+                    "1700724287955",
+                    "1700724288007",
+                    "1700724288130",
+                    "1700724397848",
+                    "1700724398300",
+                    "1700724398303",
+                    "1700724634770",
+                    "1700724634781",
+                    "1700724634813",
+                    "1700724641859",
+                    "1700724641922",
+                    "1700724641923",
+                    "1700792597587",
+                    "1700792597598",
+                    "1700792597646",
+                    "1700794095859",
+                    "1700794095926"
+                ]
+            },
+            "sys/finished_time": {
+                "typeHints": [
+                    "INT64"
+                ],
+                "columnValueHints": [
+                    "1699809710632",
+                    "1699809829283",
+                    "1699810060876",
+                    "1699810663096",
+                    "1700556979160",
+                    "1700559817611",
+                    "1700706965224",
+                    "1700724398301",
+                    "1700724641922",
+                    "1700794095926"
+                ]
+            },
+            "segm/average_precision": {
+                "typeHints": [
+                    "FLOAT64"
+                ],
+                "columnValueHints": [
+                    "0.8117134385920949"
+                ]
+            },
+            "id": {
+                "typeHints": [
+                    "STRING"
+                ],
+                "columnValueHints": [
+                    "15af2ce6adac4a3dba53758cd29dfe13",
+                    "2730d853a5104f66b3336c4e76905415",
+                    "3f164968a5ac4d29a88804c2f77c2244",
+                    "712bef3672a2488eae6ccab7580320ee",
+                    "77c3d6610fe9427187f8741d49cfc4b4",
+                    "7f0234359c214ccebdd180ce88ffb746",
+                    "88b120a8615141acb99dd9e9d49ca4c3",
+                    "976ce35ab5754a438b6cfbc8f8703132",
+                    "b1234fa607c84e18afe7239c8e82aad2",
+                    "d97139ee28b94cfda2065e89facfa969"
+                ]
+            },
+            "segm/ar_across_scales_large": {
+                "typeHints": [
+                    "FLOAT64"
+                ],
+                "columnValueHints": [
+                    "0.8434108527131782"
+                ]
+            },
+            "sys/_model_uri": {
+                "typeHints": [
+                    "STRING"
+                ],
+                "columnValueHints": [
+                    "project/1/model/2/version/2",
+                    "project/1/model/3/version/3",
+                    "project/1/model/4/version/4",
+                    "project/1/model/5/version/5",
+                    "project/1/model/6/version/6",
+                    "project/1/model/7/version/7"
+                ]
+            },
+            "segm/ar_across_scales_small": {
+                "typeHints": [
+                    "FLOAT64"
+                ],
+                "columnValueHints": [
+                    "0.6799999999999999"
+                ]
+            },
+            "bbox/ar_across_scales_medium": {
+                "typeHints": [
+                    "FLOAT64"
+                ],
+                "columnValueHints": [
+                    "0.867741935483871"
+                ]
+            },
+            "sys/runtime_uri": {
+                "typeHints": [
+                    "STRING"
+                ],
+                "columnValueHints": [
+                    "project/starwhale/runtime/huge-tasks/version/t4pidh63k6nvogtmyky5puqxtjbysulu354rqwhj",
+                    "project/starwhale/runtime/pytorch37/version/j244zctfpiy67g7ipbhwzqex63h33wlvxoa24vem",
+                    "project/starwhale/runtime/pytorch39/version/ejwe5npweoa3uookb6rmeke3kfbzepbgpga6ng36",
+                    "project/starwhale/runtime/starwhale-built-in/version/ejwe5npweoa3uookb6rmeke3kfbzepbgpga6ng36",
+                    "project/starwhale/runtime/starwhale-built-in/version/uii4jxq7o6q4sdblwwn4ryiznswpy6ebdduozc6d"
+                ]
+            },
+            "bleu_score": {
+                "typeHints": [
+                    "FLOAT64"
+                ],
+                "columnValueHints": [
+                    "0.026211570883894097"
+                ]
+            },
+            "sys/runtime_version": {
+                "typeHints": [
+                    "STRING"
+                ],
+                "columnValueHints": [
+                    "ejwe5npweoa3uookb6rmeke3kfbzepbgpga6ng36",
+                    "j244zctfpiy67g7ipbhwzqex63h33wlvxoa24vem",
+                    "t4pidh63k6nvogtmyky5puqxtjbysulu354rqwhj",
+                    "uii4jxq7o6q4sdblwwn4ryiznswpy6ebdduozc6d"
+                ]
+            },
+            "kind": {
+                "typeHints": [
+                    "STRING"
+                ],
+                "columnValueHints": [
+                    "coco_object_detection",
+                    "multi_classification"
+                ]
+            },
+            "bbox/ap_across_scales_small": {
+                "typeHints": [
+                    "FLOAT64"
+                ],
+                "columnValueHints": [
+                    "0.7613861386138614"
+                ]
+            },
+            "segm/average_precision_iou75": {
+                "typeHints": [
+                    "FLOAT64"
+                ],
+                "columnValueHints": [
+                    "0.9866913250937421"
+                ]
+            },
+            "sys/model_uri": {
+                "typeHints": [
+                    "STRING"
+                ],
+                "columnValueHints": [
+                    "project/starwhale/model/ag_news/version/irhfphltgfugzs35tnaiydsuqfv26h6euic2g67e",
+                    "project/starwhale/model/huge-tasks/version/ggwhw7g64rlzxnubkbmewexvnb4lqvebhtqgyeh4",
+                    "project/starwhale/model/nmt/version/yzzhqj4rccnxhmg23oa723hlp5rqt4t2lqym64al",
+                    "project/starwhale/model/pfp/version/qf54dfmabju5we2zfu3zx2b2wyorho7ohlxwznd4",
+                    "project/starwhale/model/speech_command/version/vr6idg2nb23ycktmhdijjnbjrmvpj7ynli4oa5z7",
+                    "project/starwhale/model/ucf101/version/sjfiszw2krewz5x4ppnsp7vqklgidkjotm36yuap"
+                ]
+            },
+            "sys/model_name": {
+                "typeHints": [
+                    "STRING"
+                ],
+                "columnValueHints": [
+                    "ag_news",
+                    "huge-tasks",
+                    "nmt",
+                    "pfp",
+                    "speech_command",
+                    "ucf101"
+                ]
+            },
+            "sys/duration_ms": {
+                "typeHints": [
+                    "INT64"
+                ],
+                "columnValueHints": [
+                    "7922",
+                    "111301",
+                    "435160",
+                    "441611",
+                    "504224",
+                    "1246632",
+                    "1366283",
+                    "1498926",
+                    "1596876",
+                    "2198096"
+                ]
+            },
+            "macro avg/support": {
+                "typeHints": [
+                    "INT64"
+                ],
+                "columnValueHints": [
+                    "204",
+                    "19962"
+                ]
+            },
+            "segm/average_recall_max10": {
+                "typeHints": [
+                    "FLOAT64"
+                ],
+                "columnValueHints": [
+                    "0.8366430260047283"
+                ]
+            },
+            "sys/step_spec": {
+                "typeHints": [
+                    "STRING"
+                ],
+                "columnValueHints": [
+                    "---\n- name: \"evaluation:predict_text\"\n  concurrency: 1\n  replicas: 100\n  needs: []\n  resources:\n  - type: \"memory\"\n    request: 102400.0\n    limit: 1.048576E9\n  - type: \"cpu\"\n    request: 0.1\n    limit: 1.0\n  expose: 0\n  job_name: \"evaluation:evaluation_results\"\n  show_name: \"predict\"\n  require_dataset: true\n  ext_cmd_args: \"\"\n  parameters_sig: []\n- name: \"evaluation:evaluation_results\"\n  concurrency: 1\n  replicas: 1\n  needs:\n  - \"evaluation:predict_text\"\n  resources: []\n  expose: 0\n  job_name: \"evaluation:evaluation_results\"\n  show_name: \"evaluate\"\n  require_dataset: false\n  ext_cmd_args: \"\"\n  parameters_sig: []\n",
+                    "---\n- name: \"nmt.evaluator:NMTPipeline.ppl\"\n  concurrency: 1\n  replicas: 1\n  needs: []\n  resources: []\n  env:\n  - name: \"SW_EVALUATION_SUMMARY_TABLE\"\n    value: \"ftspace/1/eval/summary\"\n  expose: 0\n  job_name: \"nmt.evaluator:NMTPipeline.cmp\"\n  show_name: \"predict\"\n  require_dataset: true\n  ext_cmd_args: \"\"\n  parameters_sig: []\n- name: \"nmt.evaluator:NMTPipeline.cmp\"\n  concurrency: 1\n  replicas: 1\n  needs:\n  - \"nmt.evaluator:NMTPipeline.ppl\"\n  resources: []\n  env:\n  - name: \"SW_EVALUATION_SUMMARY_TABLE\"\n    value: \"ftspace/1/eval/summary\"\n  expose: 0\n  job_name: \"nmt.evaluator:NMTPipeline.cmp\"\n  show_name: \"evaluate\"\n  require_dataset: false\n  ext_cmd_args: \"\"\n  parameters_sig: []\n",
+                    "---\n- name: \"nmt.evaluator:NMTPipeline.ppl\"\n  concurrency: 1\n  replicas: 1\n  needs: []\n  resources: []\n  env:\n  - name: \"SW_EVALUATION_SUMMARY_TABLE\"\n    value: \"ftspace/2/eval/summary\"\n  expose: 0\n  job_name: \"nmt.evaluator:NMTPipeline.cmp\"\n  show_name: \"predict\"\n  require_dataset: true\n  ext_cmd_args: \"\"\n  parameters_sig: []\n- name: \"nmt.evaluator:NMTPipeline.cmp\"\n  concurrency: 1\n  replicas: 1\n  needs:\n  - \"nmt.evaluator:NMTPipeline.ppl\"\n  resources: []\n  env:\n  - name: \"SW_EVALUATION_SUMMARY_TABLE\"\n    value: \"ftspace/2/eval/summary\"\n  expose: 0\n  job_name: \"nmt.evaluator:NMTPipeline.cmp\"\n  show_name: \"evaluate\"\n  require_dataset: false\n  ext_cmd_args: \"\"\n  parameters_sig: []\n",
+                    "---\n- name: \"pfp.evaluator:predict_mask_rcnn\"\n  concurrency: 1\n  replicas: 2\n  needs: []\n  resources:\n  - type: \"nvidia.com/gpu\"\n    request: 1.0\n    limit: 1.0\n  expose: 0\n  job_name: \"pfp.evaluator:cmp\"\n  show_name: \"predict\"\n  require_dataset: true\n  ext_cmd_args: \"\"\n  parameters_sig: []\n- name: \"pfp.evaluator:cmp\"\n  concurrency: 1\n  replicas: 1\n  needs:\n  - \"pfp.evaluator:predict_mask_rcnn\"\n  resources: []\n  expose: 0\n  job_name: \"pfp.evaluator:cmp\"\n  show_name: \"evaluate\"\n  require_dataset: false\n  ext_cmd_args: \"\"\n  parameters_sig: []\n",
+                    "---\n- name: \"sc.evaluator:predict_speech\"\n  concurrency: 1\n  replicas: 2\n  needs: []\n  resources:\n  - type: \"nvidia.com/gpu\"\n    request: 1.0\n    limit: 1.0\n  expose: 0\n  job_name: \"sc.evaluator:evaluate_speech\"\n  show_name: \"predict\"\n  require_dataset: true\n  ext_cmd_args: \"\"\n  parameters_sig: []\n- name: \"sc.evaluator:evaluate_speech\"\n  concurrency: 1\n  replicas: 1\n  needs:\n  - \"sc.evaluator:predict_speech\"\n  resources: []\n  expose: 0\n  job_name: \"sc.evaluator:evaluate_speech\"\n  show_name: \"evaluate\"\n  require_dataset: false\n  ext_cmd_args: \"\"\n  parameters_sig: []\n",
+                    "---\n- name: \"serving\"\n  concurrency: 1\n  replicas: 1\n  env:\n  - name: \"SW_EVALUATION_SUMMARY_TABLE\"\n    value: \"ftspace/1/eval/summary\"\n  expose: 8080\n  virtual: true\n  job_name: \"serving\"\n  show_name: \"virtual handler for model serving\"\n",
+                    "---\n- name: \"ucf101.evaluator:UCF101PipelineHandler.ppl\"\n  concurrency: 1\n  replicas: 1\n  needs: []\n  resources: []\n  expose: 0\n  job_name: \"ucf101.evaluator:UCF101PipelineHandler.cmp\"\n  show_name: \"predict\"\n  require_dataset: true\n  ext_cmd_args: \"\"\n  parameters_sig: []\n- name: \"ucf101.evaluator:UCF101PipelineHandler.cmp\"\n  concurrency: 1\n  replicas: 1\n  needs:\n  - \"ucf101.evaluator:UCF101PipelineHandler.ppl\"\n  resources: []\n  expose: 0\n  job_name: \"ucf101.evaluator:UCF101PipelineHandler.cmp\"\n  show_name: \"evaluate\"\n  require_dataset: false\n  ext_cmd_args: \"\"\n  parameters_sig: []\n"
+                ]
+            },
+            "sys/owner_id": {
+                "typeHints": [
+                    "INT64"
+                ],
+                "columnValueHints": [
+                    "1"
+                ]
+            },
+            "received_data_tasks": {
+                "typeHints": [
+                    "INT64"
+                ],
+                "columnValueHints": [
+                    "71"
+                ]
+            },
+            "macro avg/recall": {
+                "typeHints": [
+                    "FLOAT64"
+                ],
+                "columnValueHints": [
+                    "0.7489563904345924",
+                    "0.9257425742574258"
+                ]
+            },
+            "bbox/average_precision_iou50": {
+                "typeHints": [
+                    "FLOAT64"
+                ],
+                "columnValueHints": [
+                    "0.9965613080060758"
+                ]
+            },
+            "sys/_dataset_uris": {
+                "typeHints": [
+                    "LIST"
+                ],
+                "columnValueHints": [],
+                "elementHints": {
+                    "typeHints": [
+                        "STRING"
+                    ],
+                    "columnValueHints": [
+                        "project/1/dataset/3/version/3",
+                        "project/1/dataset/5/version/5",
+                        "project/1/dataset/6/version/6",
+                        "project/1/dataset/7/version/7",
+                        "project/1/dataset/8/version/8",
+                        "project/1/dataset/9/version/9"
+                    ]
+                }
+            },
+            "bbox/ar_across_scales_large": {
+                "typeHints": [
+                    "FLOAT64"
+                ],
+                "columnValueHints": [
+                    "0.9165374677002586"
+                ]
+            },
+            "total_predict_count": {
+                "typeHints": [
+                    "INT64"
+                ],
+                "columnValueHints": [
+                    "199999"
+                ]
+            },
+            "segm/ar_across_scales_medium": {
+                "typeHints": [
+                    "FLOAT64"
+                ],
+                "columnValueHints": [
+                    "0.7806451612903226"
+                ]
+            },
+            "sys/job_type": {
+                "typeHints": [
+                    "STRING"
+                ],
+                "columnValueHints": [
+                    "EVALUATION"
+                ]
+            },
+            "macro avg/f1-score": {
+                "typeHints": [
+                    "FLOAT64"
+                ],
+                "columnValueHints": [
+                    "0.7520213067835239",
+                    "0.9167216721672167"
+                ]
+            },
+            "results_count": {
+                "typeHints": [
+                    "INT64"
+                ],
+                "columnValueHints": [
+                    "199999"
+                ]
+            },
+            "sys/result_output_path": {
+                "typeHints": [
+                    "STRING"
+                ],
+                "columnValueHints": [
+                    "e2e-20231113/controller/resultMetrics/15/15af2ce6adac4a3dba53758cd29dfe13",
+                    "e2e-20231113/controller/resultMetrics/27/2730d853a5104f66b3336c4e76905415",
+                    "e2e-20231113/controller/resultMetrics/3f/3f164968a5ac4d29a88804c2f77c2244",
+                    "e2e-20231113/controller/resultMetrics/71/712bef3672a2488eae6ccab7580320ee",
+                    "e2e-20231113/controller/resultMetrics/77/77c3d6610fe9427187f8741d49cfc4b4",
+                    "e2e-20231113/controller/resultMetrics/7f/7f0234359c214ccebdd180ce88ffb746",
+                    "e2e-20231113/controller/resultMetrics/88/88b120a8615141acb99dd9e9d49ca4c3",
+                    "e2e-20231113/controller/resultMetrics/97/976ce35ab5754a438b6cfbc8f8703132",
+                    "e2e-20231113/controller/resultMetrics/b1/b1234fa607c84e18afe7239c8e82aad2",
+                    "e2e-20231113/controller/resultMetrics/d9/d97139ee28b94cfda2065e89facfa969"
+                ]
+            },
+            "sys/runtime_name": {
+                "typeHints": [
+                    "STRING"
+                ],
+                "columnValueHints": [
+                    "huge-tasks",
+                    "pytorch37",
+                    "pytorch39",
+                    "starwhale-built-in"
+                ]
+            },
+            "dataset_rows": {
+                "typeHints": [
+                    "INT64"
+                ],
+                "columnValueHints": [
+                    "199999"
+                ]
+            },
+            "sys/runtime_version_id": {
+                "typeHints": [
+                    "INT64"
+                ],
+                "columnValueHints": [
+                    "1",
+                    "3",
+                    "5",
+                    "7",
+                    "8"
+                ]
+            },
+            "segm/average_recall_max1": {
+                "typeHints": [
+                    "FLOAT64"
+                ],
+                "columnValueHints": [
+                    "0.34349881796690307"
+                ]
+            },
+            "bbox/average_precision": {
+                "typeHints": [
+                    "FLOAT64"
+                ],
+                "columnValueHints": [
+                    "0.8804772724243923"
+                ]
+            },
+            "sys/model_version_id": {
+                "typeHints": [
+                    "INT64"
+                ],
+                "columnValueHints": [
+                    "2",
+                    "3",
+                    "4",
+                    "5",
+                    "6",
+                    "7"
+                ]
+            },
+            "weighted avg/recall": {
+                "typeHints": [
+                    "FLOAT64"
+                ],
+                "columnValueHints": [
+                    "0.7624486524396353",
+                    "0.9264705882352942"
+                ]
+            },
+            "segm/average_precision_iou50": {
+                "typeHints": [
+                    "FLOAT64"
+                ],
+                "columnValueHints": [
+                    "0.9965613080060758"
+                ]
+            },
+            "bbox/ar_across_scales_small": {
+                "typeHints": [
+                    "FLOAT64"
+                ],
+                "columnValueHints": [
+                    "0.76"
+                ]
+            },
+            "sys/job_status": {
+                "typeHints": [
+                    "STRING"
+                ],
+                "columnValueHints": [
+                    "CANCELED",
+                    "CANCELLING",
+                    "CREATED",
+                    "READY",
+                    "RUNNING",
+                    "SUCCESS"
+                ]
+            },
+            "segm/ap_across_scales_large": {
+                "typeHints": [
+                    "FLOAT64"
+                ],
+                "columnValueHints": [
+                    "0.8194719886417133"
+                ]
+            },
+            "sys/project_id": {
+                "typeHints": [
+                    "INT64"
+                ],
+                "columnValueHints": [
+                    "1"
+                ]
+            },
+            "bbox/average_recall_max10": {
+                "typeHints": [
+                    "FLOAT64"
+                ],
+                "columnValueHints": [
+                    "0.9111111111111111"
+                ]
+            },
+            "weighted avg/f1-score": {
+                "typeHints": [
+                    "FLOAT64"
+                ],
+                "columnValueHints": [
+                    "0.7638261973876799",
+                    "0.9164488017429193"
+                ]
+            },
+            "sys/_is_deleted": {
+                "typeHints": [
+                    "INT32"
+                ],
+                "columnValueHints": [
+                    "0"
+                ]
+            },
+            "bbox/ap_across_scales_medium": {
+                "typeHints": [
+                    "FLOAT64"
+                ],
+                "columnValueHints": [
+                    "0.7944673998123173"
+                ]
+            },
+            "segm/average_recall_max100": {
+                "typeHints": [
+                    "FLOAT64"
+                ],
+                "columnValueHints": [
+                    "0.8368794326241135"
+                ]
+            },
+            "segm/ap_across_scales_medium": {
+                "typeHints": [
+                    "FLOAT64"
+                ],
+                "columnValueHints": [
+                    "0.6376925186478997"
+                ]
+            },
+            "macro avg/precision": {
+                "typeHints": [
+                    "FLOAT64"
+                ],
+                "columnValueHints": [
+                    "0.7934545493374835",
+                    "0.9336633663366336"
+                ]
+            },
+            "bbox/ap_across_scales_large": {
+                "typeHints": [
+                    "FLOAT64"
+                ],
+                "columnValueHints": [
+                    "0.8878544763799764"
+                ]
+            },
+            "sys/dataset_uris": {
+                "typeHints": [
+                    "STRING"
+                ],
+                "columnValueHints": [
+                    "project/starwhale/dataset/huge-tasks-random-text/version/n2uqkchatonteurw7arkk63sjapmh6pjcxugyy4b",
+                    "project/starwhale/dataset/nmt/version/x46ngr4tzxsxotgmluqfnapsyu6aciolacnre3d2",
+                    "project/starwhale/dataset/pfp/version/nsaxzaoxy4ddgqhydsyk64ksbgwjwzqsfirdaiwv",
+                    "project/starwhale/dataset/speech_command/version/hquydtisnq5wgih4jcdrexw3psn5gujlib466cea,project/starwhale/dataset/speech_command_link/version/lg7jhusv42fwaotmymhxtgnkpqojxdpuyajaew4b",
+                    "project/starwhale/dataset/ucf101/version/mdkirpcr2tvydiq3pnjkc3bgwkc3e7v2fd4y3743"
+                ]
+            }
+        },
+        "records": [
+            {
+                "sys/resource_pool": {
+                    "type": "STRING",
+                    "value": "default"
+                },
+                "sys/id": {
+                    "type": "INT64",
+                    "value": "56"
+                },
+                "sys/dev_mode": {
+                    "type": "INT32",
+                    "value": "0"
+                },
+                "sys/model_version": {
+                    "type": "STRING",
+                    "value": "irhfphltgfugzs35tnaiydsuqfv26h6euic2g67e"
+                },
+                "sys/_dataset_id_version_map": {
+                    "value": [],
+                    "type": "MAP"
+                },
+                "sys/name": {
+                    "type": "STRING",
+                    "value": "serving"
+                },
+                "sys/job_type": {
+                    "type": "STRING",
+                    "value": "EVALUATION"
+                },
+                "sys/_runtime_uri": {
+                    "type": "STRING",
+                    "value": "project/1/runtime/6/version/8"
+                },
+                "sys/owner_name": {
+                    "type": "STRING",
+                    "value": "starwhale"
+                },
+                "sys/created_time": {
+                    "type": "INT64",
+                    "value": "1700792597587"
+                },
+                "sys/modified_time": {
+                    "type": "INT64",
+                    "value": "1700794095926"
+                },
+                "sys/result_output_path": {
+                    "type": "STRING",
+                    "value": "e2e-20231113/controller/resultMetrics/27/2730d853a5104f66b3336c4e76905415"
+                },
+                "sys/finished_time": {
+                    "type": "INT64",
+                    "value": "1700794095926"
+                },
+                "id": {
+                    "type": "STRING",
+                    "value": "2730d853a5104f66b3336c4e76905415"
+                },
+                "sys/runtime_name": {
+                    "type": "STRING",
+                    "value": "starwhale-built-in"
+                },
+                "sys/_model_uri": {
+                    "type": "STRING",
+                    "value": "project/1/model/3/version/3"
+                },
+                "sys/runtime_version_id": {
+                    "type": "INT64",
+                    "value": "8"
+                },
+                "sys/runtime_uri": {
+                    "type": "STRING",
+                    "value": "project/starwhale/runtime/starwhale-built-in/version/ejwe5npweoa3uookb6rmeke3kfbzepbgpga6ng36"
+                },
+                "sys/model_version_id": {
+                    "type": "INT64",
+                    "value": "3"
+                },
+                "sys/runtime_version": {
+                    "type": "STRING",
+                    "value": "ejwe5npweoa3uookb6rmeke3kfbzepbgpga6ng36"
+                },
+                "sys/job_status": {
+                    "type": "STRING",
+                    "value": "CANCELED"
+                },
+                "sys/model_name": {
+                    "type": "STRING",
+                    "value": "ag_news"
+                },
+                "sys/model_uri": {
+                    "type": "STRING",
+                    "value": "project/starwhale/model/ag_news/version/irhfphltgfugzs35tnaiydsuqfv26h6euic2g67e"
+                },
+                "sys/project_id": {
+                    "type": "INT64",
+                    "value": "1"
+                },
+                "sys/duration_ms": {
+                    "type": "INT64",
+                    "value": "1498926"
+                },
+                "sys/_is_deleted": {
+                    "type": "INT32",
+                    "value": "0"
+                },
+                "sys/step_spec": {
+                    "type": "STRING",
+                    "value": "---\n- name: \"serving\"\n  concurrency: 1\n  replicas: 1\n  env:\n  - name: \"SW_EVALUATION_SUMMARY_TABLE\"\n    value: \"ftspace/1/eval/summary\"\n  expose: 8080\n  virtual: true\n  job_name: \"serving\"\n  show_name: \"virtual handler for model serving\"\n"
+                },
+                "sys/owner_id": {
+                    "type": "INT64",
+                    "value": "1"
+                }
+            },
+            {
+                "sys/resource_pool": {
+                    "type": "STRING",
+                    "value": "default"
+                },
+                "sys/id": {
+                    "type": "INT64",
+                    "value": "54"
+                },
+                "sys/dev_mode": {
+                    "type": "INT32",
+                    "value": "0"
+                },
+                "sys/model_version": {
+                    "type": "STRING",
+                    "value": "irhfphltgfugzs35tnaiydsuqfv26h6euic2g67e"
+                },
+                "sys/_dataset_id_version_map": {
+                    "value": [],
+                    "type": "MAP"
+                },
+                "sys/name": {
+                    "type": "STRING",
+                    "value": "serving"
+                },
+                "sys/job_type": {
+                    "type": "STRING",
+                    "value": "EVALUATION"
+                },
+                "sys/_runtime_uri": {
+                    "type": "STRING",
+                    "value": "project/1/runtime/6/version/8"
+                },
+                "sys/owner_name": {
+                    "type": "STRING",
+                    "value": "starwhale"
+                },
+                "sys/created_time": {
+                    "type": "INT64",
+                    "value": "1700724634770"
+                },
+                "sys/modified_time": {
+                    "type": "INT64",
+                    "value": "1700724641923"
+                },
+                "sys/result_output_path": {
+                    "type": "STRING",
+                    "value": "e2e-20231113/controller/resultMetrics/77/77c3d6610fe9427187f8741d49cfc4b4"
+                },
+                "sys/finished_time": {
+                    "type": "INT64",
+                    "value": "1700724641922"
+                },
+                "id": {
+                    "type": "STRING",
+                    "value": "77c3d6610fe9427187f8741d49cfc4b4"
+                },
+                "sys/runtime_name": {
+                    "type": "STRING",
+                    "value": "starwhale-built-in"
+                },
+                "sys/_model_uri": {
+                    "type": "STRING",
+                    "value": "project/1/model/3/version/3"
+                },
+                "sys/runtime_version_id": {
+                    "type": "INT64",
+                    "value": "8"
+                },
+                "sys/runtime_uri": {
+                    "type": "STRING",
+                    "value": "project/starwhale/runtime/starwhale-built-in/version/ejwe5npweoa3uookb6rmeke3kfbzepbgpga6ng36"
+                },
+                "sys/model_version_id": {
+                    "type": "INT64",
+                    "value": "3"
+                },
+                "sys/runtime_version": {
+                    "type": "STRING",
+                    "value": "ejwe5npweoa3uookb6rmeke3kfbzepbgpga6ng36"
+                },
+                "sys/job_status": {
+                    "type": "STRING",
+                    "value": "CANCELED"
+                },
+                "sys/model_name": {
+                    "type": "STRING",
+                    "value": "ag_news"
+                },
+                "sys/model_uri": {
+                    "type": "STRING",
+                    "value": "project/starwhale/model/ag_news/version/irhfphltgfugzs35tnaiydsuqfv26h6euic2g67e"
+                },
+                "sys/project_id": {
+                    "type": "INT64",
+                    "value": "1"
+                },
+                "sys/duration_ms": {
+                    "type": "INT64",
+                    "value": "7922"
+                },
+                "sys/_is_deleted": {
+                    "type": "INT32",
+                    "value": "0"
+                },
+                "sys/step_spec": {
+                    "type": "STRING",
+                    "value": "---\n- name: \"serving\"\n  concurrency: 1\n  replicas: 1\n  env:\n  - name: \"SW_EVALUATION_SUMMARY_TABLE\"\n    value: \"ftspace/1/eval/summary\"\n  expose: 8080\n  virtual: true\n  job_name: \"serving\"\n  show_name: \"virtual handler for model serving\"\n"
+                },
+                "sys/owner_id": {
+                    "type": "INT64",
+                    "value": "1"
+                }
+            },
+            {
+                "sys/resource_pool": {
+                    "type": "STRING",
+                    "value": "default"
+                },
+                "sys/id": {
+                    "type": "INT64",
+                    "value": "53"
+                },
+                "sys/dev_mode": {
+                    "type": "INT32",
+                    "value": "0"
+                },
+                "sys/model_version": {
+                    "type": "STRING",
+                    "value": "irhfphltgfugzs35tnaiydsuqfv26h6euic2g67e"
+                },
+                "sys/_dataset_id_version_map": {
+                    "value": [],
+                    "type": "MAP"
+                },
+                "sys/name": {
+                    "type": "STRING",
+                    "value": "serving"
+                },
+                "sys/job_type": {
+                    "type": "STRING",
+                    "value": "EVALUATION"
+                },
+                "sys/_runtime_uri": {
+                    "type": "STRING",
+                    "value": "project/1/runtime/6/version/8"
+                },
+                "sys/owner_name": {
+                    "type": "STRING",
+                    "value": "starwhale"
+                },
+                "sys/created_time": {
+                    "type": "INT64",
+                    "value": "1700724287955"
+                },
+                "sys/modified_time": {
+                    "type": "INT64",
+                    "value": "1700724398303"
+                },
+                "sys/result_output_path": {
+                    "type": "STRING",
+                    "value": "e2e-20231113/controller/resultMetrics/88/88b120a8615141acb99dd9e9d49ca4c3"
+                },
+                "sys/finished_time": {
+                    "type": "INT64",
+                    "value": "1700724398301"
+                },
+                "id": {
+                    "type": "STRING",
+                    "value": "88b120a8615141acb99dd9e9d49ca4c3"
+                },
+                "sys/runtime_name": {
+                    "type": "STRING",
+                    "value": "starwhale-built-in"
+                },
+                "sys/_model_uri": {
+                    "type": "STRING",
+                    "value": "project/1/model/3/version/3"
+                },
+                "sys/runtime_version_id": {
+                    "type": "INT64",
+                    "value": "8"
+                },
+                "sys/runtime_uri": {
+                    "type": "STRING",
+                    "value": "project/starwhale/runtime/starwhale-built-in/version/ejwe5npweoa3uookb6rmeke3kfbzepbgpga6ng36"
+                },
+                "sys/model_version_id": {
+                    "type": "INT64",
+                    "value": "3"
+                },
+                "sys/runtime_version": {
+                    "type": "STRING",
+                    "value": "ejwe5npweoa3uookb6rmeke3kfbzepbgpga6ng36"
+                },
+                "sys/job_status": {
+                    "type": "STRING",
+                    "value": "CANCELED"
+                },
+                "sys/model_name": {
+                    "type": "STRING",
+                    "value": "ag_news"
+                },
+                "sys/model_uri": {
+                    "type": "STRING",
+                    "value": "project/starwhale/model/ag_news/version/irhfphltgfugzs35tnaiydsuqfv26h6euic2g67e"
+                },
+                "sys/project_id": {
+                    "type": "INT64",
+                    "value": "1"
+                },
+                "sys/duration_ms": {
+                    "type": "INT64",
+                    "value": "111301"
+                },
+                "sys/_is_deleted": {
+                    "type": "INT32",
+                    "value": "0"
+                },
+                "sys/step_spec": {
+                    "type": "STRING",
+                    "value": "---\n- name: \"serving\"\n  concurrency: 1\n  replicas: 1\n  env:\n  - name: \"SW_EVALUATION_SUMMARY_TABLE\"\n    value: \"ftspace/1/eval/summary\"\n  expose: 8080\n  virtual: true\n  job_name: \"serving\"\n  show_name: \"virtual handler for model serving\"\n"
+                },
+                "sys/owner_id": {
+                    "type": "INT64",
+                    "value": "1"
+                }
+            },
+            {
+                "sys/resource_pool": {
+                    "type": "STRING",
+                    "value": "default"
+                },
+                "sys/id": {
+                    "type": "INT64",
+                    "value": "50"
+                },
+                "sys/dev_mode": {
+                    "type": "INT32",
+                    "value": "0"
+                },
+                "sys/model_version": {
+                    "type": "STRING",
+                    "value": "irhfphltgfugzs35tnaiydsuqfv26h6euic2g67e"
+                },
+                "sys/_dataset_id_version_map": {
+                    "value": [],
+                    "type": "MAP"
+                },
+                "sys/name": {
+                    "type": "STRING",
+                    "value": "serving"
+                },
+                "sys/job_type": {
+                    "type": "STRING",
+                    "value": "EVALUATION"
+                },
+                "sys/_runtime_uri": {
+                    "type": "STRING",
+                    "value": "project/1/runtime/6/version/8"
+                },
+                "sys/owner_name": {
+                    "type": "STRING",
+                    "value": "starwhale"
+                },
+                "sys/created_time": {
+                    "type": "INT64",
+                    "value": "1700706461597"
+                },
+                "sys/modified_time": {
+                    "type": "INT64",
+                    "value": "1700706965225"
+                },
+                "sys/result_output_path": {
+                    "type": "STRING",
+                    "value": "e2e-20231113/controller/resultMetrics/d9/d97139ee28b94cfda2065e89facfa969"
+                },
+                "sys/finished_time": {
+                    "type": "INT64",
+                    "value": "1700706965224"
+                },
+                "id": {
+                    "type": "STRING",
+                    "value": "d97139ee28b94cfda2065e89facfa969"
+                },
+                "sys/runtime_name": {
+                    "type": "STRING",
+                    "value": "starwhale-built-in"
+                },
+                "sys/_model_uri": {
+                    "type": "STRING",
+                    "value": "project/1/model/3/version/3"
+                },
+                "sys/runtime_version_id": {
+                    "type": "INT64",
+                    "value": "8"
+                },
+                "sys/runtime_uri": {
+                    "type": "STRING",
+                    "value": "project/starwhale/runtime/starwhale-built-in/version/ejwe5npweoa3uookb6rmeke3kfbzepbgpga6ng36"
+                },
+                "sys/model_version_id": {
+                    "type": "INT64",
+                    "value": "3"
+                },
+                "sys/runtime_version": {
+                    "type": "STRING",
+                    "value": "ejwe5npweoa3uookb6rmeke3kfbzepbgpga6ng36"
+                },
+                "sys/job_status": {
+                    "type": "STRING",
+                    "value": "CANCELED"
+                },
+                "sys/model_name": {
+                    "type": "STRING",
+                    "value": "ag_news"
+                },
+                "sys/model_uri": {
+                    "type": "STRING",
+                    "value": "project/starwhale/model/ag_news/version/irhfphltgfugzs35tnaiydsuqfv26h6euic2g67e"
+                },
+                "sys/project_id": {
+                    "type": "INT64",
+                    "value": "1"
+                },
+                "sys/duration_ms": {
+                    "type": "INT64",
+                    "value": "504224"
+                },
+                "sys/_is_deleted": {
+                    "type": "INT32",
+                    "value": "0"
+                },
+                "sys/step_spec": {
+                    "type": "STRING",
+                    "value": "---\n- name: \"serving\"\n  concurrency: 1\n  replicas: 1\n  env:\n  - name: \"SW_EVALUATION_SUMMARY_TABLE\"\n    value: \"ftspace/1/eval/summary\"\n  expose: 8080\n  virtual: true\n  job_name: \"serving\"\n  show_name: \"virtual handler for model serving\"\n"
+                },
+                "sys/owner_id": {
+                    "type": "INT64",
+                    "value": "1"
+                }
+            },
+            {
+                "sys/resource_pool": {
+                    "type": "STRING",
+                    "value": "default"
+                },
+                "sys/_dataset_uris": {
+                    "value": [
+                        {
+                            "type": "STRING",
+                            "value": "project/1/dataset/3/version/3"
+                        }
+                    ],
+                    "type": "LIST"
+                },
+                "sys/id": {
+                    "type": "INT64",
+                    "value": "48"
+                },
+                "sys/dev_mode": {
+                    "type": "INT32",
+                    "value": "0"
+                },
+                "sys/model_version": {
+                    "type": "STRING",
+                    "value": "yzzhqj4rccnxhmg23oa723hlp5rqt4t2lqym64al"
+                },
+                "sys/_dataset_id_version_map": {
+                    "value": [
+                        {
+                            "value": {
+                                "type": "STRING",
+                                "value": "x46ngr4tzxsxotgmluqfnapsyu6aciolacnre3d2"
+                            },
+                            "key": {
+                                "type": "INT64",
+                                "value": "3"
+                            }
+                        }
+                    ],
+                    "type": "MAP"
+                },
+                "sys/name": {
+                    "type": "STRING",
+                    "value": "nmt.evaluator:NMTPipeline.cmp"
+                },
+                "sys/job_type": {
+                    "type": "STRING",
+                    "value": "EVALUATION"
+                },
+                "sys/_runtime_uri": {
+                    "type": "STRING",
+                    "value": "project/1/runtime/6/version/7"
+                },
+                "sys/owner_name": {
+                    "type": "STRING",
+                    "value": "starwhale"
+                },
+                "sys/created_time": {
+                    "type": "INT64",
+                    "value": "1700559376326"
+                },
+                "sys/modified_time": {
+                    "type": "INT64",
+                    "value": "1700559817613"
+                },
+                "sys/result_output_path": {
+                    "type": "STRING",
+                    "value": "e2e-20231113/controller/resultMetrics/b1/b1234fa607c84e18afe7239c8e82aad2"
+                },
+                "sys/finished_time": {
+                    "type": "INT64",
+                    "value": "1700559817611"
+                },
+                "id": {
+                    "type": "STRING",
+                    "value": "b1234fa607c84e18afe7239c8e82aad2"
+                },
+                "sys/runtime_name": {
+                    "type": "STRING",
+                    "value": "starwhale-built-in"
+                },
+                "sys/_model_uri": {
+                    "type": "STRING",
+                    "value": "project/1/model/2/version/2"
+                },
+                "sys/runtime_version_id": {
+                    "type": "INT64",
+                    "value": "7"
+                },
+                "sys/runtime_uri": {
+                    "type": "STRING",
+                    "value": "project/starwhale/runtime/starwhale-built-in/version/uii4jxq7o6q4sdblwwn4ryiznswpy6ebdduozc6d"
+                },
+                "sys/model_version_id": {
+                    "type": "INT64",
+                    "value": "2"
+                },
+                "sys/runtime_version": {
+                    "type": "STRING",
+                    "value": "uii4jxq7o6q4sdblwwn4ryiznswpy6ebdduozc6d"
+                },
+                "sys/job_status": {
+                    "type": "STRING",
+                    "value": "SUCCESS"
+                },
+                "sys/model_name": {
+                    "type": "STRING",
+                    "value": "nmt"
+                },
+                "sys/model_uri": {
+                    "type": "STRING",
+                    "value": "project/starwhale/model/nmt/version/yzzhqj4rccnxhmg23oa723hlp5rqt4t2lqym64al"
+                },
+                "sys/project_id": {
+                    "type": "INT64",
+                    "value": "1"
+                },
+                "sys/duration_ms": {
+                    "type": "INT64",
+                    "value": "441611"
+                },
+                "sys/_is_deleted": {
+                    "type": "INT32",
+                    "value": "0"
+                },
+                "sys/step_spec": {
+                    "type": "STRING",
+                    "value": "---\n- name: \"nmt.evaluator:NMTPipeline.ppl\"\n  concurrency: 1\n  replicas: 1\n  needs: []\n  resources: []\n  env:\n  - name: \"SW_EVALUATION_SUMMARY_TABLE\"\n    value: \"ftspace/1/eval/summary\"\n  expose: 0\n  job_name: \"nmt.evaluator:NMTPipeline.cmp\"\n  show_name: \"predict\"\n  require_dataset: true\n  ext_cmd_args: \"\"\n  parameters_sig: []\n- name: \"nmt.evaluator:NMTPipeline.cmp\"\n  concurrency: 1\n  replicas: 1\n  needs:\n  - \"nmt.evaluator:NMTPipeline.ppl\"\n  resources: []\n  env:\n  - name: \"SW_EVALUATION_SUMMARY_TABLE\"\n    value: \"ftspace/1/eval/summary\"\n  expose: 0\n  job_name: \"nmt.evaluator:NMTPipeline.cmp\"\n  show_name: \"evaluate\"\n  require_dataset: false\n  ext_cmd_args: \"\"\n  parameters_sig: []\n"
+                },
+                "sys/owner_id": {
+                    "type": "INT64",
+                    "value": "1"
+                },
+                "sys/dataset_uris": {
+                    "type": "STRING",
+                    "value": "project/starwhale/dataset/nmt/version/x46ngr4tzxsxotgmluqfnapsyu6aciolacnre3d2"
+                }
+            },
+            {
+                "sys/resource_pool": {
+                    "type": "STRING",
+                    "value": "default"
+                },
+                "sys/_dataset_uris": {
+                    "value": [
+                        {
+                            "type": "STRING",
+                            "value": "project/1/dataset/3/version/3"
+                        }
+                    ],
+                    "type": "LIST"
+                },
+                "sys/id": {
+                    "type": "INT64",
+                    "value": "47"
+                },
+                "sys/dev_mode": {
+                    "type": "INT32",
+                    "value": "0"
+                },
+                "sys/model_version": {
+                    "type": "STRING",
+                    "value": "yzzhqj4rccnxhmg23oa723hlp5rqt4t2lqym64al"
+                },
+                "sys/_dataset_id_version_map": {
+                    "value": [
+                        {
+                            "value": {
+                                "type": "STRING",
+                                "value": "x46ngr4tzxsxotgmluqfnapsyu6aciolacnre3d2"
+                            },
+                            "key": {
+                                "type": "INT64",
+                                "value": "3"
+                            }
+                        }
+                    ],
+                    "type": "MAP"
+                },
+                "sys/name": {
+                    "type": "STRING",
+                    "value": "nmt.evaluator:NMTPipeline.cmp"
+                },
+                "sys/job_type": {
+                    "type": "STRING",
+                    "value": "EVALUATION"
+                },
+                "sys/_runtime_uri": {
+                    "type": "STRING",
+                    "value": "project/1/runtime/6/version/7"
+                },
+                "sys/owner_name": {
+                    "type": "STRING",
+                    "value": "starwhale"
+                },
+                "sys/created_time": {
+                    "type": "INT64",
+                    "value": "1700556544285"
+                },
+                "sys/modified_time": {
+                    "type": "INT64",
+                    "value": "1700556979160"
+                },
+                "sys/result_output_path": {
+                    "type": "STRING",
+                    "value": "e2e-20231113/controller/resultMetrics/97/976ce35ab5754a438b6cfbc8f8703132"
+                },
+                "sys/finished_time": {
+                    "type": "INT64",
+                    "value": "1700556979160"
+                },
+                "id": {
+                    "type": "STRING",
+                    "value": "976ce35ab5754a438b6cfbc8f8703132"
+                },
+                "sys/runtime_name": {
+                    "type": "STRING",
+                    "value": "starwhale-built-in"
+                },
+                "sys/_model_uri": {
+                    "type": "STRING",
+                    "value": "project/1/model/2/version/2"
+                },
+                "sys/runtime_version_id": {
+                    "type": "INT64",
+                    "value": "7"
+                },
+                "sys/runtime_uri": {
+                    "type": "STRING",
+                    "value": "project/starwhale/runtime/starwhale-built-in/version/uii4jxq7o6q4sdblwwn4ryiznswpy6ebdduozc6d"
+                },
+                "sys/model_version_id": {
+                    "type": "INT64",
+                    "value": "2"
+                },
+                "sys/runtime_version": {
+                    "type": "STRING",
+                    "value": "uii4jxq7o6q4sdblwwn4ryiznswpy6ebdduozc6d"
+                },
+                "bleu_score": {
+                    "type": "FLOAT64",
+                    "value": "0.026211570883894097"
+                },
+                "sys/job_status": {
+                    "type": "STRING",
+                    "value": "SUCCESS"
+                },
+                "sys/model_name": {
+                    "type": "STRING",
+                    "value": "nmt"
+                },
+                "sys/model_uri": {
+                    "type": "STRING",
+                    "value": "project/starwhale/model/nmt/version/yzzhqj4rccnxhmg23oa723hlp5rqt4t2lqym64al"
+                },
+                "sys/project_id": {
+                    "type": "INT64",
+                    "value": "1"
+                },
+                "sys/duration_ms": {
+                    "type": "INT64",
+                    "value": "435160"
+                },
+                "sys/_is_deleted": {
+                    "type": "INT32",
+                    "value": "0"
+                },
+                "sys/step_spec": {
+                    "type": "STRING",
+                    "value": "---\n- name: \"nmt.evaluator:NMTPipeline.ppl\"\n  concurrency: 1\n  replicas: 1\n  needs: []\n  resources: []\n  env:\n  - name: \"SW_EVALUATION_SUMMARY_TABLE\"\n    value: \"ftspace/2/eval/summary\"\n  expose: 0\n  job_name: \"nmt.evaluator:NMTPipeline.cmp\"\n  show_name: \"predict\"\n  require_dataset: true\n  ext_cmd_args: \"\"\n  parameters_sig: []\n- name: \"nmt.evaluator:NMTPipeline.cmp\"\n  concurrency: 1\n  replicas: 1\n  needs:\n  - \"nmt.evaluator:NMTPipeline.ppl\"\n  resources: []\n  env:\n  - name: \"SW_EVALUATION_SUMMARY_TABLE\"\n    value: \"ftspace/2/eval/summary\"\n  expose: 0\n  job_name: \"nmt.evaluator:NMTPipeline.cmp\"\n  show_name: \"evaluate\"\n  require_dataset: false\n  ext_cmd_args: \"\"\n  parameters_sig: []\n"
+                },
+                "sys/owner_id": {
+                    "type": "INT64",
+                    "value": "1"
+                },
+                "sys/dataset_uris": {
+                    "type": "STRING",
+                    "value": "project/starwhale/dataset/nmt/version/x46ngr4tzxsxotgmluqfnapsyu6aciolacnre3d2"
+                }
+            },
+            {
+                "sys/resource_pool": {
+                    "type": "STRING",
+                    "value": "default"
+                },
+                "sys/_dataset_uris": {
+                    "value": [
+                        {
+                            "type": "STRING",
+                            "value": "project/1/dataset/8/version/8"
+                        },
+                        {
+                            "type": "STRING",
+                            "value": "project/1/dataset/9/version/9"
+                        }
+                    ],
+                    "type": "LIST"
+                },
+                "cohen_kappa_score": {
+                    "type": "FLOAT64",
+                    "value": "0.7545818949882326"
+                },
+                "sys/id": {
+                    "type": "INT64",
+                    "value": "7"
+                },
+                "sys/dev_mode": {
+                    "type": "INT32",
+                    "value": "0"
+                },
+                "accuracy": {
+                    "type": "FLOAT64",
+                    "value": "0.7624486524396353"
+                },
+                "sys/model_version": {
+                    "type": "STRING",
+                    "value": "vr6idg2nb23ycktmhdijjnbjrmvpj7ynli4oa5z7"
+                },
+                "sys/_dataset_id_version_map": {
+                    "value": [
+                        {
+                            "value": {
+                                "type": "STRING",
+                                "value": "hquydtisnq5wgih4jcdrexw3psn5gujlib466cea"
+                            },
+                            "key": {
+                                "type": "INT64",
+                                "value": "8"
+                            }
+                        },
+                        {
+                            "value": {
+                                "type": "STRING",
+                                "value": "lg7jhusv42fwaotmymhxtgnkpqojxdpuyajaew4b"
+                            },
+                            "key": {
+                                "type": "INT64",
+                                "value": "9"
+                            }
+                        }
+                    ],
+                    "type": "MAP"
+                },
+                "sys/name": {
+                    "type": "STRING",
+                    "value": "sc.evaluator:evaluate_speech"
+                },
+                "hamming_loss": {
+                    "type": "FLOAT64",
+                    "value": "0.2375513475603647"
+                },
+                "weighted avg/support": {
+                    "type": "INT64",
+                    "value": "19962"
+                },
+                "sys/job_type": {
+                    "type": "STRING",
+                    "value": "EVALUATION"
+                },
+                "macro avg/f1-score": {
+                    "type": "FLOAT64",
+                    "value": "0.7520213067835239"
+                },
+                "weighted avg/precision": {
+                    "type": "FLOAT64",
+                    "value": "0.8010113393265583"
+                },
+                "sys/_runtime_uri": {
+                    "type": "STRING",
+                    "value": "project/1/runtime/3/version/3"
+                },
+                "sys/owner_name": {
+                    "type": "STRING",
+                    "value": "starwhale"
+                },
+                "sys/created_time": {
+                    "type": "INT64",
+                    "value": "1699808465094"
+                },
+                "sys/modified_time": {
+                    "type": "INT64",
+                    "value": "1699810663097"
+                },
+                "sys/result_output_path": {
+                    "type": "STRING",
+                    "value": "e2e-20231113/controller/resultMetrics/15/15af2ce6adac4a3dba53758cd29dfe13"
+                },
+                "sys/finished_time": {
+                    "type": "INT64",
+                    "value": "1699810663096"
+                },
+                "id": {
+                    "type": "STRING",
+                    "value": "15af2ce6adac4a3dba53758cd29dfe13"
+                },
+                "sys/runtime_name": {
+                    "type": "STRING",
+                    "value": "pytorch39"
+                },
+                "sys/_model_uri": {
+                    "type": "STRING",
+                    "value": "project/1/model/7/version/7"
+                },
+                "sys/runtime_version_id": {
+                    "type": "INT64",
+                    "value": "3"
+                },
+                "sys/runtime_uri": {
+                    "type": "STRING",
+                    "value": "project/starwhale/runtime/pytorch39/version/ejwe5npweoa3uookb6rmeke3kfbzepbgpga6ng36"
+                },
+                "sys/model_version_id": {
+                    "type": "INT64",
+                    "value": "7"
+                },
+                "sys/runtime_version": {
+                    "type": "STRING",
+                    "value": "ejwe5npweoa3uookb6rmeke3kfbzepbgpga6ng36"
+                },
+                "kind": {
+                    "type": "STRING",
+                    "value": "multi_classification"
+                },
+                "weighted avg/recall": {
+                    "type": "FLOAT64",
+                    "value": "0.7624486524396353"
+                },
+                "sys/job_status": {
+                    "type": "STRING",
+                    "value": "SUCCESS"
+                },
+                "sys/model_name": {
+                    "type": "STRING",
+                    "value": "speech_command"
+                },
+                "sys/model_uri": {
+                    "type": "STRING",
+                    "value": "project/starwhale/model/speech_command/version/vr6idg2nb23ycktmhdijjnbjrmvpj7ynli4oa5z7"
+                },
+                "sys/project_id": {
+                    "type": "INT64",
+                    "value": "1"
+                },
+                "sys/duration_ms": {
+                    "type": "INT64",
+                    "value": "2198096"
+                },
+                "macro avg/support": {
+                    "type": "INT64",
+                    "value": "19962"
+                },
+                "sys/_is_deleted": {
+                    "type": "INT32",
+                    "value": "0"
+                },
+                "weighted avg/f1-score": {
+                    "type": "FLOAT64",
+                    "value": "0.7638261973876799"
+                },
+                "macro avg/precision": {
+                    "type": "FLOAT64",
+                    "value": "0.7934545493374835"
+                },
+                "sys/step_spec": {
+                    "type": "STRING",
+                    "value": "---\n- name: \"sc.evaluator:predict_speech\"\n  concurrency: 1\n  replicas: 2\n  needs: []\n  resources:\n  - type: \"nvidia.com/gpu\"\n    request: 1.0\n    limit: 1.0\n  expose: 0\n  job_name: \"sc.evaluator:evaluate_speech\"\n  show_name: \"predict\"\n  require_dataset: true\n  ext_cmd_args: \"\"\n  parameters_sig: []\n- name: \"sc.evaluator:evaluate_speech\"\n  concurrency: 1\n  replicas: 1\n  needs:\n  - \"sc.evaluator:predict_speech\"\n  resources: []\n  expose: 0\n  job_name: \"sc.evaluator:evaluate_speech\"\n  show_name: \"evaluate\"\n  require_dataset: false\n  ext_cmd_args: \"\"\n  parameters_sig: []\n"
+                },
+                "sys/owner_id": {
+                    "type": "INT64",
+                    "value": "1"
+                },
+                "sys/dataset_uris": {
+                    "type": "STRING",
+                    "value": "project/starwhale/dataset/speech_command/version/hquydtisnq5wgih4jcdrexw3psn5gujlib466cea,project/starwhale/dataset/speech_command_link/version/lg7jhusv42fwaotmymhxtgnkpqojxdpuyajaew4b"
+                },
+                "macro avg/recall": {
+                    "type": "FLOAT64",
+                    "value": "0.7489563904345924"
+                }
+            },
+            {
+                "sys/resource_pool": {
+                    "type": "STRING",
+                    "value": "default"
+                },
+                "bbox/average_recall_max1": {
+                    "type": "FLOAT64",
+                    "value": "0.374468085106383"
+                },
+                "bbox/average_precision_iou75": {
+                    "type": "FLOAT64",
+                    "value": "0.980936534659577"
+                },
+                "sys/id": {
+                    "type": "INT64",
+                    "value": "6"
+                },
+                "sys/dev_mode": {
+                    "type": "INT32",
+                    "value": "0"
+                },
+                "sys/model_version": {
+                    "type": "STRING",
+                    "value": "qf54dfmabju5we2zfu3zx2b2wyorho7ohlxwznd4"
+                },
+                "sys/_dataset_id_version_map": {
+                    "value": [
+                        {
+                            "value": {
+                                "type": "STRING",
+                                "value": "nsaxzaoxy4ddgqhydsyk64ksbgwjwzqsfirdaiwv"
+                            },
+                            "key": {
+                                "type": "INT64",
+                                "value": "7"
+                            }
+                        }
+                    ],
+                    "type": "MAP"
+                },
+                "sys/name": {
+                    "type": "STRING",
+                    "value": "pfp.evaluator:cmp"
+                },
+                "bbox/average_recall_max100": {
+                    "type": "FLOAT64",
+                    "value": "0.9111111111111111"
+                },
+                "segm/ap_across_scales_small": {
+                    "type": "FLOAT64",
+                    "value": "0.6456207159177456"
+                },
+                "sys/_runtime_uri": {
+                    "type": "STRING",
+                    "value": "project/1/runtime/6/version/7"
+                },
+                "sys/owner_name": {
+                    "type": "STRING",
+                    "value": "starwhale"
+                },
+                "sys/created_time": {
+                    "type": "INT64",
+                    "value": "1699808464927"
+                },
+                "sys/modified_time": {
+                    "type": "INT64",
+                    "value": "1699810060877"
+                },
+                "sys/finished_time": {
+                    "type": "INT64",
+                    "value": "1699810060876"
+                },
+                "id": {
+                    "type": "STRING",
+                    "value": "7f0234359c214ccebdd180ce88ffb746"
+                },
+                "segm/average_precision": {
+                    "type": "FLOAT64",
+                    "value": "0.8117134385920949"
+                },
+                "segm/ar_across_scales_large": {
+                    "type": "FLOAT64",
+                    "value": "0.8434108527131782"
+                },
+                "sys/_model_uri": {
+                    "type": "STRING",
+                    "value": "project/1/model/6/version/6"
+                },
+                "segm/ar_across_scales_small": {
+                    "type": "FLOAT64",
+                    "value": "0.6799999999999999"
+                },
+                "sys/runtime_uri": {
+                    "type": "STRING",
+                    "value": "project/starwhale/runtime/starwhale-built-in/version/uii4jxq7o6q4sdblwwn4ryiznswpy6ebdduozc6d"
+                },
+                "bbox/ar_across_scales_medium": {
+                    "type": "FLOAT64",
+                    "value": "0.867741935483871"
+                },
+                "sys/runtime_version": {
+                    "type": "STRING",
+                    "value": "uii4jxq7o6q4sdblwwn4ryiznswpy6ebdduozc6d"
+                },
+                "kind": {
+                    "type": "STRING",
+                    "value": "coco_object_detection"
+                },
+                "bbox/ap_across_scales_small": {
+                    "type": "FLOAT64",
+                    "value": "0.7613861386138614"
+                },
+                "segm/average_precision_iou75": {
+                    "type": "FLOAT64",
+                    "value": "0.9866913250937421"
+                },
+                "sys/model_name": {
+                    "type": "STRING",
+                    "value": "pfp"
+                },
+                "sys/model_uri": {
+                    "type": "STRING",
+                    "value": "project/starwhale/model/pfp/version/qf54dfmabju5we2zfu3zx2b2wyorho7ohlxwznd4"
+                },
+                "sys/duration_ms": {
+                    "type": "INT64",
+                    "value": "1596876"
+                },
+                "segm/average_recall_max10": {
+                    "type": "FLOAT64",
+                    "value": "0.8366430260047283"
+                },
+                "sys/step_spec": {
+                    "type": "STRING",
+                    "value": "---\n- name: \"pfp.evaluator:predict_mask_rcnn\"\n  concurrency: 1\n  replicas: 2\n  needs: []\n  resources:\n  - type: \"nvidia.com/gpu\"\n    request: 1.0\n    limit: 1.0\n  expose: 0\n  job_name: \"pfp.evaluator:cmp\"\n  show_name: \"predict\"\n  require_dataset: true\n  ext_cmd_args: \"\"\n  parameters_sig: []\n- name: \"pfp.evaluator:cmp\"\n  concurrency: 1\n  replicas: 1\n  needs:\n  - \"pfp.evaluator:predict_mask_rcnn\"\n  resources: []\n  expose: 0\n  job_name: \"pfp.evaluator:cmp\"\n  show_name: \"evaluate\"\n  require_dataset: false\n  ext_cmd_args: \"\"\n  parameters_sig: []\n"
+                },
+                "sys/owner_id": {
+                    "type": "INT64",
+                    "value": "1"
+                },
+                "bbox/average_precision_iou50": {
+                    "type": "FLOAT64",
+                    "value": "0.9965613080060758"
+                },
+                "sys/_dataset_uris": {
+                    "value": [
+                        {
+                            "type": "STRING",
+                            "value": "project/1/dataset/7/version/7"
+                        }
+                    ],
+                    "type": "LIST"
+                },
+                "bbox/ar_across_scales_large": {
+                    "type": "FLOAT64",
+                    "value": "0.9165374677002586"
+                },
+                "segm/ar_across_scales_medium": {
+                    "type": "FLOAT64",
+                    "value": "0.7806451612903226"
+                },
+                "sys/job_type": {
+                    "type": "STRING",
+                    "value": "EVALUATION"
+                },
+                "sys/result_output_path": {
+                    "type": "STRING",
+                    "value": "e2e-20231113/controller/resultMetrics/7f/7f0234359c214ccebdd180ce88ffb746"
+                },
+                "sys/runtime_name": {
+                    "type": "STRING",
+                    "value": "starwhale-built-in"
+                },
+                "sys/runtime_version_id": {
+                    "type": "INT64",
+                    "value": "7"
+                },
+                "segm/average_recall_max1": {
+                    "type": "FLOAT64",
+                    "value": "0.34349881796690307"
+                },
+                "sys/model_version_id": {
+                    "type": "INT64",
+                    "value": "6"
+                },
+                "bbox/average_precision": {
+                    "type": "FLOAT64",
+                    "value": "0.8804772724243923"
+                },
+                "segm/average_precision_iou50": {
+                    "type": "FLOAT64",
+                    "value": "0.9965613080060758"
+                },
+                "sys/job_status": {
+                    "type": "STRING",
+                    "value": "SUCCESS"
+                },
+                "bbox/ar_across_scales_small": {
+                    "type": "FLOAT64",
+                    "value": "0.76"
+                },
+                "sys/project_id": {
+                    "type": "INT64",
+                    "value": "1"
+                },
+                "segm/ap_across_scales_large": {
+                    "type": "FLOAT64",
+                    "value": "0.8194719886417133"
+                },
+                "bbox/average_recall_max10": {
+                    "type": "FLOAT64",
+                    "value": "0.9111111111111111"
+                },
+                "sys/_is_deleted": {
+                    "type": "INT32",
+                    "value": "0"
+                },
+                "bbox/ap_across_scales_medium": {
+                    "type": "FLOAT64",
+                    "value": "0.7944673998123173"
+                },
+                "segm/average_recall_max100": {
+                    "type": "FLOAT64",
+                    "value": "0.8368794326241135"
+                },
+                "segm/ap_across_scales_medium": {
+                    "type": "FLOAT64",
+                    "value": "0.6376925186478997"
+                },
+                "bbox/ap_across_scales_large": {
+                    "type": "FLOAT64",
+                    "value": "0.8878544763799764"
+                },
+                "sys/dataset_uris": {
+                    "type": "STRING",
+                    "value": "project/starwhale/dataset/pfp/version/nsaxzaoxy4ddgqhydsyk64ksbgwjwzqsfirdaiwv"
+                }
+            },
+            {
+                "sys/resource_pool": {
+                    "type": "STRING",
+                    "value": "default"
+                },
+                "sys/_dataset_uris": {
+                    "value": [
+                        {
+                            "type": "STRING",
+                            "value": "project/1/dataset/6/version/6"
+                        }
+                    ],
+                    "type": "LIST"
+                },
+                "sys/id": {
+                    "type": "INT64",
+                    "value": "5"
+                },
+                "sys/dev_mode": {
+                    "type": "INT32",
+                    "value": "0"
+                },
+                "total_predict_count": {
+                    "type": "INT64",
+                    "value": "199999"
+                },
+                "sys/model_version": {
+                    "type": "STRING",
+                    "value": "ggwhw7g64rlzxnubkbmewexvnb4lqvebhtqgyeh4"
+                },
+                "sys/_dataset_id_version_map": {
+                    "value": [
+                        {
+                            "value": {
+                                "type": "STRING",
+                                "value": "n2uqkchatonteurw7arkk63sjapmh6pjcxugyy4b"
+                            },
+                            "key": {
+                                "type": "INT64",
+                                "value": "6"
+                            }
+                        }
+                    ],
+                    "type": "MAP"
+                },
+                "sys/name": {
+                    "type": "STRING",
+                    "value": "evaluation:evaluation_results"
+                },
+                "sys/job_type": {
+                    "type": "STRING",
+                    "value": "EVALUATION"
+                },
+                "sys/_runtime_uri": {
+                    "type": "STRING",
+                    "value": "project/1/runtime/5/version/5"
+                },
+                "results_count": {
+                    "type": "INT64",
+                    "value": "199999"
+                },
+                "sys/owner_name": {
+                    "type": "STRING",
+                    "value": "starwhale"
+                },
+                "sys/created_time": {
+                    "type": "INT64",
+                    "value": "1699808464015"
+                },
+                "sys/modified_time": {
+                    "type": "INT64",
+                    "value": "1699809710634"
+                },
+                "sys/result_output_path": {
+                    "type": "STRING",
+                    "value": "e2e-20231113/controller/resultMetrics/3f/3f164968a5ac4d29a88804c2f77c2244"
+                },
+                "sys/finished_time": {
+                    "type": "INT64",
+                    "value": "1699809710632"
+                },
+                "id": {
+                    "type": "STRING",
+                    "value": "3f164968a5ac4d29a88804c2f77c2244"
+                },
+                "sys/runtime_name": {
+                    "type": "STRING",
+                    "value": "huge-tasks"
+                },
+                "sys/_model_uri": {
+                    "type": "STRING",
+                    "value": "project/1/model/5/version/5"
+                },
+                "sys/runtime_version_id": {
+                    "type": "INT64",
+                    "value": "5"
+                },
+                "dataset_rows": {
+                    "type": "INT64",
+                    "value": "199999"
+                },
+                "sys/runtime_uri": {
+                    "type": "STRING",
+                    "value": "project/starwhale/runtime/huge-tasks/version/t4pidh63k6nvogtmyky5puqxtjbysulu354rqwhj"
+                },
+                "sys/model_version_id": {
+                    "type": "INT64",
+                    "value": "5"
+                },
+                "sys/runtime_version": {
+                    "type": "STRING",
+                    "value": "t4pidh63k6nvogtmyky5puqxtjbysulu354rqwhj"
+                },
+                "sys/job_status": {
+                    "type": "STRING",
+                    "value": "SUCCESS"
+                },
+                "sys/model_name": {
+                    "type": "STRING",
+                    "value": "huge-tasks"
+                },
+                "sys/model_uri": {
+                    "type": "STRING",
+                    "value": "project/starwhale/model/huge-tasks/version/ggwhw7g64rlzxnubkbmewexvnb4lqvebhtqgyeh4"
+                },
+                "sys/project_id": {
+                    "type": "INT64",
+                    "value": "1"
+                },
+                "sys/duration_ms": {
+                    "type": "INT64",
+                    "value": "1246632"
+                },
+                "sys/_is_deleted": {
+                    "type": "INT32",
+                    "value": "0"
+                },
+                "sys/step_spec": {
+                    "type": "STRING",
+                    "value": "---\n- name: \"evaluation:predict_text\"\n  concurrency: 1\n  replicas: 100\n  needs: []\n  resources:\n  - type: \"memory\"\n    request: 102400.0\n    limit: 1.048576E9\n  - type: \"cpu\"\n    request: 0.1\n    limit: 1.0\n  expose: 0\n  job_name: \"evaluation:evaluation_results\"\n  show_name: \"predict\"\n  require_dataset: true\n  ext_cmd_args: \"\"\n  parameters_sig: []\n- name: \"evaluation:evaluation_results\"\n  concurrency: 1\n  replicas: 1\n  needs:\n  - \"evaluation:predict_text\"\n  resources: []\n  expose: 0\n  job_name: \"evaluation:evaluation_results\"\n  show_name: \"evaluate\"\n  require_dataset: false\n  ext_cmd_args: \"\"\n  parameters_sig: []\n"
+                },
+                "sys/owner_id": {
+                    "type": "INT64",
+                    "value": "1"
+                },
+                "sys/dataset_uris": {
+                    "type": "STRING",
+                    "value": "project/starwhale/dataset/huge-tasks-random-text/version/n2uqkchatonteurw7arkk63sjapmh6pjcxugyy4b"
+                },
+                "received_data_tasks": {
+                    "type": "INT64",
+                    "value": "71"
+                }
+            },
+            {
+                "sys/resource_pool": {
+                    "type": "STRING",
+                    "value": "default"
+                },
+                "sys/_dataset_uris": {
+                    "value": [
+                        {
+                            "type": "STRING",
+                            "value": "project/1/dataset/5/version/5"
+                        }
+                    ],
+                    "type": "LIST"
+                },
+                "cohen_kappa_score": {
+                    "type": "FLOAT64",
+                    "value": "0.9257173374763314"
+                },
+                "sys/id": {
+                    "type": "INT64",
+                    "value": "4"
+                },
+                "sys/dev_mode": {
+                    "type": "INT32",
+                    "value": "0"
+                },
+                "accuracy": {
+                    "type": "FLOAT64",
+                    "value": "0.9264705882352942"
+                },
+                "sys/model_version": {
+                    "type": "STRING",
+                    "value": "sjfiszw2krewz5x4ppnsp7vqklgidkjotm36yuap"
+                },
+                "sys/_dataset_id_version_map": {
+                    "value": [
+                        {
+                            "value": {
+                                "type": "STRING",
+                                "value": "mdkirpcr2tvydiq3pnjkc3bgwkc3e7v2fd4y3743"
+                            },
+                            "key": {
+                                "type": "INT64",
+                                "value": "5"
+                            }
+                        }
+                    ],
+                    "type": "MAP"
+                },
+                "sys/name": {
+                    "type": "STRING",
+                    "value": "ucf101.evaluator:UCF101PipelineHandler.cmp"
+                },
+                "hamming_loss": {
+                    "type": "FLOAT64",
+                    "value": "0.07352941176470588"
+                },
+                "weighted avg/support": {
+                    "type": "INT64",
+                    "value": "204"
+                },
+                "sys/job_type": {
+                    "type": "STRING",
+                    "value": "EVALUATION"
+                },
+                "macro avg/f1-score": {
+                    "type": "FLOAT64",
+                    "value": "0.9167216721672167"
+                },
+                "weighted avg/precision": {
+                    "type": "FLOAT64",
+                    "value": "0.9323529411764705"
+                },
+                "sys/_runtime_uri": {
+                    "type": "STRING",
+                    "value": "project/1/runtime/1/version/1"
+                },
+                "sys/owner_name": {
+                    "type": "STRING",
+                    "value": "starwhale"
+                },
+                "sys/created_time": {
+                    "type": "INT64",
+                    "value": "1699808463886"
+                },
+                "sys/modified_time": {
+                    "type": "INT64",
+                    "value": "1699809829285"
+                },
+                "sys/result_output_path": {
+                    "type": "STRING",
+                    "value": "e2e-20231113/controller/resultMetrics/71/712bef3672a2488eae6ccab7580320ee"
+                },
+                "sys/finished_time": {
+                    "type": "INT64",
+                    "value": "1699809829283"
+                },
+                "id": {
+                    "type": "STRING",
+                    "value": "712bef3672a2488eae6ccab7580320ee"
+                },
+                "sys/runtime_name": {
+                    "type": "STRING",
+                    "value": "pytorch37"
+                },
+                "sys/_model_uri": {
+                    "type": "STRING",
+                    "value": "project/1/model/4/version/4"
+                },
+                "sys/runtime_version_id": {
+                    "type": "INT64",
+                    "value": "1"
+                },
+                "sys/runtime_uri": {
+                    "type": "STRING",
+                    "value": "project/starwhale/runtime/pytorch37/version/j244zctfpiy67g7ipbhwzqex63h33wlvxoa24vem"
+                },
+                "sys/model_version_id": {
+                    "type": "INT64",
+                    "value": "4"
+                },
+                "sys/runtime_version": {
+                    "type": "STRING",
+                    "value": "j244zctfpiy67g7ipbhwzqex63h33wlvxoa24vem"
+                },
+                "kind": {
+                    "type": "STRING",
+                    "value": "multi_classification"
+                },
+                "weighted avg/recall": {
+                    "type": "FLOAT64",
+                    "value": "0.9264705882352942"
+                },
+                "sys/job_status": {
+                    "type": "STRING",
+                    "value": "SUCCESS"
+                },
+                "sys/model_name": {
+                    "type": "STRING",
+                    "value": "ucf101"
+                },
+                "sys/model_uri": {
+                    "type": "STRING",
+                    "value": "project/starwhale/model/ucf101/version/sjfiszw2krewz5x4ppnsp7vqklgidkjotm36yuap"
+                },
+                "sys/project_id": {
+                    "type": "INT64",
+                    "value": "1"
+                },
+                "sys/duration_ms": {
+                    "type": "INT64",
+                    "value": "1366283"
+                },
+                "macro avg/support": {
+                    "type": "INT64",
+                    "value": "204"
+                },
+                "sys/_is_deleted": {
+                    "type": "INT32",
+                    "value": "0"
+                },
+                "weighted avg/f1-score": {
+                    "type": "FLOAT64",
+                    "value": "0.9164488017429193"
+                },
+                "macro avg/precision": {
+                    "type": "FLOAT64",
+                    "value": "0.9336633663366336"
+                },
+                "sys/step_spec": {
+                    "type": "STRING",
+                    "value": "---\n- name: \"ucf101.evaluator:UCF101PipelineHandler.ppl\"\n  concurrency: 1\n  replicas: 1\n  needs: []\n  resources: []\n  expose: 0\n  job_name: \"ucf101.evaluator:UCF101PipelineHandler.cmp\"\n  show_name: \"predict\"\n  require_dataset: true\n  ext_cmd_args: \"\"\n  parameters_sig: []\n- name: \"ucf101.evaluator:UCF101PipelineHandler.cmp\"\n  concurrency: 1\n  replicas: 1\n  needs:\n  - \"ucf101.evaluator:UCF101PipelineHandler.ppl\"\n  resources: []\n  expose: 0\n  job_name: \"ucf101.evaluator:UCF101PipelineHandler.cmp\"\n  show_name: \"evaluate\"\n  require_dataset: false\n  ext_cmd_args: \"\"\n  parameters_sig: []\n"
+                },
+                "sys/owner_id": {
+                    "type": "INT64",
+                    "value": "1"
+                },
+                "sys/dataset_uris": {
+                    "type": "STRING",
+                    "value": "project/starwhale/dataset/ucf101/version/mdkirpcr2tvydiq3pnjkc3bgwkc3e7v2fd4y3743"
+                },
+                "macro avg/recall": {
+                    "type": "FLOAT64",
+                    "value": "0.9257425742574258"
+                }
+            }
+        ]
+    }
+}

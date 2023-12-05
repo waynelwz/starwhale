@@ -14,6 +14,7 @@ import '@starwhale/ui/Markdown/markdown.css'
 import '@unocss/reset/tailwind.css'
 import 'virtual:uno.css'
 import '@/styles/_global.scss'
+import '@/styles/_global_story.scss'
 
 const engine = new Styletron()
 const queryClient = new QueryClient()
@@ -29,8 +30,6 @@ const Story = ({ storyFn }) => storyFn()
 const ThemeDecorator = (storyFn) => {
     const [, theme] = themedUseStyletron()
     const styles = useStyles({ theme })
-
-    console.log(DeepTheme)
 
     return (
         <React.StrictMode>
