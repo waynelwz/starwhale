@@ -11,7 +11,7 @@ import { withDefaultWidgets } from '@starwhale/core/widget'
 import StoreUpdater from '@starwhale/core/store/StoreUpdater'
 import _ from 'lodash'
 
-function withEditorContext<EditorAppPropsT>(EditorApp: React.FC<EditorAppPropsT>) {
+export function withEditorContext<EditorAppPropsT>(EditorApp: React.FC<EditorAppPropsT>) {
     return function EditorContexted(props: EditorAppPropsT & { dynamicVars?: any } & any) {
         const { prefix } = props.dynamicVars
         const { isLoading, isSuccess, names, tables } = useFetchDatastoreAllTables(prefix)
