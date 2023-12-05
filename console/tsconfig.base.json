@@ -22,11 +22,8 @@
     "include": ["src", "types", "packages", "extensions", "client"],
     "exclude": [
         "packages/starwhale-ui/src/base/**",
-        "packages/starwhale-ui/src/base/tree-view",
-        "@starwhale/ui/base/**",
         "baseui/**",
-        "node_modules/**",
-        "**/stories/**",
+        // "**/stories/**",
         "**/iconfont.js",
         "**/__generated__/**",
         // "**/__tests__/**",

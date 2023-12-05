@@ -2,6 +2,9 @@ import React from 'react'
 
 import { Button } from '@starwhale/ui'
 import { IconFont } from '@starwhale/ui'
+import type { Meta, StoryObj } from '@storybook/react'
+
+type Story = StoryObj<typeof Button>
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
@@ -9,42 +12,45 @@ export default {
     component: Button,
     // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
     argTypes: {
-        backgroundColor: { control: 'color' },
+        // backgroundColor: { control: 'color' },
     },
 }
 
-// More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
-const Template = (args) => <Button {...args} />
-
-export const Primary = Template.bind({})
-// More on args: https://storybook.js.org/docs/react/writing-stories/args
-Primary.args = {
-    kind: 'primary',
-    children: 'Button',
+export const Primary: Story = {
+    args: {
+        kind: 'primary',
+        children: 'Button',
+    },
 }
 
-export const Secondary = Template.bind({})
-Secondary.args = {
-    kind: 'secondary',
-    children: 'Button',
+export const Secondary: Story = {
+    args: {
+        kind: 'secondary',
+        children: 'Button',
+    },
 }
 
-export const ButtonWithIcon = Template.bind({})
-ButtonWithIcon.args = {
-    size: 'compact',
-    kind: 'tertiary',
-    icon: 'runtime',
-    children: 'Button',
+export const ButtonWithIcon: Story = {
+    args: {
+        size: 'compact',
+        kind: 'tertiary',
+        icon: 'runtime',
+        children: 'Button',
+    },
 }
 
-export const ButtonIcon = Template.bind({})
-ButtonIcon.args = {
-    kind: 'primary',
-    children: <IconFont type='runtime' />,
+export const ButtonWithIconOnly: Story = {
+    args: {
+        size: 'compact',
+        kind: 'primary',
+        icon: 'runtime',
+        children: <IconFont type='runtime' />,
+    },
 }
 
-export const ButtonAsLink = Template.bind({})
-ButtonAsLink.args = {
-    as: 'link',
-    children: 'Button',
+export const ButtonAsLink: Story = {
+    args: {
+        as: 'link',
+        children: 'Button',
+    },
 }

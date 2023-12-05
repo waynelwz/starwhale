@@ -9,22 +9,21 @@ type Story = StoryObj<typeof DataViewer>
 const meta: Meta<typeof DataViewer> = {
     title: 'Viewer/DataViewer',
     component: DataViewer,
-    // argTypes: {},
+    render: (args) => <div className='p-20px'>123</div>,
+    argTypes: {},
     parameters: {
         layout: 'fullscreen',
     },
 }
+
 export default meta
 
-// More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
-const Template = (args) => <div className='p-20px'>123</div>
-
-export const Primary: Story = Template.bind({})
-
-Primary.parameters = {
-    design: config({
-        type: 'iframe',
-        url: 'https://www.youtube.com/embed/JhpyGdvsApo',
-        allowFullscreen: true,
-    }),
+export const Primary = {
+    parameters: {
+        // design: config({
+        //     type: 'iframe',
+        //     url: 'https://www.youtube.com/embed/JhpyGdvsApo',
+        //     allowFullscreen: true,
+        // }),
+    },
 }

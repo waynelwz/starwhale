@@ -1,5 +1,8 @@
 import React from 'react'
 import { Input } from '@starwhale/ui'
+import type { Meta, StoryObj } from '@storybook/react'
+
+type Story = StoryObj<typeof Input>
 
 export default {
     title: 'Component/Input',
@@ -7,20 +10,16 @@ export default {
     argTypes: {},
 }
 
-// More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
-/* eslint-disable react/jsx-props-no-spreading */
-const Template = (args) => <Input {...args} clearable />
-
-export const Primary = Template.bind({})
-Primary.args = {
-    clearable: true,
-    size: 'compact',
+export const Primary: Story = {
+    args: {
+        size: 'compact',
+    },
 }
 
-export const Clearable = Template.bind({})
-Clearable.args = {
-    clearable: true,
-    disabled: false,
-    size: 'compact',
-    value: 'text',
+export const Clearable: Story = {
+    args: {
+        clearable: true,
+        disabled: false,
+        size: 'compact',
+    },
 }
