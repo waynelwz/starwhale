@@ -1,5 +1,5 @@
 import React from 'react'
-import { ComponentStory, ComponentMeta, Story } from '@storybook/react'
+import type { Meta, StoryObj } from '@storybook/react'
 
 import ImageSegmentationViewer from '@starwhale/ui/Viewer/ImageSegmentationViewer.demo'
 
@@ -13,12 +13,12 @@ export default {
         // More on Story layout: https://storybook.js.org/docs/react/configure/story-layout
         layout: 'fullscreen',
     },
-} as ComponentMeta<typeof ImageSegmentationViewer>
+} as Meta<typeof ImageSegmentationViewer>
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
 /* eslint-disable */
 // @ts-ignore
-const Template: ComponentStory<typeof ImageSegmentationViewer> = (args) => (
+const Template = (args) => (
     <div
         style={{
             minHeight: '800px',
@@ -31,4 +31,5 @@ const Template: ComponentStory<typeof ImageSegmentationViewer> = (args) => (
 
 export const Primary = Template.bind({})
 
+// @ts-ignore
 Primary.args = {}
