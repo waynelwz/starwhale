@@ -1,0 +1,216 @@
+import { Meta } from '@storybook/addon-docs'
+
+export const URL = {
+    dataset: 'https://user-images.githubusercontent.com/100347187/221126553-9262dff5-e46c-404d-a379-43386a4b433e.gif',
+    chat: 'https://github.com/star-whale/starwhale/assets/100347187/f5406bd1-aaee-443a-b089-157066df4cd5',
+    search: 'https://github.com/star-whale/starwhale/assets/100347187/5fe18c4b-0e31-448b-8190-1750f31367c2',
+    datasetUpload: 'https://github.com/star-whale/starwhale/assets/100347187/b128b72e-ee38-49c5-947b-c02b5896babf',
+    panel: 'https://github.com/star-whale/starwhale/assets/100347187/4d049068-8281-4ff4-b1e1-c2c19a77926c',
+}
+
+<Meta title='Demo' />
+
+<div className="sb-container">
+  <div className='sb-section-title'>
+    # Demo
+
+    {/* Now that you know the basics, let's explore other parts of Storybook that will improve your experience. This list is just to get you started. You can customise Storybook in many ways to fit your needs. */}
+
+  </div>
+
+  <div className="sb-section">
+    <div className="sb-features-grid">
+      <div className="sb-grid-item">
+        <h3 className="sb-section-item-heading">LLM chat with Gradio</h3>
+        <div className="px-50px py-20px">
+            <img src={URL.chat} alt="A browser window showing a Storybook being published to a chromatic.com URL" />
+        </div>
+        {/* <p className="sb-section-item-paragraph">Publish your Storybook to review and collaborate with your entire team.</p> */}
+      </div>
+      <div className="sb-grid-item">
+        <h3 className="sb-section-item-heading">Chat Panel</h3>
+        <div className="px-50px py-20px">
+            <video src={URL.panel} autoPlay loop />
+        </div>
+      </div>
+      <div className="sb-grid-item">
+        <h3 className="sb-section-item-heading">Coco Dataset</h3>
+        <div className="px-50px py-20px">
+            <img src={URL.dataset} alt="A screenshot showing the autodocs tag being set, pointing a docs page being generated" />
+        </div>
+      </div>
+      <div className="sb-grid-item">
+        <h3 className="sb-section-item-heading">Dynamic Search</h3>
+        <div className="px-50px py-20px">
+            <video src={URL.search} autoPlay loop />
+        </div>
+      </div>
+      <div className="sb-grid-item">
+        <h3 className="sb-section-item-heading">Uploader</h3>
+        <div className="px-50px py-20px">
+            <video src={URL.datasetUpload} autoPlay loop />
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<style>
+    {`
+  .sb-container {
+    margin-bottom: 48px;
+  }
+
+  .sb-section {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+  }
+
+  img {
+    object-fit: cover;
+  }
+
+  .sb-section-title {
+    margin-bottom: 32px;
+  }
+
+  .sb-section a:not(h1 a, h2 a, h3 a) {
+    font-size: 14px;
+  }
+
+  .sb-section-item, .sb-grid-item {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .sb-section-item-heading {
+    padding-top: 20px !important;
+    padding-bottom: 5px !important;
+    margin: 0 !important;
+  }
+  .sb-section-item-paragraph {
+    margin: 0;
+    padding-bottom: 10px;
+  }
+
+  .sb-chevron {
+    margin-left: 5px;
+  }
+
+  .sb-features-grid {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    grid-gap: 32px 20px;
+  }
+
+  .sb-socials {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .sb-socials p {
+    margin-bottom: 10px;
+  }
+
+  .sb-explore-image {
+    max-height: 32px;
+    align-self: flex-start;
+  }
+
+  .sb-addon {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    position: relative;
+    background-color: #EEF3F8;
+    border-radius: 5px;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    background: #EEF3F8;
+    height: 180px;
+    margin-bottom: 48px;
+    overflow: hidden;
+  }
+
+  .sb-addon-text {
+    padding-left: 48px;
+    max-width: 240px;
+  }
+
+  .sb-addon-text h3 {
+    padding-top: 0px;
+  }
+
+  .sb-addon-img {
+    position: absolute;
+    left: 345px;
+    top: 0;
+    height: 100%;
+    width: 200%;
+    overflow: hidden;
+  }
+
+  .sb-addon-img img {
+    width: 650px;
+    transform: rotate(-15deg);
+    margin-left: 40px;
+    margin-top: -72px;
+    box-shadow: 0 0 1px rgba(255, 255, 255, 0);
+    backface-visibility: hidden;
+  }
+
+  @media screen and (max-width: 800px) {
+    .sb-addon-img {
+      left: 300px;
+    }
+  }
+
+  @media screen and (max-width: 600px) {
+    .sb-section {
+      flex-direction: column;
+    }
+
+    .sb-features-grid {
+      grid-template-columns: repeat(1, 1fr);
+    }
+
+    .sb-socials {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .sb-addon {
+      height: 280px;
+      align-items: flex-start;
+      padding-top: 32px;
+      overflow: hidden;
+    }
+
+    .sb-addon-text {
+      padding-left: 24px;
+    }
+
+    .sb-addon-img {
+      right: 0;
+      left: 0;
+      top: 130px;
+      bottom: 0;
+      overflow: hidden;
+      height: auto;
+      width: 124%;
+    }
+
+    .sb-addon-img img {
+      width: 1200px;
+      transform: rotate(-12deg);
+      margin-left: 0;
+      margin-top: 48px;
+      margin-bottom: -40px;
+      margin-left: -24px;
+    }
+  }
+  `}
+</style>
