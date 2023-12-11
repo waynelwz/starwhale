@@ -5,7 +5,7 @@ import ImageSegmentationViewer from '@starwhale/ui/Viewer/ImageSegmentationViewe
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
-    title: 'Viewer/ImageSegmentationViewer',
+    title: 'Component/Viewer/ImageSegmentationViewer',
     component: ImageSegmentationViewer,
     // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
     // argTypes: {},

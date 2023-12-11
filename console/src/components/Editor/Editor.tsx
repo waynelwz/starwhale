@@ -37,6 +37,8 @@ export function withEditorContext<EditorAppPropsT>(EditorApp: React.FC<any>, raw
         const value = useMemo(() => {
             if (!store.current) {
                 store.current = createCustomStore(state)
+            } else {
+                store.current.setState({ ...state })
             }
             const eventBus = new EventBusSrv()
             return {

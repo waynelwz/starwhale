@@ -5,7 +5,7 @@ import VideoPreviewViewer from '@starwhale/ui/Viewer/VideoPreviewViewer.demo'
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
-    title: 'Viewer/VideoPreviewViewer',
+    title: 'Component/Viewer/VideoPreviewViewer',
     component: VideoPreviewViewer,
     // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
     // argTypes: {},

@@ -12,9 +12,13 @@ export const tranformState = (state: {
     function walk(nodes: WidgetTreeNode[]) {
         return nodes.map((node: WidgetTreeNode) => {
             const { type, children, ...rest } = node
+
             // @ts-ignore
-            // eslint-disable-next-line no-param-reassign
-            if (children) node.children = walk(children)
+            if (children && !Object.isFrozen(node.children)) {
+                // eslint-disable-next-line no-param-reassign
+                node.children = walk(children)
+            }
+
             const widgetConfig = WidgetFactory.newWidget(type)
             if (widgetConfig) {
                 defaults[type] = widgetConfig.defaults

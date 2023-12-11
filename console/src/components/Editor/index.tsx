@@ -1,3 +1,3 @@
 export * from './FullTablesEditor'
 export * from './EvalSelectEditor'
-export * from './Editor'
+// export * from './Editor'

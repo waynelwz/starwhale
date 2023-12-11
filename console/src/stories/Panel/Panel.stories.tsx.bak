@@ -7,10 +7,13 @@ import FullTablesEditor from '@/components/Editor/FullTablesEditor'
 import { tryParseSimplified } from '@/domain/panel/utils'
 import { WidgetRenderTree, withDefaultWidgets } from '@starwhale/core/widget'
 import { withEditorContext } from '@/components/Editor/Editor'
+import _ from 'lodash'
 
 type Story = StoryObj<typeof FullTablesEditor>
 
-const Editor = withDefaultWidgets(withEditorContext(WidgetRenderTree, {}))
+const state = _.cloneDeep(JSON.parse(SETTINGS.data))
+
+const Editor = withDefaultWidgets(withEditorContext(WidgetRenderTree, state))
 
 const meta: Meta<typeof FullTablesEditor> = {
     title: 'Editor/Panel',
@@ -26,9 +29,6 @@ export const Primary = {
     render: (args) => {
         const [t] = useTranslation()
         const dynamicVars = { prefix: 'prefix', storeKey: 'storeKey', projectId: 'projectId' }
-
-        console.log(tryParseSimplified(JSON.parse(SETTINGS.data)))
-
         return (
             <div className='min-h-800px py-20px'>
                 <Editor dynamicVars={dynamicVars} />
