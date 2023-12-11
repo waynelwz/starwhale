@@ -13,8 +13,8 @@ export const tranformState = (state: {
         return nodes.map((node: WidgetTreeNode) => {
             const { type, children, ...rest } = node
 
-            // @ts-ignore
             if (children && !Object.isFrozen(node.children)) {
+                // @ts-ignore
                 // eslint-disable-next-line no-param-reassign
                 node.children = walk(children)
             }
