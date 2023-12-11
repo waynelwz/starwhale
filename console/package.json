@@ -227,7 +227,7 @@
     "@storybook/client-api": "^7.6.3",
     "@storybook/client-logger": "^7.6.3",
     "@storybook/mdx1-csf": "^1.0.0",
-    "@storybook/mdx2-csf": "^7.6.3",
+    "@storybook/mdx2-csf": "^0.0.4",
     "@storybook/node-logger": "^7.6.3",
     "@storybook/preset-create-react-app": "^7.6.3",
     "@storybook/preview-web": "^7.6.3",
